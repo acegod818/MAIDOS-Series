@@ -1,0 +1,32 @@
+[package]
+name = "maidos-chain"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+authors.workspace = true
+keywords.workspace = true
+categories.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+# Minimal dependencies - handcrafted blockchain implementation
+tokio = { workspace = true, features = ["rt-multi-thread", "net"] }
+async-trait = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+rand = "0.8"
+hex = "0.4"
+sha2 = "0.10"
+reqwest = { workspace = true }
+ethers = { workspace = true }
+
+# Internal dependencies
+maidos-auth = { workspace = true }
+
+[lib]
+crate-type = ["rlib"]

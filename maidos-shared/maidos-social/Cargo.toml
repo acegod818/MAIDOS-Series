@@ -1,0 +1,33 @@
+[package]
+name = "maidos-social"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+authors.workspace = true
+keywords.workspace = true
+categories.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+tracing = { workspace = true }
+# HTTP client
+reqwest = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+
+# For URL encoding
+url = "2.5"
+
+# For async traits
+async-trait = { workspace = true }
+
+# Internal dependencies
+maidos-auth = { workspace = true }
+
+[lib]
+crate-type = ["rlib"]

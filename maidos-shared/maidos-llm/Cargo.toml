@@ -1,0 +1,28 @@
+[package]
+name = "maidos-llm"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "MAIDOS unified LLM provider interface"
+
+[lib]
+crate-type = ["lib", "cdylib"]
+
+[dependencies]
+maidos-config = { workspace = true, default-features = false }
+maidos-auth = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+# Use reqwest with rustls and no system proxy to enable cross-compilation
+reqwest = { version = "0.11", default-features = false, features = ["json", "stream", "rustls-tls-webpki-roots"] }
+tokio = { workspace = true }
+async-trait = { workspace = true }
+futures = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+bytes = { workspace = true }
+parking_lot = { workspace = true }
+
+[dev-dependencies]
+tokio-test = "0.4"
+wiremock = "0.5"

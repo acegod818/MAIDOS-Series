@@ -1,0 +1,29 @@
+# Rust
+/target/
+Cargo.lock
+*.pdb
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.dll
+*.so
+*.dylib
+*.rlib
+*.exe
+
+# Coverage
+*.lcov
+cobertura.xml
+tarpaulin-report.html
+
+# Logs
+*.log

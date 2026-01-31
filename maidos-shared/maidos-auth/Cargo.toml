@@ -1,0 +1,19 @@
+[package]
+name = "maidos-auth"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "MAIDOS capability-based authentication system"
+
+[lib]
+crate-type = ["lib", "cdylib"]
+
+[dependencies]
+maidos-config = { workspace = true, default-features = false }
+serde = { workspace = true }
+serde_json = { workspace = true }
+hmac = { workspace = true }
+sha2 = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+parking_lot = { workspace = true }

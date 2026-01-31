@@ -1,0 +1,132 @@
+[workspace]
+resolver = "2"
+members = [
+    "maidos-config",
+    "maidos-auth",
+    "maidos-bus",
+    "maidos-llm",
+    "maidos-log",
+    "maidos-social",
+    "maidos-google",
+    "maidos-p2p",
+    "maidos-chain"  # 區塊鏈模組
+]
+
+[workspace.package]
+version = "0.2.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/maidos/maidos-shared"
+homepage = "https://github.com/maidos/maidos-shared"
+documentation = "https://docs.rs/maidos-shared"
+authors = ["MAIDOS Project"]
+keywords = ["llm", "ai", "config", "auth", "event-bus", "p2p", "blockchain", "social"]
+categories = ["api-bindings", "authentication", "config", "asynchronous", "cryptography"]
+rust-version = "1.75"
+
+[workspace.dependencies]
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.7"
+rmp-serde = "1.1"
+
+# Async
+tokio = { version = "1.32.0", features = ["full"] }
+async-trait = "0.1"
+futures = "0.3"
+
+# Bytes
+bytes = "1.0"
+
+# Crypto
+hmac = "0.12.1"
+sha2 = "0.10"
+ring = "0.17"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Synchronization
+parking_lot = "0.12"
+
+# Error handling
+thiserror = "1.0"
+
+# File watching
+notify = "6.0"
+
+# HTTP client (for LLM providers)
+reqwest = { version = "0.11", default-features = false, features = ["json", "stream", "rustls-tls-webpki-roots"] }
+
+# Internal dependencies
+maidos-config = { path = "maidos-config", default-features = false }
+maidos-auth = { path = "maidos-auth" }
+maidos-bus = { path = "maidos-bus" }
+maidos-llm = { path = "maidos-llm" }
+maidos-chain = { path = "maidos-chain" }
+
+# Time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# Benchmarking
+criterion = { version = "0.5", features = ["html_reports"] }
+
+# Force specific versions to resolve conflicts
+zeroize = "1.8.2"
+
+# Blockchain specific
+ethers = "2.0"
+
+[patch.crates-io]
+jsonwebtoken = { path = "../../vendor/jsonwebtoken-8.3.0" }
+
+# Integration test package
+[package]
+name = "maidos-shared-tests"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+maidos-config.workspace = true
+maidos-auth.workspace = true
+maidos-bus.workspace = true
+maidos-llm.workspace = true
+maidos-chain.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+rmp-serde.workspace = true
+chrono.workspace = true
+criterion.workspace = true
+ethers.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }
+tempfile = "3.10"
+
+[[test]]
+name = "integration"
+path = "tests/integration.rs"
+
+[[test]]
+name = "audit_and_fake_check"
+path = "tests/audit_and_fake_check.rs"
+
+[[bench]]
+name = "auth_bench"
+harness = false
+
+[[bench]]
+name = "bus_bench"
+harness = false
+
+[[bench]]
+name = "config_bench"
+harness = false
+
+[[bench]]
+name = "llm_bench"
+harness = false
+
+[[bench]]
+name = "ffi_bench"
+harness = false

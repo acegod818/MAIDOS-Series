@@ -1,0 +1,38 @@
+[package]
+name = "maidos-google"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+authors.workspace = true
+keywords.workspace = true
+categories.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+# HTTP client
+reqwest = { workspace = true, features = ["multipart"] }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+url = "2.5"
+async-trait = { workspace = true }
+
+# For OAuth2
+base64 = "0.21"
+sha2 = { workspace = true }
+hmac = "0.12.1"
+rand = "0.8"
+urlencoding = "2.1"
+
+# Time handling (added for Google Calendar)
+chrono = { workspace = true }
+
+# Internal dependencies
+maidos-auth = { workspace = true }
+
+[lib]
+crate-type = ["rlib"]
