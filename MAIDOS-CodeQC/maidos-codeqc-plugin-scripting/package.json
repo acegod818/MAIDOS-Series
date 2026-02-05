@@ -1,0 +1,27 @@
+{
+  "name": "@maidos/codeqc-plugin-scripting",
+  "version": "0.1.0",
+  "description": "MAIDOS CodeQC Plugin: Scripting Languages (Shell, PowerShell, Perl, Lua)",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "@maidos/codeqc": "^0.1.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.6.0"
+  }
+}

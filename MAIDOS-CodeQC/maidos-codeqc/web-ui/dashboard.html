@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAIDOS CodeQC v3.3 — Test Bench Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pcb-bg: #0a0e14;
+  --pcb-surface: #0d1117;
+  --pcb-card: #131a24;
+  --pcb-border: #1c2937;
+  --trace-green: #00dc82;
+  --trace-dim: #0a3d23;
+  --solder-gold: #f5c542;
+  --solder-silver: #8b9bb4;
+  --pass-green: #00dc82;
+  --fail-red: #ff4757;
+  --warn-amber: #ffa502;
+  --info-cyan: #00d2ff;
+  --text-primary: #e6edf3;
+  --text-secondary: #7d8ca3;
+  --text-dim: #3d4f65;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace;
+  --font-display: 'Orbitron', sans-serif;
+  --glow-green: 0 0 20px rgba(0,220,130,0.3);
+  --glow-red: 0 0 20px rgba(255,71,87,0.3);
+  --glow-gold: 0 0 20px rgba(245,197,66,0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font-mono);
+  background: var(--pcb-bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(0,220,130,0.02) 60px, rgba(0,220,130,0.02) 61px),
+    repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(0,220,130,0.02) 60px, rgba(0,220,130,0.02) 61px);
+  pointer-events: none; z-index: 0;
+}
+.shell { max-width: 1440px; margin: 0 auto; padding: 24px; position: relative; z-index: 1; }
+</style>
+<style>
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 28px; margin-bottom: 24px;
+  background: var(--pcb-card); border: 1px solid var(--pcb-border);
+  border-radius: 8px; position: relative; overflow: hidden;
+}
+.header::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--trace-green), transparent);
+}
+.header-left { display: flex; align-items: center; gap: 16px; }
+.logo-mark {
+  width: 42px; height: 42px; border: 2px solid var(--trace-green);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 14px; font-weight: 700;
+  color: var(--trace-green); background: rgba(0,220,130,0.05);
+  box-shadow: var(--glow-green);
+}
+.header-title { font-family: var(--font-display); font-size: 20px; font-weight: 600; letter-spacing: 2px; }
+.header-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; letter-spacing: 1px; }
+.header-right { display: flex; align-items: center; gap: 16px; }
+.status-pill {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 500;
+  border: 1px solid var(--pcb-border); background: var(--pcb-surface);
+}
+.status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-dim); transition: all 0.3s; }
+.status-dot.online { background: var(--pass-green); box-shadow: var(--glow-green); }
+.status-dot.error { background: var(--fail-red); box-shadow: var(--glow-red); }
+.panel {
+  background: var(--pcb-card); border: 1px solid var(--pcb-border);
+  border-radius: 8px; margin-bottom: 20px; overflow: hidden;
+}
+.panel-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; border-bottom: 1px solid var(--pcb-border);
+  background: rgba(0,220,130,0.02);
+}
+.panel-label {
+  font-family: var(--font-display); font-size: 12px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--trace-green);
+}
+.panel-badge {
+  font-size: 10px; padding: 3px 10px; border-radius: 10px; font-weight: 600;
+  background: var(--trace-dim); color: var(--trace-green);
+}
+.panel-body { padding: 20px; }
+.input-grid { display: grid; grid-template-columns: 1fr 320px; gap: 20px; }
+@media (max-width: 900px) { .input-grid { grid-template-columns: 1fr; } }
+.code-editor {
+  width: 100%; min-height: 280px; background: var(--pcb-bg);
+  border: 1px solid var(--pcb-border); border-radius: 6px; padding: 16px;
+  font-family: var(--font-mono); font-size: 13px; color: var(--text-primary);
+  resize: vertical; outline: none; transition: border-color 0.2s; line-height: 1.6;
+}
+.code-editor:focus { border-color: var(--trace-green); }
+.code-editor::placeholder { color: var(--text-dim); }
+.controls { display: flex; flex-direction: column; gap: 12px; }
+.ctrl-group { display: flex; flex-direction: column; gap: 6px; }
+.ctrl-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-secondary); }
+.ctrl-select, .ctrl-input {
+  background: var(--pcb-bg); border: 1px solid var(--pcb-border); border-radius: 6px;
+  padding: 10px 12px; font-family: var(--font-mono); font-size: 12px;
+  color: var(--text-primary); outline: none; transition: border-color 0.2s;
+}
+.ctrl-select:focus, .ctrl-input:focus { border-color: var(--trace-green); }
+.ctrl-select option { background: var(--pcb-card); }
+.btn-row { display: flex; gap: 10px; margin-top: auto; }
+.btn {
+  flex: 1; padding: 12px 16px; border: 1px solid var(--pcb-border); border-radius: 6px;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; text-transform: uppercase; letter-spacing: 1px;
+}
+.btn-scan { background: var(--trace-green); color: var(--pcb-bg); border-color: var(--trace-green); }
+.btn-scan:hover { box-shadow: var(--glow-green); transform: translateY(-1px); }
+.btn-scan:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-pipeline { background: transparent; color: var(--solder-gold); border-color: var(--solder-gold); }
+.btn-pipeline:hover { background: rgba(245,197,66,0.08); box-shadow: var(--glow-gold); }
+.btn-pipeline:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+.drop-zone {
+  border: 2px dashed var(--pcb-border); border-radius: 6px; padding: 20px;
+  text-align: center; color: var(--text-dim); font-size: 12px; cursor: pointer; transition: all 0.2s;
+}
+.drop-zone:hover, .drop-zone.dragover { border-color: var(--trace-green); color: var(--trace-green); background: rgba(0,220,130,0.03); }
+.drop-zone input { display: none; }
+.file-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.file-chip { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 4px; background: var(--trace-dim); color: var(--trace-green); font-size: 11px; }
+.file-chip-x { cursor: pointer; opacity: 0.6; background: none; border: none; color: inherit; font-size: 13px; }
+.file-chip-x:hover { opacity: 1; }
+</style>
+<style>
+.pipeline-trace { display: flex; align-items: center; gap: 0; padding: 8px 0; overflow-x: auto; }
+.step-node { display: flex; flex-direction: column; align-items: center; min-width: 110px; position: relative; }
+.step-dot {
+  width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--pcb-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; background: var(--pcb-surface);
+  transition: all 0.4s; position: relative; z-index: 2;
+}
+.step-dot.pass { border-color: var(--pass-green); color: var(--pass-green); background: rgba(0,220,130,0.08); box-shadow: var(--glow-green); }
+.step-dot.fail { border-color: var(--fail-red); color: var(--fail-red); background: rgba(255,71,87,0.08); box-shadow: var(--glow-red); }
+.step-dot.warn { border-color: var(--warn-amber); color: var(--warn-amber); background: rgba(255,165,2,0.08); box-shadow: var(--glow-gold); }
+.step-label { font-size: 9px; margin-top: 8px; text-align: center; color: var(--text-secondary); max-width: 100px; line-height: 1.3; }
+.step-circuit { font-size: 8px; color: var(--text-dim); margin-top: 2px; }
+.step-wire { width: 40px; height: 2px; background: var(--pcb-border); transition: background 0.4s; flex-shrink: 0; }
+.step-wire.active { background: var(--trace-green); box-shadow: var(--glow-green); }
+.step-wire.broken { background: var(--fail-red); box-shadow: var(--glow-red); }
+.gates-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 700px) { .gates-row { grid-template-columns: repeat(2, 1fr); } }
+.gate-card { padding: 16px; border: 1px solid var(--pcb-border); border-radius: 6px; background: var(--pcb-surface); transition: all 0.3s; text-align: center; }
+.gate-card.pass { border-color: var(--pass-green); }
+.gate-card.fail { border-color: var(--fail-red); }
+.gate-id { font-family: var(--font-display); font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.gate-card.pass .gate-id { color: var(--pass-green); }
+.gate-card.fail .gate-id { color: var(--fail-red); }
+.gate-tool { font-size: 10px; color: var(--text-secondary); margin-bottom: 8px; }
+.gate-status { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 4px; display: inline-block; }
+.gate-card.pass .gate-status { background: rgba(0,220,130,0.1); color: var(--pass-green); }
+.gate-card.fail .gate-status { background: rgba(255,71,87,0.1); color: var(--fail-red); }
+.gate-detail { font-size: 10px; color: var(--text-dim); margin-top: 8px; line-height: 1.4; }
+.dod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+@media (max-width: 900px) { .dod-grid { grid-template-columns: repeat(2, 1fr); } }
+.dod-item {
+  display: flex; align-items: flex-start; gap: 10px; padding: 12px;
+  border: 1px solid var(--pcb-border); border-radius: 6px; background: var(--pcb-surface); transition: border-color 0.3s;
+}
+.dod-item.pass { border-color: rgba(0,220,130,0.3); }
+.dod-item.fail { border-color: rgba(255,71,87,0.3); }
+.dod-check {
+  width: 20px; height: 20px; flex-shrink: 0; border-radius: 4px;
+  border: 2px solid var(--pcb-border); display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; transition: all 0.3s;
+}
+.dod-item.pass .dod-check { border-color: var(--pass-green); color: var(--pass-green); background: rgba(0,220,130,0.08); }
+.dod-item.fail .dod-check { border-color: var(--fail-red); color: var(--fail-red); background: rgba(255,71,87,0.08); }
+.dod-name { font-size: 11px; font-weight: 600; }
+.dod-verify { font-size: 9px; color: var(--text-dim); margin-top: 2px; line-height: 1.3; }
+.stats-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 16px; }
+@media (max-width: 700px) { .stats-row { grid-template-columns: repeat(3, 1fr); } }
+.stat-box { text-align: center; padding: 14px; border: 1px solid var(--pcb-border); border-radius: 6px; background: var(--pcb-surface); }
+.stat-val { font-family: var(--font-display); font-size: 28px; font-weight: 700; }
+.stat-lbl { font-size: 10px; color: var(--text-secondary); margin-top: 4px; letter-spacing: 1px; text-transform: uppercase; }
+.violation-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.violation-table th {
+  text-align: left; padding: 10px 12px; font-size: 10px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase; color: var(--text-secondary);
+  border-bottom: 1px solid var(--pcb-border); background: var(--pcb-surface);
+}
+.violation-table td { padding: 10px 12px; border-bottom: 1px solid rgba(28,41,55,0.5); vertical-align: top; }
+.violation-table tr:hover td { background: rgba(0,220,130,0.02); }
+.sev-badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+.sev-error { background: rgba(255,71,87,0.15); color: var(--fail-red); }
+.sev-warning { background: rgba(255,165,2,0.15); color: var(--warn-amber); }
+.sev-info { background: rgba(0,210,255,0.15); color: var(--info-cyan); }
+.mission-banner {
+  padding: 24px; border-radius: 8px; text-align: center; margin-bottom: 20px;
+  font-family: var(--font-display); transition: all 0.5s;
+}
+.mission-banner.pass { background: linear-gradient(135deg, rgba(0,220,130,0.08), rgba(0,220,130,0.02)); border: 2px solid var(--pass-green); box-shadow: var(--glow-green); }
+.mission-banner.fail { background: linear-gradient(135deg, rgba(255,71,87,0.08), rgba(255,71,87,0.02)); border: 2px solid var(--fail-red); box-shadow: var(--glow-red); }
+.mission-title { font-size: 18px; font-weight: 700; letter-spacing: 3px; }
+.mission-banner.pass .mission-title { color: var(--pass-green); }
+.mission-banner.fail .mission-title { color: var(--fail-red); }
+.mission-sub { font-size: 12px; color: var(--text-secondary); margin-top: 6px; font-family: var(--font-mono); }
+.spinner-wrap { text-align: center; padding: 40px; }
+.spinner { width: 40px; height: 40px; border: 3px solid var(--pcb-border); border-top-color: var(--trace-green); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner-text { font-size: 12px; color: var(--text-secondary); }
+.hidden { display: none !important; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--pcb-bg); }
+::-webkit-scrollbar-thumb { background: var(--pcb-border); border-radius: 3px; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { animation: fadeIn 0.4s ease-out; }
+@keyframes pulseGlow { 0%,100% { box-shadow: 0 0 10px rgba(0,220,130,0.2); } 50% { box-shadow: 0 0 25px rgba(0,220,130,0.5); } }
+.pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
+.tab-bar { display: flex; gap: 0; border-bottom: 1px solid var(--pcb-border); }
+.tab-btn {
+  padding: 10px 20px; font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim);
+  background: transparent; border: none; border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.2s;
+}
+.tab-btn:hover { color: var(--text-secondary); }
+.tab-btn.active { color: var(--trace-green); border-bottom-color: var(--trace-green); }
+.v-snippet { font-size: 11px; background: var(--pcb-bg); padding: 6px 10px; border-radius: 4px; margin-top: 4px; color: var(--solder-silver); white-space: pre-wrap; word-break: break-all; }
+.v-suggestion { font-size: 10px; color: var(--info-cyan); margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="shell" id="app">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <div class="logo-mark pulse-glow">QC</div>
+      <div>
+        <div class="header-title">MAIDOS CODEQC</div>
+        <div class="header-sub">v3.3 TEST BENCH DASHBOARD — 程式碼品質檢測台</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="status-pill">
+        <div class="status-dot" id="apiDot"></div>
+        <span id="apiStatus">CONNECTING...</span>
+      </div>
+      <div class="status-pill" id="versionPill" style="display:none">
+        <span id="versionText"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- INPUT PANEL -->
+  <div class="panel">
+    <div class="panel-head">
+      <span class="panel-label">⌨ Input — Code / Files</span>
+      <span class="panel-badge" id="fileCount">0 files</span>
+    </div>
+    <div class="panel-body">
+      <div class="input-grid">
+        <div>
+          <textarea class="code-editor" id="codeInput" placeholder="在此貼上代碼，或拖曳檔案到右側上傳區...&#10;&#10;支援: TypeScript, JavaScript, Python, Rust, Go, Java, C/C++, PHP, Ruby, Swift, Kotlin..."></textarea>
+        </div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <label class="ctrl-label">Product Grade</label>
+            <select class="ctrl-select" id="gradeSelect">
+              <option value="E">E — 商用級 (Commercial)</option>
+              <option value="F">F — 深科技 (Deep-Tech)</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <label class="ctrl-label">Check Level</label>
+            <select class="ctrl-select" id="levelSelect">
+              <option value="D">D — Standard</option>
+              <option value="E">E — Extended</option>
+              <option value="F">F — Deep</option>
+            </select>
+          </div>
+          <div class="ctrl-group">
+            <label class="ctrl-label">API Endpoint</label>
+            <input class="ctrl-input" id="apiUrl" value="http://localhost:3333" placeholder="http://localhost:3333">
+          </div>
+          <div class="ctrl-group">
+            <label class="ctrl-label">Upload Files</label>
+            <div class="drop-zone" id="dropZone">
+              📂 拖曳檔案至此 或 點擊選擇
+              <input type="file" id="fileInput" multiple accept=".ts,.tsx,.js,.jsx,.py,.rs,.go,.java,.kt,.swift,.c,.cpp,.h,.cs,.php,.rb">
+            </div>
+            <div class="file-chips" id="fileChips"></div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-scan" id="btnScan" onclick="doScan()">⚡ SCAN</button>
+            <button class="btn btn-pipeline" id="btnPipeline" onclick="doPipeline()">🔧 PIPELINE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="spinner-wrap hidden" id="loading">
+    <div class="spinner"></div>
+    <div class="spinner-text" id="loadingText">正在連接引擎...</div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="resultsArea" class="hidden">
+    <div class="mission-banner hidden" id="missionBanner">
+      <div class="mission-title" id="missionTitle"></div>
+      <div class="mission-sub" id="missionSub"></div>
+    </div>
+    <div class="panel" id="resultsPanel">
+      <div class="tab-bar" id="tabBar"></div>
+      <div class="panel-body" id="tabContent"></div>
+    </div>
+  </div>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+let uploadedFiles = [];
+let lastScanResult = null;
+let lastPipelineResult = null;
+let activeTab = 'scan';
+
+// Prefer same-origin when served by `maidos-codeqc serve` (USB-friendly).
+// Fallback: support `file:///.../dashboard.html?port=3333` launchers.
+try {
+  if (location.protocol === 'http:' || location.protocol === 'https:') {
+    $('apiUrl').value = location.origin;
+  } else {
+    const params = new URLSearchParams(location.search);
+    const port = params.get('port');
+    if (port) $('apiUrl').value = `http://localhost:${port}`;
+  }
+} catch {}
+
+// ── API Health Check ──
+async function checkAPI() {
+  const base = $('apiUrl').value.replace(/\/$/, '');
+  try {
+    const r = await fetch(base + '/api/v1/version');
+    const d = await r.json();
+    $('apiDot').className = 'status-dot online';
+    $('apiStatus').textContent = 'ONLINE';
+    $('versionPill').style.display = '';
+    $('versionText').textContent = 'v' + d.version + ' / ' + d.engine;
+    return true;
+  } catch {
+    $('apiDot').className = 'status-dot error';
+    $('apiStatus').textContent = 'OFFLINE';
+    $('versionPill').style.display = 'none';
+    return false;
+  }
+}
+checkAPI();
+setInterval(checkAPI, 15000);
+
+// ── File Upload ──
+const dropZone = $('dropZone');
+const fileInput = $('fileInput');
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('dragover'); addFiles(e.dataTransfer.files); });
+fileInput.addEventListener('change', () => addFiles(fileInput.files));
+
+function addFiles(fileList) {
+  for (const f of fileList) { if (!uploadedFiles.find(x => x.name === f.name)) uploadedFiles.push(f); }
+  renderChips();
+}
+function removeFile(i) { uploadedFiles.splice(i, 1); renderChips(); }
+function renderChips() {
+  $('fileChips').innerHTML = uploadedFiles.map((f, i) =>
+    '<span class="file-chip">' + f.name + ' <button class="file-chip-x" onclick="removeFile(' + i + ')">×</button></span>'
+  ).join('');
+  $('fileCount').textContent = uploadedFiles.length + ' files';
+}
+
+async function collectFiles() {
+  const files = [];
+  const code = $('codeInput').value.trim();
+  if (code) files.push({ path: 'input.ts', content: code });
+  for (const f of uploadedFiles) { const text = await f.text(); files.push({ path: f.name, content: text }); }
+  return files;
+}
+
+// ── Scan ──
+async function doScan() {
+  const files = await collectFiles();
+  if (!files.length) return alert('請輸入代碼或上傳檔案');
+  const base = $('apiUrl').value.replace(/\/$/, '');
+  $('loading').classList.remove('hidden');
+  $('loadingText').textContent = '正在掃描... ⚡';
+  $('btnScan').disabled = true; $('btnPipeline').disabled = true;
+  try {
+    const r = await fetch(base + '/api/v1/scan', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ files, level: $('levelSelect').value }),
+    });
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'scan failed');
+    lastScanResult = d.result; lastPipelineResult = null;
+    showResults('scan');
+  } catch (e) {
+    alert('掃描失敗: ' + e.message + '\n\n請確認後端已啟動: npx tsx src/cli.ts serve --port 3333');
+  } finally {
+    $('loading').classList.add('hidden');
+    $('btnScan').disabled = false; $('btnPipeline').disabled = false;
+  }
+}
+
+// ── Pipeline ──
+async function doPipeline() {
+  const files = await collectFiles();
+  if (!files.length) return alert('請輸入代碼或上傳檔案');
+  const base = $('apiUrl').value.replace(/\/$/, '');
+  $('loading').classList.remove('hidden');
+  $('loadingText').textContent = '正在跑完整檢測流程... 🔧';
+  $('btnScan').disabled = true; $('btnPipeline').disabled = true;
+  try {
+    const body = { files: files.map(f => ({ file: f.path, source: f.content })), grade: $('gradeSelect').value };
+    const r = await fetch(base + '/api/v1/pipeline', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'pipeline failed');
+    lastPipelineResult = d.result;
+    const sr = await fetch(base + '/api/v1/scan', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ files, level: $('levelSelect').value }),
+    });
+    const sd = await sr.json();
+    if (sd.ok) lastScanResult = sd.result;
+    showResults('pipeline');
+  } catch (e) {
+    alert('完整檢查失敗: ' + e.message + '\n\n請確認後端已啟動: npx tsx src/cli.ts serve --port 3333');
+  } finally {
+    $('loading').classList.add('hidden');
+    $('btnScan').disabled = false; $('btnPipeline').disabled = false;
+  }
+}
+</script>
+<script>
+// ── Show Results + Tab Switching ──
+function showResults(defaultTab) {
+  $('resultsArea').classList.remove('hidden');
+  $('resultsArea').classList.add('fade-in');
+  const tabs = [];
+  if (lastPipelineResult) {
+    tabs.push({ id: 'pipeline', label: '🔧 Pipeline' });
+    tabs.push({ id: 'gates', label: '🚪 Gates' });
+    tabs.push({ id: 'dod', label: '📋 DoD' });
+    tabs.push({ id: 'waveform', label: '📡 Waveform' });
+  }
+  if (lastScanResult) {
+    tabs.push({ id: 'scan', label: '⚡ Scan Results' });
+    tabs.push({ id: 'violations', label: '📝 Violations' });
+  }
+  $('tabBar').innerHTML = tabs.map(t =>
+    '<button class="tab-btn ' + (t.id === defaultTab ? 'active' : '') + '" onclick="switchTab(\'' + t.id + '\')">' + t.label + '</button>'
+  ).join('');
+  if (lastPipelineResult) {
+    const p = lastPipelineResult;
+    const banner = $('missionBanner');
+    banner.classList.remove('hidden', 'pass', 'fail');
+    banner.classList.add(p.passed ? 'pass' : 'fail', 'fade-in');
+    $('missionTitle').textContent = p.passed ? '✅ MISSION COMPLETE' : '❌ MISSION FAILED';
+    const stepPass = p.steps.filter(s => s.passed).length;
+    const gatePass = Object.entries(p.gates).filter(function(e) { return e[0] !== 'allPassed' && e[1].passed; }).length;
+    const dodPass = p.dod && p.dod.items ? p.dod.items.filter(function(i) { return i.passed; }).length : 0;
+    $('missionSub').textContent = 'Pipeline ' + stepPass + '/10 · Gates ' + gatePass + '/4 · DoD ' + dodPass + '/8 · ' + p.duration + 'ms';
+  } else { $('missionBanner').classList.add('hidden'); }
+  switchTab(defaultTab);
+}
+
+function switchTab(tabId) {
+  activeTab = tabId;
+  var lookup = { pipeline: 'Pipeline', gates: 'Gates', dod: 'DoD', waveform: 'Waveform', scan: 'Scan', violations: 'Violations' };
+  document.querySelectorAll('.tab-btn').forEach(function(b) {
+    b.classList.toggle('active', b.textContent.indexOf(lookup[tabId]) >= 0);
+  });
+  if (tabId === 'pipeline') renderPipeline();
+  else if (tabId === 'gates') renderGates();
+  else if (tabId === 'dod') renderDoD();
+  else if (tabId === 'waveform') renderWaveform();
+  else if (tabId === 'scan') renderScanStats();
+  else if (tabId === 'violations') renderViolations();
+}
+
+function esc(s) { if (!s) return ''; var d = document.createElement('div'); d.textContent = String(s); return d.innerHTML; }
+
+// ── Pipeline Tab ──
+function renderPipeline() {
+  var p = lastPipelineResult; if (!p) return;
+  var html = '<div class="pipeline-trace">';
+  p.steps.forEach(function(s, i) {
+    var cls = s.passed ? 'pass' : (s.faultMode ? 'fail' : 'warn');
+    if (i > 0) { var wireCls = p.steps[i-1].passed ? 'active' : 'broken'; html += '<div class="step-wire ' + wireCls + '"></div>'; }
+    html += '<div class="step-node fade-in" style="animation-delay:' + (i*60) + 'ms">' +
+      '<div class="step-dot ' + cls + '" title="' + esc(s.details) + '">' + (s.passed ? '✓' : '✗') + '</div>' +
+      '<div class="step-label">' + esc(s.name) + '</div>' +
+      '<div class="step-circuit">' + esc(s.circuitTerm) + '</div></div>';
+  });
+  html += '</div>';
+  html += '<div style="margin-top:20px;overflow-x:auto"><table class="violation-table">' +
+    '<tr><th>#</th><th>Step</th><th>Circuit</th><th>Status</th><th>Duration</th><th>Details</th></tr>';
+  p.steps.forEach(function(s) {
+    html += '<tr><td style="color:var(--text-dim)">' + s.step + '</td>' +
+      '<td>' + esc(s.name) + '</td>' +
+      '<td style="color:var(--solder-gold)">' + esc(s.circuitTerm) + '</td>' +
+      '<td>' + (s.passed ? '✅' : '❌') + '</td>' +
+      '<td style="color:var(--text-dim)">' + s.duration + 'ms</td>' +
+      '<td style="font-size:11px;color:var(--text-secondary)">' + esc(s.details) + '</td></tr>';
+  });
+  html += '</table></div>';
+  $('tabContent').innerHTML = html;
+}
+
+// ── Gates Tab ──
+function renderGates() {
+  var g = lastPipelineResult && lastPipelineResult.gates; if (!g) return;
+  var gateInfo = [
+    { id: 'G1', label: '接口同步', tool: '有沒有對上' },
+    { id: 'G2', label: '規格覆蓋', tool: '功能有沒有做完' },
+    { id: 'G3', label: '防護完整', tool: '有沒有漏洞' },
+    { id: 'G4', label: '綜合驗收', tool: '能不能交貨' },
+  ];
+  var html = '<div class="gates-row">';
+  gateInfo.forEach(function(gi) {
+    var gate = g[gi.id]; if (!gate) return;
+    var cls = gate.passed ? 'pass' : 'fail';
+    html += '<div class="gate-card ' + cls + ' fade-in">' +
+      '<div class="gate-id">' + gi.id + '</div>' +
+      '<div class="gate-tool">' + gi.label + ' (' + gi.tool + ')</div>' +
+      '<div class="gate-status">' + (gate.passed ? 'PASS' : 'FAIL') + '</div>' +
+      '<div class="gate-detail">' + esc(gate.details) + '</div></div>';
+  });
+  html += '</div>';
+  var allPass = g.allPassed;
+  var color = allPass ? 'var(--pass-green)' : 'var(--fail-red)';
+  html += '<div style="text-align:center;margin-top:20px;padding:16px;border:1px solid ' + color + ';border-radius:6px;background:var(--pcb-surface);">' +
+    '<span style="font-family:var(--font-display);font-size:14px;letter-spacing:2px;color:' + color + ';">' +
+    'AND GATE: ' + (allPass ? 'ALL PASS — 全部通過，可以交貨' : 'BLOCKED — 有關卡沒過') + '</span></div>';
+  $('tabContent').innerHTML = html;
+}
+</script>
+<script>
+// ── DoD Tab ──
+function renderDoD() {
+  var dod = lastPipelineResult && lastPipelineResult.dod; if (!dod) return;
+  var html = '<div class="dod-grid">';
+  dod.items.forEach(function(item, i) {
+    var cls = item.passed ? 'pass' : 'fail';
+    html += '<div class="dod-item ' + cls + ' fade-in" style="animation-delay:' + (i*50) + 'ms">' +
+      '<div class="dod-check">' + (item.passed ? '✓' : '✗') + '</div>' +
+      '<div><div class="dod-name">[' + item.id + '] ' + esc(item.name) + '</div>' +
+      '<div class="dod-verify">' + esc(item.verification) + '</div></div></div>';
+  });
+  html += '</div>';
+  var passCount = dod.items.filter(function(i) { return i.passed; }).length;
+  var mc = dod.missionComplete;
+  var color = mc ? 'var(--pass-green)' : 'var(--fail-red)';
+  html += '<div style="text-align:center;margin-top:20px;padding:16px;border:1px solid ' + color + ';border-radius:6px;background:var(--pcb-surface);">' +
+    '<span style="font-family:var(--font-display);font-size:14px;letter-spacing:2px;color:' + color + ';">' +
+    'DoD: ' + passCount + '/8 ' + (mc ? '— MISSION COMPLETE' : '— 還沒做完') + '</span></div>';
+  $('tabContent').innerHTML = html;
+}
+
+// ── Waveform Tab (三通道示波器) ──
+function renderWaveform() {
+  var w = lastPipelineResult && lastPipelineResult.waveform; if (!w) return;
+  var chColors = { CH1_Y: '#00dc82', CH2_X: '#00d2ff', CH3_Z: '#ffa502' };
+  var chLabels = { CH1_Y: 'CH1 功能完整度', CH2_X: 'CH2 程式碼品質', CH3_Z: 'CH3 真實性驗證' };
+
+  // Composite score banner
+  var compColor = w.compositeScore >= 80 ? 'var(--pass-green)' : w.compositeScore >= 60 ? 'var(--warn-amber)' : 'var(--fail-red)';
+  var html = '<div style="text-align:center;margin-bottom:24px;">' +
+    '<div style="font-family:var(--font-display);font-size:12px;letter-spacing:3px;color:var(--text-dim);margin-bottom:4px;">COMPOSITE SCORE</div>' +
+    '<div style="font-family:var(--font-display);font-size:48px;font-weight:700;color:' + compColor + ';">' + w.compositeScore.toFixed(1) + '</div>' +
+    '<div style="font-size:12px;color:var(--text-dim);">Y:40% · X:30% · Z:30%</div></div>';
+
+  // Three channel cards with SVG waveforms
+  html += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;">';
+  w.channels.forEach(function(ch) {
+    var color = chColors[ch.channel] || '#fff';
+    var label = chLabels[ch.channel] || ch.channel;
+    var statusColor = ch.overall === 'PASS' ? 'var(--pass-green)' : ch.overall === 'WARN' ? 'var(--warn-amber)' : 'var(--fail-red)';
+
+    // Build SVG oscilloscope
+    var svgW = 280, svgH = 120, pad = 20;
+    var n = ch.readings.length;
+    var points = ch.readings.map(function(r, i) {
+      var x = pad + (i / (n - 1 || 1)) * (svgW - 2 * pad);
+      var y = svgH - pad - (r.amplitude / 100) * (svgH - 2 * pad);
+      return x + ',' + y;
+    });
+    // Grid lines
+    var gridSvg = '';
+    for (var g = 0; g <= 4; g++) {
+      var gy = pad + g * ((svgH - 2 * pad) / 4);
+      gridSvg += '<line x1="' + pad + '" y1="' + gy + '" x2="' + (svgW - pad) + '" y2="' + gy + '" stroke="var(--pcb-border)" stroke-width="0.5" stroke-dasharray="4,4"/>';
+    }
+    // Axis labels
+    var axisSvg = '<text x="' + (pad - 4) + '" y="' + (pad + 3) + '" fill="var(--text-dim)" font-size="8" text-anchor="end">100</text>' +
+      '<text x="' + (pad - 4) + '" y="' + (svgH - pad + 3) + '" fill="var(--text-dim)" font-size="8" text-anchor="end">0</text>';
+    // Data dots + line
+    var dotsSvg = '';
+    ch.readings.forEach(function(r, i) {
+      var x = pad + (i / (n - 1 || 1)) * (svgW - 2 * pad);
+      var y = svgH - pad - (r.amplitude / 100) * (svgH - 2 * pad);
+      var dc = r.status === 'PASS' ? 'var(--pass-green)' : r.status === 'WARN' ? 'var(--warn-amber)' : 'var(--fail-red)';
+      dotsSvg += '<circle cx="' + x + '" cy="' + y + '" r="5" fill="' + dc + '" stroke="var(--pcb-bg)" stroke-width="2">' +
+        '<title>' + r.id + ': ' + r.amplitude.toFixed(0) + '% (' + r.status + ')</title></circle>';
+      dotsSvg += '<text x="' + x + '" y="' + (y - 10) + '" fill="' + dc + '" font-size="9" text-anchor="middle" font-weight="600">' + r.id + '</text>';
+    });
+
+    var svg = '<svg width="100%" viewBox="0 0 ' + svgW + ' ' + svgH + '" style="background:var(--pcb-bg);border-radius:6px;border:1px solid var(--pcb-border);">' +
+      gridSvg + axisSvg +
+      '<polyline points="' + points.join(' ') + '" fill="none" stroke="' + color + '" stroke-width="2.5" stroke-linejoin="round" opacity="0.8"/>' +
+      '<polyline points="' + points.join(' ') + '" fill="none" stroke="' + color + '" stroke-width="1" stroke-linejoin="round" filter="url(#glow)" opacity="0.4"/>' +
+      '<defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>' +
+      dotsSvg + '</svg>';
+
+    html += '<div style="background:var(--pcb-card);border:1px solid var(--pcb-border);border-radius:8px;padding:16px;">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">' +
+      '<span style="font-family:var(--font-display);font-size:11px;letter-spacing:2px;color:' + color + ';">' + label + '</span>' +
+      '<span style="font-family:var(--font-display);font-size:11px;letter-spacing:1px;color:' + statusColor + ';">' + ch.overall + ' (' + ch.score.toFixed(0) + ')</span></div>' +
+      svg + '</div>';
+  });
+  html += '</div>';
+
+  // Reading detail table
+  html += '<div style="overflow-x:auto"><table class="violation-table"><tr><th>CH</th><th>ID</th><th>Name</th><th>Amplitude</th><th>Status</th><th>Evidence</th></tr>';
+  w.channels.forEach(function(ch) {
+    var color = chColors[ch.channel] || '#fff';
+    ch.readings.forEach(function(r) {
+      var sc = r.status === 'PASS' ? 'var(--pass-green)' : r.status === 'WARN' ? 'var(--warn-amber)' : 'var(--fail-red)';
+      html += '<tr><td style="color:' + color + ';font-weight:600">' + ch.channel.replace('_', ' ') + '</td>' +
+        '<td style="font-weight:600">' + r.id + '</td>' +
+        '<td>' + esc(r.name) + '</td>' +
+        '<td><div style="display:flex;align-items:center;gap:8px;">' +
+        '<div style="width:80px;height:6px;border-radius:3px;background:var(--pcb-border);overflow:hidden;">' +
+        '<div style="width:' + r.amplitude + '%;height:100%;background:' + sc + ';border-radius:3px;transition:width 0.5s;"></div></div>' +
+        '<span style="color:' + sc + ';font-size:12px;">' + r.amplitude.toFixed(0) + '%</span></div></td>' +
+        '<td style="color:' + sc + ';font-weight:600;">' + r.status + '</td>' +
+        '<td style="color:var(--text-dim);font-size:11px;">' + (r.evidence || '') + '</td></tr>';
+    });
+  });
+  html += '</table></div>';
+
+  // All Pass verdict
+  var apColor = w.allPass ? 'var(--pass-green)' : 'var(--fail-red)';
+  html += '<div style="text-align:center;margin-top:20px;padding:16px;border:1px solid ' + apColor + ';border-radius:6px;background:var(--pcb-surface);">' +
+    '<span style="font-family:var(--font-display);font-size:14px;letter-spacing:2px;color:' + apColor + ';">' +
+    '🔊 WAVEFORM: ' + (w.allPass ? 'ALL CHANNELS PASS — 三項全過' : 'SIGNAL ANOMALY — 有項目不及格') + '</span></div>';
+
+  $('tabContent').innerHTML = html;
+}
+
+// ── Scan Stats Tab ──
+function renderScanStats() {
+  var r = lastScanResult; if (!r) return;
+  var s = r.summary;
+  var html = '<div class="stats-row">' +
+    '<div class="stat-box"><div class="stat-val" style="color:var(--text-primary)">' + s.totalFiles + '</div><div class="stat-lbl">Files</div></div>' +
+    '<div class="stat-box"><div class="stat-val" style="color:var(--text-primary)">' + s.totalViolations + '</div><div class="stat-lbl">Total</div></div>' +
+    '<div class="stat-box"><div class="stat-val" style="color:var(--fail-red)">' + s.errorCount + '</div><div class="stat-lbl">Errors</div></div>' +
+    '<div class="stat-box"><div class="stat-val" style="color:var(--warn-amber)">' + s.warningCount + '</div><div class="stat-lbl">Warnings</div></div>' +
+    '<div class="stat-box"><div class="stat-val" style="color:var(--info-cyan)">' + s.infoCount + '</div><div class="stat-lbl">Info</div></div>' +
+    '</div>';
+  if (s.byRule && Object.keys(s.byRule).length > 0) {
+    var sorted = Object.entries(s.byRule).sort(function(a, b) { return b[1] - a[1]; });
+    html += '<div style="overflow-x:auto"><table class="violation-table"><tr><th>Rule</th><th>Count</th><th>Bar</th></tr>';
+    var maxCount = sorted[0] ? sorted[0][1] : 1;
+    sorted.forEach(function(entry) {
+      var rule = entry[0], count = entry[1];
+      var pct = Math.round(count / maxCount * 100);
+      var color = rule.charAt(0) === 'R' ? 'var(--fail-red)' : rule.charAt(0) === 'P' ? 'var(--warn-amber)' : 'var(--info-cyan)';
+      html += '<tr><td style="font-weight:600;color:' + color + '">' + rule + '</td>' +
+        '<td style="text-align:center">' + count + '</td>' +
+        '<td><div style="height:8px;border-radius:4px;background:' + color + ';width:' + pct + '%;opacity:0.6;transition:width 0.5s;"></div></td></tr>';
+    });
+    html += '</table></div>';
+  }
+  if (r.files && r.files.length > 0) {
+    html += '<div style="margin-top:20px;overflow-x:auto"><table class="violation-table"><tr><th>File</th><th>Language</th><th>Lines</th><th>Violations</th></tr>';
+    r.files.forEach(function(f) {
+      html += '<tr><td style="color:var(--trace-green)">' + esc(f.file) + '</td>' +
+        '<td style="color:var(--text-dim)">' + f.language + '</td>' +
+        '<td style="text-align:center">' + (f.stats ? f.stats.totalLines : '—') + '</td>' +
+        '<td style="text-align:center;color:' + (f.violations.length > 0 ? 'var(--warn-amber)' : 'var(--pass-green)') + '">' + f.violations.length + '</td></tr>';
+    });
+    html += '</table></div>';
+  }
+  $('tabContent').innerHTML = html;
+}
+
+// ── Violations Tab ──
+function renderViolations() {
+  var r = lastScanResult; if (!r) return;
+  var allV = [];
+  r.files.forEach(function(f) { f.violations.forEach(function(v) { allV.push(Object.assign({}, v, { file: f.file })); }); });
+  if (!allV.length) { $('tabContent').innerHTML = '<div style="text-align:center;padding:40px;color:var(--pass-green);">✅ 零違規 — 乾淨!</div>'; return; }
+  var html = '<div style="margin-bottom:12px;color:var(--text-secondary);font-size:12px;">共 ' + allV.length + ' 條違規</div>';
+  html += '<div style="overflow-x:auto"><table class="violation-table"><tr><th>Sev</th><th>Rule</th><th>File</th><th>Line</th><th>Message</th></tr>';
+  allV.forEach(function(v) {
+    var sevCls = v.severity === 'error' ? 'sev-error' : v.severity === 'warning' ? 'sev-warning' : 'sev-info';
+    html += '<tr><td><span class="sev-badge ' + sevCls + '">' + v.severity + '</span></td>' +
+      '<td style="font-weight:600;white-space:nowrap">' + esc(v.ruleId) + '</td>' +
+      '<td style="color:var(--trace-green);font-size:11px">' + esc(v.file) + '</td>' +
+      '<td style="text-align:center;color:var(--text-dim)">' + (v.line || '—') + '</td>' +
+      '<td><div>' + esc(v.message) + '</div>' +
+      (v.snippet ? '<div class="v-snippet">' + esc(v.snippet) + '</div>' : '') +
+      (v.suggestion ? '<div class="v-suggestion">💡 ' + esc(v.suggestion) + '</div>' : '') +
+      '</td></tr>';
+  });
+  html += '</table></div>';
+  $('tabContent').innerHTML = html;
+}
+</script>
+</body>
+</html>
