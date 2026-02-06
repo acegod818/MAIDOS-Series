@@ -20,6 +20,7 @@ public sealed class CompileResult
     public IReadOnlyList<string> Artifacts { get; }
     public IReadOnlyList<string> Logs { get; }
     public TimeSpan Duration { get; }
+    public List<ForgeError> Errors { get; set; } = new();
 
     private CompileResult(bool isSuccess, string error,
         IReadOnlyList<string> artifacts, IReadOnlyList<string> logs, TimeSpan duration)

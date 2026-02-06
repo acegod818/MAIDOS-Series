@@ -1,20 +1,22 @@
 # Changelog
 
-## [0.3.0] - 2026-02-06
+## [0.3.0] - 2026-02-07
 
 ### Added
-- 99 language plugins (Tier A/B fully implemented, Tier C skeleton)
+- 97 language plugins (15 Tier A/B fully implemented, 82 Tier C with toolchain validation)
 - Cross-language glue code generation (C#, Rust, C interop)
 - Tree-sitter based incremental parsing (Rust, C, C++)
 - FFI layer for C# P/Invoke integration
 - Plugin capability system with `ILanguagePlugin` interface
-- Multi-target cross-compilation support
+- Multi-target cross-compilation support (--target flag)
+- Standardized ForgeError type (file, line, col, severity, message, lang)
 
 ### Fixed
 - Go plugin encoding corruption (garbled UTF-8 comments merged with code)
 - CSharpConfig missing `OutputType` property
 - 15 plugin ProjectReference paths pointing to non-existent Forge.Core
 - Removed `#![allow(unused_variables)]` from Rust core
+- JavaScript plugin Parameters.Length → Parameters.Count
 
 ### Changed
 - All Chinese comments translated to English (Rust core + C# Core)

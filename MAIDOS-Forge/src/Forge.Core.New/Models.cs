@@ -6,6 +6,30 @@ using System.Text.Json.Serialization;
 namespace Forge.Core.Config;
 
 /// <summary>
+/// Standardized error format across all languages (FR-003)
+/// </summary>
+public sealed class ForgeError
+{
+    [JsonPropertyName("file")]
+    public string File { get; set; } = string.Empty;
+
+    [JsonPropertyName("line")]
+    public int Line { get; set; }
+
+    [JsonPropertyName("col")]
+    public int Col { get; set; }
+
+    [JsonPropertyName("severity")]
+    public string Severity { get; set; } = "error";  // error, warning, info
+
+    [JsonPropertyName("message")]
+    public string Message { get; set; } = string.Empty;
+
+    [JsonPropertyName("lang")]
+    public string Lang { get; set; } = string.Empty;
+}
+
+/// <summary>
 /// 專案配置 (forge.json)
 /// </summary>
 /// <remarks>

@@ -1,6 +1,6 @@
 # MAIDOS-Forge
 
-Cross-language compilation framework with 99 language plugins and multi-platform support.
+Cross-language compilation framework with 97 language plugins and multi-platform support.
 
 ## Architecture
 
@@ -11,7 +11,7 @@ C# Forge.Cli (CLI)
     |
 C# Forge.Core.New (Orchestrator)
     |                       \
-Rust maidos-forge-core       C# Forge.Plugins (99 languages)
+Rust maidos-forge-core       C# Forge.Plugins (97 languages)
 (Tree-sitter parser,         (ILanguagePlugin interface)
  FFI, Compiler core)
 ```
@@ -76,7 +76,7 @@ MAIDOS-Forge/
   src/
     Forge.Core.New/       # C# core orchestrator
     Forge.Cli/            # C# CLI
-    Forge.Plugins/        # 99 language plugins
+    Forge.Plugins/        # 97 language plugins
     Forge.Studio/         # WPF Studio (experimental)
     Forge.Tests/          # Unit tests
     Forge.VSCode/         # VS Code extension

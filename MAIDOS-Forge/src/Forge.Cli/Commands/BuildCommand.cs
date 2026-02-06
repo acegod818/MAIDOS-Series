@@ -135,10 +135,13 @@ public sealed class BuildCommand : ICommand
         var isDebug = args.Contains("--debug");
         var isDryRun = args.Contains("--dry-run");
         var targetModule = args.FirstOrDefault(a => !a.StartsWith('-'));
+        var targetPlatform = args.FirstOrDefault(a => a.StartsWith("--target="))?.Split('=', 2)[1] ?? "native";
         var profile = isDebug ? "debug" : "release";
 
         _context.WriteLine($"Building project at: {_context.ProjectPath}");
         _context.WriteLine($"Profile: {profile}");
+        if (targetPlatform != "native")
+            _context.WriteLine($"Target: {targetPlatform}");
         _context.WriteLine("");
 
         // 階段 1: 解析配置
@@ -226,7 +229,7 @@ public sealed class BuildCommand : ICommand
         }
 
         // 階段 4: 執行編譯
-        var buildResult = ExecuteBuildAsync(schedule, modulesToBuild, config, profile).GetAwaiter().GetResult();
+        var buildResult = ExecuteBuildAsync(schedule, modulesToBuild, config, profile, targetPlatform).GetAwaiter().GetResult();
         return buildResult;
     }
 
@@ -242,7 +245,8 @@ public sealed class BuildCommand : ICommand
         BuildSchedule schedule,
         List<ValidatedModuleConfig> modulesToBuild,
         ValidatedForgeConfig projectConfig,
-        string profile)
+        string profile,
+        string targetPlatform)
     {
         var outputDir = Path.Combine(projectConfig.ProjectRoot, 
             projectConfig.Config.Output.Dir, profile);
@@ -252,7 +256,7 @@ public sealed class BuildCommand : ICommand
         {
             Profile = profile,
             OutputDir = outputDir,
-            TargetPlatform = "native",
+            TargetPlatform = targetPlatform,
             Verbose = _context.Verbose
         };
 
