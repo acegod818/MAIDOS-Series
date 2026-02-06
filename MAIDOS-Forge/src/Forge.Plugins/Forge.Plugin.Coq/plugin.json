@@ -1,0 +1,1 @@
+{"name": "Coq", "namespace": "Forge.Plugin.Coq", "version": "1.0.0", "category": "Verification", "toolchain": "coqc"}

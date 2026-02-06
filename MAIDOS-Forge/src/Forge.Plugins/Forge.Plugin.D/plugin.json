@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.d",
+  ""version": "0.1.0",
+  ""language": "d",
+  ""displayName": "D Plugin",
+  ""description": "D language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".d"],
+  ""toolchains": ["d"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.d.dll",
+  ""pluginClass": "Forge.Plugin.d.dPlugin",
+  ""dependencies": []
+}

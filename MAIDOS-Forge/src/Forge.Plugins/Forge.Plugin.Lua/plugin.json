@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.lua",
+  ""version": "0.1.0",
+  ""language": "lua",
+  ""displayName": "Lua Plugin",
+  ""description": "Lua language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".lua"],
+  ""toolchains": ["lua"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.lua.dll",
+  ""pluginClass": "Forge.Plugin.lua.luaPlugin",
+  ""dependencies": []
+}

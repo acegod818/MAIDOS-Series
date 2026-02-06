@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.prolog",
+  ""version": "0.1.0",
+  ""language": "prolog",
+  ""displayName": "Prolog Plugin",
+  ""description": "Prolog language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".prolog"],
+  ""toolchains": ["prolog"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.prolog.dll",
+  ""pluginClass": "Forge.Plugin.prolog.prologPlugin",
+  ""dependencies": []
+}

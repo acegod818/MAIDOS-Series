@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.julia",
+  ""version": "0.1.0",
+  ""language": "julia",
+  ""displayName": "Julia Plugin",
+  ""description": "Julia language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".julia"],
+  ""toolchains": ["julia"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.julia.dll",
+  ""pluginClass": "Forge.Plugin.julia.juliaPlugin",
+  ""dependencies": []
+}

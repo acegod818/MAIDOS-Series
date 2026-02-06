@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.lisp",
+  ""version": "0.1.0",
+  ""language": "lisp",
+  ""displayName": "Lisp Plugin",
+  ""description": "Lisp language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".lisp"],
+  ""toolchains": ["lisp"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.lisp.dll",
+  ""pluginClass": "Forge.Plugin.lisp.lispPlugin",
+  ""dependencies": []
+}

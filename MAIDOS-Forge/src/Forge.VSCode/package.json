@@ -1,0 +1,276 @@
+{
+  "name": "forge-lang",
+  "displayName": "MAIDOS-Forge",
+  "description": "Cross-language build system integration for VS Code",
+  "version": "0.1.0",
+  "publisher": "maidos",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maidos/forge-vscode"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Debuggers",
+    "Other"
+  ],
+  "keywords": [
+    "forge",
+    "cross-language",
+    "ffi",
+    "build",
+    "multi-language"
+  ],
+  "activationEvents": [
+    "workspaceContains:forge.json",
+    "onCommand:forge.init",
+    "onLanguage:forge"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "forge.init",
+        "title": "Forge: Initialize Project",
+        "icon": "$(add)"
+      },
+      {
+        "command": "forge.build",
+        "title": "Forge: Build Project",
+        "icon": "$(play)"
+      },
+      {
+        "command": "forge.rebuild",
+        "title": "Forge: Rebuild Project",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "forge.clean",
+        "title": "Forge: Clean Project",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "forge.run",
+        "title": "Forge: Run Project",
+        "icon": "$(debug-start)"
+      },
+      {
+        "command": "forge.watch",
+        "title": "Forge: Watch Mode",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "forge.showGraph",
+        "title": "Forge: Show Dependency Graph",
+        "icon": "$(type-hierarchy)"
+      },
+      {
+        "command": "forge.showFfi",
+        "title": "Forge: Show FFI Interfaces",
+        "icon": "$(symbol-interface)"
+      },
+      {
+        "command": "forge.addModule",
+        "title": "Forge: Add Module",
+        "icon": "$(new-folder)"
+      },
+      {
+        "command": "forge.checkToolchain",
+        "title": "Forge: Check Toolchains",
+        "icon": "$(tools)"
+      },
+      {
+        "command": "forge.openStudio",
+        "title": "Forge: Open Forge Studio",
+        "icon": "$(window)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        { "command": "forge.init" },
+        { "command": "forge.build", "when": "forge.projectLoaded" },
+        { "command": "forge.rebuild", "when": "forge.projectLoaded" },
+        { "command": "forge.clean", "when": "forge.projectLoaded" },
+        { "command": "forge.run", "when": "forge.projectLoaded" },
+        { "command": "forge.watch", "when": "forge.projectLoaded" },
+        { "command": "forge.showGraph", "when": "forge.projectLoaded" },
+        { "command": "forge.showFfi", "when": "forge.projectLoaded" },
+        { "command": "forge.addModule", "when": "forge.projectLoaded" },
+        { "command": "forge.checkToolchain" },
+        { "command": "forge.openStudio" }
+      ],
+      "editor/title": [
+        {
+          "command": "forge.build",
+          "when": "forge.projectLoaded && resourceFilename == 'forge.json'",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "forge.addModule",
+          "when": "forge.projectLoaded && explorerResourceIsFolder",
+          "group": "forge@1"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "forge.build",
+          "when": "view == forgeModules",
+          "group": "navigation@1"
+        },
+        {
+          "command": "forge.showGraph",
+          "when": "view == forgeModules",
+          "group": "navigation@2"
+        }
+      ]
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "forgeModules",
+          "name": "Forge Modules",
+          "when": "forge.projectLoaded",
+          "icon": "$(package)"
+        },
+        {
+          "id": "forgeToolchains",
+          "name": "Toolchains",
+          "when": "forge.projectLoaded",
+          "icon": "$(tools)"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "forge",
+          "title": "Forge",
+          "icon": "icons/forge.svg"
+        }
+      ]
+    },
+    "languages": [
+      {
+        "id": "forge",
+        "aliases": ["Forge Config", "forge"],
+        "extensions": [".forge"],
+        "filenames": ["forge.json", "module.json"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "forge",
+        "scopeName": "source.forge",
+        "path": "./syntaxes/forge.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "forge",
+        "path": "./snippets/forge.json"
+      }
+    ],
+    "configuration": {
+      "title": "Forge",
+      "properties": {
+        "forge.executablePath": {
+          "type": "string",
+          "default": "forge",
+          "description": "Path to the forge executable"
+        },
+        "forge.autoWatch": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically start watch mode when project opens"
+        },
+        "forge.buildOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically build on file save"
+        },
+        "forge.defaultConfig": {
+          "type": "string",
+          "enum": ["Debug", "Release"],
+          "default": "Debug",
+          "description": "Default build configuration"
+        },
+        "forge.showInlineErrors": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show build errors inline in editor"
+        },
+        "forge.parallelJobs": {
+          "type": "number",
+          "default": 0,
+          "description": "Number of parallel build jobs (0 = auto)"
+        },
+        "forge.studioPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to Forge Studio executable"
+        }
+      }
+    },
+    "problemMatchers": [
+      {
+        "name": "forge",
+        "owner": "forge",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+):(\\d+):(\\d+):\\s+(error|warning|info):\\s+(.+)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    ],
+    "taskDefinitions": [
+      {
+        "type": "forge",
+        "required": ["task"],
+        "properties": {
+          "task": {
+            "type": "string",
+            "enum": ["build", "rebuild", "clean", "run", "watch"],
+            "description": "The forge task to run"
+          },
+          "config": {
+            "type": "string",
+            "enum": ["Debug", "Release"],
+            "description": "Build configuration"
+          },
+          "module": {
+            "type": "string",
+            "description": "Specific module to build"
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.0"
+  }
+}

@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.go",
+  ""version": "0.1.0",
+  ""language": "go",
+  ""displayName": "Go Plugin",
+  ""description": "Go language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".go"],
+  ""toolchains": ["go"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.go.dll",
+  ""pluginClass": "Forge.Plugin.go.goPlugin",
+  ""dependencies": []
+}

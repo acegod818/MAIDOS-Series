@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.objectivec",
+  ""version": "0.1.0",
+  ""language": "objectivec",
+  ""displayName": "Objective-C Plugin",
+  ""description": "Objective-C language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".objectivec"],
+  ""toolchains": ["objectivec"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.objectivec.dll",
+  ""pluginClass": "Forge.Plugin.objectivec.objectivecPlugin",
+  ""dependencies": []
+}

@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.forth",
+  ""version": "0.1.0",
+  ""language": "forth",
+  ""displayName": "Forth Plugin",
+  ""description": "Forth language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".forth"],
+  ""toolchains": ["forth"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.forth.dll",
+  ""pluginClass": "Forge.Plugin.forth.forthPlugin",
+  ""dependencies": []
+}

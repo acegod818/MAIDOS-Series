@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.smalltalk",
+  ""version": "0.1.0",
+  ""language": "smalltalk",
+  ""displayName": "Smalltalk Plugin",
+  ""description": "Smalltalk language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".smalltalk"],
+  ""toolchains": ["smalltalk"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.smalltalk.dll",
+  ""pluginClass": "Forge.Plugin.smalltalk.smalltalkPlugin",
+  ""dependencies": []
+}

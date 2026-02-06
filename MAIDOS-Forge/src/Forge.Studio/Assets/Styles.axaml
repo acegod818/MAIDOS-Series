@@ -1,0 +1,84 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Global Styles for Forge Studio -->
+    
+    <!-- Button Styles -->
+    <Style Selector="Button">
+        <Setter Property="CornerRadius" Value="4" />
+    </Style>
+    
+    <Style Selector="Button.primary">
+        <Setter Property="Background" Value="#FF6B35" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+    
+    <Style Selector="Button.success">
+        <Setter Property="Background" Value="#00B894" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+    
+    <!-- TextBox Styles -->
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="#1E272E" />
+        <Setter Property="Foreground" Value="#DFE6E9" />
+        <Setter Property="BorderBrush" Value="#636E72" />
+        <Setter Property="CornerRadius" Value="4" />
+        <Setter Property="Padding" Value="8,6" />
+    </Style>
+    
+    <!-- ComboBox Styles -->
+    <Style Selector="ComboBox">
+        <Setter Property="Background" Value="#1E272E" />
+        <Setter Property="Foreground" Value="#DFE6E9" />
+        <Setter Property="BorderBrush" Value="#636E72" />
+        <Setter Property="CornerRadius" Value="4" />
+    </Style>
+    
+    <!-- ListBox Styles -->
+    <Style Selector="ListBox">
+        <Setter Property="Background" Value="#1E272E" />
+        <Setter Property="BorderBrush" Value="#636E72" />
+        <Setter Property="CornerRadius" Value="4" />
+    </Style>
+    
+    <Style Selector="ListBoxItem">
+        <Setter Property="Foreground" Value="#DFE6E9" />
+        <Setter Property="Padding" Value="8,4" />
+    </Style>
+    
+    <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+        <Setter Property="Background" Value="#FF6B35" />
+    </Style>
+    
+    <!-- TreeView Styles -->
+    <Style Selector="TreeView">
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+    
+    <Style Selector="TreeViewItem">
+        <Setter Property="Foreground" Value="#DFE6E9" />
+    </Style>
+    
+    <!-- Menu Styles -->
+    <Style Selector="Menu">
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+    
+    <Style Selector="MenuItem">
+        <Setter Property="Foreground" Value="#DFE6E9" />
+    </Style>
+    
+    <!-- ScrollBar Styles -->
+    <Style Selector="ScrollBar">
+        <Setter Property="Background" Value="#1E272E" />
+    </Style>
+    
+    <!-- Separator Styles -->
+    <Style Selector="Separator">
+        <Setter Property="Background" Value="#636E72" />
+        <Setter Property="Height" Value="1" />
+        <Setter Property="Margin" Value="0,4" />
+    </Style>
+    
+</Styles>

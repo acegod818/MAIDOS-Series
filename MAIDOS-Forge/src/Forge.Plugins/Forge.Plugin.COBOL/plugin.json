@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.cobol",
+  ""version": "0.1.0",
+  ""language": "cobol",
+  ""displayName": "COBOL Plugin",
+  ""description": "COBOL language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".cobol"],
+  ""toolchains": ["cobol"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.cobol.dll",
+  ""pluginClass": "Forge.Plugin.cobol.cobolPlugin",
+  ""dependencies": []
+}

@@ -1,0 +1,26 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Forge.Studio.App"
+             RequestedThemeVariant="Dark">
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://Forge.Studio/Assets/Styles.axaml" />
+    </Application.Styles>
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Brand Colors -->
+            <Color x:Key="ForgePrimary">#FF6B35</Color>
+            <Color x:Key="ForgeSecondary">#2D3436</Color>
+            <Color x:Key="ForgeAccent">#00B894</Color>
+            <Color x:Key="ForgeWarning">#FDCB6E</Color>
+            <Color x:Key="ForgeError">#D63031</Color>
+            <Color x:Key="ForgeSuccess">#00B894</Color>
+            
+            <!-- Brushes -->
+            <SolidColorBrush x:Key="ForgePrimaryBrush" Color="{StaticResource ForgePrimary}" />
+            <SolidColorBrush x:Key="ForgeSecondaryBrush" Color="{StaticResource ForgeSecondary}" />
+            <SolidColorBrush x:Key="ForgeAccentBrush" Color="{StaticResource ForgeAccent}" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

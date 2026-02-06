@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.java",
+  ""version": "0.1.0",
+  ""language": "java",
+  ""displayName": "Java Plugin",
+  ""description": "Java language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".java"],
+  ""toolchains": ["javac"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.java.dll",
+  ""pluginClass": "Forge.Plugin.java.javaPlugin",
+  ""dependencies": []
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Forge.Plugin.Wolfram",
+  "version": "1.0.0",
+  "language": "wolfram",
+  "displayName": "Wolfram Plugin",
+  "description": "Wolfram language plugin for Forge",
+  "author": "MAIDOS",
+  "extensions": [
+    ".wl",
+    ".wls"
+  ],
+  "toolchains": [
+    "wolframscript"
+  ],
+  "forgeVersion": ">=0.7.0",
+  "entry": "Forge.Plugin.Wolfram.dll",
+  "pluginClass": "Forge.Plugin.Wolfram.WolframPlugin",
+  "dependencies": [],
+  "builtin": false
+}

@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.fsharp",
+  ""version": "0.1.0",
+  ""language": "fsharp",
+  ""displayName": "F# Plugin",
+  ""description": "F# language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".fsharp"],
+  ""toolchains": ["fsharp"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.fsharp.dll",
+  ""pluginClass": "Forge.Plugin.fsharp.fsharpPlugin",
+  ""dependencies": []
+}

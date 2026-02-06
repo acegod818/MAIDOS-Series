@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.assembly",
+  ""version": "0.1.0",
+  ""language": "assembly",
+  ""displayName": "Assembly Plugin",
+  ""description": "Assembly language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".assembly"],
+  ""toolchains": ["assembly"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.assembly.dll",
+  ""pluginClass": "Forge.Plugin.assembly.assemblyPlugin",
+  ""dependencies": []
+}

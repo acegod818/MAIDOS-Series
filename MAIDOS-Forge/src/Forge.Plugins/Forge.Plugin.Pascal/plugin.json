@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.pascal",
+  ""version": "0.1.0",
+  ""language": "pascal",
+  ""displayName": "Pascal Plugin",
+  ""description": "Pascal language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".pascal"],
+  ""toolchains": ["pascal"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.pascal.dll",
+  ""pluginClass": "Forge.Plugin.pascal.pascalPlugin",
+  ""dependencies": []
+}

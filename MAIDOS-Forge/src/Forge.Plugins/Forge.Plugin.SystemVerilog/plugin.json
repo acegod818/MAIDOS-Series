@@ -1,0 +1,1 @@
+{"name": "SystemVerilog", "namespace": "Forge.Plugin.SystemVerilog", "version": "1.0.0", "category": "Hardware", "toolchain": "verilator"}

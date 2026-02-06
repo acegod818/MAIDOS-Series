@@ -1,0 +1,30 @@
+[package]
+name = "maidos-forge-core"
+version = "0.1.0"
+edition = "2021"
+authors = ["ZGWC_acegod818 <wocao@maidos.dev>"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+thiserror = "1.0"
+log = "0.4"
+env_logger = "0.10"
+clap = { version = "4.0", features = ["derive"] }
+tempfile = "3.0"
+which = "4.0"
+tree-sitter = "0.20"
+tree-sitter-rust = "0.20"
+tree-sitter-c = "0.20"
+tree-sitter-cpp = "0.20"
+async-trait = "0.1"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+[dev-dependencies]
+tokio-test = "0.4"
+tempfile = "3.0"

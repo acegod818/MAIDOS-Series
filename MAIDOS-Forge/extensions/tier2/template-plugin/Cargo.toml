@@ -1,0 +1,23 @@
+[package]
+name = "template-language-plugin"
+version = "1.0.0"
+edition = "2021"
+authors = ["ZGWC_acegod818 <wocao@maidos.dev>"]
+description = "Template for creating new language plugins for MAIDOS Forge"
+license = "MIT"
+repository = "https://github.com/maidos/maidos-forge/extensions/template-plugin"
+keywords = ["maidos", "plugin", "template", "language"]
+categories = ["development-tools"]
+
+[dependencies]
+maidos-forge-core = { path = "../../../maidos-forge-core" }
+async-trait = "0.1"
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1.0", features = ["full"] }
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dev-dependencies]
+tempfile = "3.0"
+tokio-test = "0.4"

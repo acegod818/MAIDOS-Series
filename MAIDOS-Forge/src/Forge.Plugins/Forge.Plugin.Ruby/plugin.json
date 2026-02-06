@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.ruby",
+  ""version": "0.1.0",
+  ""language": "ruby",
+  ""displayName": "Ruby Plugin",
+  ""description": "Ruby language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".ruby"],
+  ""toolchains": ["ruby"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.ruby.dll",
+  ""pluginClass": "Forge.Plugin.ruby.rubyPlugin",
+  ""dependencies": []
+}

@@ -1,0 +1,1 @@
+{"name": "PowerShell", "namespace": "Forge.Plugin.PowerShell", "version": "1.0.0", "category": "Scripting", "toolchain": "pwsh"}

@@ -1,0 +1,128 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Forge.Studio.ViewModels"
+        x:Class="Forge.Studio.Views.NewProjectDialog"
+        x:DataType="vm:NewProjectViewModel"
+        Title="New Forge Project"
+        Width="600" Height="500"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        Background="#2D3436">
+
+    <Grid RowDefinitions="Auto,*,Auto" Margin="24">
+        
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Spacing="8" Margin="0,0,0,24">
+            <TextBlock Text="Create New Project" FontSize="24" FontWeight="Bold" 
+                       Foreground="#FF6B35" />
+            <TextBlock Text="Configure your cross-language project" 
+                       Foreground="#B2BEC3" FontSize="14" />
+        </StackPanel>
+        
+        <!-- Form -->
+        <ScrollViewer Grid.Row="1">
+            <StackPanel Spacing="20">
+                
+                <!-- Project Name -->
+                <StackPanel Spacing="6">
+                    <TextBlock Text="Project Name" Foreground="#DFE6E9" FontWeight="SemiBold" />
+                    <TextBox Text="{Binding ProjectName}" Watermark="my-project" />
+                    <TextBlock Text="Use lowercase letters, numbers, and hyphens"
+                               Foreground="#636E72" FontSize="11" />
+                </StackPanel>
+                
+                <!-- Location -->
+                <StackPanel Spacing="6">
+                    <TextBlock Text="Location" Foreground="#DFE6E9" FontWeight="SemiBold" />
+                    <Grid ColumnDefinitions="*,Auto">
+                        <TextBox Grid.Column="0" Text="{Binding ProjectPath}" 
+                                 Watermark="~/projects" />
+                        <Button Grid.Column="1" Content="Browse..." 
+                                Command="{Binding BrowseCommand}"
+                                Margin="8,0,0,0" Padding="12,8" />
+                    </Grid>
+                </StackPanel>
+                
+                <!-- Template -->
+                <StackPanel Spacing="6">
+                    <TextBlock Text="Project Template" Foreground="#DFE6E9" FontWeight="SemiBold" />
+                    <ComboBox ItemsSource="{Binding Templates}" 
+                              SelectedItem="{Binding SelectedTemplate}"
+                              HorizontalAlignment="Stretch">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <TextBlock Text="{Binding Icon}" FontSize="16" />
+                                    <TextBlock Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                
+                <!-- Template Description -->
+                <Border Background="#1E272E" CornerRadius="8" Padding="16"
+                        IsVisible="{Binding SelectedTemplate, Converter={x:Static ObjectConverters.IsNotNull}}">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="{Binding SelectedTemplate.Description}" 
+                                   Foreground="#B2BEC3" TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="16" Margin="0,8,0,0">
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock Text="Languages:" Foreground="#636E72" FontSize="11" />
+                                <TextBlock Text="{Binding SelectedTemplate.Languages}" 
+                                           Foreground="#00B894" FontSize="11" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                <TextBlock Text="Modules:" Foreground="#636E72" FontSize="11" />
+                                <TextBlock Text="{Binding SelectedTemplate.ModuleCount}" 
+                                           Foreground="#00B894" FontSize="11" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Initial Modules -->
+                <StackPanel Spacing="6">
+                    <TextBlock Text="Initial Modules (Optional)" Foreground="#DFE6E9" FontWeight="SemiBold" />
+                    <ItemsControl ItemsSource="{Binding InitialModules}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#1E272E" CornerRadius="4" 
+                                        Padding="12,8" Margin="0,0,0,4">
+                                    <Grid ColumnDefinitions="*,Auto,Auto">
+                                        <TextBox Grid.Column="0" Text="{Binding Name}" 
+                                                 Watermark="module-name" />
+                                        <ComboBox Grid.Column="1" 
+                                                  ItemsSource="{Binding $parent[ItemsControl].((vm:NewProjectViewModel)DataContext).AvailableLanguages}"
+                                                  SelectedItem="{Binding Language}"
+                                                  Width="120" Margin="8,0" />
+                                        <Button Grid.Column="2" Content="✕" 
+                                                Command="{Binding $parent[ItemsControl].((vm:NewProjectViewModel)DataContext).RemoveModuleCommand}"
+                                                CommandParameter="{Binding}"
+                                                Background="Transparent" Foreground="#D63031"
+                                                Padding="8,4" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Button Content="+ Add Module" Command="{Binding AddModuleCommand}"
+                            HorizontalAlignment="Left" Background="Transparent"
+                            Foreground="#00B894" Padding="0" />
+                </StackPanel>
+                
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- Buttons -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto,Auto" Margin="0,24,0,0">
+            <TextBlock Grid.Column="0" Text="{Binding ValidationMessage}" 
+                       Foreground="#D63031" VerticalAlignment="Center" />
+            <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}"
+                    Padding="20,10" Margin="0,0,8,0" />
+            <Button Grid.Column="2" Content="Create Project" Command="{Binding CreateCommand}"
+                    Background="#00B894" Foreground="White" Padding="20,10"
+                    IsEnabled="{Binding CanCreate}" />
+        </Grid>
+    </Grid>
+</Window>

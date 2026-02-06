@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.groovy",
+  ""version": "0.1.0",
+  ""language": "groovy",
+  ""displayName": "Groovy Plugin",
+  ""description": "Groovy language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".groovy"],
+  ""toolchains": ["groovy"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.groovy.dll",
+  ""pluginClass": "Forge.Plugin.groovy.groovyPlugin",
+  ""dependencies": []
+}

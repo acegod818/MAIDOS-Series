@@ -1,0 +1,1 @@
+{"name": "HLSL", "namespace": "Forge.Plugin.Hlsl", "version": "1.0.0", "category": "Shader", "toolchain": "dxc"}

@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.erlang",
+  ""version": "0.1.0",
+  ""language": "erlang",
+  ""displayName": "Erlang Plugin",
+  ""description": "Erlang language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".erlang"],
+  ""toolchains": ["erlang"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.erlang.dll",
+  ""pluginClass": "Forge.Plugin.erlang.erlangPlugin",
+  ""dependencies": []
+}

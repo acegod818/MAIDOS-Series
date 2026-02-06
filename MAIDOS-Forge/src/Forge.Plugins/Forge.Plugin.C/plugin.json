@@ -1,0 +1,14 @@
+{
+  "name": "forge.plugin.c",
+  "version": "0.7.0",
+  "language": "c",
+  "displayName": "C Plugin",
+  "description": "C language support with clang and gcc compilers",
+  "author": "MAIDOS",
+  "extensions": [".c", ".h"],
+  "toolchains": ["clang", "gcc"],
+  "forgeVersion": ">=0.7.0",
+  "entry": "Forge.Plugin.C.dll",
+  "pluginClass": "Forge.Plugin.C.CLanguagePlugin",
+  "dependencies": []
+}

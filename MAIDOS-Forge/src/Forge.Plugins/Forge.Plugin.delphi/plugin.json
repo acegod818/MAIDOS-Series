@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.delphi",
+  ""version": "0.1.0",
+  ""language": "delphi",
+  ""displayName": "Delphi Plugin",
+  ""description": "Delphi language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".delphi"],
+  ""toolchains": ["delphi"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.delphi.dll",
+  ""pluginClass": "Forge.Plugin.delphi.delphiPlugin",
+  ""dependencies": []
+}

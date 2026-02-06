@@ -1,0 +1,275 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Forge.Studio.ViewModels"
+        x:Class="Forge.Studio.Views.SettingsWindow"
+        x:DataType="vm:SettingsViewModel"
+        Title="Settings"
+        Width="700" Height="600"
+        WindowStartupLocation="CenterOwner"
+        Background="#2D3436">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#1E272E" Padding="24,16">
+            <TextBlock Text="Settings" FontSize="20" FontWeight="Bold" Foreground="#FF6B35" />
+        </Border>
+        
+        <!-- Content -->
+        <Grid Grid.Row="1" ColumnDefinitions="200,*">
+            
+            <!-- Categories -->
+            <Border Grid.Column="0" Background="#1E272E">
+                <ListBox ItemsSource="{Binding Categories}" 
+                         SelectedItem="{Binding SelectedCategory}"
+                         Background="Transparent">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="12" Margin="12,10">
+                                <TextBlock Text="{Binding Icon}" FontSize="16" />
+                                <TextBlock Text="{Binding Name}" Foreground="#DFE6E9" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+            
+            <!-- Settings Panel -->
+            <ScrollViewer Grid.Column="1" Padding="24,16">
+                <StackPanel Spacing="24">
+                    
+                    <!-- General Settings -->
+                    <StackPanel Spacing="16" IsVisible="{Binding IsGeneralVisible}">
+                        <TextBlock Text="General" FontSize="16" FontWeight="SemiBold" 
+                                   Foreground="#DFE6E9" />
+                        
+                        <Border Background="#1E272E" CornerRadius="8" Padding="16">
+                            <StackPanel Spacing="16">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Default Project Location" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Where new projects are created by default"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                                        <TextBox Text="{Binding DefaultProjectPath}" Width="200" />
+                                        <Button Content="..." Command="{Binding BrowseProjectPathCommand}"
+                                                Padding="12,8" />
+                                    </StackPanel>
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Auto-save" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Automatically save changes"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" IsChecked="{Binding AutoSave}" />
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Check for Updates" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Automatically check for new versions"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" IsChecked="{Binding CheckUpdates}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                    
+                    <!-- Build Settings -->
+                    <StackPanel Spacing="16" IsVisible="{Binding IsBuildVisible}">
+                        <TextBlock Text="Build" FontSize="16" FontWeight="SemiBold" 
+                                   Foreground="#DFE6E9" />
+                        
+                        <Border Background="#1E272E" CornerRadius="8" Padding="16">
+                            <StackPanel Spacing="16">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Default Configuration" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Build configuration for new projects"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ComboBox Grid.Column="1" SelectedItem="{Binding DefaultConfig}"
+                                              Width="120">
+                                        <ComboBoxItem Content="Debug" />
+                                        <ComboBoxItem Content="Release" />
+                                    </ComboBox>
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Parallel Build" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Build modules in parallel when possible"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" IsChecked="{Binding ParallelBuild}" />
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Max Parallel Jobs" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Maximum number of concurrent build jobs"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <NumericUpDown Grid.Column="1" Value="{Binding MaxParallelJobs}"
+                                                   Minimum="1" Maximum="32" Width="100" />
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Incremental Build" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Only rebuild changed modules"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" IsChecked="{Binding IncrementalBuild}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                    
+                    <!-- Appearance Settings -->
+                    <StackPanel Spacing="16" IsVisible="{Binding IsAppearanceVisible}">
+                        <TextBlock Text="Appearance" FontSize="16" FontWeight="SemiBold" 
+                                   Foreground="#DFE6E9" />
+                        
+                        <Border Background="#1E272E" CornerRadius="8" Padding="16">
+                            <StackPanel Spacing="16">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Theme" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Application color theme"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ComboBox Grid.Column="1" SelectedItem="{Binding Theme}" Width="120">
+                                        <ComboBoxItem Content="Dark" />
+                                        <ComboBoxItem Content="Light" />
+                                        <ComboBoxItem Content="System" />
+                                    </ComboBox>
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Font Size" Foreground="#DFE6E9" />
+                                        <TextBlock Text="UI font size"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ComboBox Grid.Column="1" SelectedItem="{Binding FontSize}" Width="120">
+                                        <ComboBoxItem Content="Small" />
+                                        <ComboBoxItem Content="Medium" />
+                                        <ComboBoxItem Content="Large" />
+                                    </ComboBox>
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Show Line Numbers" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Display line numbers in output"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" IsChecked="{Binding ShowLineNumbers}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                    
+                    <!-- Plugins Settings -->
+                    <StackPanel Spacing="16" IsVisible="{Binding IsPluginsVisible}">
+                        <TextBlock Text="Plugins" FontSize="16" FontWeight="SemiBold" 
+                                   Foreground="#DFE6E9" />
+                        
+                        <Border Background="#1E272E" CornerRadius="8" Padding="16">
+                            <StackPanel Spacing="16">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Plugin Directory" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Location of extension plugins"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                                        <TextBox Text="{Binding PluginPath}" Width="200" />
+                                        <Button Content="..." Command="{Binding BrowsePluginPathCommand}"
+                                                Padding="12,8" />
+                                    </StackPanel>
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Auto-load Plugins" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Load plugins automatically on startup"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" IsChecked="{Binding AutoLoadPlugins}" />
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Check Plugin Updates" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Notify when plugin updates are available"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" IsChecked="{Binding CheckPluginUpdates}" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                    
+                    <!-- Advanced Settings -->
+                    <StackPanel Spacing="16" IsVisible="{Binding IsAdvancedVisible}">
+                        <TextBlock Text="Advanced" FontSize="16" FontWeight="SemiBold" 
+                                   Foreground="#DFE6E9" />
+                        
+                        <Border Background="#1E272E" CornerRadius="8" Padding="16">
+                            <StackPanel Spacing="16">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Verbose Logging" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Show detailed build output"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" IsChecked="{Binding VerboseLogging}" />
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Keep Build Artifacts" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Don't delete intermediate files after build"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" IsChecked="{Binding KeepArtifacts}" />
+                                </Grid>
+                                
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <StackPanel Grid.Column="0">
+                                        <TextBlock Text="Telemetry" Foreground="#DFE6E9" />
+                                        <TextBlock Text="Send anonymous usage data to help improve Forge"
+                                                   Foreground="#636E72" FontSize="11" />
+                                    </StackPanel>
+                                    <ToggleSwitch Grid.Column="1" IsChecked="{Binding Telemetry}" />
+                                </Grid>
+                                
+                                <Button Content="Reset to Defaults" Command="{Binding ResetCommand}"
+                                        HorizontalAlignment="Left" Padding="16,8" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                    
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        
+        <!-- Footer -->
+        <Border Grid.Row="2" Background="#1E272E" Padding="24,12">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock Grid.Column="0" Text="{Binding StatusMessage}" 
+                           Foreground="#B2BEC3" VerticalAlignment="Center" />
+                <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}"
+                        Padding="16,8" Margin="0,0,8,0" />
+                <Button Grid.Column="2" Content="Save" Command="{Binding SaveCommand}"
+                        Background="#00B894" Foreground="White" Padding="16,8" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

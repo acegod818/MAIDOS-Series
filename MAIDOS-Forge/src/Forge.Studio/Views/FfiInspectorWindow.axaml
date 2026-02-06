@@ -1,0 +1,155 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Forge.Studio.ViewModels"
+        x:Class="Forge.Studio.Views.FfiInspectorWindow"
+        x:DataType="vm:FfiInspectorViewModel"
+        Title="FFI Inspector"
+        Width="1000" Height="700"
+        WindowStartupLocation="CenterOwner"
+        Background="#2D3436">
+
+    <Grid RowDefinitions="Auto,*">
+        
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#1E272E" Padding="24,16">
+            <Grid ColumnDefinitions="*,Auto">
+                <StackPanel Grid.Column="0" Spacing="4">
+                    <TextBlock Text="FFI Inspector" FontSize="20" FontWeight="Bold" 
+                               Foreground="#FF6B35" />
+                    <TextBlock Text="Analyze cross-language interfaces and bindings" 
+                               Foreground="#B2BEC3" FontSize="12" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                    <ComboBox ItemsSource="{Binding Modules}" 
+                              SelectedItem="{Binding SelectedModule}"
+                              Width="200" />
+                    <Button Content="Analyze" Command="{Binding AnalyzeCommand}"
+                            Background="#00B894" Foreground="White" Padding="16,8" />
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <!-- Content -->
+        <Grid Grid.Row="1" ColumnDefinitions="300,*">
+            
+            <!-- Left: Interface List -->
+            <Border Grid.Column="0" Background="#1E272E">
+                <Grid RowDefinitions="Auto,*">
+                    <Border Grid.Row="0" Padding="16,12" Background="#232B30">
+                        <TextBlock Text="EXPORTED INTERFACES" FontSize="11" 
+                                   FontWeight="Bold" Foreground="#636E72" />
+                    </Border>
+                    
+                    <ListBox Grid.Row="1" ItemsSource="{Binding Interfaces}"
+                             SelectedItem="{Binding SelectedInterface}"
+                             Background="Transparent">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="Auto,*" Margin="8,6">
+                                    <Border Grid.Column="0" Background="{Binding KindColor}"
+                                            CornerRadius="4" Padding="6,2" Margin="0,0,8,0">
+                                        <TextBlock Text="{Binding KindLabel}" FontSize="9"
+                                                   Foreground="White" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1">
+                                        <TextBlock Text="{Binding Name}" Foreground="#DFE6E9" 
+                                                   FontFamily="Consolas,Monaco,monospace" />
+                                        <TextBlock Text="{Binding Signature}" Foreground="#636E72"
+                                                   FontSize="10" FontFamily="Consolas,Monaco,monospace" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+            
+            <!-- Right: Details -->
+            <Grid Grid.Column="1" RowDefinitions="*,Auto,*">
+                
+                <!-- Interface Details -->
+                <Border Grid.Row="0" Margin="16,16,16,8">
+                    <Grid RowDefinitions="Auto,*">
+                        <Border Grid.Row="0" Background="#1E272E" Padding="12,8" CornerRadius="8,8,0,0">
+                            <TextBlock Text="INTERFACE DETAILS" FontSize="11" 
+                                       FontWeight="Bold" Foreground="#636E72" />
+                        </Border>
+                        <Border Grid.Row="1" Background="#232B30" Padding="16" CornerRadius="0,0,8,8">
+                            <ScrollViewer>
+                                <StackPanel Spacing="12" IsVisible="{Binding HasSelectedInterface}">
+                                    <!-- Name -->
+                                    <StackPanel Spacing="4">
+                                        <TextBlock Text="Name" Foreground="#636E72" FontSize="10" />
+                                        <TextBlock Text="{Binding SelectedInterface.Name}" 
+                                                   Foreground="#DFE6E9" FontSize="14"
+                                                   FontFamily="Consolas,Monaco,monospace" />
+                                    </StackPanel>
+                                    
+                                    <!-- Return Type -->
+                                    <StackPanel Spacing="4">
+                                        <TextBlock Text="Return Type" Foreground="#636E72" FontSize="10" />
+                                        <TextBlock Text="{Binding SelectedInterface.ReturnType}" 
+                                                   Foreground="#00B894" FontSize="14"
+                                                   FontFamily="Consolas,Monaco,monospace" />
+                                    </StackPanel>
+                                    
+                                    <!-- Parameters -->
+                                    <StackPanel Spacing="4">
+                                        <TextBlock Text="Parameters" Foreground="#636E72" FontSize="10" />
+                                        <ItemsControl ItemsSource="{Binding SelectedInterface.Parameters}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid ColumnDefinitions="120,*" Margin="0,2">
+                                                        <TextBlock Grid.Column="0" Text="{Binding Name}" 
+                                                                   Foreground="#DFE6E9"
+                                                                   FontFamily="Consolas,Monaco,monospace" />
+                                                        <TextBlock Grid.Column="1" Text="{Binding Type}" 
+                                                                   Foreground="#00B894"
+                                                                   FontFamily="Consolas,Monaco,monospace" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                    
+                                    <!-- Calling Convention -->
+                                    <StackPanel Spacing="4">
+                                        <TextBlock Text="Calling Convention" Foreground="#636E72" FontSize="10" />
+                                        <TextBlock Text="{Binding SelectedInterface.CallingConvention}" 
+                                                   Foreground="#FDCB6E"
+                                                   FontFamily="Consolas,Monaco,monospace" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                </Border>
+                
+                <GridSplitter Grid.Row="1" Height="4" Background="#1E272E" />
+                
+                <!-- Generated Bindings -->
+                <Border Grid.Row="2" Margin="16,8,16,16">
+                    <Grid RowDefinitions="Auto,*">
+                        <Border Grid.Row="0" Background="#1E272E" Padding="12,8" CornerRadius="8,8,0,0">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBlock Grid.Column="0" Text="GENERATED BINDINGS" FontSize="11" 
+                                           FontWeight="Bold" Foreground="#636E72" />
+                                <ComboBox Grid.Column="1" ItemsSource="{Binding TargetLanguages}"
+                                          SelectedItem="{Binding SelectedTargetLanguage}"
+                                          Width="120" />
+                            </Grid>
+                        </Border>
+                        <Border Grid.Row="1" Background="#0D1117" Padding="16" CornerRadius="0,0,8,8">
+                            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                                <TextBlock Text="{Binding GeneratedCode}" 
+                                           Foreground="#E6EDF3"
+                                           FontFamily="Consolas,Monaco,monospace"
+                                           FontSize="12" />
+                            </ScrollViewer>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

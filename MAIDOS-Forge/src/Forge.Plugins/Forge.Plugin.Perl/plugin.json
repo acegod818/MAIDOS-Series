@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.perl",
+  ""version": "0.1.0",
+  ""language": "perl",
+  ""displayName": "Perl Plugin",
+  ""description": "Perl language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".perl"],
+  ""toolchains": ["perl"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.perl.dll",
+  ""pluginClass": "Forge.Plugin.perl.perlPlugin",
+  ""dependencies": []
+}

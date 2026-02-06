@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.nim",
+  ""version": "0.1.0",
+  ""language": "nim",
+  ""displayName": "Nim Plugin",
+  ""description": "Nim language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".nim"],
+  ""toolchains": ["nim"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.nim.dll",
+  ""pluginClass": "Forge.Plugin.nim.nimPlugin",
+  ""dependencies": []
+}

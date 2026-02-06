@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.typescript",
+  ""version": "0.1.0",
+  ""language": "typescript",
+  ""displayName": "TypeScript Plugin",
+  ""description": "TypeScript language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".ts"],
+  ""toolchains": ["tsc"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.typescript.dll",
+  ""pluginClass": "Forge.Plugin.typescript.typescriptPlugin",
+  ""dependencies": []
+}

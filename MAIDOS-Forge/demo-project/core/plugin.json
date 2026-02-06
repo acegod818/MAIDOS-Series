@@ -1,0 +1,19 @@
+{
+  "name": "core",
+  "version": "1.0.0",
+  "language": "custom",
+  "displayName": "custom Plugin",
+  "description": "Custom custom language plugin for Forge",
+  "author": "Your Name",
+  "extensions": [
+    ".custom"
+  ],
+  "toolchains": [
+    "custom"
+  ],
+  "forgeVersion": "\u003E=0.7.0",
+  "entry": "core.dll",
+  "pluginClass": "core.customPlugin",
+  "dependencies": [],
+  "builtin": false
+}

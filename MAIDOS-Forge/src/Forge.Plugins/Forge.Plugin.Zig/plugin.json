@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.zig",
+  ""version": "0.1.0",
+  ""language": "zig",
+  ""displayName": "Zig Plugin",
+  ""description": "Zig language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".zig"],
+  ""toolchains": ["zig"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.zig.dll",
+  ""pluginClass": "Forge.Plugin.zig.zigPlugin",
+  ""dependencies": []
+}

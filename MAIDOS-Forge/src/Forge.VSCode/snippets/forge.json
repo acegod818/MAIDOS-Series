@@ -1,0 +1,72 @@
+{
+  "Forge Project Config": {
+    "prefix": "forge-project",
+    "body": [
+      "{",
+      "  \"name\": \"${1:my-project}\",",
+      "  \"version\": \"${2:0.1.0}\",",
+      "  \"config\": {",
+      "    \"debug\": {",
+      "      \"optimize\": false,",
+      "      \"debug_symbols\": true",
+      "    },",
+      "    \"release\": {",
+      "      \"optimize\": true,",
+      "      \"debug_symbols\": false",
+      "    }",
+      "  }",
+      "}"
+    ],
+    "description": "Forge project configuration"
+  },
+  "Forge Module Config": {
+    "prefix": "forge-module",
+    "body": [
+      "{",
+      "  \"name\": \"${1:module-name}\",",
+      "  \"language\": \"${2|c,cpp,csharp,rust,go,python,typescript|}\",",
+      "  \"version\": \"${3:0.1.0}\",",
+      "  \"sources\": [\".\"],",
+      "  \"dependencies\": [$4]",
+      "}"
+    ],
+    "description": "Forge module configuration"
+  },
+  "Forge Dependency": {
+    "prefix": "forge-dep",
+    "body": [
+      "\"${1:module-name}\""
+    ],
+    "description": "Module dependency reference"
+  },
+  "Forge FFI Export": {
+    "prefix": "forge-ffi-export",
+    "body": [
+      "{",
+      "  \"ffi\": {",
+      "    \"exports\": [",
+      "      {",
+      "        \"name\": \"${1:function_name}\",",
+      "        \"calling_convention\": \"${2|cdecl,stdcall|}\"",
+      "      }",
+      "    ]",
+      "  }",
+      "}"
+    ],
+    "description": "FFI export configuration"
+  },
+  "Forge Target Platform": {
+    "prefix": "forge-target",
+    "body": [
+      "{",
+      "  \"targets\": [",
+      "    {",
+      "      \"os\": \"${1|windows,linux,macos|}\",",
+      "      \"arch\": \"${2|x64,arm64,x86|}\"",
+      "    }",
+      "  ]",
+      "}"
+    ],
+    "description": "Target platform configuration"
+  }
+}

@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.cpp",
+  ""version": "0.1.0",
+  ""language": "cpp",
+  ""displayName": "C++ Plugin",
+  ""description": "C++ language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".cpp",".cc" ,".cxx" ,".hpp" ,".h"],
+  ""toolchains": ["g++","clang++"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.cpp.dll",
+  ""pluginClass": "Forge.Plugin.cpp.cppPlugin",
+  ""dependencies": []
+}

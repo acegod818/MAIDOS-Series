@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.crystal",
+  ""version": "0.1.0",
+  ""language": "crystal",
+  ""displayName": "Crystal Plugin",
+  ""description": "Crystal language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".crystal"],
+  ""toolchains": ["crystal"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.crystal.dll",
+  ""pluginClass": "Forge.Plugin.crystal.crystalPlugin",
+  ""dependencies": []
+}

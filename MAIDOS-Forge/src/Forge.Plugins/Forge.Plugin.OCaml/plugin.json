@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.ocaml",
+  ""version": "0.1.0",
+  ""language": "ocaml",
+  ""displayName": "OCaml Plugin",
+  ""description": "OCaml language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".ocaml"],
+  ""toolchains": ["ocaml"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.ocaml.dll",
+  ""pluginClass": "Forge.Plugin.ocaml.ocamlPlugin",
+  ""dependencies": []
+}

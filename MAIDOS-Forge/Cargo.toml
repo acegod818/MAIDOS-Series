@@ -1,0 +1,12 @@
+[workspace]
+resolver = "2"
+members = [
+    "maidos-forge-core",
+    "maidos-forge-cli",
+]
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

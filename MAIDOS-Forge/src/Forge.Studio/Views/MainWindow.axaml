@@ -1,0 +1,274 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Forge.Studio.ViewModels"
+        xmlns:views="using:Forge.Studio.Views"
+        xmlns:controls="using:Forge.Studio.Controls"
+        x:Class="Forge.Studio.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Forge Studio - Cross-Language Build Tool"
+        Width="1400" Height="900"
+        MinWidth="1000" MinHeight="600"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/forge-icon.ico"
+        Background="{DynamicResource ForgeSecondaryBrush}">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        
+        <!-- Top Menu Bar -->
+        <Border Grid.Row="0" Background="#1E272E" Padding="8">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <!-- Logo and Title -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="12">
+                    <TextBlock Text="🔥" FontSize="24" VerticalAlignment="Center" />
+                    <TextBlock Text="Forge Studio" FontSize="18" FontWeight="Bold" 
+                               Foreground="#FF6B35" VerticalAlignment="Center" />
+                    <TextBlock Text="|" Foreground="#636E72" VerticalAlignment="Center" Margin="8,0" />
+                    <TextBlock Text="{Binding ProjectName, FallbackValue='No Project'}" 
+                               Foreground="#B2BEC3" VerticalAlignment="Center" />
+                </StackPanel>
+                
+                <!-- Main Menu -->
+                <Menu Grid.Column="1" Background="Transparent" Margin="20,0">
+                    <MenuItem Header="_File">
+                        <MenuItem Header="_New Project" Command="{Binding NewProjectCommand}" 
+                                  InputGesture="Ctrl+N" />
+                        <MenuItem Header="_Open Project" Command="{Binding OpenProjectCommand}" 
+                                  InputGesture="Ctrl+O" />
+                        <MenuItem Header="Open _Recent" ItemsSource="{Binding RecentProjects}">
+                            <MenuItem.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" />
+                                </DataTemplate>
+                            </MenuItem.ItemTemplate>
+                        </MenuItem>
+                        <Separator />
+                        <MenuItem Header="_Save" Command="{Binding SaveCommand}" 
+                                  InputGesture="Ctrl+S" />
+                        <Separator />
+                        <MenuItem Header="E_xit" Command="{Binding ExitCommand}" />
+                    </MenuItem>
+                    
+                    <MenuItem Header="_Build">
+                        <MenuItem Header="_Build Project" Command="{Binding BuildCommand}" 
+                                  InputGesture="F5" />
+                        <MenuItem Header="_Rebuild All" Command="{Binding RebuildCommand}" 
+                                  InputGesture="Ctrl+Shift+B" />
+                        <MenuItem Header="_Clean" Command="{Binding CleanCommand}" />
+                        <Separator />
+                        <MenuItem Header="Build _Configuration">
+                            <MenuItem Header="Debug" Command="{Binding SetConfigCommand}" 
+                                      CommandParameter="Debug" />
+                            <MenuItem Header="Release" Command="{Binding SetConfigCommand}" 
+                                      CommandParameter="Release" />
+                        </MenuItem>
+                    </MenuItem>
+                    
+                    <MenuItem Header="_Plugins">
+                        <MenuItem Header="_Manage Plugins" Command="{Binding ManagePluginsCommand}" />
+                        <MenuItem Header="_Install Plugin" Command="{Binding InstallPluginCommand}" />
+                        <Separator />
+                        <MenuItem Header="Plugin _Registry" Command="{Binding PluginRegistryCommand}" />
+                    </MenuItem>
+                    
+                    <MenuItem Header="_Tools">
+                        <MenuItem Header="_Dependency Graph" Command="{Binding ShowGraphCommand}" />
+                        <MenuItem Header="_FFI Inspector" Command="{Binding ShowFfiCommand}" />
+                        <MenuItem Header="_Toolchain Status" Command="{Binding ShowToolchainCommand}" />
+                    </MenuItem>
+                    
+                    <MenuItem Header="_Help">
+                        <MenuItem Header="_Documentation" />
+                        <MenuItem Header="_About Forge Studio" Command="{Binding AboutCommand}" />
+                    </MenuItem>
+                </Menu>
+                
+                <!-- Quick Actions -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8">
+                    <Button Content="▶ Build" Command="{Binding BuildCommand}"
+                            Background="#00B894" Foreground="White" Padding="12,6" />
+                    <Button Content="⟳" Command="{Binding RefreshCommand}"
+                            Background="Transparent" Foreground="#B2BEC3" Padding="8,6" />
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <!-- Main Content Area -->
+        <Grid Grid.Row="1" ColumnDefinitions="280,Auto,*,Auto,300">
+            
+            <!-- Left Panel: Project Explorer -->
+            <Border Grid.Column="0" Background="#2D3436" Margin="0">
+                <Grid RowDefinitions="Auto,*">
+                    <Border Grid.Row="0" Background="#1E272E" Padding="12,8">
+                        <TextBlock Text="PROJECT EXPLORER" FontSize="11" FontWeight="Bold"
+                                   Foreground="#636E72" />
+                    </Border>
+                    
+                    <TreeView Grid.Row="1" ItemsSource="{Binding ProjectTree}" 
+                              Background="Transparent" Margin="4">
+                        <TreeView.ItemTemplate>
+                            <TreeDataTemplate ItemsSource="{Binding Children}">
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <TextBlock Text="{Binding Icon}" FontSize="14" />
+                                    <TextBlock Text="{Binding Name}" Foreground="#DFE6E9" />
+                                    <TextBlock Text="{Binding Language}" Foreground="#636E72" 
+                                               FontSize="10" Margin="4,0,0,0" />
+                                </StackPanel>
+                            </TreeDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
+            </Border>
+            
+            <GridSplitter Grid.Column="1" Width="4" Background="#1E272E" />
+            
+            <!-- Center Panel: Main Content -->
+            <Grid Grid.Column="2" RowDefinitions="*,Auto,200">
+                
+                <!-- Dependency Graph / Editor Area -->
+                <Border Grid.Row="0" Background="#2D3436" Margin="0">
+                    <Grid RowDefinitions="Auto,*">
+                        <Border Grid.Row="0" Background="#1E272E" Padding="12,8">
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <TextBlock Text="DEPENDENCY GRAPH" FontSize="11" FontWeight="Bold"
+                                           Foreground="#636E72" />
+                                <TextBlock Text="{Binding ModuleCount, StringFormat='({0} modules)'}" 
+                                           Foreground="#636E72" FontSize="11" />
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- Graph Canvas -->
+                        <controls:DependencyGraphControl Grid.Row="1" 
+                            Modules="{Binding Modules}"
+                            Dependencies="{Binding Dependencies}" />
+                    </Grid>
+                </Border>
+                
+                <GridSplitter Grid.Row="1" Height="4" Background="#1E272E" />
+                
+                <!-- Bottom: Build Output -->
+                <Border Grid.Row="2" Background="#1E272E">
+                    <Grid RowDefinitions="Auto,*">
+                        <Border Grid.Row="0" Padding="12,8">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="12">
+                                    <TextBlock Text="BUILD OUTPUT" FontSize="11" FontWeight="Bold"
+                                               Foreground="#636E72" />
+                                    <TextBlock Text="{Binding BuildStatus}" 
+                                               Foreground="{Binding BuildStatusColor}" FontSize="11" />
+                                </StackPanel>
+                                <Button Grid.Column="1" Content="Clear" 
+                                        Command="{Binding ClearOutputCommand}"
+                                        Background="Transparent" Foreground="#636E72" 
+                                        Padding="8,2" FontSize="10" />
+                            </Grid>
+                        </Border>
+                        
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+                            <TextBlock Text="{Binding BuildOutput}" 
+                                       FontFamily="Consolas,Monaco,monospace"
+                                       FontSize="12" Foreground="#DFE6E9" Padding="12,4"
+                                       TextWrapping="NoWrap" />
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+            </Grid>
+            
+            <GridSplitter Grid.Column="3" Width="4" Background="#1E272E" />
+            
+            <!-- Right Panel: Properties / Plugins -->
+            <Border Grid.Column="4" Background="#2D3436">
+                <Grid RowDefinitions="Auto,*,Auto,*">
+                    <!-- Module Properties -->
+                    <Border Grid.Row="0" Background="#1E272E" Padding="12,8">
+                        <TextBlock Text="MODULE PROPERTIES" FontSize="11" FontWeight="Bold"
+                                   Foreground="#636E72" />
+                    </Border>
+                    
+                    <ScrollViewer Grid.Row="1" Margin="8">
+                        <StackPanel Spacing="12" IsVisible="{Binding HasSelectedModule}">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Name" Foreground="#636E72" FontSize="10" />
+                                <TextBox Text="{Binding SelectedModule.Name}" />
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Language" Foreground="#636E72" FontSize="10" />
+                                <ComboBox ItemsSource="{Binding AvailableLanguages}"
+                                          SelectedItem="{Binding SelectedModule.Language}" />
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Path" Foreground="#636E72" FontSize="10" />
+                                <TextBox Text="{Binding SelectedModule.Path}" IsReadOnly="True" />
+                            </StackPanel>
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="Dependencies" Foreground="#636E72" FontSize="10" />
+                                <ListBox ItemsSource="{Binding SelectedModule.Dependencies}"
+                                         Height="80" />
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                    
+                    <!-- Installed Plugins -->
+                    <Border Grid.Row="2" Background="#1E272E" Padding="12,8">
+                        <TextBlock Text="INSTALLED PLUGINS" FontSize="11" FontWeight="Bold"
+                                   Foreground="#636E72" />
+                    </Border>
+                    
+                    <ScrollViewer Grid.Row="3" Margin="8">
+                        <ItemsControl ItemsSource="{Binding InstalledPlugins}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#1E272E" CornerRadius="4" 
+                                            Padding="8" Margin="0,0,0,4">
+                                        <Grid ColumnDefinitions="Auto,*,Auto">
+                                            <TextBlock Grid.Column="0" Text="{Binding Icon}" 
+                                                       FontSize="16" Margin="0,0,8,0" />
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="{Binding Name}" 
+                                                           Foreground="#DFE6E9" FontSize="12" />
+                                                <TextBlock Text="{Binding Version}" 
+                                                           Foreground="#636E72" FontSize="10" />
+                                            </StackPanel>
+                                            <Border Grid.Column="2" Background="{Binding StatusColor}"
+                                                    CornerRadius="4" Padding="6,2">
+                                                <TextBlock Text="{Binding Status}" 
+                                                           FontSize="9" Foreground="White" />
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+        
+        <!-- Status Bar -->
+        <Border Grid.Row="2" Background="#1E272E" Padding="12,6">
+            <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto">
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="16">
+                    <TextBlock Text="{Binding StatusMessage}" Foreground="#B2BEC3" FontSize="11" />
+                </StackPanel>
+                
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="Languages:" Foreground="#636E72" FontSize="11" />
+                    <TextBlock Text="{Binding LanguageCount}" Foreground="#DFE6E9" FontSize="11" />
+                </StackPanel>
+                
+                <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="8" Margin="16,0">
+                    <TextBlock Text="Config:" Foreground="#636E72" FontSize="11" />
+                    <TextBlock Text="{Binding BuildConfiguration}" 
+                               Foreground="#00B894" FontSize="11" FontWeight="Bold" />
+                </StackPanel>
+                
+                <StackPanel Grid.Column="4" Orientation="Horizontal" Spacing="8">
+                    <TextBlock Text="v0.12.0" Foreground="#636E72" FontSize="11" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.clojure",
+  ""version": "0.1.0",
+  ""language": "clojure",
+  ""displayName": "Clojure Plugin",
+  ""description": "Clojure language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".clojure"],
+  ""toolchains": ["clojure"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.clojure.dll",
+  ""pluginClass": "Forge.Plugin.clojure.clojurePlugin",
+  ""dependencies": []
+}

@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.fortran",
+  ""version": "0.1.0",
+  ""language": "fortran",
+  ""displayName": "Fortran Plugin",
+  ""description": "Fortran language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".fortran"],
+  ""toolchains": ["fortran"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.fortran.dll",
+  ""pluginClass": "Forge.Plugin.fortran.fortranPlugin",
+  ""dependencies": []
+}

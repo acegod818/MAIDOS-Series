@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.haskell",
+  ""version": "0.1.0",
+  ""language": "haskell",
+  ""displayName": "Haskell Plugin",
+  ""description": "Haskell language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".haskell"],
+  ""toolchains": ["haskell"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.haskell.dll",
+  ""pluginClass": "Forge.Plugin.haskell.haskellPlugin",
+  ""dependencies": []
+}

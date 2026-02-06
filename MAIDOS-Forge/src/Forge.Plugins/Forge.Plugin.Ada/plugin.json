@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.ada",
+  ""version": "0.1.0",
+  ""language": "ada",
+  ""displayName": "Ada Plugin",
+  ""description": "Ada language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".ada"],
+  ""toolchains": ["ada"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.ada.dll",
+  ""pluginClass": "Forge.Plugin.ada.adaPlugin",
+  ""dependencies": []
+}

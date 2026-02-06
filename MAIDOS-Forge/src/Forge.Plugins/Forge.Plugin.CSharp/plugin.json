@@ -1,0 +1,14 @@
+{
+  "name": "forge.plugin.csharp",
+  "version": "0.7.0",
+  "language": "csharp",
+  "displayName": "C# Plugin",
+  "description": "C# language support with CLR and NativeAOT compilation modes",
+  "author": "MAIDOS",
+  "extensions": [".cs", ".csproj"],
+  "toolchains": ["dotnet"],
+  "forgeVersion": ">=0.7.0",
+  "entry": "Forge.Plugin.CSharp.dll",
+  "pluginClass": "Forge.Plugin.CSharp.CSharpLanguagePlugin",
+  "dependencies": []
+}

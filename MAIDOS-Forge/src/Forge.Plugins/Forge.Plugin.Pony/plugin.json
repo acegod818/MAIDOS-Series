@@ -1,0 +1,19 @@
+{
+  "name": "Forge.Plugin.Pony",
+  "version": "1.0.0",
+  "language": "pony",
+  "displayName": "Pony Plugin",
+  "description": "Pony language plugin for Forge",
+  "author": "MAIDOS",
+  "extensions": [
+    ".pony"
+  ],
+  "toolchains": [
+    "ponyc"
+  ],
+  "forgeVersion": ">=0.7.0",
+  "entry": "Forge.Plugin.Pony.dll",
+  "pluginClass": "Forge.Plugin.Pony.PonyPlugin",
+  "dependencies": [],
+  "builtin": false
+}

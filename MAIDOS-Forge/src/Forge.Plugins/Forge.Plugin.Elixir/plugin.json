@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.elixir",
+  ""version": "0.1.0",
+  ""language": "elixir",
+  ""displayName": "Elixir Plugin",
+  ""description": "Elixir language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".elixir"],
+  ""toolchains": ["elixir"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.elixir.dll",
+  ""pluginClass": "Forge.Plugin.elixir.elixirPlugin",
+  ""dependencies": []
+}

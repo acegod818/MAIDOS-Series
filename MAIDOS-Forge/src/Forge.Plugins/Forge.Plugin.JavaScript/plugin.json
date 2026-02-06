@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.javascript",
+  ""version": "0.1.0",
+  ""language": "javascript",
+  ""displayName": "JavaScript Plugin",
+  ""description": "JavaScript language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".js"],
+  ""toolchains": ["node"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.javascript.dll",
+  ""pluginClass": "Forge.Plugin.javascript.javascriptPlugin",
+  ""dependencies": []
+}

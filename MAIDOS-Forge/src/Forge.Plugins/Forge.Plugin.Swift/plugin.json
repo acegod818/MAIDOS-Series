@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.swift",
+  ""version": "0.1.0",
+  ""language": "swift",
+  ""displayName": "Swift Plugin",
+  ""description": "Swift language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".swift"],
+  ""toolchains": ["swift"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.swift.dll",
+  ""pluginClass": "Forge.Plugin.swift.swiftPlugin",
+  ""dependencies": []
+}

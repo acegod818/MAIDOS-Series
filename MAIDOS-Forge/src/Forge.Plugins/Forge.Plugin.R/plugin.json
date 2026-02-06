@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.r",
+  ""version": "0.1.0",
+  ""language": "r",
+  ""displayName": "R Plugin",
+  ""description": "R language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".r"],
+  ""toolchains": ["r"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.r.dll",
+  ""pluginClass": "Forge.Plugin.r.rPlugin",
+  ""dependencies": []
+}

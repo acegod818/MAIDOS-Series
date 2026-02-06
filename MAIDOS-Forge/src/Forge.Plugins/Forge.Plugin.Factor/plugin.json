@@ -1,0 +1,19 @@
+{
+  "name": "Forge.Plugin.Factor",
+  "version": "1.0.0",
+  "language": "factor",
+  "displayName": "Factor Plugin",
+  "description": "Factor language plugin for Forge",
+  "author": "MAIDOS",
+  "extensions": [
+    ".factor"
+  ],
+  "toolchains": [
+    "factor"
+  ],
+  "forgeVersion": ">=0.7.0",
+  "entry": "Forge.Plugin.Factor.dll",
+  "pluginClass": "Forge.Plugin.Factor.FactorPlugin",
+  "dependencies": [],
+  "builtin": false
+}

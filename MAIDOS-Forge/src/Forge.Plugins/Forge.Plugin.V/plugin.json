@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.v",
+  ""version": "0.1.0",
+  ""language": "v",
+  ""displayName": "V Plugin",
+  ""description": "V language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".v"],
+  ""toolchains": ["v"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.v.dll",
+  ""pluginClass": "Forge.Plugin.v.vPlugin",
+  ""dependencies": []
+}

@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.matlab",
+  ""version": "0.1.0",
+  ""language": "matlab",
+  ""displayName": "MATLAB Plugin",
+  ""description": "MATLAB language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".matlab"],
+  ""toolchains": ["matlab"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.matlab.dll",
+  ""pluginClass": "Forge.Plugin.matlab.matlabPlugin",
+  ""dependencies": []
+}

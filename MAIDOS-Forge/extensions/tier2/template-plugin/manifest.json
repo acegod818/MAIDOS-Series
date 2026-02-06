@@ -1,0 +1,18 @@
+{
+  "id": "template-language",
+  "name": "Template Language Plugin",
+  "version": "1.0.0",
+  "description": "Template for creating new language plugins",
+  "author": "MAIDOS Team",
+  "license": "MIT",
+  "language": {
+    "id": "template",
+    "name": "Template Language",
+    "extensions": [".tmpl", ".template"],
+    "category": "Other"
+  },
+  "dependencies": {
+    "required_tools": [],
+    "minimum_version": "1.0.0"
+  }
+}

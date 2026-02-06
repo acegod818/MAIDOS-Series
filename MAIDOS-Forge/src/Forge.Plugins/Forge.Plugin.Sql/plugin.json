@@ -1,0 +1,1 @@
+{"name": "SQL", "namespace": "Forge.Plugin.Sql", "version": "1.0.0", "category": "Database", "toolchain": "sqlite3"}

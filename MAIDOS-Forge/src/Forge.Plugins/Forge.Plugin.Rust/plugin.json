@@ -1,0 +1,14 @@
+{
+  "name": "forge.plugin.rust",
+  "version": "0.7.0",
+  "language": "rust",
+  "displayName": "Rust Plugin",
+  "description": "Rust language support with cargo and rustc build modes",
+  "author": "MAIDOS",
+  "extensions": [".rs", "Cargo.toml"],
+  "toolchains": ["cargo", "rustc"],
+  "forgeVersion": ">=0.7.0",
+  "entry": "Forge.Plugin.Rust.dll",
+  "pluginClass": "Forge.Plugin.Rust.RustLanguagePlugin",
+  "dependencies": []
+}

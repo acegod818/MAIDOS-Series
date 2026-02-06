@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.python",
+  ""version": "0.1.0",
+  ""language": "python",
+  ""displayName": "Python Plugin",
+  ""description": "Python language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".py"],
+  ""toolchains": ["python","python3"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.python.dll",
+  ""pluginClass": "Forge.Plugin.python.pythonPlugin",
+  ""dependencies": []
+}

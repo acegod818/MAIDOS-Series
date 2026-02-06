@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>12.0</LangVersion>
+    <RootNamespace>Forge.Plugin.Pony</RootNamespace>
+    <AssemblyName>Forge.Plugin.Pony</AssemblyName>
+    <Description>MAIDOS-Forge Pony language plugin</Description>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Forge.Core\Forge.Core.csproj" />
+  </ItemGroup>
+</Project>

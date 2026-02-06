@@ -1,0 +1,19 @@
+{
+  "name": "Forge.Plugin.Faust",
+  "version": "1.0.0",
+  "language": "faust",
+  "displayName": "Faust Plugin",
+  "description": "Faust language plugin for Forge",
+  "author": "MAIDOS",
+  "extensions": [
+    ".dsp"
+  ],
+  "toolchains": [
+    "faust"
+  ],
+  "forgeVersion": ">=0.7.0",
+  "entry": "Forge.Plugin.Faust.dll",
+  "pluginClass": "Forge.Plugin.Faust.FaustPlugin",
+  "dependencies": [],
+  "builtin": false
+}

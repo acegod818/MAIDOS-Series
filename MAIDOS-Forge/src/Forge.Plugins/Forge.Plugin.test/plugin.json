@@ -1,0 +1,14 @@
+﻿{
+  ""name": "forge.plugin.test",
+  ""version": "0.1.0",
+  ""language": "test",
+  ""displayName": "Test Language Plugin",
+  ""description": "Test Language language support for MAIDOS-Forge",
+  ""author": "MAIDOS",
+  ""extensions": [".test"],
+  ""toolchains": ["test"],
+  ""forgeVersion": ">=0.7.0",
+  ""entry": "Forge.Plugin.test.dll",
+  ""pluginClass": "Forge.Plugin.test.testPlugin",
+  ""dependencies": []
+}
