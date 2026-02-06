@@ -299,7 +299,7 @@ mod tests {
             config,
         };
 
-        let candidates = vec!["Option1".to_string(), "Option2".to_string(), "Option3".to_string()];
+        let candidates = ["Option1".to_string(), "Option2".to_string(), "Option3".to_string()];
 
         // Test correct index selection
         let result = manager.parse_index_selection("1", candidates.len());

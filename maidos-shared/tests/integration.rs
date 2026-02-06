@@ -53,7 +53,7 @@ budget_monthly = 100.0
     caps.grant(Capability::LlmChat);
     caps.grant(Capability::LlmStream);
     
-    let token = issuer.issue(caps.clone()).expect("Failed to issue token");
+    let token = issuer.issue(caps).expect("Failed to issue token");
     let token_str = token.as_str();
     
     let verified = issuer.verify(token_str).expect("Verification failed");
@@ -299,8 +299,8 @@ fn test_token_ttl() {
     let mut caps = CapabilitySet::empty();
     caps.grant(Capability::LlmChat);
     
-    let token1 = issuer.issue(caps.clone()).expect("Issue failed");
-    let token2 = issuer.issue_with_ttl(caps.clone(), Duration::from_secs(60)).expect("Issue with TTL failed");
+    let token1 = issuer.issue(caps).expect("Issue failed");
+    let token2 = issuer.issue_with_ttl(caps, Duration::from_secs(60)).expect("Issue with TTL failed");
     let token3 = issuer.issue_for_subject(caps, "user:12345").expect("Issue for subject failed");
     
     assert!(issuer.verify(token1.as_str()).is_ok());

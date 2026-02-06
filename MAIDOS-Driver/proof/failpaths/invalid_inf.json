@@ -1,0 +1,5 @@
+{
+    "nonce":  "NONCE-0348965e32e945bfa14cff971a38fcb2",
+    "description":  "install_driver_c returns error on invalid INF path",
+    "failpath":  "invalid_inf"
+}

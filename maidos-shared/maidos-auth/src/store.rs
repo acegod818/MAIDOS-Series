@@ -380,10 +380,10 @@ mod tests {
         let caps = CapabilitySet::empty();
 
         store
-            .store("token1".into(), Some("user1".into()), caps.clone(), 3600)
+            .store("token1".into(), Some("user1".into()), caps, 3600)
             .unwrap();
         store
-            .store("token2".into(), Some("user1".into()), caps.clone(), 3600)
+            .store("token2".into(), Some("user1".into()), caps, 3600)
             .unwrap();
         store
             .store("token3".into(), Some("user2".into()), caps, 3600)
@@ -403,10 +403,10 @@ mod tests {
         let caps = CapabilitySet::empty();
 
         store
-            .store("token1".into(), Some("user1".into()), caps.clone(), 3600)
+            .store("token1".into(), Some("user1".into()), caps, 3600)
             .unwrap();
         store
-            .store("token2".into(), Some("user1".into()), caps.clone(), 3600)
+            .store("token2".into(), Some("user1".into()), caps, 3600)
             .unwrap();
         store
             .store("token3".into(), Some("user2".into()), caps, 3600)
@@ -437,8 +437,8 @@ mod tests {
         let store = TokenStore::default();
         let caps = CapabilitySet::empty();
 
-        store.store("token1".into(), None, caps.clone(), 3600).unwrap();
-        store.store("token2".into(), None, caps.clone(), 3600).unwrap();
+        store.store("token1".into(), None, caps, 3600).unwrap();
+        store.store("token2".into(), None, caps, 3600).unwrap();
         store.revoke("token2", None).unwrap();
 
         let stats = store.stats();
@@ -458,8 +458,8 @@ mod tests {
         let store = TokenStore::new(config);
         let caps = CapabilitySet::empty();
 
-        store.store("token1".into(), None, caps.clone(), 3600).unwrap();
-        store.store("token2".into(), None, caps.clone(), 3600).unwrap();
+        store.store("token1".into(), None, caps, 3600).unwrap();
+        store.store("token2".into(), None, caps, 3600).unwrap();
 
         let result = store.store("token3".into(), None, caps, 3600);
         assert!(result.is_err());
@@ -470,7 +470,7 @@ mod tests {
         let store = TokenStore::default();
         let caps = CapabilitySet::empty();
 
-        store.store("token1".into(), None, caps.clone(), 3600).unwrap();
+        store.store("token1".into(), None, caps, 3600).unwrap();
         store.store("token2".into(), None, caps, 3600).unwrap();
 
         assert_eq!(store.stats().total_tokens, 2);

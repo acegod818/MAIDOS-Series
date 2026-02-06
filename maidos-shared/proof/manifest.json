@@ -1,0 +1,98 @@
+{
+  "version": "codeqc-proofpack-3",
+  "run_id": "RUN-20260206-181947-58ecbdab",
+  "nonce": "NONCE-8dbe2d1cc23f4de189e2cc601890bf8d",
+  "timestamp": "2026-02-06T18:19:47.133419+00:00",
+  "journeys": [
+    {
+      "id": "J-001",
+      "description": "Auth module",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_rust.log"
+      ]
+    },
+    {
+      "id": "J-002",
+      "description": "Config module",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_rust.log"
+      ]
+    },
+    {
+      "id": "J-003",
+      "description": "Log module",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_rust.log"
+      ]
+    },
+    {
+      "id": "J-004",
+      "description": "LLM client",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_rust.log"
+      ]
+    },
+    {
+      "id": "J-005",
+      "description": "Message bus",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_rust.log"
+      ]
+    }
+  ],
+  "hashes": {
+    "e2e/build_rust.log": {
+      "sha256": "adf7a10aeda4ab7c4c37cf1600f06b75cdb1d484f5ebe7b3ac30223d2650b276",
+      "bytes": 427
+    },
+    "e2e/clippy.log": {
+      "sha256": "514c9745e6515a1c36572e807268d9c1fc3cce6c426a141262cd8cafda6492ba",
+      "bytes": 898
+    },
+    "e2e/nonce.txt": {
+      "sha256": "78a1f35578296d71cca6decd8a6a37fbba8eb6781c8b9de5cd6860ff3e2cc8d6",
+      "bytes": 40
+    },
+    "e2e/unit_rust.log": {
+      "sha256": "3cf41073562b6ac90996fafa53c4ba2fa888584e0f9e3be640daa8c2a19bcf5d",
+      "bytes": 12531
+    },
+    "failpaths/auth_failure.json": {
+      "sha256": "454b5c1e9713edfbfa1c2d601b259f906cd95dbae1a4b8a597e83a0beda45534",
+      "bytes": 158
+    },
+    "failpaths/llm_timeout.json": {
+      "sha256": "1e91bf6e9526cde1f94e536b187388a3f08e24a2c221c3e21ff61a8dfce58487",
+      "bytes": 157
+    },
+    "failpaths/missing_config.json": {
+      "sha256": "691cafc0fe77e0cfb1b2781656c09ae6b3fed30d7fc5290d345e1029829df746",
+      "bytes": 165
+    },
+    "observability/trace.json": {
+      "sha256": "d0c7dd71e684f589ed0bad737ac6528b8dc53a1e59a0c11b84fda1f1cf3372e1",
+      "bytes": 197
+    },
+    "sync/subcrates.txt": {
+      "sha256": "567ca6d9ebcb6ff93aae76d35814f118b34371f4ee0d0d88b27f5367dc6c331f",
+      "bytes": 120
+    },
+    "sync/workspace_sync.json": {
+      "sha256": "41499f2c85a02c2fab7fe0d071013fe873e9f7281fa29dee6e8e14e2ab0da38e",
+      "bytes": 168
+    }
+  },
+  "merkle_root": "4d17bb257eda2bd8af3f74a7152f31ec3df6529ebf1f16ff3211935ce032624a",
+  "git": {
+    "dirty": false
+  },
+  "env": {
+    "os": "win32",
+    "ci": false
+  }
+}

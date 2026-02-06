@@ -1,0 +1,5 @@
+{
+    "nonce":  "NONCE-0348965e32e945bfa14cff971a38fcb2",
+    "description":  "Operations requiring admin return permission error",
+    "failpath":  "no_admin"
+}

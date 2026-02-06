@@ -1,0 +1,5 @@
+{
+    "nonce":  "NONCE-e2962543b2224d1d80aa70b29443bd0e",
+    "description":  "Auth failure returns error, not panic",
+    "failpath":  "auth_failure"
+}

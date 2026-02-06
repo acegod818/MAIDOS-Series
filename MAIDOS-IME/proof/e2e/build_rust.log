@@ -1,0 +1,9 @@
+cargo :    Compiling maidos-core v0.1.0 (C:\Users\USER\Documents\GitHub\MAIDOS-Series\MAIDOS-IME\src\core\maidos-core)
+¦ì©ó C:\Users\USER\Documents\GitHub\MAIDOS-Series\MAIDOS-IME\qc\run_evidence.ps1:24 ¦r¤¸:13
++ $buildLog = cargo build --release 2>&1 | Out-String
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (   Compiling ma...re\maidos-core):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    Finished `release` profile [optimized] target(s) in 48.07s
+

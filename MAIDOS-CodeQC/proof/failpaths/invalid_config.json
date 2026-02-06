@@ -1,0 +1,5 @@
+{
+    "nonce":  "NONCE-2832522764a440308f37628e4b789606",
+    "description":  "Invalid config file returns parse error, not crash",
+    "failpath":  "invalid_config"
+}

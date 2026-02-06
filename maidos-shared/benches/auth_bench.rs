@@ -22,7 +22,7 @@ fn bench_token_issue(c: &mut Criterion) {
     
     c.bench_function("token_issue", |b| {
         b.iter(|| {
-            issuer.issue(black_box(caps.clone())).unwrap()
+            issuer.issue(black_box(caps)).unwrap()
         })
     });
 }
@@ -56,7 +56,7 @@ fn bench_token_roundtrip(c: &mut Criterion) {
     
     c.bench_function("token_roundtrip", |b| {
         b.iter(|| {
-            let token = issuer.issue(black_box(caps.clone())).unwrap();
+            let token = issuer.issue(black_box(caps)).unwrap();
             issuer.verify(token.as_str()).unwrap()
         })
     });
@@ -160,7 +160,7 @@ fn bench_token_scaling(c: &mut Criterion) {
             BenchmarkId::new("issue", cap_count),
             cap_count,
             |b, _| {
-                b.iter(|| issuer.issue(black_box(caps.clone())).unwrap())
+                b.iter(|| issuer.issue(black_box(caps)).unwrap())
             }
         );
     }

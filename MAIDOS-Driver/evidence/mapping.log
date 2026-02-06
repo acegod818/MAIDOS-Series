@@ -1,0 +1,69 @@
+# MAIDOS-Driver SPEC-to-Test Mapping
+# Generated: 2026-02-07
+# SPEC: SPEC-MAIDOS-Driver-v2.0.md
+
+## Functional Requirements
+
+FR-001 Hardware Scan
+  AC-001 → unit::test_scan_returns_devices, integration::scan_real_devices
+  AC-002 → unit::test_problem_device_status
+  AC-003 → benchmark::scan_under_5s
+
+FR-002 Driver Install
+  AC-004 → integration::test_install_valid_inf (requires admin + real hardware)
+  AC-005 → unit::test_restore_point_creation
+  AC-006 → unit::test_install_invalid_inf_returns_error
+
+FR-003 Driver Update
+  AC-007 → unit::test_check_update_returns_info
+  AC-008 → integration::test_download_update_file
+  AC-009 → integration::test_apply_update (requires admin)
+  AC-010 → unit::test_check_all_updates_batch
+
+FR-004 Driver Rollback
+  AC-011 → integration::test_rollback_driver (requires admin)
+  AC-012 → unit::test_rollback_no_previous_version_error
+
+FR-005 Driver Backup
+  AC-013 → integration::test_backup_creates_files
+  AC-014 → unit::test_backup_creates_directory
+  AC-015 → unit::test_backup_insufficient_space_error
+
+FR-006 Diagnostics
+  AC-016 → unit::test_diagnose_problem_code_28
+  AC-017 → unit::test_irq_conflict_detection
+  AC-018 → unit::test_all_devices_normal
+
+FR-007 Audit Log
+  AC-019 → unit::test_audit_log_records_operation
+  AC-020 → unit::test_audit_log_records_failure
+
+## Non-Functional Requirements
+
+NFR-001 Scan Speed       → benchmark::scan_500_devices_under_5s
+NFR-002 Memory           → profiling::memory_under_50mb
+NFR-003 Permissions      → integration::admin_check
+NFR-004 Security         → unit::test_signature_verification
+NFR-005 Stability        → stress::error_injection
+NFR-006 Build            → ci::cargo_build_0e_0w, ci::dotnet_build_0e_0w
+NFR-007 Coverage         → coverage::rust_ge_60, coverage::csharp_ge_50
+NFR-008 Compatibility    → e2e::windows_10_11_test
+
+## FFI Contract (16 functions)
+
+scan_all_devices_c      → unit::test_ffi_scan
+free_device_info        → unit::test_ffi_free_device
+get_last_error          → unit::test_ffi_last_error
+free_string             → unit::test_ffi_free_string
+install_driver_c        → unit::test_ffi_install
+backup_drivers_c        → unit::test_ffi_backup
+free_backup_entries     → unit::test_ffi_free_backup
+check_driver_update_c   → unit::test_ffi_check_update
+free_update_info        → unit::test_ffi_free_update
+download_update_c       → unit::test_ffi_download
+apply_update_c          → unit::test_ffi_apply
+check_all_updates_c     → unit::test_ffi_check_all
+free_update_info_array  → unit::test_ffi_free_array
+diagnose_device_c       → unit::test_ffi_diagnose
+get_device_irq_c        → unit::test_ffi_irq
+rollback_driver_c       → unit::test_ffi_rollback

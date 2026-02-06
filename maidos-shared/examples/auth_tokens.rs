@@ -31,7 +31,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // 發行令牌
     println!("\n【發行令牌】");
-    let token = issuer.issue(caps.clone())?;
+    let token = issuer.issue(caps)?;
     let token_str = token.as_str();
     let display_len = 50.min(token_str.len());
     println!("  Token: {}...", &token_str[..display_len]);

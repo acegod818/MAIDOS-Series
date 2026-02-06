@@ -1,0 +1,9 @@
+maidos-auth
+maidos-bus
+maidos-chain
+maidos-config
+maidos-google
+maidos-llm
+maidos-log
+maidos-p2p
+maidos-social

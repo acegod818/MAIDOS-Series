@@ -1,0 +1,146 @@
+cargo :    Compiling maidos-core v0.1.0 (C:\Users\USER\Documents\GitHub\MAIDOS-Series\MAIDOS-IME\src\core\maidos-core)
+¦ì©ó C:\Users\USER\Documents\GitHub\MAIDOS-Series\MAIDOS-IME\qc\run_evidence.ps1:35 ¦r¤¸:12
++ $unitLog = cargo test 2>&1 | Out-String
++            ~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (   Compiling ma...re\maidos-core):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 8.42s
+     Running unittests src\lib.rs (target\debug\deps\maidos_config-daa30c09d58124c2.exe)
+
+running 15 tests
+test config::tests::test_create_default_config ... ok
+test dict::tests::test_user_dict_creation ... ok
+test model::tests::test_get_enabled_models ... ok
+test model::tests::test_validate_model_config_duplicate_names ... ok
+test config::tests::test_validate_config ... ok
+test model::tests::test_get_default_model ... ok
+test dict::tests::test_add_and_find_entry ... ok
+test model::tests::test_validate_model_config ... ok
+test dict::tests::test_remove_entry ... ok
+test model::tests::test_validate_model_config_no_enabled ... ok
+test tests::test_default_config ... ok
+test model::tests::test_get_default_model_from_list ... ok
+test config::tests::test_save_and_load_config ... ok
+test dict::tests::test_save_and_load_dict ... ok
+test model::tests::test_save_and_load_model_config ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running unittests src\lib.rs (target\debug\deps\maidos_core-523a9dbe59aba0fc.exe)
+
+running 53 tests
+test ai::tests::test_parse_index_selection ... ok
+test converter::tests::test_mapping_table_size ... ok
+test converter::tests::test_convert_simplified_to_traditional ... ok
+test ffi::tests::test_ffi_null_safety ... ok
+test converter::tests::test_extended_conversion ... ok
+test dictionary::tests::test_dictionary_loading ... ok
+test ime_engine::tests::test_parse_character_selection ... ok
+test ai::tests::test_ai_manager_creation ... ok
+test japanese::tests::test_hiragana_to_katakana ... ok
+test converter::tests::test_mixed_text_conversion ... ok
+test ffi::tests::test_ffi_detect_language ... ok
+test ffi::tests::test_ffi_convert_charset ... ok
+test ffi::tests::test_ffi_init ... ok
+test converter::tests::test_convert_same_charset ... ok
+test converter::tests::test_convert_candidates ... ok
+test ffi::tests::test_ffi_supported_schemes ... ok
+test ffi::tests::test_ffi_version ... ok
+test ime_engine::tests::test_ime_engine_creation ... ok
+test converter::tests::test_reverse_extended_conversion ... ok
+test pinyin_parser::tests::test_dictionary_loading ... ok
+test pinyin_parser::tests::test_pinyin_parser_creation ... ok
+test schemes::tests::test_handwriting_returns_error ... ok
+test converter::tests::test_convert_traditional_to_simplified ... ok
+test schemes::tests::test_voice_returns_error ... ok
+test tests::it_works ... ok
+test user_learning::tests::test_case_insensitive ... ok
+test english::tests::test_english_user_word ... ok
+test user_learning::tests::test_user_table_learn_and_lookup ... ok
+test english::tests::test_english_prefix_match ... ok
+test user_learning::tests::test_freq_cap ... ok
+test english::tests::test_english_case_insensitive ... ok
+test english::tests::test_english_no_match ... ok
+test schemes::tests::test_english_scheme_returns_candidates ... ok
+test schemes::tests::test_bopomofo_user_word ... ok
+test schemes::tests::test_pinyin_user_word ... ok
+test schemes::tests::test_wubi_scheme_returns_candidates ... ok
+test schemes::tests::test_cangjie_scheme_returns_candidates ... ok
+test schemes::tests::test_cangjie_multi_code ... ok
+test schemes::tests::test_quick_scheme_returns_candidates ... ok
+test ffi::tests::test_ffi_process_input_pinyin ... ok
+test schemes::tests::test_bopomofo_scheme_returns_candidates ... ok
+test ffi::tests::test_ffi_process_input_bopomofo ... ok
+test schemes::tests::test_pinyin_scheme_returns_candidates ... ok
+test japanese::tests::test_romaji_n_handling ... ok
+test japanese::tests::test_kana_to_kanji_lookup ... ok
+test japanese::tests::test_romaji_to_hiragana_compound ... ok
+test japanese::tests::test_romaji_to_kanji ... ok
+test japanese::tests::test_romaji_sokuon ... ok
+test user_learning::tests::test_user_table_persistence ... ok
+test schemes::tests::test_japanese_scheme_returns_candidates ... ok
+test japanese::tests::test_romaji_to_hiragana_basic ... ok
+test japanese::tests::test_japanese_user_word ... ok
+test schemes::tests::test_scheme_factory ... ok
+
+test result: ok. 53 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running unittests src\main.rs (target\debug\deps\maidos_core_demo-74f390d6f574bbd5.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\dictionary_test.rs (target\debug\deps\dictionary_test-9373b45e96ebe10b.exe)
+
+running 2 tests
+test test_dictionary_loading ... ok
+test test_pinyin_parser ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\pinyin_parser_test.rs (target\debug\deps\pinyin_parser_test-95fae6a48599b7b5.exe)
+
+running 3 tests
+test test_pinyin_parser_loading ... ok
+test test_single_pinyin_parsing ... ok
+test test_continuous_pinyin_parsing ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\lib.rs (target\debug\deps\maidos_llm-71b7fffce88ef083.exe)
+
+running 10 tests
+test client::tests::test_from_config ... ok
+test models::tests::test_model_config ... ok
+test local::tests::test_simple_inference ... ok
+test models::tests::test_model_metadata ... ok
+test tests::it_works ... ok
+test local::tests::test_local_llm_basic ... ok
+test client::tests::test_local_client ... ok
+test providers::tests::test_provider_factory ... ok
+test client::tests::test_ollama_client_creation ... ok
+test providers::tests::test_ollama_provider_creation ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.03s
+
+   Doc-tests maidos_config
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests maidos_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests maidos_llm
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+

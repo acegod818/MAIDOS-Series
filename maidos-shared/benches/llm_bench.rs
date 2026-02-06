@@ -183,7 +183,7 @@ fn bench_role_operations(c: &mut Criterion) {
     c.bench_function("role_clone", |b| {
         let role = Role::System;
         b.iter(|| {
-            black_box(role.clone())
+            black_box(role)
         })
     });
 }

@@ -6,7 +6,7 @@ use maidOS_driver::core::detect::hardware::scan_all_devices;
 fn test_hardware_detection_basic() {
     // 測試掃描功能是否能正常工作
     let devices = scan_all_devices().expect("硬體掃描應該成功");
-    assert!(devices.len() >= 1, "應該至少找到1個設備");
+    assert!(!devices.is_empty(), "應該至少找到1個設備");
 
     // 驗證設備基本信息
     let first_device = &devices[0];

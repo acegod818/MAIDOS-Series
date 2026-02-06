@@ -1,0 +1,5 @@
+{
+    "csharp_pinvoke":  "csharp_imports.txt",
+    "nonce":  "NONCE-0348965e32e945bfa14cff971a38fcb2",
+    "rust_ffi":  "rust_exports.txt"
+}

@@ -199,11 +199,11 @@ fn load_driver_database() -> Option<DriverDatabase> {
     .collect();
 
     for path in &candidates {
-        if std::path::Path::new(path).exists() {
-            if db.load_from_file(path).is_ok() {
-                log::info!("Loaded driver database from {}", path);
-                return Some(db);
-            }
+        if std::path::Path::new(path).exists()
+            && db.load_from_file(path).is_ok()
+        {
+            log::info!("Loaded driver database from {}", path);
+            return Some(db);
         }
     }
 
@@ -296,12 +296,12 @@ fn check_windows_update_available() -> Vec<(String, String)> {
             stdout
                 .lines()
                 .filter(|line| !line.trim().is_empty())
-                .filter_map(|line| {
+                .map(|line| {
                     let parts: Vec<&str> = line.splitn(2, '|').collect();
                     if parts.len() == 2 {
-                        Some((parts[0].to_string(), parts[1].to_string()))
+                        (parts[0].to_string(), parts[1].to_string())
                     } else {
-                        Some((line.to_string(), String::new()))
+                        (line.to_string(), String::new())
                     }
                 })
                 .collect()

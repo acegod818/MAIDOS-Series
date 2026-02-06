@@ -1,0 +1,90 @@
+{
+  "version": "codeqc-proofpack-3",
+  "run_id": "RUN-20260206-181838-22a6cb34",
+  "nonce": "NONCE-d881efa4d40243aeb8b1268c29f24957",
+  "timestamp": "2026-02-06T18:18:38.487118+00:00",
+  "journeys": [
+    {
+      "id": "J-001",
+      "description": "Quality scan",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_ts.log"
+      ]
+    },
+    {
+      "id": "J-002",
+      "description": "Plugin loading",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_ts.log"
+      ]
+    },
+    {
+      "id": "J-003",
+      "description": "Gate system",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_ts.log"
+      ]
+    },
+    {
+      "id": "J-004",
+      "description": "Report generation",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_ts.log"
+      ]
+    },
+    {
+      "id": "J-005",
+      "description": "Fake impl detection",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_ts.log"
+      ]
+    }
+  ],
+  "hashes": {
+    "e2e/build_ts.log": {
+      "sha256": "6515fe55083bc6351c1284dc51db8eef226608e039710e165b91423140e3311e",
+      "bytes": 1332
+    },
+    "e2e/nonce.txt": {
+      "sha256": "d2fe450214f9f5b2269faa6eabe1f0c9d5a510e1f06f2f95f7618529aefb62bf",
+      "bytes": 40
+    },
+    "e2e/unit_ts.log": {
+      "sha256": "15fde7397dc62a5b34f93ea3fab34bbc7ba3867f2d70b6ad08938e1ae94deec7",
+      "bytes": 7647
+    },
+    "failpaths/empty_project.json": {
+      "sha256": "42ccd90f32e0d1fc071cf3ff320dd8d22e3490b287944fc3d3d2662f6909887b",
+      "bytes": 176
+    },
+    "failpaths/invalid_config.json": {
+      "sha256": "738a779134af4feb3107420919c92228241cf0a1b506d59dda25e1b7c1123ac8",
+      "bytes": 173
+    },
+    "failpaths/missing_plugin.json": {
+      "sha256": "3ec022bea080677d6b858383249ee7d148ef8f2cdb51d12288a1d25628d665a1",
+      "bytes": 177
+    },
+    "observability/trace.json": {
+      "sha256": "a6a79a411a919b373df6601e88a61a1bb431482b0d7ce97e5ca60a6dacb8fbad",
+      "bytes": 197
+    },
+    "sync/plugin_sync.json": {
+      "sha256": "c1a486b6f2c6396f91e6b5c9385f294418e03f6d9d8cbc3e2288da9d5290a0b5",
+      "bytes": 175
+    }
+  },
+  "merkle_root": "87d4fef6f30367474d97de73fda6c95cdaaadcbcb5984e6837b410e87be8b352",
+  "git": {
+    "dirty": false
+  },
+  "env": {
+    "os": "win32",
+    "ci": false
+  }
+}

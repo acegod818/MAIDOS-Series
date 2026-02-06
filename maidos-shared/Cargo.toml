@@ -79,9 +79,6 @@ zeroize = "1.8.2"
 # Blockchain specific
 ethers = "2.0"
 
-[patch.crates-io]
-jsonwebtoken = { path = "../../vendor/jsonwebtoken-8.3.0" }
-
 # Integration test package
 [package]
 name = "maidos-shared-tests"

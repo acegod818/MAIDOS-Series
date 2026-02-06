@@ -1,0 +1,65 @@
+cargo :    Compiling maidOS-driver v0.2.0 (C:\Users\USER\Documents\GitHub\MAIDOS-Series\MAIDOS-Driver)
+¦ì©ó C:\Users\USER\Documents\GitHub\MAIDOS-Series\MAIDOS-Driver\qc\run_evidence.ps1:35 ¦r¤¸:12
++ $unitLog = cargo test 2>&1 | Out-String
++            ~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (   Compiling ma...\MAIDOS-Driver):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.73s
+     Running unittests src\lib.rs (target\debug\deps\maidOS_driver-db0f41eef2b7d9bf.exe)
+
+running 29 tests
+test ai::driver_recommender::tests::test_version_comparison ... ok
+test ai::hardware_identifier::tests::test_identify_usb_logitech ... ok
+test ai::hardware_identifier::tests::test_identify_intel_pci ... ok
+test core::diagnose::device_diagnostics::tests::test_problem_description ... ok
+test ai::driver_recommender::tests::test_recommend_for_device ... ok
+test ai::hardware_identifier::tests::test_heuristic_fallback ... ok
+test ai::hardware_identifier::tests::test_identify_nvidia_pci ... ok
+test core::driver_match::driver_matching::tests::test_exact_match ... ok
+test core::download::downloader::tests::test_https_only ... ok
+test core::download::downloader::tests::test_trusted_source_check ... ok
+test core::update::checker::tests::test_extract_ven_dev ... ok
+test core::verify::signature_verifier::tests::test_verify_nonexistent_file ... ok
+test core::audit::tests::test_format_entry_no_detail ... ok
+test core::driver_match::driver_matching::tests::test_vendor_extraction ... ok
+test core::update::checker::tests::test_apply_update_missing_file ... ok
+test core::audit::tests::test_format_entry ... ok
+test core::update::checker::tests::test_version_is_newer ... ok
+test database::driver_database::tests::test_insert_and_query ... ok
+test core::driver_match::driver_matching::tests::test_no_match ... ok
+test core::audit::tests::test_audit_write ... ok
+test database::driver_database::tests::test_save_and_load ... ok
+test core::verify::signature_verifier::tests::test_verify_system_file ... ok
+test platform::windows::wmi_queries::tests::test_wmi_cpu_query ... ok
+test core::update::checker::tests::test_check_driver_update_unknown_device ... ok
+test core::detect::hardware::tests::test_hardware_detection_basics ... ok
+test platform::windows::wmi_queries::tests::test_wmi_os_query ... ok
+test core::update::checker::tests::test_check_windows_update_api ... ok
+test core::update::checker::tests::test_check_all_updates has been running for over 60 seconds
+test core::update::checker::tests::test_check_driver_update_known_device has been running for over 60 seconds
+test core::update::checker::tests::test_check_all_updates ... ok
+test core::update::checker::tests::test_check_driver_update_known_device ... ok
+
+test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 100.03s
+
+     Running unittests src\main.rs (target\debug\deps\maidOS_driver_cli-4a151881826619af.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\hardware_detection_test.rs (target\debug\deps\hardware_detection_test-d73d840165006a39.exe)
+
+running 1 test
+test test_hardware_detection_basic ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.66s
+
+   Doc-tests maidOS_driver
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+

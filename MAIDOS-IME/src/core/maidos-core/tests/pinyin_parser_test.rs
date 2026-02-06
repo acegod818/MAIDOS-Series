@@ -41,6 +41,6 @@ fn test_continuous_pinyin_parsing() {
     
     // Note: Since pinyin in the dictionary uses tone marks, "nihao" may not find a match
     // Here we only check that the function executes without errors
-    assert!(true); // Function executed successfully; actual results depend on dictionary contents
-    assert!(true); // Function executed successfully; actual results depend on dictionary contents
+    // Function executed successfully; actual results depend on dictionary contents
+    let _ = &_result;
 }

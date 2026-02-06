@@ -86,13 +86,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // 對話歷史構建
     println!("\n【對話歷史】");
-    let mut conversation = Vec::new();
-    
-    conversation.push(Message::user("Hi there!"));
-    conversation.push(Message::assistant("Hello! How can I help?"));
-    conversation.push(Message::user("What's the weather like?"));
-    conversation.push(Message::assistant("I don't have weather data."));
-    conversation.push(Message::user("Okay, thanks anyway."));
+    let conversation = [
+        Message::user("Hi there!"),
+        Message::assistant("Hello! How can I help?"),
+        Message::user("What's the weather like?"),
+        Message::assistant("I don't have weather data."),
+        Message::user("Okay, thanks anyway."),
+    ];
     
     println!("  對話輪數: {}", conversation.len());
     for (i, msg) in conversation.iter().enumerate() {

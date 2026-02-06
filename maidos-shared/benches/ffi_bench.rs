@@ -151,7 +151,7 @@ fn bench_auth_native_vs_ffi(c: &mut Criterion) {
     // --- Native Token Issue ---
     group.bench_function("native_token_issue", |b| {
         b.iter(|| {
-            let token = issuer.issue(black_box(caps.clone())).unwrap();
+            let token = issuer.issue(black_box(caps)).unwrap();
             black_box(token);
         })
     });
@@ -175,7 +175,7 @@ fn bench_auth_native_vs_ffi(c: &mut Criterion) {
     });
 
     // --- Native Token Verify ---
-    let token = issuer.issue(caps.clone()).unwrap();
+    let token = issuer.issue(caps).unwrap();
     let token_str = token.as_str().to_string();
 
     group.bench_function("native_token_verify", |b| {
@@ -218,7 +218,7 @@ fn bench_auth_native_vs_ffi(c: &mut Criterion) {
     // --- Token Roundtrip Comparison ---
     group.bench_function("native_token_roundtrip", |b| {
         b.iter(|| {
-            let token = issuer.issue(black_box(caps.clone())).unwrap();
+            let token = issuer.issue(black_box(caps)).unwrap();
             let verified = issuer.verify(token.as_str()).unwrap();
             black_box(verified);
         })
@@ -449,6 +449,7 @@ fn bench_memory_patterns(c: &mut Criterion) {
 
     // --- Box Allocation (FFI handle pattern) ---
     #[derive(Clone)]
+    #[allow(dead_code)]
     struct LargeStruct {
         data: [u8; 1024],
         name: String,
@@ -594,7 +595,7 @@ fn bench_throughput(c: &mut Criterion) {
 
     group.bench_function("tokens_per_sec", |b| {
         b.iter(|| {
-            let token = issuer.issue(black_box(caps.clone())).unwrap();
+            let token = issuer.issue(black_box(caps)).unwrap();
             let _ = issuer.verify(token.as_str()).unwrap();
         })
     });

@@ -273,7 +273,7 @@ mod tests {
         let scan_result = scan_all_devices();
         assert!(scan_result.is_ok(), "硬體掃描應該能執行成功");
         let devices = scan_result.unwrap();
-        assert!(devices.len() > 0, "應該至少找到一個設備");
+        assert!(!devices.is_empty(), "應該至少找到一個設備");
 
         // 驗證每個設備都有名稱
         for d in &devices {

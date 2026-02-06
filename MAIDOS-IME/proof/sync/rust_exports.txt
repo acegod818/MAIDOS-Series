@@ -1,0 +1,13 @@
+pub unsafe extern "C" fn ime_process_input(
+pub unsafe extern "C" fn ime_get_candidates(
+pub unsafe extern "C" fn ime_convert_charset(
+pub extern "C" fn ime_supported_schemes() -> *mut c_char {
+pub unsafe extern "C" fn ime_detect_language(
+pub extern "C" fn ime_version() -> *mut c_char {
+pub unsafe extern "C" fn ime_pinyin_lookup(
+pub extern "C" fn ime_init() -> i32 {
+pub extern "C" fn ime_last_error() -> *mut c_char {
+pub unsafe extern "C" fn ime_free_string(s: *mut c_char) {
+pub extern "C" fn ime_clear_error() {
+pub unsafe extern "C" fn ime_learn(
+pub unsafe extern "C" fn ime_clear_learned(

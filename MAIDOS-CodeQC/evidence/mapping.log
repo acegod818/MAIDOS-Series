@@ -1,0 +1,52 @@
+# MAIDOS-CodeQC SPEC-to-Test Mapping
+# Generated: 2026-02-07
+# SPEC: CodeQC v2.6.1
+
+## Core Functionality
+
+SCAN - Code Quality Scanning
+  AC-SCAN-001 → unit::test_scan_rust_project
+  AC-SCAN-002 → unit::test_scan_csharp_project
+  AC-SCAN-003 → unit::test_scan_mixed_project
+  AC-SCAN-004 → integration::test_scan_real_codebase
+
+GATE - Gate System (G1-G4)
+  AC-GATE-001 → unit::test_g1_basic_compilation
+  AC-GATE-002 → unit::test_g2_spec_compliance
+  AC-GATE-003 → unit::test_g3_fake_impl_detection
+  AC-GATE-004 → unit::test_g4_full_validation
+
+PLUGIN - Plugin System
+  AC-PLUG-001 → unit::test_plugin_load
+  AC-PLUG-002 → unit::test_plugin_config
+  AC-PLUG-003 → unit::test_plugin_dotnet
+  AC-PLUG-004 → unit::test_plugin_jvm
+  AC-PLUG-005 → unit::test_plugin_web
+  AC-PLUG-006 → unit::test_plugin_systems
+  AC-PLUG-007 → unit::test_plugin_mobile
+  AC-PLUG-008 → unit::test_plugin_scripting
+  AC-PLUG-009 → unit::test_plugin_functional
+  AC-PLUG-010 → unit::test_plugin_enterprise
+
+REPORT - Report Generation
+  AC-RPT-001 → unit::test_report_json_output
+  AC-RPT-002 → unit::test_report_markdown_output
+  AC-RPT-003 → unit::test_report_summary
+
+SECTION3 - §3 Fake Implementation Cleanup
+  AC-S3-001 → unit::test_detect_todo_macro
+  AC-S3-002 → unit::test_detect_not_implemented_exception
+  AC-S3-003 → unit::test_scan_log_generation
+
+## Non-Functional Requirements
+
+NFR-001 Performance      → benchmark::scan_10k_loc_under_5s
+NFR-002 Memory           → profiling::memory_under_200mb
+NFR-003 Cross-platform   → ci::build_linux_macos_windows
+NFR-004 Plugin loading   → benchmark::plugin_load_under_1s
+
+## Build
+
+cargo build              → ci::build_0e_0w
+cargo test               → ci::tests_pass
+cargo clippy             → ci::clippy_0w

@@ -1,0 +1,63 @@
+# MAIDOS-IME SPEC-to-Test Mapping
+# Generated: 2026-02-07
+# SPEC: SPEC-MAIDOS-IME-v2.0.md
+
+## Functional Requirements
+
+FR-001 Input Scheme Management
+  AC-001 → e2e::test_scheme_switching
+  AC-002 → unit::test_bopomofo_candidate_ranking
+
+FR-002 Bopomofo Input
+  AC-003 → unit::test_bopomofo_zhongwen
+  AC-004 → unit::test_invalid_bopomofo_no_crash
+
+FR-003 Pinyin Input
+  AC-005 → unit::test_pinyin_auto_segmentation
+  AC-006 → unit::test_missing_dictionary_graceful
+
+FR-004 Traditional-Simplified Conversion
+  AC-007 → unit::test_trad_to_simp_guoyu
+  AC-008 → unit::test_simp_to_trad_toufa
+
+FR-005 English Input
+  AC-009 → unit::test_english_prefix_match
+  AC-010 → unit::test_custom_word_addition
+
+FR-006 Japanese Input
+  AC-011 → unit::test_romaji_to_hiragana_watashi
+  AC-012 → unit::test_katakana_conversion
+
+FR-007 LLM Smart Selection
+  AC-013 → integration::test_ollama_smart_pick
+  AC-014 → unit::test_ollama_fallback_on_failure
+  AC-015 → unit::test_ai_timeout_cancellation
+
+FR-008 TSF Integration
+  AC-016 → e2e::test_notepad_candidate_window (manual)
+  AC-017 → e2e::test_chrome_ime_input (manual)
+
+## Non-Functional Requirements
+
+NFR-001 Input Latency     → benchmark::key_to_candidate_under_50ms
+NFR-002 AI Latency        → benchmark::llm_response_under_2s
+NFR-003 Memory            → profiling::memory_under_80mb
+NFR-004 CPU               → profiling::idle_cpu_under_1pct
+NFR-005 Compatibility     → e2e::windows_10_11_test
+NFR-006 Stability         → stress::1000_chars_no_crash
+NFR-007 Security          → audit::llm_localhost_only
+NFR-008 Coverage          → coverage::rust_ge_70, coverage::csharp_ge_50
+
+## Dictionary Data
+
+bopomofo_table.json     → unit::test_bopomofo_table_load (7000+ entries)
+cangjie_table.json      → unit::test_cangjie_table_load (3500+ entries)
+wubi_table.json         → unit::test_wubi_table_load (1400+ entries)
+pinyin.dict.json        → unit::test_pinyin_dict_load (6000+ entries)
+english_common.json     → unit::test_english_dict_load (5000+ entries)
+japanese_kana2kanji.json → unit::test_japanese_dict_load (3000+ entries)
+
+## FFI Contract
+
+Rust → C++ TSF: process_key, get_candidates, commit_text, switch_scheme
+Rust → C#: smart_predict, get_settings, update_dictionary

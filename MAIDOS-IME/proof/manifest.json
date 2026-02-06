@@ -1,0 +1,118 @@
+{
+  "version": "codeqc-proofpack-3",
+  "run_id": "RUN-20260206-181911-ab65b97d",
+  "nonce": "NONCE-d9a95729d65a4ce98335b0e9d94431c2",
+  "timestamp": "2026-02-06T18:19:11.277843+00:00",
+  "journeys": [
+    {
+      "id": "J-001",
+      "description": "Input scheme switching",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_rust.log"
+      ]
+    },
+    {
+      "id": "J-002",
+      "description": "Bopomofo input",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_rust.log"
+      ]
+    },
+    {
+      "id": "J-003",
+      "description": "Pinyin input",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_rust.log"
+      ]
+    },
+    {
+      "id": "J-004",
+      "description": "Trad-Simp conversion",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_rust.log"
+      ]
+    },
+    {
+      "id": "J-005",
+      "description": "English input",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_rust.log"
+      ]
+    },
+    {
+      "id": "J-006",
+      "description": "Japanese input",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_rust.log"
+      ]
+    },
+    {
+      "id": "J-007",
+      "description": "LLM smart selection",
+      "status": "pass",
+      "artifacts": [
+        "e2e/unit_rust.log"
+      ]
+    }
+  ],
+  "hashes": {
+    "e2e/build_rust.log": {
+      "sha256": "9d9c4e4a6f198d090156efc013489bfe91f40d7735c3dd1583d683687271db55",
+      "bytes": 537
+    },
+    "e2e/clippy.log": {
+      "sha256": "58f898bb150a2ff71de27eb0cf8c3ff84c668da1adb2c3afb240ff62349ee3e0",
+      "bytes": 477
+    },
+    "e2e/nonce.txt": {
+      "sha256": "86634460a394f7bc384b1697b249bd49e7e94b72dac899df4f137d239815945d",
+      "bytes": 40
+    },
+    "e2e/unit_rust.log": {
+      "sha256": "2887640120a4195198b80e8b3592807b0af8f3639325f9c44de351785c7c7344",
+      "bytes": 6693
+    },
+    "failpaths/invalid_input.json": {
+      "sha256": "ec3a2a0c8ffe1a390e36fdfea44ced2a8b63cb6293b093de374884bbce87d248",
+      "bytes": 180
+    },
+    "failpaths/missing_dictionary.json": {
+      "sha256": "1535b13fcd0e8ff4db1ab9b2d7669cba5455239e9eca8e2055027c908345aef5",
+      "bytes": 174
+    },
+    "failpaths/ollama_offline.json": {
+      "sha256": "af2152b476439182fa8a54691156d8048eeb5fcaf935a83cb640f099c878fc3e",
+      "bytes": 180
+    },
+    "observability/trace.json": {
+      "sha256": "337b14959685d9ad03d93ee22b5f3e2b7a8b470366281246eb2d2146d0a991cc",
+      "bytes": 197
+    },
+    "sync/ffi_sync.json": {
+      "sha256": "19f59f0b4d2646d6cab1596fb3f1ab8993689f28fb31ab2aabd044bc4f5dbb96",
+      "bytes": 143
+    },
+    "sync/rust_exports.txt": {
+      "sha256": "236f7c72a8d34dcfb879b866c701ee003a5582f6077275d7e843aeded273983a",
+      "bytes": 613
+    },
+    "sync/sync_assert.json": {
+      "sha256": "26f222d881efec42514a63b7e6bebdc3cf776e3dba01d48cc8e1eac355b2958b",
+      "bytes": 100
+    }
+  },
+  "merkle_root": "5d289293610c7e919738f6744922472b51de6b39e76efa97d0e4540d75658830",
+  "git": {
+    "dirty": false
+  },
+  "env": {
+    "os": "win32",
+    "ci": false
+  }
+}

@@ -1,0 +1,8 @@
+cargo :     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.35s
+¦ì©ó C:\Users\USER\Documents\GitHub\MAIDOS-Series\MAIDOS-Driver\qc\run_evidence.ps1:29 ¦r¤¸:14
++ $clippyLog = cargo clippy --all-targets -- -D warnings 2>&1 | Out-Str ...
++              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (    Finished `d...get(s) in 0.35s:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
