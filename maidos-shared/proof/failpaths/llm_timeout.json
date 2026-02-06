@@ -1,5 +1,0 @@
-{
-    "nonce":  "NONCE-e2962543b2224d1d80aa70b29443bd0e",
-    "description":  "LLM timeout returns fallback response",
-    "failpath":  "llm_timeout"
-}

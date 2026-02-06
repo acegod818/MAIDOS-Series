@@ -1,5 +1,0 @@
-{
-    "nonce":  "NONCE-0348965e32e945bfa14cff971a38fcb2",
-    "description":  "backup_drivers_c returns error on insufficient space",
-    "failpath":  "disk_full"
-}

@@ -1,5 +1,0 @@
-{
-    "nonce":  "NONCE-2832522764a440308f37628e4b789606",
-    "description":  "Scanning empty project returns 0 violations, not error",
-    "failpath":  "empty_project"
-}
