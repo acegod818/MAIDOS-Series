@@ -1,0 +1,5 @@
+{
+    "nonce":  "NONCE-8adc57589dae4232bf274cd7d5d8e8e6",
+    "description":  "CompileAsync returns Failure when no files found",
+    "failpath":  "no_source_files"
+}

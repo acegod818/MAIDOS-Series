@@ -1,0 +1,22 @@
+            sb.AppendLine($"    [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]");
+            sb.AppendLine($"    [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]");
+            sb.AppendLine($"    [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]");
+// [MAIDOS-AUDIT] 10 個 DllImport 聲明對齊 Rust FFI 導出
+    [DllImport(NativeDll, CallingConvention = CallingConvention.Cdecl, EntryPoint = "forge_parse_source")]
+    [DllImport(NativeDll, CallingConvention = CallingConvention.Cdecl, EntryPoint = "forge_check_syntax")]
+    [DllImport(NativeDll, CallingConvention = CallingConvention.Cdecl, EntryPoint = "forge_supported_languages")]
+    [DllImport(NativeDll, CallingConvention = CallingConvention.Cdecl, EntryPoint = "forge_version")]
+    [DllImport(NativeDll, CallingConvention = CallingConvention.Cdecl, EntryPoint = "forge_parse_batch")]
+    [DllImport(NativeDll, CallingConvention = CallingConvention.Cdecl, EntryPoint = "forge_parse_incremental")]
+    [DllImport(NativeDll, CallingConvention = CallingConvention.Cdecl, EntryPoint = "forge_last_error")]
+    [DllImport(NativeDll, CallingConvention = CallingConvention.Cdecl, EntryPoint = "forge_free_string")]
+    [DllImport(NativeDll, CallingConvention = CallingConvention.Cdecl, EntryPoint = "forge_init")]
+    [DllImport(NativeDll, CallingConvention = CallingConvention.Cdecl, EntryPoint = "forge_clear_error")]
+    /// APPROACH: 為每個導出函數生成 DllImport 聲明
+    /// APPROACH: 生成 DllImport 屬性和方法簽名
+        // DllImport 屬性
+        sb.AppendLine($"    [DllImport(LibraryName, CallingConvention = CallingConvention.{convention}, EntryPoint = \"{export.Name}\")]");
+            sb.AppendLine($"    [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]");
+            sb.AppendLine($"    [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]");
+    /// APPROACH: 為每個導出函數生成 DllImport 聲明
+            sb.AppendLine($"    [DllImport(LibraryName, CallingConvention = CallingConvention.Cdecl)]");
