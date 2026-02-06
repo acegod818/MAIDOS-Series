@@ -1,0 +1,21 @@
+# MAIDOS IME 配置文件
+
+[model]
+provider = "local"
+model = "maidos-core"
+max_tokens = 64
+
+[ime]
+default_scheme = "pinyin"
+charset = "traditional"
+enabled_schemes = ["pinyin", "bopomofo"]
+
+[security]
+data_collection = false
+privacy_first = true
+
+[features]
+ai_selection = true
+context_understanding = true
+auto_correction = true
+smart_suggestions = true

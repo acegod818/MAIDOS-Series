@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <!--
+    MAIDOS-IME Installer (WiX v3)
+    - Per-machine install (TSF/COM registration requires elevated write to HKCR/HKLM).
+    - Uses self-registration (DllRegisterServer/DllUnregisterServer) for TSF profile + COM keys.
+  -->
+  <Product
+    Id="*"
+    Name="MAIDOS IME"
+    Manufacturer="MAIDOS"
+    Version="1.0.0"
+    Language="1033"
+    UpgradeCode="{A4B39029-8B59-4D7A-8A0B-4D28A8D6BEE9}">
+
+    <Package
+      InstallerVersion="500"
+      Compressed="yes"
+      InstallScope="perMachine"
+      InstallPrivileges="elevated" />
+
+    <MajorUpgrade
+      AllowSameVersionUpgrades="yes"
+      DowngradeErrorMessage="A newer version of MAIDOS IME is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="MAIDOSDIR" Name="MAIDOS">
+          <Directory Id="INSTALLFOLDER" Name="MAIDOS-IME">
+            <Component Id="CmpImeCore" Guid="{9E52E8B0-3E72-4E3D-9A8B-9E5F03B9D68B}">
+              <File
+                Id="FileImeCoreDll"
+                Source="$(var.CoreDll)"
+                KeyPath="yes"
+                SelfRegCost="1" />
+            </Component>
+
+            <Directory Id="DICTDIR" Name="dicts">
+              <Component Id="CmpDicts" Guid="{D4A890A2-0FD1-4B4D-9C64-3A41B4D2D05B}">
+                <File Id="FileDictBasic" Source="$(var.DictsDir)\basic.dict.json" KeyPath="yes" />
+                <File Id="FileDictBopomofo" Source="$(var.DictsDir)\bopomofo.dict.json" />
+                <File Id="FileDictPinyin" Source="$(var.DictsDir)\pinyin.dict.json" />
+                <File Id="FileDictZhExt" Source="$(var.DictsDir)\traditional_chinese_extended.dict.json" />
+                <File Id="FileDictZhFull" Source="$(var.DictsDir)\traditional_chinese_full.dict.json" />
+              </Component>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="ProductFeature" Title="MAIDOS IME" Level="1">
+      <ComponentRef Id="CmpImeCore" />
+      <ComponentRef Id="CmpDicts" />
+    </Feature>
+  </Product>
+</Wix>

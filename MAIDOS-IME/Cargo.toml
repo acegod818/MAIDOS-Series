@@ -1,0 +1,14 @@
+[workspace]
+resolver = "2"
+members = [
+    "src/core/maidos-core",
+    "src/core/maidos-llm",
+    "src/core/maidos-config",
+]
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+opt-level = "z"

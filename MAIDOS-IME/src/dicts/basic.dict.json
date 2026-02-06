@@ -1,0 +1,67 @@
+{
+  "entries": {
+    "你好": {
+      "word": "你好",
+      "frequency": 1000,
+      "pronunciation": "ní hǎo",
+      "tags": ["greeting", "common"]
+    },
+    "世界": {
+      "word": "世界",
+      "frequency": 800,
+      "pronunciation": "shì jiè",
+      "tags": ["noun", "common"]
+    },
+    "今天": {
+      "word": "今天",
+      "frequency": 900,
+      "pronunciation": "jīn tiān",
+      "tags": ["time", "common"]
+    },
+    "明天": {
+      "word": "明天",
+      "frequency": 700,
+      "pronunciation": "míng tiān",
+      "tags": ["time", "common"]
+    },
+    "謝謝": {
+      "word": "謝謝",
+      "frequency": 950,
+      "pronunciation": "xiè xiè",
+      "tags": ["greeting", "common"]
+    },
+    "再見": {
+      "word": "再見",
+      "frequency": 850,
+      "pronunciation": "zài jiàn",
+      "tags": ["greeting", "common"]
+    },
+    "愛": {
+      "word": "愛",
+      "frequency": 600,
+      "pronunciation": "ài",
+      "tags": ["emotion", "common"]
+    },
+    "快樂": {
+      "word": "快樂",
+      "frequency": 550,
+      "pronunciation": "kuài lè",
+      "tags": ["emotion", "common"]
+    },
+    "悲傷": {
+      "word": "悲傷",
+      "frequency": 400,
+      "pronunciation": "bēi shāng",
+      "tags": ["emotion", "common"]
+    },
+    "電腦": {
+      "word": "電腦",
+      "frequency": 750,
+      "pronunciation": "diàn nǎo",
+      "tags": ["technology", "common"]
+    }
+  },
+  "version": "1.0.0",
+  "created_at": "2026-01-24T00:00:00Z",
+  "updated_at": "2026-01-24T00:00:00Z"
+}

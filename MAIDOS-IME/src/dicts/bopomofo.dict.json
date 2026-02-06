@@ -1,0 +1,117 @@
+{
+  "entries": {
+    "ㄋㄧˇ ㄏㄠˇ": [
+      {
+        "word": "你好",
+        "frequency": 1000,
+        "pronunciation": "ㄋㄧˇ ㄏㄠˇ",
+        "tags": [
+          "greeting",
+          "common"
+        ]
+      }
+    ],
+    "ㄕˋ ㄐㄧㄝˋ": [
+      {
+        "word": "世界",
+        "frequency": 800,
+        "pronunciation": "ㄕˋ ㄐㄧㄝˋ",
+        "tags": [
+          "noun",
+          "common"
+        ]
+      }
+    ],
+    "ㄒㄧㄝˋ ㄒㄧㄝˋ": [
+      {
+        "word": "謝謝",
+        "frequency": 950,
+        "pronunciation": "ㄒㄧㄝˋ ㄒㄧㄝˋ",
+        "tags": [
+          "greeting",
+          "common"
+        ]
+      }
+    ],
+    "ㄐㄧㄣ ㄊㄧㄢ": [
+      {
+        "word": "今天",
+        "frequency": 900,
+        "pronunciation": "ㄐㄧㄣ ㄊㄧㄢ",
+        "tags": [
+          "time",
+          "common"
+        ]
+      }
+    ],
+    "ㄇㄧㄥˊ ㄊㄧㄢ": [
+      {
+        "word": "明天",
+        "frequency": 700,
+        "pronunciation": "ㄇㄧㄥˊ ㄊㄧㄢ",
+        "tags": [
+          "time",
+          "common"
+        ]
+      }
+    ],
+    "ㄞˋ": [
+      {
+        "word": "愛",
+        "frequency": 600,
+        "pronunciation": "ㄞˋ",
+        "tags": [
+          "emotion",
+          "common"
+        ]
+      }
+    ],
+    "ㄎㄨㄞˋ ㄌㄜˋ": [
+      {
+        "word": "快樂",
+        "frequency": 550,
+        "pronunciation": "ㄎㄨㄞˋ ㄌㄜˋ",
+        "tags": [
+          "emotion",
+          "common"
+        ]
+      }
+    ],
+    "ㄉㄧㄢˋ ㄋㄠˇ": [
+      {
+        "word": "電腦",
+        "frequency": 750,
+        "pronunciation": "ㄉㄧㄢˋ ㄋㄠˇ",
+        "tags": [
+          "technology",
+          "common"
+        ]
+      }
+    ],
+    "ㄓㄨˋ ㄧㄣ": [
+      {
+        "word": "注音",
+        "frequency": 500,
+        "pronunciation": "ㄓㄨˋ ㄧㄣ",
+        "tags": [
+          "input_method",
+          "technical"
+        ]
+      }
+    ],
+    "ㄕㄨ ㄖㄨˋ": [
+      {
+        "word": "輸入",
+        "frequency": 850,
+        "pronunciation": "ㄕㄨ ㄖㄨˋ",
+        "tags": [
+          "technical",
+          "common"
+        ]
+      }
+    ]
+  },
+  "version": "1.0.0",
+  "created_at": "2026-01-25T00:00:00Z",
+  "updated_at": "2026-01-25T00:00:00Z"
+}

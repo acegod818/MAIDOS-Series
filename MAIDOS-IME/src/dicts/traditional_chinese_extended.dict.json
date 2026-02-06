@@ -1,0 +1,286 @@
+{
+  "entries": {
+    "你好": {
+      "word": "你好",
+      "frequency": 1000,
+      "pronunciation": "ní hǎo",
+      "tags": ["greeting", "common"]
+    },
+    "大家好": {
+      "word": "大家好",
+      "frequency": 900,
+      "pronunciation": "dà jiā hǎo",
+      "tags": ["greeting", "common"]
+    },
+    "世界": {
+      "word": "世界",
+      "frequency": 800,
+      "pronunciation": "shì jiè",
+      "tags": ["noun", "common"]
+    },
+    "今天": {
+      "word": "今天",
+      "frequency": 900,
+      "pronunciation": "jīn tiān",
+      "tags": ["time", "common"]
+    },
+    "明天": {
+      "word": "明天",
+      "frequency": 700,
+      "pronunciation": "míng tiān",
+      "tags": ["time", "common"]
+    },
+    "昨天": {
+      "word": "昨天",
+      "frequency": 650,
+      "pronunciation": "zuó tiān",
+      "tags": ["time", "common"]
+    },
+    "天氣": {
+      "word": "天氣",
+      "frequency": 600,
+      "pronunciation": "tiān qì",
+      "tags": ["weather", "common"]
+    },
+    "謝謝": {
+      "word": "謝謝",
+      "frequency": 950,
+      "pronunciation": "xiè xiè",
+      "tags": ["greeting", "common"]
+    },
+    "感謝": {
+      "word": "感謝",
+      "frequency": 850,
+      "pronunciation": "gǎn xiè",
+      "tags": ["greeting", "formal"]
+    },
+    "再見": {
+      "word": "再見",
+      "frequency": 850,
+      "pronunciation": "zài jiàn",
+      "tags": ["greeting", "common"]
+    },
+    "早安": {
+      "word": "早安",
+      "frequency": 800,
+      "pronunciation": "zǎo ān",
+      "tags": ["greeting", "morning"]
+    },
+    "晚安": {
+      "word": "晚安",
+      "frequency": 750,
+      "pronunciation": "wǎn ān",
+      "tags": ["greeting", "evening"]
+    },
+    "不好意思": {
+      "word": "不好意思",
+      "frequency": 700,
+      "pronunciation": "bù hǎo yì si",
+      "tags": ["apology", "common"]
+    },
+    "對不起": {
+      "word": "對不起",
+      "frequency": 650,
+      "pronunciation": "duì bù qǐ",
+      "tags": ["apology", "formal"]
+    },
+    "請問": {
+      "word": "請問",
+      "frequency": 800,
+      "pronunciation": "qǐng wèn",
+      "tags": ["question", "polite"]
+    },
+    "多少錢": {
+      "word": "多少錢",
+      "frequency": 600,
+      "pronunciation": "duō shǎo qián",
+      "tags": ["money", "shopping"]
+    },
+    "時間": {
+      "word": "時間",
+      "frequency": 750,
+      "pronunciation": "shí jiān",
+      "tags": ["time", "common"]
+    },
+    "地點": {
+      "word": "地點",
+      "frequency": 600,
+      "pronunciation": "dì diǎn",
+      "tags": ["location", "common"]
+    },
+    "電話": {
+      "word": "電話",
+      "frequency": 700,
+      "pronunciation": "diàn huà",
+      "tags": ["communication", "common"]
+    },
+    "電腦": {
+      "word": "電腦",
+      "frequency": 750,
+      "pronunciation": "diàn nǎo",
+      "tags": ["technology", "common"]
+    },
+    "手機": {
+      "word": "手機",
+      "frequency": 800,
+      "pronunciation": "shǒu jī",
+      "tags": ["technology", "common"]
+    },
+    "網路": {
+      "word": "網路",
+      "frequency": 700,
+      "pronunciation": "wǎng lù",
+      "tags": ["technology", "internet"]
+    },
+    "工作": {
+      "word": "工作",
+      "frequency": 850,
+      "pronunciation": "gōng zuò",
+      "tags": ["work", "common"]
+    },
+    "學習": {
+      "word": "學習",
+      "frequency": 750,
+      "pronunciation": "xué xí",
+      "tags": ["education", "common"]
+    },
+    "學校": {
+      "word": "學校",
+      "frequency": 650,
+      "pronunciation": "xué xiào",
+      "tags": ["education", "common"]
+    },
+    "公司": {
+      "word": "公司",
+      "frequency": 700,
+      "pronunciation": "gōng sī",
+      "tags": ["business", "common"]
+    },
+    "家庭": {
+      "word": "家庭",
+      "frequency": 650,
+      "pronunciation": "jiā tíng",
+      "tags": ["family", "common"]
+    },
+    "朋友": {
+      "word": "朋友",
+      "frequency": 800,
+      "pronunciation": "péng yǒu",
+      "tags": ["social", "common"]
+    },
+    "愛情": {
+      "word": "愛情",
+      "frequency": 600,
+      "pronunciation": "ài qíng",
+      "tags": ["emotion", "love"]
+    },
+    "快樂": {
+      "word": "快樂",
+      "frequency": 550,
+      "pronunciation": "kuài lè",
+      "tags": ["emotion", "happy"]
+    },
+    "悲傷": {
+      "word": "悲傷",
+      "frequency": 400,
+      "pronunciation": "bēi shāng",
+      "tags": ["emotion", "sad"]
+    },
+    "愛": {
+      "word": "愛",
+      "frequency": 600,
+      "pronunciation": "ài",
+      "tags": ["emotion", "love"]
+    },
+    "喜歡": {
+      "word": "喜歡",
+      "frequency": 700,
+      "pronunciation": "xǐ huān",
+      "tags": ["emotion", "like"]
+    },
+    "食物": {
+      "word": "食物",
+      "frequency": 600,
+      "pronunciation": "shí wù",
+      "tags": ["food", "common"]
+    },
+    "餐廳": {
+      "word": "餐廳",
+      "frequency": 550,
+      "pronunciation": "cān tīng",
+      "tags": ["food", "common"]
+    },
+    "咖啡": {
+      "word": "咖啡",
+      "frequency": 500,
+      "pronunciation": "kā fēi",
+      "tags": ["food", "drink"]
+    },
+    "茶": {
+      "word": "茶",
+      "frequency": 450,
+      "pronunciation": "chá",
+      "tags": ["food", "drink"]
+    },
+    "水": {
+      "word": "水",
+      "frequency": 400,
+      "pronunciation": "shuǐ",
+      "tags": ["food", "drink"]
+    },
+    "音樂": {
+      "word": "音樂",
+      "frequency": 600,
+      "pronunciation": "yīn yuè",
+      "tags": ["entertainment", "common"]
+    },
+    "電影": {
+      "word": "電影",
+      "frequency": 550,
+      "pronunciation": "diàn yǐng",
+      "tags": ["entertainment", "common"]
+    },
+    "書籍": {
+      "word": "書籍",
+      "frequency": 450,
+      "pronunciation": "shū jí",
+      "tags": ["education", "common"]
+    },
+    "旅行": {
+      "word": "旅行",
+      "frequency": 500,
+      "pronunciation": "lǚ xíng",
+      "tags": ["travel", "common"]
+    },
+    "交通": {
+      "word": "交通",
+      "frequency": 550,
+      "pronunciation": "jiāo tōng",
+      "tags": ["transport", "common"]
+    },
+    "汽車": {
+      "word": "汽車",
+      "frequency": 500,
+      "pronunciation": "qì chē",
+      "tags": ["transport", "common"]
+    },
+    "火車": {
+      "word": "火車",
+      "frequency": 450,
+      "pronunciation": "huǒ chē",
+      "tags": ["transport", "common"]
+    },
+    "飛機": {
+      "word": "飛機",
+      "frequency": 400,
+      "pronunciation": "fēi jī",
+      "tags": ["transport", "common"]
+    }
+  },
+  "version": "1.1.0",
+  "created_at": "2026-01-26T00:00:00Z",
+  "updated_at": "2026-01-26T00:00:00Z",
+  "category": "traditional_chinese",
+  "word_count": 50,
+  "language": "zh-TW"
+}

@@ -1,0 +1,5632 @@
+{
+  "words": [
+    {
+      "word": "the",
+      "freq": 10000
+    },
+    {
+      "word": "be",
+      "freq": 9993
+    },
+    {
+      "word": "to",
+      "freq": 9986
+    },
+    {
+      "word": "of",
+      "freq": 9979
+    },
+    {
+      "word": "and",
+      "freq": 9972
+    },
+    {
+      "word": "a",
+      "freq": 9965
+    },
+    {
+      "word": "in",
+      "freq": 9958
+    },
+    {
+      "word": "that",
+      "freq": 9951
+    },
+    {
+      "word": "have",
+      "freq": 9944
+    },
+    {
+      "word": "i",
+      "freq": 9936
+    },
+    {
+      "word": "it",
+      "freq": 9929
+    },
+    {
+      "word": "for",
+      "freq": 9922
+    },
+    {
+      "word": "not",
+      "freq": 9915
+    },
+    {
+      "word": "on",
+      "freq": 9908
+    },
+    {
+      "word": "with",
+      "freq": 9901
+    },
+    {
+      "word": "he",
+      "freq": 9894
+    },
+    {
+      "word": "as",
+      "freq": 9887
+    },
+    {
+      "word": "you",
+      "freq": 9880
+    },
+    {
+      "word": "do",
+      "freq": 9872
+    },
+    {
+      "word": "at",
+      "freq": 9865
+    },
+    {
+      "word": "this",
+      "freq": 9858
+    },
+    {
+      "word": "but",
+      "freq": 9851
+    },
+    {
+      "word": "his",
+      "freq": 9844
+    },
+    {
+      "word": "by",
+      "freq": 9837
+    },
+    {
+      "word": "from",
+      "freq": 9830
+    },
+    {
+      "word": "they",
+      "freq": 9823
+    },
+    {
+      "word": "we",
+      "freq": 9816
+    },
+    {
+      "word": "her",
+      "freq": 9808
+    },
+    {
+      "word": "she",
+      "freq": 9801
+    },
+    {
+      "word": "or",
+      "freq": 9794
+    },
+    {
+      "word": "an",
+      "freq": 9787
+    },
+    {
+      "word": "will",
+      "freq": 9780
+    },
+    {
+      "word": "my",
+      "freq": 9773
+    },
+    {
+      "word": "one",
+      "freq": 9766
+    },
+    {
+      "word": "all",
+      "freq": 9759
+    },
+    {
+      "word": "would",
+      "freq": 9752
+    },
+    {
+      "word": "there",
+      "freq": 9744
+    },
+    {
+      "word": "their",
+      "freq": 9737
+    },
+    {
+      "word": "what",
+      "freq": 9730
+    },
+    {
+      "word": "so",
+      "freq": 9723
+    },
+    {
+      "word": "up",
+      "freq": 9716
+    },
+    {
+      "word": "out",
+      "freq": 9709
+    },
+    {
+      "word": "if",
+      "freq": 9702
+    },
+    {
+      "word": "about",
+      "freq": 9695
+    },
+    {
+      "word": "who",
+      "freq": 9688
+    },
+    {
+      "word": "get",
+      "freq": 9680
+    },
+    {
+      "word": "which",
+      "freq": 9673
+    },
+    {
+      "word": "go",
+      "freq": 9666
+    },
+    {
+      "word": "me",
+      "freq": 9659
+    },
+    {
+      "word": "when",
+      "freq": 9652
+    },
+    {
+      "word": "make",
+      "freq": 9645
+    },
+    {
+      "word": "can",
+      "freq": 9638
+    },
+    {
+      "word": "like",
+      "freq": 9631
+    },
+    {
+      "word": "time",
+      "freq": 9624
+    },
+    {
+      "word": "no",
+      "freq": 9616
+    },
+    {
+      "word": "just",
+      "freq": 9609
+    },
+    {
+      "word": "him",
+      "freq": 9602
+    },
+    {
+      "word": "know",
+      "freq": 9595
+    },
+    {
+      "word": "take",
+      "freq": 9588
+    },
+    {
+      "word": "people",
+      "freq": 9581
+    },
+    {
+      "word": "into",
+      "freq": 9574
+    },
+    {
+      "word": "year",
+      "freq": 9567
+    },
+    {
+      "word": "your",
+      "freq": 9560
+    },
+    {
+      "word": "good",
+      "freq": 9552
+    },
+    {
+      "word": "some",
+      "freq": 9545
+    },
+    {
+      "word": "could",
+      "freq": 9538
+    },
+    {
+      "word": "them",
+      "freq": 9531
+    },
+    {
+      "word": "see",
+      "freq": 9524
+    },
+    {
+      "word": "other",
+      "freq": 9517
+    },
+    {
+      "word": "than",
+      "freq": 9510
+    },
+    {
+      "word": "then",
+      "freq": 9503
+    },
+    {
+      "word": "now",
+      "freq": 9496
+    },
+    {
+      "word": "look",
+      "freq": 9488
+    },
+    {
+      "word": "only",
+      "freq": 9481
+    },
+    {
+      "word": "come",
+      "freq": 9474
+    },
+    {
+      "word": "its",
+      "freq": 9467
+    },
+    {
+      "word": "over",
+      "freq": 9460
+    },
+    {
+      "word": "think",
+      "freq": 9453
+    },
+    {
+      "word": "also",
+      "freq": 9446
+    },
+    {
+      "word": "back",
+      "freq": 9439
+    },
+    {
+      "word": "after",
+      "freq": 9432
+    },
+    {
+      "word": "use",
+      "freq": 9424
+    },
+    {
+      "word": "two",
+      "freq": 9417
+    },
+    {
+      "word": "how",
+      "freq": 9410
+    },
+    {
+      "word": "our",
+      "freq": 9403
+    },
+    {
+      "word": "work",
+      "freq": 9396
+    },
+    {
+      "word": "first",
+      "freq": 9389
+    },
+    {
+      "word": "well",
+      "freq": 9382
+    },
+    {
+      "word": "way",
+      "freq": 9375
+    },
+    {
+      "word": "even",
+      "freq": 9368
+    },
+    {
+      "word": "new",
+      "freq": 9360
+    },
+    {
+      "word": "want",
+      "freq": 9353
+    },
+    {
+      "word": "because",
+      "freq": 9346
+    },
+    {
+      "word": "any",
+      "freq": 9339
+    },
+    {
+      "word": "these",
+      "freq": 9332
+    },
+    {
+      "word": "give",
+      "freq": 9325
+    },
+    {
+      "word": "day",
+      "freq": 9318
+    },
+    {
+      "word": "most",
+      "freq": 9311
+    },
+    {
+      "word": "us",
+      "freq": 9304
+    },
+    {
+      "word": "great",
+      "freq": 9296
+    },
+    {
+      "word": "between",
+      "freq": 9289
+    },
+    {
+      "word": "need",
+      "freq": 9282
+    },
+    {
+      "word": "under",
+      "freq": 9275
+    },
+    {
+      "word": "those",
+      "freq": 9268
+    },
+    {
+      "word": "never",
+      "freq": 9261
+    },
+    {
+      "word": "should",
+      "freq": 9254
+    },
+    {
+      "word": "may",
+      "freq": 9247
+    },
+    {
+      "word": "long",
+      "freq": 9240
+    },
+    {
+      "word": "right",
+      "freq": 9232
+    },
+    {
+      "word": "too",
+      "freq": 9225
+    },
+    {
+      "word": "old",
+      "freq": 9218
+    },
+    {
+      "word": "still",
+      "freq": 9211
+    },
+    {
+      "word": "own",
+      "freq": 9204
+    },
+    {
+      "word": "through",
+      "freq": 9197
+    },
+    {
+      "word": "where",
+      "freq": 9190
+    },
+    {
+      "word": "much",
+      "freq": 9183
+    },
+    {
+      "word": "hand",
+      "freq": 9176
+    },
+    {
+      "word": "say",
+      "freq": 9168
+    },
+    {
+      "word": "each",
+      "freq": 9161
+    },
+    {
+      "word": "tell",
+      "freq": 9154
+    },
+    {
+      "word": "does",
+      "freq": 9147
+    },
+    {
+      "word": "set",
+      "freq": 9140
+    },
+    {
+      "word": "three",
+      "freq": 9133
+    },
+    {
+      "word": "must",
+      "freq": 9126
+    },
+    {
+      "word": "before",
+      "freq": 9119
+    },
+    {
+      "word": "house",
+      "freq": 9112
+    },
+    {
+      "word": "number",
+      "freq": 9104
+    },
+    {
+      "word": "off",
+      "freq": 9097
+    },
+    {
+      "word": "every",
+      "freq": 9090
+    },
+    {
+      "word": "world",
+      "freq": 9083
+    },
+    {
+      "word": "here",
+      "freq": 9076
+    },
+    {
+      "word": "small",
+      "freq": 9069
+    },
+    {
+      "word": "why",
+      "freq": 9062
+    },
+    {
+      "word": "place",
+      "freq": 9055
+    },
+    {
+      "word": "while",
+      "freq": 9048
+    },
+    {
+      "word": "turn",
+      "freq": 9040
+    },
+    {
+      "word": "keep",
+      "freq": 9033
+    },
+    {
+      "word": "point",
+      "freq": 9026
+    },
+    {
+      "word": "might",
+      "freq": 9019
+    },
+    {
+      "word": "down",
+      "freq": 9012
+    },
+    {
+      "word": "call",
+      "freq": 9005
+    },
+    {
+      "word": "put",
+      "freq": 8998
+    },
+    {
+      "word": "high",
+      "freq": 8991
+    },
+    {
+      "word": "such",
+      "freq": 8984
+    },
+    {
+      "word": "last",
+      "freq": 8976
+    },
+    {
+      "word": "show",
+      "freq": 8969
+    },
+    {
+      "word": "being",
+      "freq": 8962
+    },
+    {
+      "word": "man",
+      "freq": 8955
+    },
+    {
+      "word": "left",
+      "freq": 8948
+    },
+    {
+      "word": "move",
+      "freq": 8941
+    },
+    {
+      "word": "head",
+      "freq": 8934
+    },
+    {
+      "word": "really",
+      "freq": 8927
+    },
+    {
+      "word": "different",
+      "freq": 8920
+    },
+    {
+      "word": "another",
+      "freq": 8912
+    },
+    {
+      "word": "state",
+      "freq": 8905
+    },
+    {
+      "word": "begin",
+      "freq": 8898
+    },
+    {
+      "word": "both",
+      "freq": 8891
+    },
+    {
+      "word": "end",
+      "freq": 8884
+    },
+    {
+      "word": "help",
+      "freq": 8877
+    },
+    {
+      "word": "few",
+      "freq": 8870
+    },
+    {
+      "word": "change",
+      "freq": 8863
+    },
+    {
+      "word": "school",
+      "freq": 8856
+    },
+    {
+      "word": "part",
+      "freq": 8848
+    },
+    {
+      "word": "write",
+      "freq": 8841
+    },
+    {
+      "word": "night",
+      "freq": 8834
+    },
+    {
+      "word": "life",
+      "freq": 8827
+    },
+    {
+      "word": "always",
+      "freq": 8820
+    },
+    {
+      "word": "next",
+      "freq": 8813
+    },
+    {
+      "word": "city",
+      "freq": 8806
+    },
+    {
+      "word": "read",
+      "freq": 8799
+    },
+    {
+      "word": "line",
+      "freq": 8792
+    },
+    {
+      "word": "group",
+      "freq": 8784
+    },
+    {
+      "word": "run",
+      "freq": 8777
+    },
+    {
+      "word": "name",
+      "freq": 8770
+    },
+    {
+      "word": "play",
+      "freq": 8763
+    },
+    {
+      "word": "side",
+      "freq": 8756
+    },
+    {
+      "word": "home",
+      "freq": 8749
+    },
+    {
+      "word": "close",
+      "freq": 8742
+    },
+    {
+      "word": "open",
+      "freq": 8735
+    },
+    {
+      "word": "four",
+      "freq": 8728
+    },
+    {
+      "word": "leave",
+      "freq": 8720
+    },
+    {
+      "word": "let",
+      "freq": 8713
+    },
+    {
+      "word": "start",
+      "freq": 8706
+    },
+    {
+      "word": "hard",
+      "freq": 8699
+    },
+    {
+      "word": "water",
+      "freq": 8692
+    },
+    {
+      "word": "same",
+      "freq": 8685
+    },
+    {
+      "word": "thought",
+      "freq": 8678
+    },
+    {
+      "word": "many",
+      "freq": 8671
+    },
+    {
+      "word": "near",
+      "freq": 8664
+    },
+    {
+      "word": "live",
+      "freq": 8656
+    },
+    {
+      "word": "story",
+      "freq": 8649
+    },
+    {
+      "word": "far",
+      "freq": 8642
+    },
+    {
+      "word": "young",
+      "freq": 8635
+    },
+    {
+      "word": "important",
+      "freq": 8628
+    },
+    {
+      "word": "learn",
+      "freq": 8621
+    },
+    {
+      "word": "kind",
+      "freq": 8614
+    },
+    {
+      "word": "more",
+      "freq": 8607
+    },
+    {
+      "word": "watch",
+      "freq": 8600
+    },
+    {
+      "word": "find",
+      "freq": 8592
+    },
+    {
+      "word": "something",
+      "freq": 8585
+    },
+    {
+      "word": "word",
+      "freq": 8578
+    },
+    {
+      "word": "again",
+      "freq": 8571
+    },
+    {
+      "word": "stop",
+      "freq": 8564
+    },
+    {
+      "word": "face",
+      "freq": 8557
+    },
+    {
+      "word": "ask",
+      "freq": 8550
+    },
+    {
+      "word": "talk",
+      "freq": 8543
+    },
+    {
+      "word": "real",
+      "freq": 8535
+    },
+    {
+      "word": "country",
+      "freq": 8528
+    },
+    {
+      "word": "system",
+      "freq": 8521
+    },
+    {
+      "word": "family",
+      "freq": 8514
+    },
+    {
+      "word": "idea",
+      "freq": 8507
+    },
+    {
+      "word": "until",
+      "freq": 8500
+    },
+    {
+      "word": "body",
+      "freq": 8493
+    },
+    {
+      "word": "follow",
+      "freq": 8486
+    },
+    {
+      "word": "child",
+      "freq": 8479
+    },
+    {
+      "word": "since",
+      "freq": 8471
+    },
+    {
+      "word": "mother",
+      "freq": 8464
+    },
+    {
+      "word": "father",
+      "freq": 8457
+    },
+    {
+      "word": "possible",
+      "freq": 8450
+    },
+    {
+      "word": "during",
+      "freq": 8443
+    },
+    {
+      "word": "today",
+      "freq": 8436
+    },
+    {
+      "word": "enough",
+      "freq": 8429
+    },
+    {
+      "word": "stand",
+      "freq": 8422
+    },
+    {
+      "word": "bring",
+      "freq": 8415
+    },
+    {
+      "word": "hold",
+      "freq": 8407
+    },
+    {
+      "word": "above",
+      "freq": 8400
+    },
+    {
+      "word": "power",
+      "freq": 8393
+    },
+    {
+      "word": "program",
+      "freq": 8386
+    },
+    {
+      "word": "problem",
+      "freq": 8379
+    },
+    {
+      "word": "meet",
+      "freq": 8372
+    },
+    {
+      "word": "best",
+      "freq": 8365
+    },
+    {
+      "word": "nothing",
+      "freq": 8358
+    },
+    {
+      "word": "believe",
+      "freq": 8351
+    },
+    {
+      "word": "become",
+      "freq": 8343
+    },
+    {
+      "word": "second",
+      "freq": 8336
+    },
+    {
+      "word": "without",
+      "freq": 8329
+    },
+    {
+      "word": "fact",
+      "freq": 8322
+    },
+    {
+      "word": "money",
+      "freq": 8315
+    },
+    {
+      "word": "already",
+      "freq": 8308
+    },
+    {
+      "word": "together",
+      "freq": 8301
+    },
+    {
+      "word": "food",
+      "freq": 8294
+    },
+    {
+      "word": "black",
+      "freq": 8287
+    },
+    {
+      "word": "white",
+      "freq": 8279
+    },
+    {
+      "word": "red",
+      "freq": 8272
+    },
+    {
+      "word": "blue",
+      "freq": 8265
+    },
+    {
+      "word": "light",
+      "freq": 8258
+    },
+    {
+      "word": "study",
+      "freq": 8251
+    },
+    {
+      "word": "build",
+      "freq": 8244
+    },
+    {
+      "word": "land",
+      "freq": 8237
+    },
+    {
+      "word": "south",
+      "freq": 8230
+    },
+    {
+      "word": "north",
+      "freq": 8223
+    },
+    {
+      "word": "east",
+      "freq": 8215
+    },
+    {
+      "word": "west",
+      "freq": 8208
+    },
+    {
+      "word": "book",
+      "freq": 8201
+    },
+    {
+      "word": "room",
+      "freq": 8194
+    },
+    {
+      "word": "door",
+      "freq": 8187
+    },
+    {
+      "word": "fire",
+      "freq": 8180
+    },
+    {
+      "word": "love",
+      "freq": 8173
+    },
+    {
+      "word": "try",
+      "freq": 8166
+    },
+    {
+      "word": "car",
+      "freq": 8159
+    },
+    {
+      "word": "girl",
+      "freq": 8151
+    },
+    {
+      "word": "boy",
+      "freq": 8144
+    },
+    {
+      "word": "woman",
+      "freq": 8137
+    },
+    {
+      "word": "full",
+      "freq": 8130
+    },
+    {
+      "word": "air",
+      "freq": 8123
+    },
+    {
+      "word": "form",
+      "freq": 8116
+    },
+    {
+      "word": "type",
+      "freq": 8109
+    },
+    {
+      "word": "case",
+      "freq": 8102
+    },
+    {
+      "word": "class",
+      "freq": 8095
+    },
+    {
+      "word": "field",
+      "freq": 8087
+    },
+    {
+      "word": "game",
+      "freq": 8080
+    },
+    {
+      "word": "model",
+      "freq": 8073
+    },
+    {
+      "word": "team",
+      "freq": 8066
+    },
+    {
+      "word": "free",
+      "freq": 8059
+    },
+    {
+      "word": "market",
+      "freq": 8052
+    },
+    {
+      "word": "area",
+      "freq": 8045
+    },
+    {
+      "word": "list",
+      "freq": 8038
+    },
+    {
+      "word": "quite",
+      "freq": 8031
+    },
+    {
+      "word": "clear",
+      "freq": 8023
+    },
+    {
+      "word": "cost",
+      "freq": 8016
+    },
+    {
+      "word": "early",
+      "freq": 8009
+    },
+    {
+      "word": "less",
+      "freq": 8002
+    },
+    {
+      "word": "plan",
+      "freq": 7995
+    },
+    {
+      "word": "half",
+      "freq": 7988
+    },
+    {
+      "word": "mind",
+      "freq": 7981
+    },
+    {
+      "word": "heart",
+      "freq": 7974
+    },
+    {
+      "word": "voice",
+      "freq": 7967
+    },
+    {
+      "word": "health",
+      "freq": 7959
+    },
+    {
+      "word": "music",
+      "freq": 7952
+    },
+    {
+      "word": "short",
+      "freq": 7945
+    },
+    {
+      "word": "true",
+      "freq": 7938
+    },
+    {
+      "word": "round",
+      "freq": 7931
+    },
+    {
+      "word": "question",
+      "freq": 7924
+    },
+    {
+      "word": "table",
+      "freq": 7917
+    },
+    {
+      "word": "sure",
+      "freq": 7910
+    },
+    {
+      "word": "level",
+      "freq": 7903
+    },
+    {
+      "word": "strong",
+      "freq": 7895
+    },
+    {
+      "word": "order",
+      "freq": 7888
+    },
+    {
+      "word": "care",
+      "freq": 7881
+    },
+    {
+      "word": "able",
+      "freq": 7874
+    },
+    {
+      "word": "past",
+      "freq": 7867
+    },
+    {
+      "word": "lead",
+      "freq": 7860
+    },
+    {
+      "word": "paper",
+      "freq": 7853
+    },
+    {
+      "word": "act",
+      "freq": 7846
+    },
+    {
+      "word": "sense",
+      "freq": 7839
+    },
+    {
+      "word": "human",
+      "freq": 7831
+    },
+    {
+      "word": "cut",
+      "freq": 7824
+    },
+    {
+      "word": "often",
+      "freq": 7817
+    },
+    {
+      "word": "support",
+      "freq": 7810
+    },
+    {
+      "word": "course",
+      "freq": 7803
+    },
+    {
+      "word": "war",
+      "freq": 7796
+    },
+    {
+      "word": "term",
+      "freq": 7789
+    },
+    {
+      "word": "mean",
+      "freq": 7782
+    },
+    {
+      "word": "special",
+      "freq": 7775
+    },
+    {
+      "word": "age",
+      "freq": 7767
+    },
+    {
+      "word": "law",
+      "freq": 7760
+    },
+    {
+      "word": "step",
+      "freq": 7753
+    },
+    {
+      "word": "size",
+      "freq": 7746
+    },
+    {
+      "word": "company",
+      "freq": 7739
+    },
+    {
+      "word": "service",
+      "freq": 7732
+    },
+    {
+      "word": "data",
+      "freq": 7725
+    },
+    {
+      "word": "late",
+      "freq": 7718
+    },
+    {
+      "word": "record",
+      "freq": 7711
+    },
+    {
+      "word": "deep",
+      "freq": 7703
+    },
+    {
+      "word": "known",
+      "freq": 7696
+    },
+    {
+      "word": "space",
+      "freq": 7689
+    },
+    {
+      "word": "rate",
+      "freq": 7682
+    },
+    {
+      "word": "low",
+      "freq": 7675
+    },
+    {
+      "word": "yet",
+      "freq": 7668
+    },
+    {
+      "word": "single",
+      "freq": 7661
+    },
+    {
+      "word": "rule",
+      "freq": 7654
+    },
+    {
+      "word": "value",
+      "freq": 7647
+    },
+    {
+      "word": "view",
+      "freq": 7639
+    },
+    {
+      "word": "month",
+      "freq": 7632
+    },
+    {
+      "word": "fast",
+      "freq": 7625
+    },
+    {
+      "word": "dark",
+      "freq": 7618
+    },
+    {
+      "word": "cause",
+      "freq": 7611
+    },
+    {
+      "word": "office",
+      "freq": 7604
+    },
+    {
+      "word": "fine",
+      "freq": 7597
+    },
+    {
+      "word": "feel",
+      "freq": 7590
+    },
+    {
+      "word": "fall",
+      "freq": 7583
+    },
+    {
+      "word": "road",
+      "freq": 7575
+    },
+    {
+      "word": "bit",
+      "freq": 7568
+    },
+    {
+      "word": "note",
+      "freq": 7561
+    },
+    {
+      "word": "public",
+      "freq": 7554
+    },
+    {
+      "word": "simple",
+      "freq": 7547
+    },
+    {
+      "word": "common",
+      "freq": 7540
+    },
+    {
+      "word": "picture",
+      "freq": 7533
+    },
+    {
+      "word": "person",
+      "freq": 7526
+    },
+    {
+      "word": "ever",
+      "freq": 7519
+    },
+    {
+      "word": "reason",
+      "freq": 7511
+    },
+    {
+      "word": "mark",
+      "freq": 7504
+    },
+    {
+      "word": "party",
+      "freq": 7497
+    },
+    {
+      "word": "social",
+      "freq": 7490
+    },
+    {
+      "word": "drive",
+      "freq": 7483
+    },
+    {
+      "word": "green",
+      "freq": 7476
+    },
+    {
+      "word": "report",
+      "freq": 7469
+    },
+    {
+      "word": "rather",
+      "freq": 7462
+    },
+    {
+      "word": "local",
+      "freq": 7455
+    },
+    {
+      "word": "total",
+      "freq": 7447
+    },
+    {
+      "word": "member",
+      "freq": 7440
+    },
+    {
+      "word": "five",
+      "freq": 7433
+    },
+    {
+      "word": "six",
+      "freq": 7426
+    },
+    {
+      "word": "seven",
+      "freq": 7419
+    },
+    {
+      "word": "eight",
+      "freq": 7412
+    },
+    {
+      "word": "nine",
+      "freq": 7405
+    },
+    {
+      "word": "ten",
+      "freq": 7398
+    },
+    {
+      "word": "front",
+      "freq": 7391
+    },
+    {
+      "word": "effect",
+      "freq": 7383
+    },
+    {
+      "word": "result",
+      "freq": 7376
+    },
+    {
+      "word": "issue",
+      "freq": 7369
+    },
+    {
+      "word": "policy",
+      "freq": 7362
+    },
+    {
+      "word": "period",
+      "freq": 7355
+    },
+    {
+      "word": "effort",
+      "freq": 7348
+    },
+    {
+      "word": "among",
+      "freq": 7341
+    },
+    {
+      "word": "general",
+      "freq": 7334
+    },
+    {
+      "word": "range",
+      "freq": 7327
+    },
+    {
+      "word": "accept",
+      "freq": 7319
+    },
+    {
+      "word": "action",
+      "freq": 7312
+    },
+    {
+      "word": "bank",
+      "freq": 7305
+    },
+    {
+      "word": "test",
+      "freq": 7298
+    },
+    {
+      "word": "base",
+      "freq": 7291
+    },
+    {
+      "word": "film",
+      "freq": 7284
+    },
+    {
+      "word": "return",
+      "freq": 7277
+    },
+    {
+      "word": "break",
+      "freq": 7270
+    },
+    {
+      "word": "nice",
+      "freq": 7263
+    },
+    {
+      "word": "pretty",
+      "freq": 7255
+    },
+    {
+      "word": "wrong",
+      "freq": 7248
+    },
+    {
+      "word": "stay",
+      "freq": 7241
+    },
+    {
+      "word": "join",
+      "freq": 7234
+    },
+    {
+      "word": "teach",
+      "freq": 7227
+    },
+    {
+      "word": "sign",
+      "freq": 7220
+    },
+    {
+      "word": "cover",
+      "freq": 7213
+    },
+    {
+      "word": "wind",
+      "freq": 7206
+    },
+    {
+      "word": "force",
+      "freq": 7199
+    },
+    {
+      "word": "star",
+      "freq": 7191
+    },
+    {
+      "word": "apply",
+      "freq": 7184
+    },
+    {
+      "word": "wait",
+      "freq": 7177
+    },
+    {
+      "word": "fight",
+      "freq": 7170
+    },
+    {
+      "word": "century",
+      "freq": 7163
+    },
+    {
+      "word": "happen",
+      "freq": 7156
+    },
+    {
+      "word": "trade",
+      "freq": 7149
+    },
+    {
+      "word": "deal",
+      "freq": 7142
+    },
+    {
+      "word": "explain",
+      "freq": 7134
+    },
+    {
+      "word": "save",
+      "freq": 7127
+    },
+    {
+      "word": "create",
+      "freq": 7120
+    },
+    {
+      "word": "phone",
+      "freq": 7113
+    },
+    {
+      "word": "contain",
+      "freq": 7106
+    },
+    {
+      "word": "add",
+      "freq": 7099
+    },
+    {
+      "word": "tree",
+      "freq": 7092
+    },
+    {
+      "word": "wall",
+      "freq": 7085
+    },
+    {
+      "word": "stock",
+      "freq": 7078
+    },
+    {
+      "word": "enter",
+      "freq": 7070
+    },
+    {
+      "word": "drop",
+      "freq": 7063
+    },
+    {
+      "word": "design",
+      "freq": 7056
+    },
+    {
+      "word": "window",
+      "freq": 7049
+    },
+    {
+      "word": "rock",
+      "freq": 7042
+    },
+    {
+      "word": "cold",
+      "freq": 7035
+    },
+    {
+      "word": "pick",
+      "freq": 7028
+    },
+    {
+      "word": "carry",
+      "freq": 7021
+    },
+    {
+      "word": "share",
+      "freq": 7014
+    },
+    {
+      "word": "miss",
+      "freq": 7006
+    },
+    {
+      "word": "sell",
+      "freq": 6999
+    },
+    {
+      "word": "key",
+      "freq": 6992
+    },
+    {
+      "word": "figure",
+      "freq": 6985
+    },
+    {
+      "word": "street",
+      "freq": 6978
+    },
+    {
+      "word": "fish",
+      "freq": 6971
+    },
+    {
+      "word": "job",
+      "freq": 6964
+    },
+    {
+      "word": "pull",
+      "freq": 6957
+    },
+    {
+      "word": "chance",
+      "freq": 6950
+    },
+    {
+      "word": "degree",
+      "freq": 6942
+    },
+    {
+      "word": "popular",
+      "freq": 6935
+    },
+    {
+      "word": "language",
+      "freq": 6928
+    },
+    {
+      "word": "letter",
+      "freq": 6921
+    },
+    {
+      "word": "staff",
+      "freq": 6914
+    },
+    {
+      "word": "subject",
+      "freq": 6907
+    },
+    {
+      "word": "fill",
+      "freq": 6900
+    },
+    {
+      "word": "million",
+      "freq": 6893
+    },
+    {
+      "word": "director",
+      "freq": 6886
+    },
+    {
+      "word": "modern",
+      "freq": 6878
+    },
+    {
+      "word": "role",
+      "freq": 6871
+    },
+    {
+      "word": "image",
+      "freq": 6864
+    },
+    {
+      "word": "cup",
+      "freq": 6857
+    },
+    {
+      "word": "ball",
+      "freq": 6850
+    },
+    {
+      "word": "hair",
+      "freq": 6843
+    },
+    {
+      "word": "material",
+      "freq": 6836
+    },
+    {
+      "word": "edge",
+      "freq": 6829
+    },
+    {
+      "word": "scene",
+      "freq": 6822
+    },
+    {
+      "word": "plant",
+      "freq": 6814
+    },
+    {
+      "word": "enjoy",
+      "freq": 6807
+    },
+    {
+      "word": "glass",
+      "freq": 6800
+    },
+    {
+      "word": "offer",
+      "freq": 6793
+    },
+    {
+      "word": "wish",
+      "freq": 6786
+    },
+    {
+      "word": "production",
+      "freq": 6779
+    },
+    {
+      "word": "operation",
+      "freq": 6772
+    },
+    {
+      "word": "remain",
+      "freq": 6765
+    },
+    {
+      "word": "season",
+      "freq": 6758
+    },
+    {
+      "word": "sit",
+      "freq": 6750
+    },
+    {
+      "word": "continue",
+      "freq": 6743
+    },
+    {
+      "word": "check",
+      "freq": 6736
+    },
+    {
+      "word": "walk",
+      "freq": 6729
+    },
+    {
+      "word": "condition",
+      "freq": 6722
+    },
+    {
+      "word": "capital",
+      "freq": 6715
+    },
+    {
+      "word": "position",
+      "freq": 6708
+    },
+    {
+      "word": "structure",
+      "freq": 6701
+    },
+    {
+      "word": "focus",
+      "freq": 6694
+    },
+    {
+      "word": "practice",
+      "freq": 6686
+    },
+    {
+      "word": "unit",
+      "freq": 6679
+    },
+    {
+      "word": "pressure",
+      "freq": 6672
+    },
+    {
+      "word": "spend",
+      "freq": 6665
+    },
+    {
+      "word": "growth",
+      "freq": 6658
+    },
+    {
+      "word": "serious",
+      "freq": 6651
+    },
+    {
+      "word": "benefit",
+      "freq": 6644
+    },
+    {
+      "word": "wonder",
+      "freq": 6637
+    },
+    {
+      "word": "manager",
+      "freq": 6630
+    },
+    {
+      "word": "series",
+      "freq": 6622
+    },
+    {
+      "word": "success",
+      "freq": 6615
+    },
+    {
+      "word": "response",
+      "freq": 6608
+    },
+    {
+      "word": "approach",
+      "freq": 6601
+    },
+    {
+      "word": "feature",
+      "freq": 6594
+    },
+    {
+      "word": "election",
+      "freq": 6587
+    },
+    {
+      "word": "activity",
+      "freq": 6580
+    },
+    {
+      "word": "standard",
+      "freq": 6573
+    },
+    {
+      "word": "performance",
+      "freq": 6566
+    },
+    {
+      "word": "strategy",
+      "freq": 6558
+    },
+    {
+      "word": "security",
+      "freq": 6551
+    },
+    {
+      "word": "section",
+      "freq": 6544
+    },
+    {
+      "word": "article",
+      "freq": 6537
+    },
+    {
+      "word": "option",
+      "freq": 6530
+    },
+    {
+      "word": "future",
+      "freq": 6523
+    },
+    {
+      "word": "resource",
+      "freq": 6516
+    },
+    {
+      "word": "environment",
+      "freq": 6509
+    },
+    {
+      "word": "campaign",
+      "freq": 6502
+    },
+    {
+      "word": "industry",
+      "freq": 6494
+    },
+    {
+      "word": "character",
+      "freq": 6487
+    },
+    {
+      "word": "evidence",
+      "freq": 6480
+    },
+    {
+      "word": "natural",
+      "freq": 6473
+    },
+    {
+      "word": "project",
+      "freq": 6466
+    },
+    {
+      "word": "analysis",
+      "freq": 6459
+    },
+    {
+      "word": "process",
+      "freq": 6452
+    },
+    {
+      "word": "community",
+      "freq": 6445
+    },
+    {
+      "word": "private",
+      "freq": 6438
+    },
+    {
+      "word": "region",
+      "freq": 6430
+    },
+    {
+      "word": "individual",
+      "freq": 6423
+    },
+    {
+      "word": "experience",
+      "freq": 6416
+    },
+    {
+      "word": "training",
+      "freq": 6409
+    },
+    {
+      "word": "technology",
+      "freq": 6402
+    },
+    {
+      "word": "behavior",
+      "freq": 6395
+    },
+    {
+      "word": "morning",
+      "freq": 6388
+    },
+    {
+      "word": "function",
+      "freq": 6381
+    },
+    {
+      "word": "memory",
+      "freq": 6374
+    },
+    {
+      "word": "computer",
+      "freq": 6366
+    },
+    {
+      "word": "method",
+      "freq": 6359
+    },
+    {
+      "word": "building",
+      "freq": 6352
+    },
+    {
+      "word": "software",
+      "freq": 6345
+    },
+    {
+      "word": "network",
+      "freq": 6338
+    },
+    {
+      "word": "internet",
+      "freq": 6331
+    },
+    {
+      "word": "website",
+      "freq": 6324
+    },
+    {
+      "word": "browser",
+      "freq": 6317
+    },
+    {
+      "word": "search",
+      "freq": 6310
+    },
+    {
+      "word": "input",
+      "freq": 6302
+    },
+    {
+      "word": "output",
+      "freq": 6295
+    },
+    {
+      "word": "database",
+      "freq": 6288
+    },
+    {
+      "word": "server",
+      "freq": 6281
+    },
+    {
+      "word": "client",
+      "freq": 6274
+    },
+    {
+      "word": "code",
+      "freq": 6267
+    },
+    {
+      "word": "debug",
+      "freq": 6260
+    },
+    {
+      "word": "error",
+      "freq": 6253
+    },
+    {
+      "word": "file",
+      "freq": 6246
+    },
+    {
+      "word": "folder",
+      "freq": 6238
+    },
+    {
+      "word": "library",
+      "freq": 6231
+    },
+    {
+      "word": "module",
+      "freq": 6224
+    },
+    {
+      "word": "package",
+      "freq": 6217
+    },
+    {
+      "word": "object",
+      "freq": 6210
+    },
+    {
+      "word": "array",
+      "freq": 6203
+    },
+    {
+      "word": "string",
+      "freq": 6196
+    },
+    {
+      "word": "boolean",
+      "freq": 6189
+    },
+    {
+      "word": "variable",
+      "freq": 6182
+    },
+    {
+      "word": "constant",
+      "freq": 6174
+    },
+    {
+      "word": "parameter",
+      "freq": 6167
+    },
+    {
+      "word": "argument",
+      "freq": 6160
+    },
+    {
+      "word": "loop",
+      "freq": 6153
+    },
+    {
+      "word": "branch",
+      "freq": 6146
+    },
+    {
+      "word": "switch",
+      "freq": 6139
+    },
+    {
+      "word": "throw",
+      "freq": 6132
+    },
+    {
+      "word": "catch",
+      "freq": 6125
+    },
+    {
+      "word": "interface",
+      "freq": 6118
+    },
+    {
+      "word": "abstract",
+      "freq": 6110
+    },
+    {
+      "word": "static",
+      "freq": 6103
+    },
+    {
+      "word": "final",
+      "freq": 6096
+    },
+    {
+      "word": "const",
+      "freq": 6089
+    },
+    {
+      "word": "var",
+      "freq": 6082
+    },
+    {
+      "word": "import",
+      "freq": 6075
+    },
+    {
+      "word": "export",
+      "freq": 6068
+    },
+    {
+      "word": "default",
+      "freq": 6061
+    },
+    {
+      "word": "async",
+      "freq": 6054
+    },
+    {
+      "word": "await",
+      "freq": 6046
+    },
+    {
+      "word": "promise",
+      "freq": 6039
+    },
+    {
+      "word": "callback",
+      "freq": 6032
+    },
+    {
+      "word": "event",
+      "freq": 6025
+    },
+    {
+      "word": "listener",
+      "freq": 6018
+    },
+    {
+      "word": "handler",
+      "freq": 6011
+    },
+    {
+      "word": "request",
+      "freq": 6004
+    },
+    {
+      "word": "stream",
+      "freq": 5997
+    },
+    {
+      "word": "buffer",
+      "freq": 5990
+    },
+    {
+      "word": "channel",
+      "freq": 5982
+    },
+    {
+      "word": "thread",
+      "freq": 5975
+    },
+    {
+      "word": "signal",
+      "freq": 5968
+    },
+    {
+      "word": "queue",
+      "freq": 5961
+    },
+    {
+      "word": "stack",
+      "freq": 5954
+    },
+    {
+      "word": "heap",
+      "freq": 5947
+    },
+    {
+      "word": "cache",
+      "freq": 5940
+    },
+    {
+      "word": "proxy",
+      "freq": 5933
+    },
+    {
+      "word": "gateway",
+      "freq": 5926
+    },
+    {
+      "word": "router",
+      "freq": 5918
+    },
+    {
+      "word": "controller",
+      "freq": 5911
+    },
+    {
+      "word": "middleware",
+      "freq": 5904
+    },
+    {
+      "word": "repository",
+      "freq": 5897
+    },
+    {
+      "word": "factory",
+      "freq": 5890
+    },
+    {
+      "word": "builder",
+      "freq": 5883
+    },
+    {
+      "word": "adapter",
+      "freq": 5876
+    },
+    {
+      "word": "observer",
+      "freq": 5869
+    },
+    {
+      "word": "decorator",
+      "freq": 5862
+    },
+    {
+      "word": "template",
+      "freq": 5854
+    },
+    {
+      "word": "command",
+      "freq": 5847
+    },
+    {
+      "word": "iterator",
+      "freq": 5840
+    },
+    {
+      "word": "composite",
+      "freq": 5833
+    },
+    {
+      "word": "facade",
+      "freq": 5826
+    },
+    {
+      "word": "bridge",
+      "freq": 5819
+    },
+    {
+      "word": "mediator",
+      "freq": 5812
+    },
+    {
+      "word": "prototype",
+      "freq": 5805
+    },
+    {
+      "word": "singleton",
+      "freq": 5798
+    },
+    {
+      "word": "scope",
+      "freq": 5790
+    },
+    {
+      "word": "context",
+      "freq": 5783
+    },
+    {
+      "word": "session",
+      "freq": 5776
+    },
+    {
+      "word": "token",
+      "freq": 5769
+    },
+    {
+      "word": "authentication",
+      "freq": 5762
+    },
+    {
+      "word": "authorization",
+      "freq": 5755
+    },
+    {
+      "word": "encryption",
+      "freq": 5748
+    },
+    {
+      "word": "password",
+      "freq": 5741
+    },
+    {
+      "word": "username",
+      "freq": 5734
+    },
+    {
+      "word": "email",
+      "freq": 5726
+    },
+    {
+      "word": "address",
+      "freq": 5719
+    },
+    {
+      "word": "contact",
+      "freq": 5712
+    },
+    {
+      "word": "profile",
+      "freq": 5705
+    },
+    {
+      "word": "account",
+      "freq": 5698
+    },
+    {
+      "word": "setting",
+      "freq": 5691
+    },
+    {
+      "word": "preference",
+      "freq": 5684
+    },
+    {
+      "word": "notification",
+      "freq": 5677
+    },
+    {
+      "word": "message",
+      "freq": 5669
+    },
+    {
+      "word": "comment",
+      "freq": 5662
+    },
+    {
+      "word": "review",
+      "freq": 5655
+    },
+    {
+      "word": "rating",
+      "freq": 5648
+    },
+    {
+      "word": "feedback",
+      "freq": 5641
+    },
+    {
+      "word": "history",
+      "freq": 5634
+    },
+    {
+      "word": "log",
+      "freq": 5627
+    },
+    {
+      "word": "audit",
+      "freq": 5620
+    },
+    {
+      "word": "dashboard",
+      "freq": 5613
+    },
+    {
+      "word": "analytics",
+      "freq": 5605
+    },
+    {
+      "word": "metric",
+      "freq": 5598
+    },
+    {
+      "word": "chart",
+      "freq": 5591
+    },
+    {
+      "word": "graph",
+      "freq": 5584
+    },
+    {
+      "word": "column",
+      "freq": 5577
+    },
+    {
+      "word": "row",
+      "freq": 5570
+    },
+    {
+      "word": "cell",
+      "freq": 5563
+    },
+    {
+      "word": "header",
+      "freq": 5556
+    },
+    {
+      "word": "footer",
+      "freq": 5549
+    },
+    {
+      "word": "sidebar",
+      "freq": 5541
+    },
+    {
+      "word": "navbar",
+      "freq": 5534
+    },
+    {
+      "word": "modal",
+      "freq": 5527
+    },
+    {
+      "word": "popup",
+      "freq": 5520
+    },
+    {
+      "word": "tooltip",
+      "freq": 5513
+    },
+    {
+      "word": "dropdown",
+      "freq": 5506
+    },
+    {
+      "word": "checkbox",
+      "freq": 5499
+    },
+    {
+      "word": "radio",
+      "freq": 5492
+    },
+    {
+      "word": "button",
+      "freq": 5485
+    },
+    {
+      "word": "textarea",
+      "freq": 5477
+    },
+    {
+      "word": "select",
+      "freq": 5470
+    },
+    {
+      "word": "label",
+      "freq": 5463
+    },
+    {
+      "word": "placeholder",
+      "freq": 5456
+    },
+    {
+      "word": "validation",
+      "freq": 5449
+    },
+    {
+      "word": "submit",
+      "freq": 5442
+    },
+    {
+      "word": "reset",
+      "freq": 5435
+    },
+    {
+      "word": "cancel",
+      "freq": 5428
+    },
+    {
+      "word": "delete",
+      "freq": 5421
+    },
+    {
+      "word": "update",
+      "freq": 5413
+    },
+    {
+      "word": "edit",
+      "freq": 5406
+    },
+    {
+      "word": "detail",
+      "freq": 5399
+    },
+    {
+      "word": "filter",
+      "freq": 5392
+    },
+    {
+      "word": "sort",
+      "freq": 5385
+    },
+    {
+      "word": "page",
+      "freq": 5378
+    },
+    {
+      "word": "limit",
+      "freq": 5371
+    },
+    {
+      "word": "offset",
+      "freq": 5364
+    },
+    {
+      "word": "cursor",
+      "freq": 5357
+    },
+    {
+      "word": "scroll",
+      "freq": 5349
+    },
+    {
+      "word": "zoom",
+      "freq": 5342
+    },
+    {
+      "word": "drag",
+      "freq": 5335
+    },
+    {
+      "word": "upload",
+      "freq": 5328
+    },
+    {
+      "word": "download",
+      "freq": 5321
+    },
+    {
+      "word": "copy",
+      "freq": 5314
+    },
+    {
+      "word": "paste",
+      "freq": 5307
+    },
+    {
+      "word": "undo",
+      "freq": 5300
+    },
+    {
+      "word": "redo",
+      "freq": 5293
+    },
+    {
+      "word": "refresh",
+      "freq": 5285
+    },
+    {
+      "word": "reload",
+      "freq": 5278
+    },
+    {
+      "word": "redirect",
+      "freq": 5271
+    },
+    {
+      "word": "forward",
+      "freq": 5264
+    },
+    {
+      "word": "backward",
+      "freq": 5257
+    },
+    {
+      "word": "previous",
+      "freq": 5250
+    },
+    {
+      "word": "current",
+      "freq": 5243
+    },
+    {
+      "word": "version",
+      "freq": 5236
+    },
+    {
+      "word": "release",
+      "freq": 5229
+    },
+    {
+      "word": "deploy",
+      "freq": 5221
+    },
+    {
+      "word": "monitor",
+      "freq": 5214
+    },
+    {
+      "word": "alert",
+      "freq": 5207
+    },
+    {
+      "word": "warning",
+      "freq": 5200
+    },
+    {
+      "word": "info",
+      "freq": 5193
+    },
+    {
+      "word": "failure",
+      "freq": 5186
+    },
+    {
+      "word": "pending",
+      "freq": 5179
+    },
+    {
+      "word": "active",
+      "freq": 5172
+    },
+    {
+      "word": "inactive",
+      "freq": 5165
+    },
+    {
+      "word": "enabled",
+      "freq": 5157
+    },
+    {
+      "word": "disabled",
+      "freq": 5150
+    },
+    {
+      "word": "visible",
+      "freq": 5143
+    },
+    {
+      "word": "hidden",
+      "freq": 5136
+    },
+    {
+      "word": "locked",
+      "freq": 5129
+    },
+    {
+      "word": "unlocked",
+      "freq": 5122
+    },
+    {
+      "word": "approved",
+      "freq": 5115
+    },
+    {
+      "word": "rejected",
+      "freq": 5108
+    },
+    {
+      "word": "archived",
+      "freq": 5101
+    },
+    {
+      "word": "deleted",
+      "freq": 5093
+    },
+    {
+      "word": "expired",
+      "freq": 5086
+    },
+    {
+      "word": "verified",
+      "freq": 5079
+    },
+    {
+      "word": "confirmed",
+      "freq": 5072
+    },
+    {
+      "word": "complete",
+      "freq": 5065
+    },
+    {
+      "word": "incomplete",
+      "freq": 5058
+    },
+    {
+      "word": "required",
+      "freq": 5051
+    },
+    {
+      "word": "optional",
+      "freq": 5044
+    },
+    {
+      "word": "minimum",
+      "freq": 5037
+    },
+    {
+      "word": "maximum",
+      "freq": 5029
+    },
+    {
+      "word": "custom",
+      "freq": 5022
+    },
+    {
+      "word": "manual",
+      "freq": 5015
+    },
+    {
+      "word": "automatic",
+      "freq": 5008
+    },
+    {
+      "word": "instant",
+      "freq": 5001
+    },
+    {
+      "word": "delayed",
+      "freq": 4994
+    },
+    {
+      "word": "scheduled",
+      "freq": 4987
+    },
+    {
+      "word": "recurring",
+      "freq": 4980
+    },
+    {
+      "word": "temporary",
+      "freq": 4973
+    },
+    {
+      "word": "permanent",
+      "freq": 4965
+    },
+    {
+      "word": "global",
+      "freq": 4958
+    },
+    {
+      "word": "regional",
+      "freq": 4951
+    },
+    {
+      "word": "national",
+      "freq": 4944
+    },
+    {
+      "word": "international",
+      "freq": 4937
+    },
+    {
+      "word": "universal",
+      "freq": 4930
+    },
+    {
+      "word": "personal",
+      "freq": 4923
+    },
+    {
+      "word": "professional",
+      "freq": 4916
+    },
+    {
+      "word": "business",
+      "freq": 4909
+    },
+    {
+      "word": "enterprise",
+      "freq": 4901
+    },
+    {
+      "word": "startup",
+      "freq": 4894
+    },
+    {
+      "word": "product",
+      "freq": 4887
+    },
+    {
+      "word": "platform",
+      "freq": 4880
+    },
+    {
+      "word": "solution",
+      "freq": 4873
+    },
+    {
+      "word": "framework",
+      "freq": 4866
+    },
+    {
+      "word": "architecture",
+      "freq": 4859
+    },
+    {
+      "word": "infrastructure",
+      "freq": 4852
+    },
+    {
+      "word": "development",
+      "freq": 4845
+    },
+    {
+      "word": "staging",
+      "freq": 4837
+    },
+    {
+      "word": "testing",
+      "freq": 4830
+    },
+    {
+      "word": "deployment",
+      "freq": 4823
+    },
+    {
+      "word": "integration",
+      "freq": 4816
+    },
+    {
+      "word": "delivery",
+      "freq": 4809
+    },
+    {
+      "word": "pipeline",
+      "freq": 4802
+    },
+    {
+      "word": "workflow",
+      "freq": 4795
+    },
+    {
+      "word": "automation",
+      "freq": 4788
+    },
+    {
+      "word": "configuration",
+      "freq": 4781
+    },
+    {
+      "word": "documentation",
+      "freq": 4773
+    },
+    {
+      "word": "specification",
+      "freq": 4766
+    },
+    {
+      "word": "requirement",
+      "freq": 4759
+    },
+    {
+      "word": "constraint",
+      "freq": 4752
+    },
+    {
+      "word": "dependency",
+      "freq": 4745
+    },
+    {
+      "word": "compatibility",
+      "freq": 4738
+    },
+    {
+      "word": "scalability",
+      "freq": 4731
+    },
+    {
+      "word": "reliability",
+      "freq": 4724
+    },
+    {
+      "word": "availability",
+      "freq": 4717
+    },
+    {
+      "word": "durability",
+      "freq": 4709
+    },
+    {
+      "word": "consistency",
+      "freq": 4702
+    },
+    {
+      "word": "accuracy",
+      "freq": 4695
+    },
+    {
+      "word": "precision",
+      "freq": 4688
+    },
+    {
+      "word": "efficiency",
+      "freq": 4681
+    },
+    {
+      "word": "quality",
+      "freq": 4674
+    },
+    {
+      "word": "privacy",
+      "freq": 4667
+    },
+    {
+      "word": "compliance",
+      "freq": 4660
+    },
+    {
+      "word": "governance",
+      "freq": 4653
+    },
+    {
+      "word": "management",
+      "freq": 4645
+    },
+    {
+      "word": "leadership",
+      "freq": 4638
+    },
+    {
+      "word": "communication",
+      "freq": 4631
+    },
+    {
+      "word": "collaboration",
+      "freq": 4624
+    },
+    {
+      "word": "coordination",
+      "freq": 4617
+    },
+    {
+      "word": "organization",
+      "freq": 4610
+    },
+    {
+      "word": "administration",
+      "freq": 4603
+    },
+    {
+      "word": "execution",
+      "freq": 4596
+    },
+    {
+      "word": "implementation",
+      "freq": 4589
+    },
+    {
+      "word": "optimization",
+      "freq": 4581
+    },
+    {
+      "word": "transformation",
+      "freq": 4574
+    },
+    {
+      "word": "innovation",
+      "freq": 4567
+    },
+    {
+      "word": "disruption",
+      "freq": 4560
+    },
+    {
+      "word": "acceleration",
+      "freq": 4553
+    },
+    {
+      "word": "expansion",
+      "freq": 4546
+    },
+    {
+      "word": "acquisition",
+      "freq": 4539
+    },
+    {
+      "word": "merger",
+      "freq": 4532
+    },
+    {
+      "word": "partnership",
+      "freq": 4525
+    },
+    {
+      "word": "alliance",
+      "freq": 4517
+    },
+    {
+      "word": "investment",
+      "freq": 4510
+    },
+    {
+      "word": "funding",
+      "freq": 4503
+    },
+    {
+      "word": "revenue",
+      "freq": 4496
+    },
+    {
+      "word": "profit",
+      "freq": 4489
+    },
+    {
+      "word": "margin",
+      "freq": 4482
+    },
+    {
+      "word": "customer",
+      "freq": 4475
+    },
+    {
+      "word": "consumer",
+      "freq": 4468
+    },
+    {
+      "word": "user",
+      "freq": 4461
+    },
+    {
+      "word": "audience",
+      "freq": 4453
+    },
+    {
+      "word": "segment",
+      "freq": 4446
+    },
+    {
+      "word": "target",
+      "freq": 4439
+    },
+    {
+      "word": "reach",
+      "freq": 4432
+    },
+    {
+      "word": "engagement",
+      "freq": 4425
+    },
+    {
+      "word": "conversion",
+      "freq": 4418
+    },
+    {
+      "word": "retention",
+      "freq": 4411
+    },
+    {
+      "word": "loyalty",
+      "freq": 4404
+    },
+    {
+      "word": "satisfaction",
+      "freq": 4397
+    },
+    {
+      "word": "journey",
+      "freq": 4389
+    },
+    {
+      "word": "touch",
+      "freq": 4382
+    },
+    {
+      "word": "medium",
+      "freq": 4375
+    },
+    {
+      "word": "format",
+      "freq": 4368
+    },
+    {
+      "word": "content",
+      "freq": 4361
+    },
+    {
+      "word": "media",
+      "freq": 4354
+    },
+    {
+      "word": "brand",
+      "freq": 4347
+    },
+    {
+      "word": "identity",
+      "freq": 4340
+    },
+    {
+      "word": "awareness",
+      "freq": 4333
+    },
+    {
+      "word": "perception",
+      "freq": 4325
+    },
+    {
+      "word": "reputation",
+      "freq": 4318
+    },
+    {
+      "word": "trust",
+      "freq": 4311
+    },
+    {
+      "word": "credibility",
+      "freq": 4304
+    },
+    {
+      "word": "authority",
+      "freq": 4297
+    },
+    {
+      "word": "influence",
+      "freq": 4290
+    },
+    {
+      "word": "impact",
+      "freq": 4283
+    },
+    {
+      "word": "outcome",
+      "freq": 4276
+    },
+    {
+      "word": "advantage",
+      "freq": 4268
+    },
+    {
+      "word": "opportunity",
+      "freq": 4261
+    },
+    {
+      "word": "challenge",
+      "freq": 4254
+    },
+    {
+      "word": "risk",
+      "freq": 4247
+    },
+    {
+      "word": "threat",
+      "freq": 4240
+    },
+    {
+      "word": "vulnerability",
+      "freq": 4233
+    },
+    {
+      "word": "weakness",
+      "freq": 4226
+    },
+    {
+      "word": "strength",
+      "freq": 4219
+    },
+    {
+      "word": "capability",
+      "freq": 4212
+    },
+    {
+      "word": "asset",
+      "freq": 4204
+    },
+    {
+      "word": "talent",
+      "freq": 4197
+    },
+    {
+      "word": "skill",
+      "freq": 4190
+    },
+    {
+      "word": "knowledge",
+      "freq": 4183
+    },
+    {
+      "word": "expertise",
+      "freq": 4176
+    },
+    {
+      "word": "competence",
+      "freq": 4169
+    },
+    {
+      "word": "proficiency",
+      "freq": 4162
+    },
+    {
+      "word": "mastery",
+      "freq": 4155
+    },
+    {
+      "word": "excellence",
+      "freq": 4148
+    },
+    {
+      "word": "benchmark",
+      "freq": 4140
+    },
+    {
+      "word": "baseline",
+      "freq": 4133
+    },
+    {
+      "word": "threshold",
+      "freq": 4126
+    },
+    {
+      "word": "criteria",
+      "freq": 4119
+    },
+    {
+      "word": "indicator",
+      "freq": 4112
+    },
+    {
+      "word": "measure",
+      "freq": 4105
+    },
+    {
+      "word": "score",
+      "freq": 4098
+    },
+    {
+      "word": "ranking",
+      "freq": 4091
+    },
+    {
+      "word": "grade",
+      "freq": 4084
+    },
+    {
+      "word": "tier",
+      "freq": 4076
+    },
+    {
+      "word": "category",
+      "freq": 4069
+    },
+    {
+      "word": "cluster",
+      "freq": 4062
+    },
+    {
+      "word": "cohort",
+      "freq": 4055
+    },
+    {
+      "word": "batch",
+      "freq": 4048
+    },
+    {
+      "word": "collection",
+      "freq": 4041
+    },
+    {
+      "word": "portfolio",
+      "freq": 4034
+    },
+    {
+      "word": "catalog",
+      "freq": 4027
+    },
+    {
+      "word": "inventory",
+      "freq": 4020
+    },
+    {
+      "word": "registry",
+      "freq": 4012
+    },
+    {
+      "word": "index",
+      "freq": 4005
+    },
+    {
+      "word": "directory",
+      "freq": 3998
+    },
+    {
+      "word": "warehouse",
+      "freq": 3991
+    },
+    {
+      "word": "archive",
+      "freq": 3984
+    },
+    {
+      "word": "backup",
+      "freq": 3977
+    },
+    {
+      "word": "snapshot",
+      "freq": 3970
+    },
+    {
+      "word": "checkpoint",
+      "freq": 3963
+    },
+    {
+      "word": "milestone",
+      "freq": 3956
+    },
+    {
+      "word": "sprint",
+      "freq": 3948
+    },
+    {
+      "word": "iteration",
+      "freq": 3941
+    },
+    {
+      "word": "cycle",
+      "freq": 3934
+    },
+    {
+      "word": "phase",
+      "freq": 3927
+    },
+    {
+      "word": "stage",
+      "freq": 3920
+    },
+    {
+      "word": "task",
+      "freq": 3913
+    },
+    {
+      "word": "trigger",
+      "freq": 3906
+    },
+    {
+      "word": "guideline",
+      "freq": 3899
+    },
+    {
+      "word": "procedure",
+      "freq": 3892
+    },
+    {
+      "word": "protocol",
+      "freq": 3884
+    },
+    {
+      "word": "pattern",
+      "freq": 3877
+    },
+    {
+      "word": "technique",
+      "freq": 3870
+    },
+    {
+      "word": "tactic",
+      "freq": 3863
+    },
+    {
+      "word": "roadmap",
+      "freq": 3856
+    },
+    {
+      "word": "vision",
+      "freq": 3849
+    },
+    {
+      "word": "mission",
+      "freq": 3842
+    },
+    {
+      "word": "goal",
+      "freq": 3835
+    },
+    {
+      "word": "objective",
+      "freq": 3828
+    },
+    {
+      "word": "deliverable",
+      "freq": 3820
+    },
+    {
+      "word": "artifact",
+      "freq": 3813
+    },
+    {
+      "word": "document",
+      "freq": 3806
+    },
+    {
+      "word": "entry",
+      "freq": 3799
+    },
+    {
+      "word": "item",
+      "freq": 3792
+    },
+    {
+      "word": "element",
+      "freq": 3785
+    },
+    {
+      "word": "component",
+      "freq": 3778
+    },
+    {
+      "word": "plugin",
+      "freq": 3771
+    },
+    {
+      "word": "extension",
+      "freq": 3764
+    },
+    {
+      "word": "widget",
+      "freq": 3756
+    },
+    {
+      "word": "functionality",
+      "freq": 3749
+    },
+    {
+      "word": "property",
+      "freq": 3742
+    },
+    {
+      "word": "attribute",
+      "freq": 3735
+    },
+    {
+      "word": "theme",
+      "freq": 3728
+    },
+    {
+      "word": "layout",
+      "freq": 3721
+    },
+    {
+      "word": "style",
+      "freq": 3714
+    },
+    {
+      "word": "recipe",
+      "freq": 3707
+    },
+    {
+      "word": "blueprint",
+      "freq": 3700
+    },
+    {
+      "word": "schema",
+      "freq": 3692
+    },
+    {
+      "word": "diagram",
+      "freq": 3685
+    },
+    {
+      "word": "flow",
+      "freq": 3678
+    },
+    {
+      "word": "map",
+      "freq": 3671
+    },
+    {
+      "word": "mesh",
+      "freq": 3664
+    },
+    {
+      "word": "grid",
+      "freq": 3657
+    },
+    {
+      "word": "matrix",
+      "freq": 3650
+    },
+    {
+      "word": "vector",
+      "freq": 3643
+    },
+    {
+      "word": "tensor",
+      "freq": 3636
+    },
+    {
+      "word": "scalar",
+      "freq": 3628
+    },
+    {
+      "word": "dimension",
+      "freq": 3621
+    },
+    {
+      "word": "axis",
+      "freq": 3614
+    },
+    {
+      "word": "coordinate",
+      "freq": 3607
+    },
+    {
+      "word": "origin",
+      "freq": 3600
+    },
+    {
+      "word": "center",
+      "freq": 3593
+    },
+    {
+      "word": "boundary",
+      "freq": 3586
+    },
+    {
+      "word": "border",
+      "freq": 3579
+    },
+    {
+      "word": "padding",
+      "freq": 3572
+    },
+    {
+      "word": "spacing",
+      "freq": 3564
+    },
+    {
+      "word": "alignment",
+      "freq": 3557
+    },
+    {
+      "word": "distribution",
+      "freq": 3550
+    },
+    {
+      "word": "proportion",
+      "freq": 3543
+    },
+    {
+      "word": "ratio",
+      "freq": 3536
+    },
+    {
+      "word": "scale",
+      "freq": 3529
+    },
+    {
+      "word": "interval",
+      "freq": 3522
+    },
+    {
+      "word": "duration",
+      "freq": 3515
+    },
+    {
+      "word": "frequency",
+      "freq": 3508
+    },
+    {
+      "word": "wave",
+      "freq": 3500
+    },
+    {
+      "word": "pulse",
+      "freq": 3493
+    },
+    {
+      "word": "noise",
+      "freq": 3486
+    },
+    {
+      "word": "transform",
+      "freq": 3479
+    },
+    {
+      "word": "encode",
+      "freq": 3472
+    },
+    {
+      "word": "decode",
+      "freq": 3465
+    },
+    {
+      "word": "compress",
+      "freq": 3458
+    },
+    {
+      "word": "decompress",
+      "freq": 3451
+    },
+    {
+      "word": "serialize",
+      "freq": 3444
+    },
+    {
+      "word": "parse",
+      "freq": 3436
+    },
+    {
+      "word": "validate",
+      "freq": 3429
+    },
+    {
+      "word": "sanitize",
+      "freq": 3422
+    },
+    {
+      "word": "normalize",
+      "freq": 3415
+    },
+    {
+      "word": "convert",
+      "freq": 3408
+    },
+    {
+      "word": "translate",
+      "freq": 3401
+    },
+    {
+      "word": "interpret",
+      "freq": 3394
+    },
+    {
+      "word": "compile",
+      "freq": 3387
+    },
+    {
+      "word": "execute",
+      "freq": 3380
+    },
+    {
+      "word": "evaluate",
+      "freq": 3372
+    },
+    {
+      "word": "calculate",
+      "freq": 3365
+    },
+    {
+      "word": "compute",
+      "freq": 3358
+    },
+    {
+      "word": "estimate",
+      "freq": 3351
+    },
+    {
+      "word": "predict",
+      "freq": 3344
+    },
+    {
+      "word": "forecast",
+      "freq": 3337
+    },
+    {
+      "word": "simulate",
+      "freq": 3330
+    },
+    {
+      "word": "optimize",
+      "freq": 3323
+    },
+    {
+      "word": "tune",
+      "freq": 3316
+    },
+    {
+      "word": "calibrate",
+      "freq": 3308
+    },
+    {
+      "word": "configure",
+      "freq": 3301
+    },
+    {
+      "word": "customize",
+      "freq": 3294
+    },
+    {
+      "word": "personalize",
+      "freq": 3287
+    },
+    {
+      "word": "adapt",
+      "freq": 3280
+    },
+    {
+      "word": "adjust",
+      "freq": 3273
+    },
+    {
+      "word": "modify",
+      "freq": 3266
+    },
+    {
+      "word": "upgrade",
+      "freq": 3259
+    },
+    {
+      "word": "migrate",
+      "freq": 3252
+    },
+    {
+      "word": "transfer",
+      "freq": 3244
+    },
+    {
+      "word": "clone",
+      "freq": 3237
+    },
+    {
+      "word": "fork",
+      "freq": 3230
+    },
+    {
+      "word": "merge",
+      "freq": 3223
+    },
+    {
+      "word": "rebase",
+      "freq": 3216
+    },
+    {
+      "word": "commit",
+      "freq": 3209
+    },
+    {
+      "word": "push",
+      "freq": 3202
+    },
+    {
+      "word": "fetch",
+      "freq": 3195
+    },
+    {
+      "word": "sync",
+      "freq": 3188
+    },
+    {
+      "word": "connect",
+      "freq": 3180
+    },
+    {
+      "word": "disconnect",
+      "freq": 3173
+    },
+    {
+      "word": "attach",
+      "freq": 3166
+    },
+    {
+      "word": "detach",
+      "freq": 3159
+    },
+    {
+      "word": "mount",
+      "freq": 3152
+    },
+    {
+      "word": "unmount",
+      "freq": 3145
+    },
+    {
+      "word": "bind",
+      "freq": 3138
+    },
+    {
+      "word": "acquire",
+      "freq": 3131
+    },
+    {
+      "word": "allocate",
+      "freq": 3124
+    },
+    {
+      "word": "reserve",
+      "freq": 3116
+    },
+    {
+      "word": "assign",
+      "freq": 3109
+    },
+    {
+      "word": "delegate",
+      "freq": 3102
+    },
+    {
+      "word": "distribute",
+      "freq": 3095
+    },
+    {
+      "word": "balance",
+      "freq": 3088
+    },
+    {
+      "word": "schedule",
+      "freq": 3081
+    },
+    {
+      "word": "dequeue",
+      "freq": 3074
+    },
+    {
+      "word": "enqueue",
+      "freq": 3067
+    },
+    {
+      "word": "pop",
+      "freq": 3060
+    },
+    {
+      "word": "insert",
+      "freq": 3052
+    },
+    {
+      "word": "remove",
+      "freq": 3045
+    },
+    {
+      "word": "subtract",
+      "freq": 3038
+    },
+    {
+      "word": "multiply",
+      "freq": 3031
+    },
+    {
+      "word": "divide",
+      "freq": 3024
+    },
+    {
+      "word": "increment",
+      "freq": 3017
+    },
+    {
+      "word": "decrement",
+      "freq": 3010
+    },
+    {
+      "word": "accumulate",
+      "freq": 3003
+    },
+    {
+      "word": "aggregate",
+      "freq": 2996
+    },
+    {
+      "word": "summarize",
+      "freq": 2988
+    },
+    {
+      "word": "condense",
+      "freq": 2981
+    },
+    {
+      "word": "expand",
+      "freq": 2974
+    },
+    {
+      "word": "extend",
+      "freq": 2967
+    },
+    {
+      "word": "reduce",
+      "freq": 2960
+    },
+    {
+      "word": "simplify",
+      "freq": 2953
+    },
+    {
+      "word": "generalize",
+      "freq": 2946
+    },
+    {
+      "word": "specialize",
+      "freq": 2939
+    },
+    {
+      "word": "inherit",
+      "freq": 2932
+    },
+    {
+      "word": "implement",
+      "freq": 2924
+    },
+    {
+      "word": "override",
+      "freq": 2917
+    },
+    {
+      "word": "overload",
+      "freq": 2910
+    },
+    {
+      "word": "compose",
+      "freq": 2903
+    },
+    {
+      "word": "decompose",
+      "freq": 2896
+    },
+    {
+      "word": "separate",
+      "freq": 2889
+    },
+    {
+      "word": "combine",
+      "freq": 2882
+    },
+    {
+      "word": "split",
+      "freq": 2875
+    },
+    {
+      "word": "link",
+      "freq": 2868
+    },
+    {
+      "word": "unlink",
+      "freq": 2860
+    },
+    {
+      "word": "reference",
+      "freq": 2853
+    },
+    {
+      "word": "dereference",
+      "freq": 2846
+    },
+    {
+      "word": "deallocate",
+      "freq": 2839
+    },
+    {
+      "word": "initialize",
+      "freq": 2832
+    },
+    {
+      "word": "finalize",
+      "freq": 2825
+    },
+    {
+      "word": "construct",
+      "freq": 2818
+    },
+    {
+      "word": "destruct",
+      "freq": 2811
+    },
+    {
+      "word": "destroy",
+      "freq": 2803
+    },
+    {
+      "word": "enable",
+      "freq": 2796
+    },
+    {
+      "word": "disable",
+      "freq": 2789
+    },
+    {
+      "word": "send",
+      "freq": 2782
+    },
+    {
+      "word": "receive",
+      "freq": 2775
+    },
+    {
+      "word": "respond",
+      "freq": 2768
+    },
+    {
+      "word": "subscribe",
+      "freq": 2761
+    },
+    {
+      "word": "publish",
+      "freq": 2754
+    },
+    {
+      "word": "broadcast",
+      "freq": 2747
+    },
+    {
+      "word": "multicast",
+      "freq": 2739
+    },
+    {
+      "word": "unicast",
+      "freq": 2732
+    },
+    {
+      "word": "route",
+      "freq": 2725
+    },
+    {
+      "word": "handle",
+      "freq": 2718
+    },
+    {
+      "word": "authorize",
+      "freq": 2711
+    },
+    {
+      "word": "authenticate",
+      "freq": 2704
+    },
+    {
+      "word": "encrypt",
+      "freq": 2697
+    },
+    {
+      "word": "decrypt",
+      "freq": 2690
+    },
+    {
+      "word": "verify",
+      "freq": 2683
+    },
+    {
+      "word": "hash",
+      "freq": 2675
+    },
+    {
+      "word": "extract",
+      "freq": 2668
+    },
+    {
+      "word": "restore",
+      "freq": 2661
+    },
+    {
+      "word": "recover",
+      "freq": 2654
+    },
+    {
+      "word": "repair",
+      "freq": 2647
+    },
+    {
+      "word": "maintain",
+      "freq": 2640
+    },
+    {
+      "word": "observe",
+      "freq": 2633
+    },
+    {
+      "word": "trace",
+      "freq": 2626
+    },
+    {
+      "word": "analyze",
+      "freq": 2619
+    },
+    {
+      "word": "assess",
+      "freq": 2611
+    },
+    {
+      "word": "inspect",
+      "freq": 2604
+    },
+    {
+      "word": "troubleshoot",
+      "freq": 2597
+    },
+    {
+      "word": "diagnose",
+      "freq": 2590
+    },
+    {
+      "word": "fix",
+      "freq": 2583
+    },
+    {
+      "word": "patch",
+      "freq": 2576
+    },
+    {
+      "word": "afternoon",
+      "freq": 2569
+    },
+    {
+      "word": "evening",
+      "freq": 2562
+    },
+    {
+      "word": "tomorrow",
+      "freq": 2555
+    },
+    {
+      "word": "yesterday",
+      "freq": 2547
+    },
+    {
+      "word": "week",
+      "freq": 2540
+    },
+    {
+      "word": "spring",
+      "freq": 2533
+    },
+    {
+      "word": "summer",
+      "freq": 2526
+    },
+    {
+      "word": "autumn",
+      "freq": 2519
+    },
+    {
+      "word": "winter",
+      "freq": 2512
+    },
+    {
+      "word": "weather",
+      "freq": 2505
+    },
+    {
+      "word": "rain",
+      "freq": 2498
+    },
+    {
+      "word": "snow",
+      "freq": 2491
+    },
+    {
+      "word": "sun",
+      "freq": 2483
+    },
+    {
+      "word": "cloud",
+      "freq": 2476
+    },
+    {
+      "word": "storm",
+      "freq": 2469
+    },
+    {
+      "word": "temperature",
+      "freq": 2462
+    },
+    {
+      "word": "hot",
+      "freq": 2455
+    },
+    {
+      "word": "warm",
+      "freq": 2448
+    },
+    {
+      "word": "cool",
+      "freq": 2441
+    },
+    {
+      "word": "bright",
+      "freq": 2434
+    },
+    {
+      "word": "color",
+      "freq": 2427
+    },
+    {
+      "word": "shape",
+      "freq": 2419
+    },
+    {
+      "word": "weight",
+      "freq": 2412
+    },
+    {
+      "word": "height",
+      "freq": 2405
+    },
+    {
+      "word": "width",
+      "freq": 2398
+    },
+    {
+      "word": "depth",
+      "freq": 2391
+    },
+    {
+      "word": "length",
+      "freq": 2384
+    },
+    {
+      "word": "distance",
+      "freq": 2377
+    },
+    {
+      "word": "speed",
+      "freq": 2370
+    },
+    {
+      "word": "direction",
+      "freq": 2363
+    },
+    {
+      "word": "top",
+      "freq": 2355
+    },
+    {
+      "word": "bottom",
+      "freq": 2348
+    },
+    {
+      "word": "behind",
+      "freq": 2341
+    },
+    {
+      "word": "inside",
+      "freq": 2334
+    },
+    {
+      "word": "outside",
+      "freq": 2327
+    },
+    {
+      "word": "below",
+      "freq": 2320
+    },
+    {
+      "word": "around",
+      "freq": 2313
+    },
+    {
+      "word": "across",
+      "freq": 2306
+    },
+    {
+      "word": "along",
+      "freq": 2299
+    },
+    {
+      "word": "toward",
+      "freq": 2291
+    },
+    {
+      "word": "away",
+      "freq": 2284
+    },
+    {
+      "word": "everywhere",
+      "freq": 2277
+    },
+    {
+      "word": "nowhere",
+      "freq": 2270
+    },
+    {
+      "word": "somewhere",
+      "freq": 2263
+    },
+    {
+      "word": "anywhere",
+      "freq": 2256
+    },
+    {
+      "word": "sometimes",
+      "freq": 2249
+    },
+    {
+      "word": "rarely",
+      "freq": 2242
+    },
+    {
+      "word": "usually",
+      "freq": 2235
+    },
+    {
+      "word": "quickly",
+      "freq": 2227
+    },
+    {
+      "word": "slowly",
+      "freq": 2220
+    },
+    {
+      "word": "carefully",
+      "freq": 2213
+    },
+    {
+      "word": "easily",
+      "freq": 2206
+    },
+    {
+      "word": "hardly",
+      "freq": 2199
+    },
+    {
+      "word": "merely",
+      "freq": 2192
+    },
+    {
+      "word": "simply",
+      "freq": 2185
+    },
+    {
+      "word": "exactly",
+      "freq": 2178
+    },
+    {
+      "word": "finally",
+      "freq": 2171
+    },
+    {
+      "word": "eventually",
+      "freq": 2163
+    },
+    {
+      "word": "suddenly",
+      "freq": 2156
+    },
+    {
+      "word": "gradually",
+      "freq": 2149
+    },
+    {
+      "word": "recently",
+      "freq": 2142
+    },
+    {
+      "word": "currently",
+      "freq": 2135
+    },
+    {
+      "word": "previously",
+      "freq": 2128
+    },
+    {
+      "word": "originally",
+      "freq": 2121
+    },
+    {
+      "word": "initially",
+      "freq": 2114
+    },
+    {
+      "word": "ultimately",
+      "freq": 2107
+    },
+    {
+      "word": "essentially",
+      "freq": 2099
+    },
+    {
+      "word": "basically",
+      "freq": 2092
+    },
+    {
+      "word": "generally",
+      "freq": 2085
+    },
+    {
+      "word": "specifically",
+      "freq": 2078
+    },
+    {
+      "word": "particularly",
+      "freq": 2071
+    },
+    {
+      "word": "especially",
+      "freq": 2064
+    },
+    {
+      "word": "mainly",
+      "freq": 2057
+    },
+    {
+      "word": "mostly",
+      "freq": 2050
+    },
+    {
+      "word": "partly",
+      "freq": 2043
+    },
+    {
+      "word": "entirely",
+      "freq": 2035
+    },
+    {
+      "word": "completely",
+      "freq": 2028
+    },
+    {
+      "word": "absolutely",
+      "freq": 2021
+    },
+    {
+      "word": "definitely",
+      "freq": 2014
+    },
+    {
+      "word": "certainly",
+      "freq": 2007
+    },
+    {
+      "word": "probably",
+      "freq": 2000
+    },
+    {
+      "word": "possibly",
+      "freq": 1993
+    },
+    {
+      "word": "perhaps",
+      "freq": 1986
+    },
+    {
+      "word": "maybe",
+      "freq": 1979
+    },
+    {
+      "word": "almost",
+      "freq": 1971
+    },
+    {
+      "word": "nearly",
+      "freq": 1964
+    },
+    {
+      "word": "very",
+      "freq": 1957
+    },
+    {
+      "word": "extremely",
+      "freq": 1950
+    },
+    {
+      "word": "incredibly",
+      "freq": 1943
+    },
+    {
+      "word": "remarkably",
+      "freq": 1936
+    },
+    {
+      "word": "significantly",
+      "freq": 1929
+    },
+    {
+      "word": "substantially",
+      "freq": 1922
+    },
+    {
+      "word": "considerably",
+      "freq": 1915
+    },
+    {
+      "word": "slightly",
+      "freq": 1907
+    },
+    {
+      "word": "barely",
+      "freq": 1900
+    },
+    {
+      "word": "somewhat",
+      "freq": 1893
+    },
+    {
+      "word": "apple",
+      "freq": 1886
+    },
+    {
+      "word": "banana",
+      "freq": 1879
+    },
+    {
+      "word": "orange",
+      "freq": 1872
+    },
+    {
+      "word": "grape",
+      "freq": 1865
+    },
+    {
+      "word": "mango",
+      "freq": 1858
+    },
+    {
+      "word": "lemon",
+      "freq": 1851
+    },
+    {
+      "word": "berry",
+      "freq": 1843
+    },
+    {
+      "word": "peach",
+      "freq": 1836
+    },
+    {
+      "word": "cherry",
+      "freq": 1829
+    },
+    {
+      "word": "melon",
+      "freq": 1822
+    },
+    {
+      "word": "bread",
+      "freq": 1815
+    },
+    {
+      "word": "rice",
+      "freq": 1808
+    },
+    {
+      "word": "pasta",
+      "freq": 1801
+    },
+    {
+      "word": "cheese",
+      "freq": 1794
+    },
+    {
+      "word": "butter",
+      "freq": 1787
+    },
+    {
+      "word": "milk",
+      "freq": 1779
+    },
+    {
+      "word": "coffee",
+      "freq": 1772
+    },
+    {
+      "word": "tea",
+      "freq": 1765
+    },
+    {
+      "word": "juice",
+      "freq": 1758
+    },
+    {
+      "word": "beer",
+      "freq": 1751
+    },
+    {
+      "word": "wine",
+      "freq": 1744
+    },
+    {
+      "word": "soup",
+      "freq": 1737
+    },
+    {
+      "word": "salad",
+      "freq": 1730
+    },
+    {
+      "word": "chicken",
+      "freq": 1723
+    },
+    {
+      "word": "beef",
+      "freq": 1715
+    },
+    {
+      "word": "pork",
+      "freq": 1708
+    },
+    {
+      "word": "egg",
+      "freq": 1701
+    },
+    {
+      "word": "cake",
+      "freq": 1694
+    },
+    {
+      "word": "cookie",
+      "freq": 1687
+    },
+    {
+      "word": "chocolate",
+      "freq": 1680
+    },
+    {
+      "word": "sugar",
+      "freq": 1673
+    },
+    {
+      "word": "salt",
+      "freq": 1666
+    },
+    {
+      "word": "pepper",
+      "freq": 1659
+    },
+    {
+      "word": "sauce",
+      "freq": 1651
+    },
+    {
+      "word": "oil",
+      "freq": 1644
+    },
+    {
+      "word": "flower",
+      "freq": 1637
+    },
+    {
+      "word": "garden",
+      "freq": 1630
+    },
+    {
+      "word": "park",
+      "freq": 1623
+    },
+    {
+      "word": "forest",
+      "freq": 1616
+    },
+    {
+      "word": "river",
+      "freq": 1609
+    },
+    {
+      "word": "lake",
+      "freq": 1602
+    },
+    {
+      "word": "ocean",
+      "freq": 1595
+    },
+    {
+      "word": "beach",
+      "freq": 1587
+    },
+    {
+      "word": "mountain",
+      "freq": 1580
+    },
+    {
+      "word": "valley",
+      "freq": 1573
+    },
+    {
+      "word": "island",
+      "freq": 1566
+    },
+    {
+      "word": "desert",
+      "freq": 1559
+    },
+    {
+      "word": "farm",
+      "freq": 1552
+    },
+    {
+      "word": "village",
+      "freq": 1545
+    },
+    {
+      "word": "town",
+      "freq": 1538
+    },
+    {
+      "word": "continent",
+      "freq": 1531
+    },
+    {
+      "word": "planet",
+      "freq": 1523
+    },
+    {
+      "word": "earth",
+      "freq": 1516
+    },
+    {
+      "word": "moon",
+      "freq": 1509
+    },
+    {
+      "word": "galaxy",
+      "freq": 1502
+    },
+    {
+      "word": "universe",
+      "freq": 1495
+    },
+    {
+      "word": "animal",
+      "freq": 1488
+    },
+    {
+      "word": "dog",
+      "freq": 1481
+    },
+    {
+      "word": "cat",
+      "freq": 1474
+    },
+    {
+      "word": "bird",
+      "freq": 1467
+    },
+    {
+      "word": "horse",
+      "freq": 1459
+    },
+    {
+      "word": "cow",
+      "freq": 1452
+    },
+    {
+      "word": "sheep",
+      "freq": 1445
+    },
+    {
+      "word": "pig",
+      "freq": 1438
+    },
+    {
+      "word": "rabbit",
+      "freq": 1431
+    },
+    {
+      "word": "mouse",
+      "freq": 1424
+    },
+    {
+      "word": "elephant",
+      "freq": 1417
+    },
+    {
+      "word": "lion",
+      "freq": 1410
+    },
+    {
+      "word": "tiger",
+      "freq": 1402
+    },
+    {
+      "word": "bear",
+      "freq": 1395
+    },
+    {
+      "word": "wolf",
+      "freq": 1388
+    },
+    {
+      "word": "fox",
+      "freq": 1381
+    },
+    {
+      "word": "deer",
+      "freq": 1374
+    },
+    {
+      "word": "monkey",
+      "freq": 1367
+    },
+    {
+      "word": "snake",
+      "freq": 1360
+    },
+    {
+      "word": "frog",
+      "freq": 1353
+    },
+    {
+      "word": "doctor",
+      "freq": 1346
+    },
+    {
+      "word": "nurse",
+      "freq": 1338
+    },
+    {
+      "word": "teacher",
+      "freq": 1331
+    },
+    {
+      "word": "student",
+      "freq": 1324
+    },
+    {
+      "word": "engineer",
+      "freq": 1317
+    },
+    {
+      "word": "scientist",
+      "freq": 1310
+    },
+    {
+      "word": "artist",
+      "freq": 1303
+    },
+    {
+      "word": "writer",
+      "freq": 1296
+    },
+    {
+      "word": "musician",
+      "freq": 1289
+    },
+    {
+      "word": "actor",
+      "freq": 1282
+    },
+    {
+      "word": "lawyer",
+      "freq": 1274
+    },
+    {
+      "word": "judge",
+      "freq": 1267
+    },
+    {
+      "word": "police",
+      "freq": 1260
+    },
+    {
+      "word": "soldier",
+      "freq": 1253
+    },
+    {
+      "word": "pilot",
+      "freq": 1246
+    },
+    {
+      "word": "driver",
+      "freq": 1239
+    },
+    {
+      "word": "chef",
+      "freq": 1232
+    },
+    {
+      "word": "farmer",
+      "freq": 1225
+    },
+    {
+      "word": "worker",
+      "freq": 1218
+    },
+    {
+      "word": "president",
+      "freq": 1210
+    },
+    {
+      "word": "minister",
+      "freq": 1203
+    },
+    {
+      "word": "senator",
+      "freq": 1196
+    },
+    {
+      "word": "governor",
+      "freq": 1189
+    },
+    {
+      "word": "mayor",
+      "freq": 1182
+    },
+    {
+      "word": "diplomat",
+      "freq": 1175
+    },
+    {
+      "word": "ambassador",
+      "freq": 1168
+    },
+    {
+      "word": "professor",
+      "freq": 1161
+    },
+    {
+      "word": "researcher",
+      "freq": 1154
+    },
+    {
+      "word": "analyst",
+      "freq": 1146
+    },
+    {
+      "word": "developer",
+      "freq": 1139
+    },
+    {
+      "word": "designer",
+      "freq": 1132
+    },
+    {
+      "word": "architect",
+      "freq": 1125
+    },
+    {
+      "word": "consultant",
+      "freq": 1118
+    },
+    {
+      "word": "advisor",
+      "freq": 1111
+    },
+    {
+      "word": "coach",
+      "freq": 1104
+    },
+    {
+      "word": "trainer",
+      "freq": 1097
+    },
+    {
+      "word": "mentor",
+      "freq": 1090
+    },
+    {
+      "word": "leader",
+      "freq": 1082
+    },
+    {
+      "word": "founder",
+      "freq": 1075
+    },
+    {
+      "word": "chair",
+      "freq": 1068
+    },
+    {
+      "word": "desk",
+      "freq": 1061
+    },
+    {
+      "word": "bed",
+      "freq": 1054
+    },
+    {
+      "word": "sofa",
+      "freq": 1047
+    },
+    {
+      "word": "lamp",
+      "freq": 1040
+    },
+    {
+      "word": "mirror",
+      "freq": 1033
+    },
+    {
+      "word": "clock",
+      "freq": 1026
+    },
+    {
+      "word": "keyboard",
+      "freq": 1018
+    },
+    {
+      "word": "screen",
+      "freq": 1011
+    },
+    {
+      "word": "camera",
+      "freq": 1004
+    },
+    {
+      "word": "speaker",
+      "freq": 997
+    },
+    {
+      "word": "floor",
+      "freq": 990
+    },
+    {
+      "word": "ceiling",
+      "freq": 983
+    },
+    {
+      "word": "roof",
+      "freq": 976
+    },
+    {
+      "word": "stairs",
+      "freq": 969
+    },
+    {
+      "word": "kitchen",
+      "freq": 962
+    },
+    {
+      "word": "bedroom",
+      "freq": 954
+    },
+    {
+      "word": "bathroom",
+      "freq": 947
+    },
+    {
+      "word": "living",
+      "freq": 940
+    },
+    {
+      "word": "dining",
+      "freq": 933
+    },
+    {
+      "word": "garage",
+      "freq": 926
+    },
+    {
+      "word": "basement",
+      "freq": 919
+    },
+    {
+      "word": "yard",
+      "freq": 912
+    },
+    {
+      "word": "fence",
+      "freq": 905
+    },
+    {
+      "word": "university",
+      "freq": 898
+    },
+    {
+      "word": "college",
+      "freq": 890
+    },
+    {
+      "word": "museum",
+      "freq": 883
+    },
+    {
+      "word": "hospital",
+      "freq": 876
+    },
+    {
+      "word": "church",
+      "freq": 869
+    },
+    {
+      "word": "temple",
+      "freq": 862
+    },
+    {
+      "word": "store",
+      "freq": 855
+    },
+    {
+      "word": "shop",
+      "freq": 848
+    },
+    {
+      "word": "restaurant",
+      "freq": 841
+    },
+    {
+      "word": "hotel",
+      "freq": 834
+    },
+    {
+      "word": "airport",
+      "freq": 826
+    },
+    {
+      "word": "station",
+      "freq": 819
+    },
+    {
+      "word": "highway",
+      "freq": 812
+    },
+    {
+      "word": "tunnel",
+      "freq": 805
+    },
+    {
+      "word": "harbor",
+      "freq": 798
+    },
+    {
+      "word": "math",
+      "freq": 791
+    },
+    {
+      "word": "science",
+      "freq": 784
+    },
+    {
+      "word": "geography",
+      "freq": 777
+    },
+    {
+      "word": "physics",
+      "freq": 770
+    },
+    {
+      "word": "chemistry",
+      "freq": 762
+    },
+    {
+      "word": "biology",
+      "freq": 755
+    },
+    {
+      "word": "literature",
+      "freq": 748
+    },
+    {
+      "word": "philosophy",
+      "freq": 741
+    },
+    {
+      "word": "psychology",
+      "freq": 734
+    },
+    {
+      "word": "economics",
+      "freq": 727
+    },
+    {
+      "word": "politics",
+      "freq": 720
+    },
+    {
+      "word": "sociology",
+      "freq": 713
+    },
+    {
+      "word": "sports",
+      "freq": 706
+    },
+    {
+      "word": "culture",
+      "freq": 698
+    },
+    {
+      "word": "education",
+      "freq": 691
+    },
+    {
+      "word": "research",
+      "freq": 684
+    },
+    {
+      "word": "medicine",
+      "freq": 677
+    },
+    {
+      "word": "thousand",
+      "freq": 670
+    },
+    {
+      "word": "hundred",
+      "freq": 663
+    },
+    {
+      "word": "zero",
+      "freq": 656
+    },
+    {
+      "word": "pair",
+      "freq": 649
+    },
+    {
+      "word": "dozen",
+      "freq": 642
+    },
+    {
+      "word": "quarter",
+      "freq": 634
+    },
+    {
+      "word": "third",
+      "freq": 627
+    },
+    {
+      "word": "twice",
+      "freq": 620
+    },
+    {
+      "word": "once",
+      "freq": 613
+    },
+    {
+      "word": "double",
+      "freq": 606
+    },
+    {
+      "word": "triple",
+      "freq": 599
+    },
+    {
+      "word": "percent",
+      "freq": 592
+    },
+    {
+      "word": "fraction",
+      "freq": 585
+    },
+    {
+      "word": "decimal",
+      "freq": 578
+    },
+    {
+      "word": "integer",
+      "freq": 570
+    },
+    {
+      "word": "equation",
+      "freq": 563
+    },
+    {
+      "word": "formula",
+      "freq": 556
+    },
+    {
+      "word": "theory",
+      "freq": 549
+    },
+    {
+      "word": "principle",
+      "freq": 542
+    },
+    {
+      "word": "concept",
+      "freq": 535
+    },
+    {
+      "word": "belief",
+      "freq": 528
+    },
+    {
+      "word": "opinion",
+      "freq": 521
+    },
+    {
+      "word": "truth",
+      "freq": 514
+    },
+    {
+      "word": "wisdom",
+      "freq": 506
+    },
+    {
+      "word": "understanding",
+      "freq": 499
+    },
+    {
+      "word": "insight",
+      "freq": 492
+    },
+    {
+      "word": "brain",
+      "freq": 485
+    },
+    {
+      "word": "soul",
+      "freq": 478
+    },
+    {
+      "word": "spirit",
+      "freq": 471
+    },
+    {
+      "word": "foot",
+      "freq": 464
+    },
+    {
+      "word": "eye",
+      "freq": 457
+    },
+    {
+      "word": "ear",
+      "freq": 450
+    },
+    {
+      "word": "nose",
+      "freq": 442
+    },
+    {
+      "word": "mouth",
+      "freq": 435
+    },
+    {
+      "word": "arm",
+      "freq": 428
+    },
+    {
+      "word": "leg",
+      "freq": 421
+    },
+    {
+      "word": "finger",
+      "freq": 414
+    },
+    {
+      "word": "tooth",
+      "freq": 407
+    },
+    {
+      "word": "bone",
+      "freq": 400
+    },
+    {
+      "word": "skin",
+      "freq": 393
+    },
+    {
+      "word": "happy",
+      "freq": 386
+    },
+    {
+      "word": "sad",
+      "freq": 378
+    },
+    {
+      "word": "angry",
+      "freq": 371
+    },
+    {
+      "word": "afraid",
+      "freq": 364
+    },
+    {
+      "word": "brave",
+      "freq": 357
+    },
+    {
+      "word": "calm",
+      "freq": 350
+    },
+    {
+      "word": "nervous",
+      "freq": 343
+    },
+    {
+      "word": "excited",
+      "freq": 336
+    },
+    {
+      "word": "tired",
+      "freq": 329
+    },
+    {
+      "word": "hungry",
+      "freq": 322
+    },
+    {
+      "word": "thirsty",
+      "freq": 314
+    },
+    {
+      "word": "sick",
+      "freq": 307
+    },
+    {
+      "word": "healthy",
+      "freq": 300
+    },
+    {
+      "word": "weak",
+      "freq": 293
+    },
+    {
+      "word": "slow",
+      "freq": 286
+    },
+    {
+      "word": "loud",
+      "freq": 279
+    },
+    {
+      "word": "quiet",
+      "freq": 272
+    },
+    {
+      "word": "sharp",
+      "freq": 265
+    },
+    {
+      "word": "smooth",
+      "freq": 258
+    },
+    {
+      "word": "rough",
+      "freq": 250
+    },
+    {
+      "word": "soft",
+      "freq": 243
+    },
+    {
+      "word": "wet",
+      "freq": 236
+    },
+    {
+      "word": "dry",
+      "freq": 229
+    },
+    {
+      "word": "clean",
+      "freq": 222
+    },
+    {
+      "word": "dirty",
+      "freq": 215
+    },
+    {
+      "word": "fresh",
+      "freq": 208
+    },
+    {
+      "word": "stale",
+      "freq": 201
+    },
+    {
+      "word": "sweet",
+      "freq": 194
+    },
+    {
+      "word": "sour",
+      "freq": 186
+    },
+    {
+      "word": "bitter",
+      "freq": 179
+    },
+    {
+      "word": "spicy",
+      "freq": 172
+    },
+    {
+      "word": "plain",
+      "freq": 165
+    },
+    {
+      "word": "rich",
+      "freq": 158
+    },
+    {
+      "word": "poor",
+      "freq": 151
+    },
+    {
+      "word": "expensive",
+      "freq": 144
+    },
+    {
+      "word": "cheap",
+      "freq": 137
+    },
+    {
+      "word": "closed",
+      "freq": 130
+    },
+    {
+      "word": "empty",
+      "freq": 122
+    },
+    {
+      "word": "crowded",
+      "freq": 115
+    },
+    {
+      "word": "busy",
+      "freq": 108
+    },
+    {
+      "word": "safe",
+      "freq": 101
+    },
+    {
+      "word": "dangerous",
+      "freq": 94
+    },
+    {
+      "word": "impossible",
+      "freq": 87
+    },
+    {
+      "word": "easy",
+      "freq": 80
+    },
+    {
+      "word": "difficult",
+      "freq": 73
+    },
+    {
+      "word": "complex",
+      "freq": 66
+    },
+    {
+      "word": "confusing",
+      "freq": 58
+    },
+    {
+      "word": "correct",
+      "freq": 51
+    },
+    {
+      "word": "false",
+      "freq": 44
+    },
+    {
+      "word": "fake",
+      "freq": 37
+    },
+    {
+      "word": "artificial",
+      "freq": 30
+    },
+    {
+      "word": "original",
+      "freq": 23
+    },
+    {
+      "word": "traditional",
+      "freq": 16
+    },
+    {
+      "word": "ancient",
+      "freq": 9
+    },
+    {
+      "word": "recent",
+      "freq": 1
+    }
+  ]
+}
