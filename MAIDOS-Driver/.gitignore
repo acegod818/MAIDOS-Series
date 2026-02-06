@@ -1,0 +1,56 @@
+# Rust
+/target/
+**/*.rs.bk
+
+# C# / .NET
+bin/
+obj/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.slnx
+*.nupkg
+
+# Build artifacts
+*.obj
+*.dll
+*.exe
+*.exp
+*.lib
+*.ilk
+*.pdb
+
+# IDE
+.vs/
+.vscode/
+*.swp
+*~
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Installer output
+*.msi
+*.wixobj
+*.wixpdb
+installer/publish/
+installer/HeatOutput.wxs
+
+# Publish / deploy output
+/publish/
+build_log.txt
+
+# AI / tool config
+.clinerules
+.github/
+
+# Deprecated test projects
+HardwareDetectionTest/
+SimpleHardwareDetectionTest.cs
+
+# Misc
+nul
+*.backup

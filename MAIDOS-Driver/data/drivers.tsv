@@ -1,0 +1,43 @@
+# MAIDOS Driver Database v1.0 — 2026-02-06
+# driver_id	name	version	manufacturer	device_ids	download_url	checksum	score
+# ---
+# NVIDIA GeForce (common desktop GPUs)
+DRV_NV_RTX4090	NVIDIA GeForce RTX 4090 Driver	551.86	NVIDIA	PCI\VEN_10DE&DEV_2684	https://us.download.nvidia.com/Windows/551.86/551.86-desktop-win10-win11-64bit-international-dch-whql.exe		95
+DRV_NV_RTX4080	NVIDIA GeForce RTX 4080 Driver	551.86	NVIDIA	PCI\VEN_10DE&DEV_2704	https://us.download.nvidia.com/Windows/551.86/551.86-desktop-win10-win11-64bit-international-dch-whql.exe		95
+DRV_NV_RTX4070	NVIDIA GeForce RTX 4070 Ti Driver	551.86	NVIDIA	PCI\VEN_10DE&DEV_2782	https://us.download.nvidia.com/Windows/551.86/551.86-desktop-win10-win11-64bit-international-dch-whql.exe		95
+DRV_NV_RTX3090	NVIDIA GeForce RTX 3090 Driver	551.86	NVIDIA	PCI\VEN_10DE&DEV_2204	https://us.download.nvidia.com/Windows/551.86/551.86-desktop-win10-win11-64bit-international-dch-whql.exe		90
+DRV_NV_RTX3080	NVIDIA GeForce RTX 3080 Driver	551.86	NVIDIA	PCI\VEN_10DE&DEV_2206	https://us.download.nvidia.com/Windows/551.86/551.86-desktop-win10-win11-64bit-international-dch-whql.exe		90
+DRV_NV_RTX3070	NVIDIA GeForce RTX 3070 Driver	551.86	NVIDIA	PCI\VEN_10DE&DEV_2484	https://us.download.nvidia.com/Windows/551.86/551.86-desktop-win10-win11-64bit-international-dch-whql.exe		90
+DRV_NV_GTX1660	NVIDIA GeForce GTX 1660 Driver	551.86	NVIDIA	PCI\VEN_10DE&DEV_2184	https://us.download.nvidia.com/Windows/551.86/551.86-desktop-win10-win11-64bit-international-dch-whql.exe		85
+DRV_NV_GTX1050	NVIDIA GeForce GTX 1050 Driver	551.86	NVIDIA	PCI\VEN_10DE&DEV_1C81	https://us.download.nvidia.com/Windows/551.86/551.86-desktop-win10-win11-64bit-international-dch-whql.exe		80
+# ---
+# AMD Radeon
+DRV_AMD_RX7900	AMD Radeon RX 7900 XTX Driver	24.1.1	AMD	PCI\VEN_1002&DEV_744C	https://drivers.amd.com/drivers/whql-amd-software-adrenalin-edition-24.1.1-win10-win11-64bit-jan17.exe		95
+DRV_AMD_RX7800	AMD Radeon RX 7800 XT Driver	24.1.1	AMD	PCI\VEN_1002&DEV_7480	https://drivers.amd.com/drivers/whql-amd-software-adrenalin-edition-24.1.1-win10-win11-64bit-jan17.exe		90
+DRV_AMD_RX6800	AMD Radeon RX 6800 XT Driver	24.1.1	AMD	PCI\VEN_1002&DEV_73BF	https://drivers.amd.com/drivers/whql-amd-software-adrenalin-edition-24.1.1-win10-win11-64bit-jan17.exe		90
+DRV_AMD_RX580	AMD Radeon RX 580 Driver	24.1.1	AMD	PCI\VEN_1002&DEV_67DF	https://drivers.amd.com/drivers/whql-amd-software-adrenalin-edition-24.1.1-win10-win11-64bit-jan17.exe		80
+# ---
+# Intel Graphics
+DRV_INTEL_ARC	Intel Arc A770 Graphics Driver	31.0.101.5186	Intel	PCI\VEN_8086&DEV_56A0	https://downloadcenter.intel.com/downloads/eula/806870/Intel-Arc-Graphics-Driver-31.0.101.5186.exe		90
+DRV_INTEL_IRISXE	Intel Iris Xe Graphics Driver	31.0.101.5186	Intel	PCI\VEN_8086&DEV_9A49	https://downloadcenter.intel.com/downloads/eula/806870/Intel-Arc-Graphics-Driver-31.0.101.5186.exe		90
+DRV_INTEL_UHD770	Intel UHD Graphics 770 Driver	31.0.101.5186	Intel	PCI\VEN_8086&DEV_4680	https://downloadcenter.intel.com/downloads/eula/806870/Intel-Arc-Graphics-Driver-31.0.101.5186.exe		85
+DRV_INTEL_UHD630	Intel UHD Graphics 630 Driver	31.0.101.5186	Intel	PCI\VEN_8086&DEV_3E92	https://downloadcenter.intel.com/downloads/eula/806870/Intel-Arc-Graphics-Driver-31.0.101.5186.exe		80
+# ---
+# Intel Ethernet
+DRV_INTEL_I225	Intel I225-V 2.5G Ethernet Driver	12.19.2.50	Intel	PCI\VEN_8086&DEV_15F3	https://downloadcenter.intel.com/downloads/eula/727998/Intel-Network-Adapter-Driver-for-Windows-10-11.exe		90
+DRV_INTEL_I219	Intel I219-LM Gigabit Ethernet Driver	12.19.2.50	Intel	PCI\VEN_8086&DEV_15B8	https://downloadcenter.intel.com/downloads/eula/727998/Intel-Network-Adapter-Driver-for-Windows-10-11.exe		85
+DRV_INTEL_I211	Intel I211 Gigabit Ethernet Driver	12.19.2.50	Intel	PCI\VEN_8086&DEV_1539	https://downloadcenter.intel.com/downloads/eula/727998/Intel-Network-Adapter-Driver-for-Windows-10-11.exe		85
+# ---
+# Intel Wi-Fi
+DRV_INTEL_AX211	Intel Wi-Fi 6E AX211 Driver	23.30.0	Intel	PCI\VEN_8086&DEV_51F0	https://downloadcenter.intel.com/downloads/eula/788519/Intel-Wi-Fi-6E-AX211-Driver.exe		90
+DRV_INTEL_AX200	Intel Wi-Fi 6 AX200 Driver	23.30.0	Intel	PCI\VEN_8086&DEV_2723	https://downloadcenter.intel.com/downloads/eula/788519/Intel-Wi-Fi-6E-AX211-Driver.exe		85
+DRV_INTEL_AC9560	Intel Wireless-AC 9560 Driver	23.30.0	Intel	PCI\VEN_8086&DEV_A370	https://downloadcenter.intel.com/downloads/eula/788519/Intel-Wi-Fi-6E-AX211-Driver.exe		80
+# ---
+# Realtek Audio
+DRV_RTK_ALC897	Realtek ALC897 HD Audio Driver	6.0.9561.1	Realtek	HDAUDIO\VEN_10EC&DEV_0897	https://www.realtek.com/Download/Index?cate_id=195&menu_id=44		85
+DRV_RTK_ALC1220	Realtek ALC1220 HD Audio Driver	6.0.9561.1	Realtek	HDAUDIO\VEN_10EC&DEV_1220	https://www.realtek.com/Download/Index?cate_id=195&menu_id=44		90
+DRV_RTK_ALC892	Realtek ALC892 HD Audio Driver	6.0.9561.1	Realtek	HDAUDIO\VEN_10EC&DEV_0892	https://www.realtek.com/Download/Index?cate_id=195&menu_id=44		80
+# ---
+# Realtek Ethernet
+DRV_RTK_8125	Realtek RTL8125 2.5GbE Ethernet Driver	10.60.831.2024	Realtek	PCI\VEN_10EC&DEV_8125	https://www.realtek.com/Download/Index?cate_id=584&menu_id=296		90
+DRV_RTK_8168	Realtek RTL8168/8111 GbE Ethernet Driver	10.60.831.2024	Realtek	PCI\VEN_10EC&DEV_8168	https://www.realtek.com/Download/Index?cate_id=584&menu_id=296		85

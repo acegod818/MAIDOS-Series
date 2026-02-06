@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <!-- Product definition -->
+  <Product Id="*"
+           Name="MAIDOS Driver Manager"
+           Language="1033"
+           Version="0.2.2.0"
+           Manufacturer="ZGWC_acegod818"
+           UpgradeCode="A1B2C3D4-E5F6-7890-ABCD-EF1234567890">
+
+    <Package InstallerVersion="500"
+             Compressed="yes"
+             InstallScope="perMachine"
+             Platform="x64"
+             Description="MAIDOS Driver Manager - Windows driver detection, backup, and management tool"
+             Manufacturer="ZGWC_acegod818"
+             Comments="Built with Rust + C# WPF" />
+
+    <!-- Single MSI file with all content embedded -->
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- Major upgrade: remove older versions before install -->
+    <MajorUpgrade DowngradeErrorMessage="A newer version of MAIDOS Driver Manager is already installed." />
+
+    <!-- Require admin privileges (driver operations need elevation) -->
+    <Condition Message="You must be an administrator to install this product.">
+      Privileged
+    </Condition>
+
+    <!-- Require 64-bit Windows -->
+    <Condition Message="This application requires a 64-bit version of Windows.">
+      <![CDATA[VersionNT64]]>
+    </Condition>
+
+    <!-- Features -->
+    <Feature Id="MainFeature" Title="MAIDOS Driver Manager" Level="1">
+      <ComponentGroupRef Id="PublishFiles" />
+      <ComponentRef Id="StartMenuShortcut" />
+      <ComponentRef Id="DesktopShortcut" />
+    </Feature>
+
+    <!-- UI: Basic dialog set (progress bar + finish) -->
+    <UIRef Id="WixUI_Minimal" />
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+
+    <!-- Icon for Add/Remove Programs -->
+    <Icon Id="AppIcon.exe" SourceFile="$(var.PublishDir)\MAIDOS.Driver.App.exe" />
+    <Property Id="ARPPRODUCTICON" Value="AppIcon.exe" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/maidos" />
+
+    <!-- Force overwrite unversioned files during upgrade -->
+    <Property Id="REINSTALLMODE" Value="amus" />
+
+  </Product>
+
+  <!-- Directory structure -->
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="MAIDOS Driver Manager" />
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="MAIDOS" />
+      </Directory>
+      <Directory Id="DesktopFolder" />
+    </Directory>
+  </Fragment>
+
+  <!-- Shortcuts -->
+  <Fragment>
+    <Component Id="StartMenuShortcut" Guid="*" Directory="ApplicationProgramsFolder">
+      <Shortcut Id="StartMenuShortcut"
+                Name="MAIDOS Driver Manager"
+                Target="[INSTALLFOLDER]MAIDOS.Driver.App.exe"
+                WorkingDirectory="INSTALLFOLDER"
+                Description="Windows driver detection and management" />
+      <RemoveFolder Id="CleanUpStartMenu" Directory="ApplicationProgramsFolder" On="uninstall" />
+      <RegistryValue Root="HKCU"
+                     Key="Software\MAIDOS\DriverManager"
+                     Name="StartMenuShortcut"
+                     Type="integer"
+                     Value="1"
+                     KeyPath="yes" />
+    </Component>
+
+    <Component Id="DesktopShortcut" Guid="*" Directory="DesktopFolder">
+      <Shortcut Id="DesktopShortcut"
+                Name="MAIDOS Driver Manager"
+                Target="[INSTALLFOLDER]MAIDOS.Driver.App.exe"
+                WorkingDirectory="INSTALLFOLDER"
+                Description="Windows driver detection and management" />
+      <RegistryValue Root="HKCU"
+                     Key="Software\MAIDOS\DriverManager"
+                     Name="DesktopShortcut"
+                     Type="integer"
+                     Value="1"
+                     KeyPath="yes" />
+    </Component>
+  </Fragment>
+
+</Wix>
