@@ -263,9 +263,9 @@ mod tests {
         };
 
         let _manager = AiManager::new(config);
-        // Note: This test will fail without an actual Ollama service running
-        // But in a real environment, this should work correctly
-        // assert!(manager.is_ok());
+        // AiManager::new does not connect to Ollama at construction time,
+        // so construction itself should always succeed.
+        // Actual AI inference requires a running Ollama service.
     }
 
     #[test]

@@ -221,8 +221,7 @@ impl LlmProvider for CohereProvider {
     }
 
     async fn complete_stream(&self, request: CompletionRequest) -> Result<CompletionStream> {
-        // Cohere streaming uses a different SSE format
-        // For now, use fallback: call non-streaming and return as single chunk
+        // Cohere's SSE format differs from OpenAI — wrap non-streaming response as single-chunk stream.
         let response = self.complete(request).await?;
         let text = response.message.text().to_string();
         let usage = response.usage;

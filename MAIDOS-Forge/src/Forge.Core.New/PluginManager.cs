@@ -752,19 +752,55 @@ public sealed class PluginManager : IDisposable
                     if (files.Length == 0) { stopwatch.Stop(); return CompileResult.Failure("No source files found", logs, stopwatch.Elapsed); }
                     logs.Add($"[{{langLower}}] Found {files.Length} source file(s)");
 
-                    // 3. TODO: Add compiler invocation here
-                    // var r = await ProcessRunner.RunAsync("{{langLower}}-compiler", $"\"{f}\"", ...);
+                    // 3. Invoke compiler for each source file
+                    var compilerCmd = $"{{langLower}}-compiler";
+                    var outputDir = Path.Combine(module.OutputPath ?? module.ModulePath, "bin");
+                    Directory.CreateDirectory(outputDir);
+                    var artifacts = new List<string>();
+
+                    foreach (var f in files)
+                    {
+                        var outFile = Path.Combine(outputDir, Path.GetFileNameWithoutExtension(f) + ".o");
+                        var (exitCode, stdout, stderr) = await ProcessRunner.RunAsync(compilerCmd, $"\"{f}\" -o \"{outFile}\"", module.ModulePath, ct);
+                        logs.Add($"[{{langLower}}] {Path.GetFileName(f)} → exit={exitCode}");
+                        if (!string.IsNullOrEmpty(stdout)) logs.Add(stdout);
+                        if (exitCode != 0)
+                        {
+                            stopwatch.Stop();
+                            return CompileResult.Failure($"Compilation failed for {Path.GetFileName(f)}: {stderr}", logs, stopwatch.Elapsed);
+                        }
+                        artifacts.Add(outFile);
+                    }
 
                     stopwatch.Stop();
-                    return CompileResult.Failure("Compiler not configured — edit CompileAsync", logs, stopwatch.Elapsed);
+                    return CompileResult.Success(artifacts.ToArray(), logs, stopwatch.Elapsed);
                 }
 
-                public Task<InterfaceDescription?> ExtractInterfaceAsync(
+                public async Task<InterfaceDescription?> ExtractInterfaceAsync(
                     string artifactPath,
                     CancellationToken ct = default)
                 {
-                    // FIXED: 實作接口提取
-                    return Task.FromResult<InterfaceDescription?>(null);
+                    if (!File.Exists(artifactPath)) return null;
+
+                    var exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "{{langLower}}", ct)).ToArray();
+                    if (exports.Length == 0) return null;
+
+                    return new InterfaceDescription
+                    {
+                        Version = "1.0",
+                        Module = new InterfaceModule
+                        {
+                            Name = Path.GetFileNameWithoutExtension(artifactPath),
+                            Version = "1.0.0"
+                        },
+                        Language = new InterfaceLanguage
+                        {
+                            Name = "{{langLower}}",
+                            Abi = "native",
+                            Mode = "native"
+                        },
+                        Exports = exports
+                    };
                 }
 
                 public GlueCodeResult GenerateGlue(InterfaceDescription sourceInterface, string targetLanguage)

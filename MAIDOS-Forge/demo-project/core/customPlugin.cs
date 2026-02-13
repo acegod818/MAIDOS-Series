@@ -45,20 +45,50 @@ public sealed class CustomPlugin : ILanguagePlugin
         var files = Directory.GetFiles(srcDir, "*.custom", SearchOption.AllDirectories);
         if (files.Length == 0) { stopwatch.Stop(); return CompileResult.Failure("No .custom source files found", logs, stopwatch.Elapsed); }
 
-        // 3. [DEMO] Replace this section with your compiler invocation
-        // Example: var r = await ProcessRunner.RunAsync("custom-compiler", $"\"{f}\"", ...);
-        logs.Add($"[custom] Found {files.Length} source file(s) — no compiler configured");
+        // 3. Compile each source file
+        var outputDir = Path.Combine(module.OutputPath ?? module.ModulePath, "bin");
+        Directory.CreateDirectory(outputDir);
+        var artifacts = new List<string>();
+
+        foreach (var f in files)
+        {
+            var outFile = Path.Combine(outputDir, Path.GetFileNameWithoutExtension(f) + ".o");
+            // Configure your compiler command here:
+            var (exitCode, stdout, stderr) = await ProcessRunner.RunAsync(
+                "custom-compiler", $"\"{f}\" -o \"{outFile}\"", module.ModulePath, ct);
+            logs.Add($"[custom] {Path.GetFileName(f)} → exit={exitCode}");
+            if (!string.IsNullOrEmpty(stdout)) logs.Add(stdout);
+            if (exitCode != 0)
+            {
+                stopwatch.Stop();
+                return CompileResult.Failure($"Compilation failed for {Path.GetFileName(f)}: {stderr}", logs, stopwatch.Elapsed);
+            }
+            artifacts.Add(outFile);
+        }
 
         stopwatch.Stop();
-        return CompileResult.Failure("No custom compiler configured — edit CompileAsync to add your compiler", logs, stopwatch.Elapsed);
+        return CompileResult.Success(artifacts.ToArray(), logs, stopwatch.Elapsed);
     }
 
-    public Task<InterfaceDescription?> ExtractInterfaceAsync(
+    public async Task<InterfaceDescription?> ExtractInterfaceAsync(
         string artifactPath,
         CancellationToken ct = default)
     {
-        // [DEMO] Interface extraction for .custom files is not implemented in this demo
-        return Task.FromResult<InterfaceDescription?>(null);
+        if (!File.Exists(artifactPath)) return null;
+        var exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "custom", ct)).ToArray();
+        if (exports.Length == 0) return null;
+
+        return new InterfaceDescription
+        {
+            Version = "1.0",
+            Module = new InterfaceModule
+            {
+                Name = Path.GetFileNameWithoutExtension(artifactPath),
+                Version = "1.0.0"
+            },
+            Language = new InterfaceLanguage { Name = "custom", Abi = "native", Mode = "native" },
+            Exports = exports
+        };
     }
 
     public GlueCodeResult GenerateGlue(InterfaceDescription sourceInterface, string targetLanguage)
@@ -68,7 +98,9 @@ public sealed class CustomPlugin : ILanguagePlugin
 
     public async Task<(bool Available, string Message)> ValidateToolchainAsync(CancellationToken ct = default)
     {
-        // [DEMO] Assume custom toolchain is always available for this demo
-        return (true, "custom toolchain available");
+        var version = await ProcessRunner.GetVersionAsync("custom-compiler", "--version", ct);
+        if (version is null)
+            return (false, "custom-compiler not found. Please install or configure the custom language toolchain.");
+        return (true, $"custom-compiler {version}");
     }
 }

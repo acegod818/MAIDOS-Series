@@ -105,8 +105,21 @@ mod tests {
 
 
     #[test]
-    fn test_dictionary_loading() {
-        // Should have a test dictionary file here
-        // Skipping for now since test file has not been created yet
+    fn test_dictionary_default_and_add_entry() {
+        use super::*;
+        let mut dict = Dictionary::default();
+        assert!(dict.entries.is_empty());
+        assert_eq!(dict.lookup("ni"), None);
+
+        dict.add_entry("ni".to_string(), DictEntry {
+            word: "你".to_string(),
+            frequency: 100,
+            pronunciation: "ni".to_string(),
+            tags: vec![],
+        });
+        let result = dict.lookup("ni");
+        assert!(result.is_some());
+        assert_eq!(result.unwrap().len(), 1);
+        assert_eq!(result.unwrap()[0].word, "你");
     }
 }

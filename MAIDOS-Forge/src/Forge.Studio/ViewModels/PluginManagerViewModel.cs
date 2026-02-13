@@ -155,7 +155,7 @@ public partial class PluginManagerViewModel : ViewModelBase
             // Filter by tab
             if (ShowInstalled && !plugin.IsInstalled) continue;
             if (ShowAvailable && plugin.IsInstalled) continue;
-            if (ShowUpdates) continue; // No updates for now
+            if (ShowUpdates && !plugin.HasUpdate) continue;
 
             FilteredPlugins.Add(plugin);
         }

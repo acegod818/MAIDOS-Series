@@ -16,7 +16,7 @@ function walk(dir: string): string[] {
       if (entry.isDirectory()) files.push(...walk(full));
       else if (/\.(rs|cs|cpp|h)$/.test(entry.name)) files.push(full);
     }
-  } catch {}
+  } catch (e) { console.error(`[rescan:walk] Failed to read directory ${dir}: ${e}`); }
   return files;
 }
 
@@ -37,7 +37,7 @@ for (const f of files) {
         all.push({ rule: v.ruleId, file: rel, line: v.line, fn: fnMatch?.[1] ?? '' });
       }
     }
-  } catch {}
+  } catch (e) { console.error(`[rescan] Failed to process ${rel}: ${e}`); }
 }
 
 for (const rule of ['R25', 'R26', 'R27', 'R28']) {

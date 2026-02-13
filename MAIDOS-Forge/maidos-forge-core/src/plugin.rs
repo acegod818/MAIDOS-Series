@@ -231,7 +231,6 @@ impl LanguagePlugin for GenericLanguagePlugin {
         output_dir: &std::path::Path,
         options: &CompileOptions,
     ) -> Result<CompileResult> {
-        // This is a simplified implementation; the actual one varies by language
         let start_time = std::time::Instant::now();
 
         // Build the compile command
@@ -259,8 +258,7 @@ impl LanguagePlugin for GenericLanguagePlugin {
 
         // Check compilation result
         if output.status.success() {
-            // Simplified handling; in practice, output files should be parsed
-            let outputs = vec![output_dir.join(format!("{}.out", module.name))];
+            let outputs = self.collect_output_artifacts(output_dir, &module.name);
             
             Ok(CompileResult {
                 success: true,
@@ -316,7 +314,7 @@ impl LanguagePlugin for GenericLanguagePlugin {
             Ok(ToolchainInfo {
                 name: self.toolchain_cmd.clone(),
                 version,
-                targets: vec!["native".to_string()], // Simplified handling
+                targets: self.definition.toolchains.clone(),
             })
         } else {
             Err(ForgeError::Toolchain(
@@ -324,9 +322,44 @@ impl LanguagePlugin for GenericLanguagePlugin {
             ))
         }
     }
+
+
+    /// Collect output artifacts from the build output directory.
+    fn collect_output_artifacts(
+        &self,
+        output_dir: &std::path::Path,
+        module_name: &str,
+    ) -> Vec<std::path::PathBuf> {
+        let mut artifacts = Vec::new();
+        if let Ok(entries) = std::fs::read_dir(output_dir) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.is_file() {
+                    let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("");
+                    let matches_output = self.definition.output_types.iter().any(|t| t == ext)
+                        || path
+                            .file_stem()
+                            .and_then(|s| s.to_str())
+                            .is_some_and(|s| s == module_name);
+                    if matches_output {
+                        artifacts.push(path);
+                    }
+                }
+            }
+        }
+        if artifacts.is_empty() {
+            // Fallback: check for common output patterns
+            for ext in &["", ".exe", ".dll", ".so", ".dylib", ".o", ".a"] {
+                let candidate = output_dir.join(format!("{module_name}{ext}"));
+                if candidate.exists() {
+                    artifacts.push(candidate);
+                }
+            }
+        }
+        artifacts
+    }
 }
 
-// Add async-trait macro to lib.rs
 #[cfg(test)]
 mod tests {
     use super::*;

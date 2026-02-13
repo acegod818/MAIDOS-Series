@@ -128,10 +128,8 @@ impl PinyinParser {
         result
     }
 
-    /// Generate candidates (simplified implementation)
+    /// Generate candidates from dictionary via exact and split-point matching.
     fn generate_candidates(&self, pinyin_sequence: &str) -> Vec<DictEntry> {
-        // This is a simplified implementation; real-world usage would be more complex.
-        // We look up the full pinyin sequence and possible partial matches.
 
         let mut candidates = Vec::new();
 
@@ -193,9 +191,11 @@ mod tests {
 
 
     #[test]
-    fn test_dictionary_loading() {
-        // Should have a test dictionary file here
-        // Skipping for now since test file has not been created yet
+    fn test_dictionary_default_creation() {
+        use super::*;
+        let dict = Dictionary::default();
+        assert!(dict.entries.is_empty());
+        assert_eq!(dict.lookup("ni"), None);
     }
 
     #[test]

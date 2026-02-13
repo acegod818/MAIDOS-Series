@@ -125,7 +125,48 @@ public sealed class CrossToolchainManager
     private async Task<CrossToolchain> DetectToolchainAsync(CrossTarget target, CancellationToken ct)
     {
         if (target.IsNative) return await DetectNativeToolchainAsync(ct);
-        return new CrossToolchain { Target = target }; // Simplified for now
+        return await DetectCrossToolchainAsync(target, ct);
+    }
+
+    private async Task<CrossToolchain> DetectCrossToolchainAsync(CrossTarget target, CancellationToken ct)
+    {
+        // Try target-prefixed GCC (e.g. aarch64-linux-gnu-gcc)
+        var tripleGcc = $"{target.Triple}-gcc";
+        if (await ProcessRunner.CommandExistsAsync(tripleGcc))
+        {
+            var toolchain = new CrossToolchain
+            {
+                Target = target,
+                CC = tripleGcc,
+                CXX = $"{target.Triple}-g++",
+                LD = tripleGcc,
+                AR = $"{target.Triple}-ar",
+                Strip = $"{target.Triple}-strip"
+            };
+            await toolchain.ValidateAsync(ct);
+            return toolchain;
+        }
+
+        // Try clang with --target (clang supports cross-compilation natively)
+        if (await ProcessRunner.CommandExistsAsync("clang"))
+        {
+            var toolchain = new CrossToolchain
+            {
+                Target = target,
+                CC = "clang",
+                CXX = "clang++",
+                LD = "clang",
+                AR = "llvm-ar",
+                Strip = "llvm-strip"
+            };
+            await toolchain.ValidateAsync(ct);
+            return toolchain;
+        }
+
+        // No cross-toolchain found — return unvalidated toolchain (ValidateAsync will report failure)
+        var fallback = new CrossToolchain { Target = target };
+        await fallback.ValidateAsync(ct);
+        return fallback;
     }
 
     private async Task<CrossToolchain> DetectNativeToolchainAsync(CancellationToken ct)

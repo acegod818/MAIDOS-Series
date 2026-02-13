@@ -310,8 +310,8 @@ impl PolicyContext {
         let hour = (now % 86400) / 3600;
         self.set_int("hour", hour);
 
-        // Add day of week (0=Sun, 6=Sat) - simplified
-        let day = ((now / 86400) + 4) % 7; // Jan 1, 1970 was Thursday (4)
+        // Day of week (0=Sun, 6=Sat) via Unix epoch offset: Jan 1 1970 = Thursday (4)
+        let day = ((now / 86400) + 4) % 7;
         self.set_int("day_of_week", day);
 
         self

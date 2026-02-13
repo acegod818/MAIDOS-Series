@@ -15,7 +15,7 @@ function walk(dir: string): string[] {
       if (entry.isDirectory()) files.push(...walk(full));
       else if (/\.(rs|cs|cpp|h)$/.test(entry.name)) files.push(full);
     }
-  } catch {}
+  } catch (e) { console.error(`[walk] Failed to read directory ${dir}: ${e}`); }
   return files;
 }
 
@@ -33,7 +33,7 @@ for (const f of files) {
         allViolations.push({ rule: v.ruleId, file: rel, line: v.line, msg: v.message.substring(0, 70) });
       }
     }
-  } catch {}
+  } catch (e) { console.error(`[scan] Failed to process ${rel}: ${e}`); }
 }
 
 console.log('╔════════════════════════════════════════════════════╗');

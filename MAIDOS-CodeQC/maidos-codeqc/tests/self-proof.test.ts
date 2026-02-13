@@ -174,9 +174,12 @@ describe('2. 規格門檻證明', () => {
   });
   
   it('測試覆蓋率應該有意義', () => {
-    // 至少 80 個測試案例
-    // 實際數字在測試運行時可見
-    expect(true).toBe(true); // placeholder - 實際覆蓋率由 vitest 報告
+    // Verify the test suite itself has meaningful coverage
+    const redlineStats = getRedlineStats();
+    const prohibitionStats = getProhibitionStats();
+    const totalImplemented = redlineStats.implemented + prohibitionStats.implemented;
+    expect(totalImplemented).toBeGreaterThanOrEqual(20);
+    console.log(`測試覆蓋規則數: ${totalImplemented}`);
   });
 });
 
@@ -381,7 +384,8 @@ describe('統計報告', () => {
     const totalImplemented = redlineStats.implemented + prohibitionStats.implemented;
     const totalRules = redlineStats.total + prohibitionStats.total;
     console.log(`總計: ${totalImplemented}/${totalRules} (${(totalImplemented/totalRules*100).toFixed(0)}%)`);
-    
-    expect(true).toBe(true);
+
+    // At least 50% of all rules must be implemented
+    expect(totalImplemented / totalRules).toBeGreaterThanOrEqual(0.50);
   });
 });
