@@ -60,8 +60,6 @@ build_log.txt
 .github/
 
 # Deprecated / dev-only
-/evidence/
-/docs/
 /scripts/
 /Demo/
 

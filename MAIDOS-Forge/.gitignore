@@ -32,3 +32,4 @@ ehthumbs.db
 dist_release/
 jdk17/
 *.log
+!evidence/mapping.log

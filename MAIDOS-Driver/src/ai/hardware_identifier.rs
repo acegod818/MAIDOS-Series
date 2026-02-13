@@ -106,12 +106,14 @@ impl HardwareIdentifier {
             .cloned()
             .unwrap_or_else(|| format!("{} Device", vendor.name));
 
-        let confidence =
-            if dev_id.is_some() && vendor.known_devices.contains_key(dev_id.as_ref().unwrap()) {
-                0.95
-            } else {
-                0.7
-            };
+        let confidence = if dev_id
+            .as_ref()
+            .is_some_and(|d| vendor.known_devices.contains_key(d))
+        {
+            0.95
+        } else {
+            0.7
+        };
 
         Some(IdentificationResult {
             device_name,

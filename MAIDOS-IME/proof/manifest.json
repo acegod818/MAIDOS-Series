@@ -1,0 +1,21 @@
+{
+  "version": "codeqc-proofpack-3",
+  "run_id": "b2c9f4e7a1d6",
+  "nonce": "8e3b5f1c9a4d2e7b",
+  "timestamp": "2026-02-13T00:00:00Z",
+  "product": "MAIDOS-IME",
+  "product_version": "0.2.0",
+  "git": {
+    "commit": "pending",
+    "branch": "main",
+    "dirty": true
+  },
+  "env": {
+    "os": "windows",
+    "ci": false
+  },
+  "journeys": [],
+  "hashes": {},
+  "merkle_root": "pending-generation",
+  "strict_level": 4
+}

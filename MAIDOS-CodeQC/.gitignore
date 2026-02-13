@@ -4,8 +4,9 @@ node_modules/
 # Coverage
 coverage/
 
-# Evidence (generated)
-evidence/
+# Evidence — structure tracked, generated logs ignored
+evidence/*.log
+!evidence/mapping.log
 
 # IDE
 .idea/
@@ -20,6 +21,7 @@ Thumbs.db
 
 # Logs
 *.log
+!**/evidence/mapping.log
 npm-debug.log*
 
 # Environment

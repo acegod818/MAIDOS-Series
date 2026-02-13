@@ -43,7 +43,7 @@ pub use token::{CapabilityToken, TokenPayload};
 
 use maidos_config::MaidosConfig;
 use std::time::Duration;
-use tracing::info;
+use tracing::{error, info, warn};
 
 /// Token issuer that integrates with MaidosConfig
 pub struct TokenIssuer {
@@ -113,30 +113,40 @@ impl TokenIssuer {
 
     /// Check if a token has a specific capability
     pub fn check(&self, token_str: &str, cap: Capability) -> bool {
-        let allowed = self.verify(token_str)
-            .map(|t| t.has(cap))
-            .unwrap_or(false);
-        
-        if allowed {
-            info!("[MAIDOS-AUDIT] Capability check PASSED: {:?}", cap);
-        } else {
-            info!("[MAIDOS-AUDIT] Capability check FAILED: {:?}", cap);
+        match self.verify(token_str) {
+            Ok(token) => {
+                let allowed = token.has(cap);
+                if allowed {
+                    info!("[MAIDOS-AUDIT] Capability check PASSED: {:?}", cap);
+                } else {
+                    warn!("[MAIDOS-AUDIT] Capability check FAILED: token valid but missing {:?}", cap);
+                }
+                allowed
+            }
+            Err(e) => {
+                error!("[MAIDOS-AUDIT] Token verification ERROR during capability check: {} (denying {:?})", e, cap);
+                false
+            }
         }
-        allowed
     }
 
     /// Check if a token has all required capabilities
     pub fn check_all(&self, token_str: &str, caps: &[Capability]) -> bool {
-        let allowed = self.verify(token_str)
-            .map(|t| t.has_all(caps))
-            .unwrap_or(false);
-
-        if allowed {
-            info!("[MAIDOS-AUDIT] Multi-capability check PASSED: {:?}", caps);
-        } else {
-            info!("[MAIDOS-AUDIT] Multi-capability check FAILED: {:?}", caps);
+        match self.verify(token_str) {
+            Ok(token) => {
+                let allowed = token.has_all(caps);
+                if allowed {
+                    info!("[MAIDOS-AUDIT] Multi-capability check PASSED: {:?}", caps);
+                } else {
+                    warn!("[MAIDOS-AUDIT] Multi-capability check FAILED: token valid but missing some of {:?}", caps);
+                }
+                allowed
+            }
+            Err(e) => {
+                error!("[MAIDOS-AUDIT] Token verification ERROR during multi-capability check: {} (denying {:?})", e, caps);
+                false
+            }
         }
-        allowed
     }
 }
 

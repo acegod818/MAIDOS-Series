@@ -473,7 +473,7 @@ export function loadFiles(targetPath: string): Array<{ path: string; content: st
   }));
 }
 
-async function outputReport(report: string, outputPath?: string): Promise<void> {
+function outputReport(report: string, outputPath?: string): void {
   if (outputPath) {
     writeFileSync(outputPath, report);
     console.log(`Report written to: ${outputPath}`);

@@ -3,6 +3,8 @@ name = "maidos-forge-core"
 version = "0.1.0"
 edition = "2021"
 authors = ["ZGWC_acegod818 <wocao@maidos.dev>"]
+description = "Core compilation framework for MAIDOS-Forge — multi-language build orchestration, plugin system, and FFI bindings"
+license = "MIT"
 
 [lib]
 crate-type = ["cdylib", "rlib"]

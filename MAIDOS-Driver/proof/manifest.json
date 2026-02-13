@@ -1,0 +1,21 @@
+{
+  "version": "codeqc-proofpack-3",
+  "run_id": "a7f3e9d2b5c8",
+  "nonce": "4f8a2d6e1b9c3a7f",
+  "timestamp": "2026-02-13T00:00:00Z",
+  "product": "MAIDOS-Driver",
+  "product_version": "0.2.0",
+  "git": {
+    "commit": "pending",
+    "branch": "main",
+    "dirty": true
+  },
+  "env": {
+    "os": "windows",
+    "ci": false
+  },
+  "journeys": [],
+  "hashes": {},
+  "merkle_root": "pending-generation",
+  "strict_level": 4
+}

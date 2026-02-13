@@ -27,3 +27,4 @@ tarpaulin-report.html
 
 # Logs
 *.log
+!evidence/mapping.log

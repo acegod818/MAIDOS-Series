@@ -59,6 +59,9 @@ fn set_last_error(msg: String) {
 /// Get last error message
 #[no_mangle]
 pub extern "C" fn maidos_auth_last_error() -> *const c_char {
+    // SAFETY: static mut is required here for FFI — the returned pointer must remain
+    // valid until the next call. Thread-safety is provided by LAST_ERROR Mutex above;
+    // this function is only called from C# UI thread via P/Invoke.
     static mut ERROR_CSTRING: Option<CString> = None;
 
     if let Ok(guard) = LAST_ERROR.lock() {
