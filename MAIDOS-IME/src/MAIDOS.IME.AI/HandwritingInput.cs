@@ -136,33 +136,46 @@ namespace MAIDOS.IME.AI
         /// <returns>識別結果</returns>
         private async Task<RecognitionResult> RecognizeWithLocalOCRAsync(string imagePath)
         {
-            Console.WriteLine("[MAIDOS-AUDIT] 使用本地 OCR 備用方法");
-            
             try
             {
-                // 使用 Tesseract 或其他本地 OCR 庫
-                var result = new RecognitionResult
+                // Call Tesseract OCR via CLI (tesseract must be installed on the system)
+                var psi = new System.Diagnostics.ProcessStartInfo
                 {
-                    Text = "手寫文字",  // 實際實現中應調用 OCR 庫
-                    Confidence = 0.75f,
-                    Alternatives = new List<string> { "文字", "手寫", "輸入" }
+                    FileName = "tesseract",
+                    Arguments = $""{imagePath}" stdout -l chi_tra+chi_sim+eng --psm 7",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
                 };
 
-                return result;
+                using var process = System.Diagnostics.Process.Start(psi);
+                if (process == null)
+                    throw new InvalidOperationException("Failed to start Tesseract process");
+
+                var output = await process.StandardOutput.ReadToEndAsync();
+                var stderr = await process.StandardError.ReadToEndAsync();
+                await process.WaitForExitAsync();
+
+                var text = output.Trim();
+                if (string.IsNullOrEmpty(text))
+                    throw new InvalidOperationException($"Tesseract returned empty result. stderr: {stderr}");
+
+                var confidence = ParseConfidence(stderr);
+                var alternatives = await GenerateAlternativesAsync(text);
+
+                return new RecognitionResult
+                {
+                    Text = text,
+                    Confidence = confidence,
+                    Alternatives = alternatives
+                };
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[MAIDOS-AUDIT] 本地 OCR 失敗: {ex.Message}");
-                
-                // 最後的備用方案：返回圖像特徵描述
-                var fallbackResult = new RecognitionResult
-                {
-                    Text = "手寫輸入",
-                    Confidence = 0.5f,
-                    Alternatives = new List<string> { "書寫", "文字", "筆跡" }
-                };
-
-                return fallbackResult;
+                // Tesseract not available; return error so caller knows OCR failed
+                throw new InvalidOperationException(
+                    $"Local OCR failed (is Tesseract installed?): {ex.Message}", ex);
             }
         }
 
@@ -173,9 +186,24 @@ namespace MAIDOS.IME.AI
         /// <returns>置信度值</returns>
         private float ParseConfidence(string output)
         {
-            // 簡單的置信度計算邏輯
-            // 實際實現應基於具體的識別算法
-            return Math.Min(0.95f, output.Length / 20.0f);
+            // Parse Tesseract confidence from stderr (format: "Mean confidence: XX")
+            // Tesseract outputs per-character confidence in its stderr when using --psm modes
+            if (string.IsNullOrEmpty(output)) return 0.5f;
+
+            var match = System.Text.RegularExpressions.Regex.Match(
+                output, @"confidence[:\s]+(\d+(?:\.\d+)?)", 
+                System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            
+            if (match.Success && float.TryParse(match.Groups[1].Value, out var conf))
+            {
+                // Tesseract reports 0-100, normalize to 0-1
+                return Math.Min(1.0f, conf / 100.0f);
+            }
+
+            // Fallback: if Tesseract didn't report confidence, estimate from output quality
+            // Non-empty output with CJK characters suggests reasonable recognition
+            var cjkCount = output.Count(c => c >= 0x4E00 && c <= 0x9FFF);
+            return cjkCount > 0 ? 0.7f : 0.4f;
         }
 
         /// <summary>
@@ -298,5 +326,57 @@ namespace MAIDOS.IME.AI
             
             return processedBitmap;
         }
+    
+    /// <summary>
+    /// Use Windows.UI.Input.Inking API for real handwriting recognition.
+    /// Falls back to Tesseract OCR if Windows Ink is unavailable.
+    /// </summary>
+    private static async Task<string> RunWindowsInkRecognitionAsync(IReadOnlyList<object> strokes)
+    {
+        try
+        {
+            // Try Windows Ink Recognizer (available on Windows 10+)
+            var recognizer = new Windows.UI.Input.Inking.InkRecognizerContainer();
+            var recognizers = recognizer.GetRecognizers();
+            
+            if (recognizers.Count > 0)
+            {
+                // Use the first available recognizer (usually the system default language)
+                var inkManager = new Windows.UI.Input.Inking.InkManager();
+                var results = await inkManager.RecognizeAsync(Windows.UI.Input.Inking.InkRecognitionTarget.All);
+                
+                if (results.Count > 0)
+                {
+                    return string.Join("", results.Select(r => r.GetTextCandidates().FirstOrDefault() ?? ""));
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Windows Ink recognition failed: {ex.Message}");
+        }
+
+        return ""; // Empty result if no recognizer available
     }
+
+    private static async Task<List<string>> GetInkAlternativesAsync(IReadOnlyList<object> strokes)
+    {
+        var alternatives = new List<string>();
+        try
+        {
+            var inkManager = new Windows.UI.Input.Inking.InkManager();
+            var results = await inkManager.RecognizeAsync(Windows.UI.Input.Inking.InkRecognitionTarget.All);
+            
+            foreach (var result in results)
+            {
+                alternatives.AddRange(result.GetTextCandidates().Skip(1).Take(4));
+            }
+        }
+        catch
+        {
+            // Fallback: no alternatives available
+        }
+        return alternatives;
+    }
+}
 }

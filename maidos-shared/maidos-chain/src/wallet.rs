@@ -1,97 +1,98 @@
 use crate::ChainError;
-use rand::Rng;
+use ethers::signers::{LocalWallet, Signer};
+use ethers::core::types::Signature;
 use std::fmt;
+use std::str::FromStr;
 
-/// Simple wallet for blockchain operations
-#[derive(Debug, Clone)]
+/// Ethereum-compatible wallet using secp256k1 ECDSA
+///
+/// Wraps ethers::LocalWallet for real cryptographic operations:
+/// - Key generation: CSPRNG via k256
+/// - Address derivation: Keccak256 of uncompressed public key
+/// - Signing: secp256k1 ECDSA with recovery ID (EIP-155 compatible)
+/// - Verification: ECDSA signature verification against public key
+#[derive(Clone)]
 pub struct Wallet {
-    pub public_key: String,
-    pub private_key: String,
+    inner: LocalWallet,
 }
 
 impl Wallet {
-    /// Create a new wallet with random key pair
+    /// Create a new wallet with a cryptographically random key pair
     pub fn new() -> Self {
-        let mut rng = rand::thread_rng();
-        let private_key: [u8; 32] = rng.gen();
-        let public_key = Self::derive_public_key(&private_key);
-        
         Self {
-            private_key: hex::encode(private_key),
-            public_key: hex::encode(public_key),
+            inner: LocalWallet::new(&mut rand::thread_rng()),
         }
     }
 
-    /// Create wallet from private key
+    /// Create wallet from a hex-encoded private key
     pub fn from_private_key(private_key: &str) -> Result<Self, ChainError> {
-        let key_bytes = hex::decode(private_key)
+        let clean = private_key.strip_prefix("0x").unwrap_or(private_key);
+        let inner = LocalWallet::from_str(clean)
             .map_err(|e| ChainError::Wallet(format!("Invalid private key: {}", e)))?;
-        
-        if key_bytes.len() != 32 {
-            return Err(ChainError::Wallet("Private key must be 32 bytes".to_string()));
-        }
-        
-        let mut key_array = [0u8; 32];
-        key_array.copy_from_slice(&key_bytes);
-        
-        let public_key = Self::derive_public_key(&key_array);
-        
-        Ok(Self {
-            private_key: private_key.to_string(),
-            public_key: hex::encode(public_key),
-        })
+        Ok(Self { inner })
     }
 
-    /// Derive public key from private key (simple XOR for demo)
-    fn derive_public_key(private_key: &[u8; 32]) -> [u8; 32] {
-        let mut public_key = [0u8; 32];
-        for (i, &byte) in private_key.iter().enumerate() {
-            public_key[i] = byte ^ 0xFF; // Simple transformation for demo
-        }
-        public_key
-    }
-
-    /// Get wallet address (simple hash of public key)
+    /// Get the Ethereum address (0x-prefixed, checksummed)
     pub fn address(&self) -> String {
-        let public_key_bytes = hex::decode(&self.public_key).unwrap_or_default();
-        let hash = Self::simple_hash(&public_key_bytes);
-        format!("0x{}", hex::encode(&hash[..20])) // Ethereum-like address
+        format!("{:?}", self.inner.address())
     }
 
-    /// Simple hash function for demo purposes
-    fn simple_hash(data: &[u8]) -> [u8; 32] {
-        use sha2::{Sha256, Digest};
-        let mut hasher = Sha256::new();
-        hasher.update(data);
-        let result = hasher.finalize();
-        let mut hash = [0u8; 32];
-        hash.copy_from_slice(&result);
-        hash
+    /// Get the hex-encoded private key
+    pub fn private_key(&self) -> String {
+        hex::encode(self.inner.signer().to_bytes())
     }
 
-    /// Sign a message (demo implementation)
-    pub fn sign(&self, message: &[u8]) -> Vec<u8> {
-        let private_key_bytes = hex::decode(&self.private_key).unwrap_or_default();
-        let mut signature = Vec::with_capacity(message.len() + private_key_bytes.len());
-        signature.extend_from_slice(message);
-        signature.extend_from_slice(&private_key_bytes);
-        signature
+    /// Get the hex-encoded public key (uncompressed, 65 bytes)
+    pub fn public_key(&self) -> String {
+        let verifying_key = self.inner.signer().verifying_key();
+        let encoded = verifying_key.to_encoded_point(false);
+        hex::encode(encoded.as_bytes())
     }
 
-    /// Verify a signature (demo implementation)
-    pub fn verify(&self, message: &[u8], signature: &[u8]) -> bool {
-        if signature.len() != message.len() + 32 {
+    /// Sign a message using EIP-191 personal_sign (secp256k1 ECDSA)
+    ///
+    /// Returns a 65-byte signature (r: 32 bytes, s: 32 bytes, v: 1 byte)
+    pub async fn sign(&self, message: &[u8]) -> Result<Vec<u8>, ChainError> {
+        let signature = self.inner.sign_message(message).await
+            .map_err(|e| ChainError::Wallet(format!("Signing failed: {}", e)))?;
+        Ok(signature.to_vec())
+    }
+
+    /// Sign a message synchronously (blocking)
+    pub fn sign_sync(&self, message: &[u8]) -> Result<Vec<u8>, ChainError> {
+        // ethers LocalWallet sign_hash is CPU-bound (no I/O)
+        let hash = ethers::core::utils::hash_message(message);
+        let signature: Signature = self.inner.sign_hash(hash)
+            .map_err(|e| ChainError::Wallet(format!("Signing failed: {}", e)))?;
+        Ok(signature.to_vec())
+    }
+
+    /// Verify a signature against this wallet's public key
+    pub fn verify(&self, message: &[u8], signature_bytes: &[u8]) -> bool {
+        if signature_bytes.len() != 65 {
             return false;
         }
-        
-        let expected = self.sign(message);
-        signature == expected
+
+        let signature = match Signature::try_from(signature_bytes) {
+            Ok(s) => s,
+            Err(_) => return false,
+        };
+
+        signature.verify(message, self.inner.address()).is_ok()
     }
 }
 
 impl Default for Wallet {
     fn default() -> Self {
         Self::new()
+    }
+}
+
+impl fmt::Debug for Wallet {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("Wallet")
+            .field("address", &self.address())
+            .finish()
     }
 }
 
@@ -108,24 +109,24 @@ mod tests {
     #[test]
     fn test_wallet_creation() {
         let wallet = Wallet::new();
-        assert!(!wallet.private_key.is_empty());
-        assert!(!wallet.public_key.is_empty());
         assert!(wallet.address().starts_with("0x"));
+        assert_eq!(wallet.address().len(), 42); // 0x + 40 hex chars
     }
 
     #[test]
     fn test_wallet_from_private_key() {
         let wallet1 = Wallet::new();
-        let wallet2 = Wallet::from_private_key(&wallet1.private_key).unwrap();
-        assert_eq!(wallet1.private_key, wallet2.private_key);
-        assert_eq!(wallet1.public_key, wallet2.public_key);
+        let pk = wallet1.private_key();
+        let wallet2 = Wallet::from_private_key(&pk).unwrap();
+        assert_eq!(wallet1.address(), wallet2.address());
     }
 
     #[test]
-    fn test_signature() {
+    fn test_signature_sync() {
         let wallet = Wallet::new();
         let message = b"test message";
-        let signature = wallet.sign(message);
+        let signature = wallet.sign_sync(message).unwrap();
+        assert_eq!(signature.len(), 65); // r(32) + s(32) + v(1)
         assert!(wallet.verify(message, &signature));
     }
 
@@ -133,10 +134,19 @@ mod tests {
     fn test_signature_invalid() {
         let wallet = Wallet::new();
         let message = b"test message";
-        let signature = wallet.sign(message);
+        let signature = wallet.sign_sync(message).unwrap();
         let mut bad = signature.clone();
-        bad.push(0);
+        bad[0] ^= 0xFF; // Corrupt first byte
         assert!(!wallet.verify(message, &bad));
+    }
+
+    #[test]
+    fn test_cross_wallet_verify_fails() {
+        let wallet1 = Wallet::new();
+        let wallet2 = Wallet::new();
+        let message = b"test message";
+        let signature = wallet1.sign_sync(message).unwrap();
+        assert!(!wallet2.verify(message, &signature));
     }
 
     #[test]
@@ -147,8 +157,16 @@ mod tests {
     }
 
     #[test]
-    fn test_wallet_invalid_private_key_length() {
-        let err = Wallet::from_private_key("abc").unwrap_err();
+    fn test_wallet_invalid_private_key() {
+        let err = Wallet::from_private_key("not_hex").unwrap_err();
         assert!(matches!(err, ChainError::Wallet(_)));
+    }
+
+    #[test]
+    fn test_wallet_with_0x_prefix() {
+        let wallet1 = Wallet::new();
+        let pk = format!("0x{}", wallet1.private_key());
+        let wallet2 = Wallet::from_private_key(&pk).unwrap();
+        assert_eq!(wallet1.address(), wallet2.address());
     }
 }

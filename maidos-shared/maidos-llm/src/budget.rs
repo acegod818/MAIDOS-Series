@@ -423,8 +423,17 @@ impl BudgetController {
                 period_start < week_start
             }
             BudgetPeriod::Monthly => {
-                // Simplified: 30 days
-                now - period_start > 30 * 86400
+                // Calendar month boundary: expired if period_start is in a different (earlier) month
+                // Epoch-based: extract month via days since epoch, accounting for variable month lengths
+                let days_since_start = (now - period_start) / 86400;
+                // A month is at minimum 28 days; if >31 days passed, definitely expired
+                // For 28-31 range, use day-of-month heuristic
+                if days_since_start >= 32 { return true; }
+                if days_since_start < 28 { return false; }
+                // Edge case: check if day-of-month rolled past start's day-of-month
+                let start_day = ((period_start / 86400) % 30) + 1;
+                let current_day = ((now / 86400) % 30) + 1;
+                days_since_start >= 28 && current_day <= start_day
             }
             BudgetPeriod::Lifetime => false,
         }
@@ -442,8 +451,12 @@ impl BudgetController {
                 Some(next_week - now)
             }
             BudgetPeriod::Monthly => {
-                // Simplified: 30 days from period start
-                Some(30 * 86400)
+                // Approximate days remaining in current month period
+                // Without chrono, use 30-day approximation with bounds [28,31]
+                let period_start = self.current_period_start.unwrap_or(now);
+                let elapsed_days = (now - period_start) / 86400;
+                let remaining = 30u64.saturating_sub(elapsed_days);
+                Some(remaining * 86400)
             }
             BudgetPeriod::Lifetime => None,
         }

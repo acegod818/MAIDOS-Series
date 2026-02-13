@@ -1,3 +1,4 @@
+using Forge.Core;
 // MAIDOS-Forge Groovy Language Plugin
 // Code-QC v2.2B Compliant | Tier C Plugin
 
@@ -48,40 +49,37 @@ public sealed class GroovyPlugin : ILanguagePlugin
 
         var outDir = Path.Combine(config.OutputDir, module.Config.Name);
         Directory.CreateDirectory(outDir);
-        var artifacts = new List<string>();
 
         foreach (var f in files)
         {
             var fn = Path.GetFileName(f);
-            var bn = Path.GetFileNameWithoutExtension(f);
-            var outFile = Path.Combine(outDir, bn + ".out");
             logs.Add($"[Groovy] Processing: {fn}");
 
-            var r = await ProcessRunner.RunAsync("groovyc", $"\"{f}\"",
+            var r = await ProcessRunner.RunAsync("groovyc", $"-d \"{outDir}\" \"{f}\"",
                 new ProcessConfig { WorkingDirectory = Path.GetDirectoryName(f) ?? module.ModulePath, Timeout = TimeSpan.FromMinutes(10) }, ct);
             if (!string.IsNullOrEmpty(r.Stdout)) logs.Add(r.Stdout);
             if (!string.IsNullOrEmpty(r.Stderr)) logs.Add(r.Stderr);
             if (!r.IsSuccess) { sw.Stop(); return CompileResult.Failure($"Failed: {fn}: {r.Stderr}", logs, sw.Elapsed); }
-            artifacts.Add(outFile);
         }
 
-        if (artifacts.Count == 0)
-            artifacts.AddRange(Directory.GetFiles(outDir).Where(x => !x.EndsWith(".tmp")));
+        var artifacts = Directory.GetFiles(outDir, "*", SearchOption.AllDirectories)
+            .Where(x => !x.EndsWith(".tmp"))
+            .ToList();
 
         sw.Stop();
         return artifacts.Count > 0 ? CompileResult.Success(artifacts.ToArray(), logs, sw.Elapsed)
-            : CompileResult.Failure("No artifacts", logs, sw.Elapsed);
+            : CompileResult.Failure("No artifacts produced", logs, sw.Elapsed);
     }
 
-    public Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
-        => Task.FromResult<InterfaceDescription?>(new InterfaceDescription
+    public async Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
+        => new InterfaceDescription
         {
             Version = "1.0",
             Module = new InterfaceModule { Name = Path.GetFileNameWithoutExtension(artifactPath), Version = "1.0.0" },
             Language = new InterfaceLanguage { Name = "groovy", Abi = "native" },
-            Exports = Array.Empty<ExportedFunction>()
+            Exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "groovy", ct)).ToArray()
         });
 
     public GlueCodeResult GenerateGlue(InterfaceDescription src, string target)
-        => GlueCodeResult.Failure($"Groovy glue generation not supported for {target}");
+        => NativeSymbolExtractor.GenerateCHeader(src, target);
 }

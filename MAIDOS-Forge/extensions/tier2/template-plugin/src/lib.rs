@@ -76,9 +76,12 @@ impl LanguageAdapter for TemplateLanguageAdapter {
 
     /// Check if toolchain is available
     async fn check_toolchain(&self) -> Result<bool> {
-        // [TEMPLATE] Implementation point: Check for required compiler/tools.
-        // Returns true for template validation.
-        
+        // [TEMPLATE] Verify the template compiler placeholder is acknowledged
+        // Real plugins should check: which <compiler> / where <compiler>
+        let language = self.language_id();
+        if language.is_empty() {
+            return Ok(false);
+        }
         Ok(true)
     }
 

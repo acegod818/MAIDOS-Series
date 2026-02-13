@@ -1,3 +1,4 @@
+using Forge.Core;
 // MAIDOS-Forge WebAssembly Language Plugin
 
 using System.Text;
@@ -58,7 +59,7 @@ public sealed class WebAssemblyPlugin : ILanguagePlugin
             if (!string.IsNullOrEmpty(r.Stdout)) logs.Add(r.Stdout);
             if (!string.IsNullOrEmpty(r.Stderr)) logs.Add(r.Stderr);
             if (!r.IsSuccess) { sw.Stop(); return CompileResult.Failure($"Failed: {fn}: {r.Stderr}", logs, sw.Elapsed); }
-            artifacts.Add(outFile);
+            if (File.Exists(outFile)) artifacts.Add(outFile);
         }
 
         if (artifacts.Count == 0) artifacts.AddRange(Directory.GetFiles(outDir));
@@ -67,15 +68,15 @@ public sealed class WebAssemblyPlugin : ILanguagePlugin
             : CompileResult.Failure("No artifacts", logs, sw.Elapsed);
     }
 
-    public Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
-        => Task.FromResult<InterfaceDescription?>(new InterfaceDescription
+    public async Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
+        => new InterfaceDescription
         {
             Version = "1.0",
             Module = new InterfaceModule { Name = Path.GetFileNameWithoutExtension(artifactPath), Version = "1.0.0" },
             Language = new InterfaceLanguage { Name = "webassembly", Abi = "native" },
-            Exports = Array.Empty<ExportedFunction>()
+            Exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "webassembly", ct)).ToArray()
         });
 
     public GlueCodeResult GenerateGlue(InterfaceDescription src, string target)
-        => GlueCodeResult.Failure($"WebAssembly glue generation not supported for {target}");
+        => NativeSymbolExtractor.GenerateCHeader(src, target);
 }

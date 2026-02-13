@@ -139,11 +139,8 @@ impl Parser for TreeSitterParser {
         }
         
         // Perform incremental parsing based on the previous tree
-        let old_tree = previous_tree.and_then(|_t| {
-            // This should convert prev_tree to tree_sitter::Tree
-            // For simplicity, we return None for now
-            None
-        });
+        // Pass the previous tree for incremental parsing (reduces re-parse overhead)
+        let old_tree = previous_tree;
         
         let tree = self.parser.parse(&source_code, old_tree.as_ref())
             .ok_or_else(|| ForgeError::ParserError("Failed to parse source code".to_string()))?;

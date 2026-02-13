@@ -123,13 +123,13 @@ bool ImeEngine::Initialize(const std::wstring& configPath)
         std::wstring dictPath = ResolveDictPath(L"pinyin.dict.json");
         if (dictPath.empty() || !m_dictionary->LoadFromFile(dictPath))
         {
-            // Fallback entries (ASCII placeholders for now to avoid encoding issues)
-            m_dictionary->AddEntry(L"ni hao", Dictionary::DictEntry{ L"NiHao", 1000, L"ni hao", {L"greeting", L"common"} });
-            m_dictionary->AddEntry(L"shi jie", Dictionary::DictEntry{ L"ShiJie", 800, L"shi jie", {L"noun", L"common"} });
-            m_dictionary->AddEntry(L"xie xie", Dictionary::DictEntry{ L"XieXie", 950, L"xie xie", {L"greeting", L"common"} });
-            m_dictionary->AddEntry(L"jin tian", Dictionary::DictEntry{ L"JinTian", 900, L"jin tian", {L"time", L"common"} });
-            m_dictionary->AddEntry(L"ming tian", Dictionary::DictEntry{ L"MingTian", 700, L"ming tian", {L"time", L"common"} });
-            m_dictionary->AddEntry(L"ai", Dictionary::DictEntry{ L"Ai", 600, L"ai", {L"emotion", L"common"} });
+            // Fallback entries with real CJK characters (hex-escaped for portability)
+            m_dictionary->AddEntry(L"ni hao", Dictionary::DictEntry{ L"\x4F60\x597D", 1000, L"ni hao", {L"greeting", L"common"} });
+            m_dictionary->AddEntry(L"shi jie", Dictionary::DictEntry{ L"\x4E16\x754C", 800, L"shi jie", {L"noun", L"common"} });
+            m_dictionary->AddEntry(L"xie xie", Dictionary::DictEntry{ L"\x8C22\x8C22", 950, L"xie xie", {L"greeting", L"common"} });
+            m_dictionary->AddEntry(L"jin tian", Dictionary::DictEntry{ L"\x4ECA\x5929", 900, L"jin tian", {L"time", L"common"} });
+            m_dictionary->AddEntry(L"ming tian", Dictionary::DictEntry{ L"\x660E\x5929", 700, L"ming tian", {L"time", L"common"} });
+            m_dictionary->AddEntry(L"ai", Dictionary::DictEntry{ L"\x7231", 600, L"ai", {L"emotion", L"common"} });
         }
 
         // Initialize pinyin parser

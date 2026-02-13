@@ -1,3 +1,4 @@
+using Forge.Core;
 // MAIDOS-Forge Java Language Plugin
 // UEP v1.7C Compliant - Zero Technical Debt
 // Standalone Plugin Module
@@ -328,7 +329,7 @@ public sealed class JavaPlugin : ILanguagePlugin
             Version = "1.0.0"
         },
         Language = new InterfaceLanguage { Name = "java", Abi = "jni", Mode = "jvm" },
-        Exports = Array.Empty<ExportedFunction>()
+        Exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "java", ct)).ToArray()
     };
 
     public GlueCodeResult GenerateGlue(InterfaceDescription sourceInterface, string targetLanguage)

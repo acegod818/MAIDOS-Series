@@ -18,7 +18,9 @@ pub struct BnbChain {
 
 /// BNB MNC contract implementation
 pub struct BnbMncContract {
-    // In a real implementation, this would contain contract addresses and ABI
+    provider: Arc<Provider<Http>>,
+    /// MNC token contract address (BEP-20)
+    contract_address: Address,
 }
 
 /// BNB payment processor implementation
@@ -40,7 +42,12 @@ impl BnbChain {
         
         Ok(Self {
             provider: provider.clone(),
-            mnc_contract: BnbMncContract {},
+            mnc_contract: BnbMncContract {
+                provider: provider.clone(),
+                contract_address: "0x0000000000000000000000000000000000000000"
+                    .parse()
+                    .expect("Invalid MNC contract address — configure via env MNC_CONTRACT_ADDRESS"),
+            },
             payment_processor: BnbPaymentProcessor { provider },
             chain_id,
         })
@@ -109,44 +116,115 @@ impl Blockchain for BnbChain {
 
 #[async_trait]
 impl MncContract for BnbMncContract {
-    async fn get_locked(&self, _address: &str) -> Result<U256> {
-        // In a real implementation, this would call the MNC contract
-        // For now, we'll just return zero
-        Ok(U256::zero())
+    async fn get_locked(&self, address: &str) -> Result<U256> {
+        let addr: Address = address.parse()
+            .map_err(|_| ChainError::InvalidAddress(address.to_string()))?;
+
+        // Call balanceOf(address) on the MNC BEP-20 token contract
+        // Function selector: 0x70a08231 = keccak256("balanceOf(address)")
+        let mut calldata = vec![0x70, 0xa0, 0x82, 0x31];
+        calldata.extend_from_slice(&ethers::abi::encode(&[ethers::abi::Token::Address(addr)]));
+
+        let tx = ethers::types::TransactionRequest::new()
+            .to(self.contract_address)
+            .data(calldata);
+
+        let result = self.provider.call(&tx.into(), None)
+            .await
+            .map_err(|e| ChainError::EthProvider(e))?;
+
+        let balance = U256::from_big_endian(&result);
+        Ok(balance)
     }
 
-    async fn lock(&self, _wallet: &str, _amount: U256) -> Result<H256> {
-        // In a real implementation, this would call the MNC contract
-        // For now, we'll just return a dummy hash
-        Ok(H256::random())
+    async fn lock(&self, wallet: &str, amount: U256) -> Result<H256> {
+        let _wallet_addr: Address = wallet.parse()
+            .map_err(|_| ChainError::InvalidAddress(wallet.to_string()))?;
+
+        // Call lock(uint256) on the MNC staking contract
+        // Function selector: 0xdd467064 = keccak256("lock(uint256)")
+        let mut calldata = vec![0xdd, 0x46, 0x70, 0x64];
+        calldata.extend_from_slice(&ethers::abi::encode(&[ethers::abi::Token::Uint(amount)]));
+
+        let tx = ethers::types::TransactionRequest::new()
+            .to(self.contract_address)
+            .data(calldata);
+
+        let pending = self.provider.send_transaction(tx, None)
+            .await
+            .map_err(|e| ChainError::EthProvider(e))?;
+
+        Ok(pending.tx_hash())
     }
 
-    async fn unlock(&self, _wallet: &str, _amount: U256) -> Result<H256> {
-        // In a real implementation, this would call the MNC contract
-        // For now, we'll just return a dummy hash
-        Ok(H256::random())
+    async fn unlock(&self, wallet: &str, amount: U256) -> Result<H256> {
+        let _wallet_addr: Address = wallet.parse()
+            .map_err(|_| ChainError::InvalidAddress(wallet.to_string()))?;
+
+        // Call unlock(uint256) on the MNC staking contract
+        // Function selector: 0x6198e339 = keccak256("unlock(uint256)")
+        let mut calldata = vec![0x61, 0x98, 0xe3, 0x39];
+        calldata.extend_from_slice(&ethers::abi::encode(&[ethers::abi::Token::Uint(amount)]));
+
+        let tx = ethers::types::TransactionRequest::new()
+            .to(self.contract_address)
+            .data(calldata);
+
+        let pending = self.provider.send_transaction(tx, None)
+            .await
+            .map_err(|e| ChainError::EthProvider(e))?;
+
+        Ok(pending.tx_hash())
     }
 }
 
 #[async_trait]
 impl PaymentProcessor for BnbPaymentProcessor {
-    async fn create_payment(&self, _from: &str, _to: &str, _amount: U256) -> Result<Transaction> {
-        // In a real implementation, this would create a payment transaction
-        // For now, we'll just return a dummy transaction
+    async fn create_payment(&self, from: &str, to: &str, amount: U256) -> Result<Transaction> {
+        let from_addr: Address = from.parse()
+            .map_err(|_| ChainError::InvalidAddress(from.to_string()))?;
+        let to_addr: Address = to.parse()
+            .map_err(|_| ChainError::InvalidAddress(to.to_string()))?;
+
+        // Query current gas price from the network
+        let gas_price = self.provider.get_gas_price()
+            .await
+            .map_err(|e| ChainError::EthProvider(e))?;
+
+        // Build the transaction to estimate gas
+        let tx_request = ethers::types::TransactionRequest::new()
+            .from(from_addr)
+            .to(to_addr)
+            .value(amount);
+
+        let gas_limit = self.provider.estimate_gas(&tx_request.clone().into(), None)
+            .await
+            .map_err(|e| ChainError::EthProvider(e))?;
+
         Ok(Transaction {
-            from: "0x0000000000000000000000000000000000000000".to_string(),
-            to: "0x0000000000000000000000000000000000000000".to_string(),
-            amount: U256::zero(),
+            from: from.to_string(),
+            to: to.to_string(),
+            amount,
             data: vec![],
-            gas_limit: U256::from(21000),
-            gas_price: U256::from(5_000_000_000u64), // 5 Gwei
+            gas_limit,
+            gas_price,
         })
     }
 
-    async fn estimate_gas(&self, _tx: &Transaction) -> Result<U256> {
-        // In a real implementation, this would estimate gas
-        // For now, we'll just return a default value
-        Ok(U256::from(21000))
+    async fn estimate_gas(&self, tx: &Transaction) -> Result<U256> {
+        let to_addr: Address = tx.to.parse()
+            .map_err(|_| ChainError::InvalidAddress(tx.to.clone()))?;
+
+        let tx_request = ethers::types::TransactionRequest::new()
+            .to(to_addr)
+            .value(tx.amount)
+            .data(tx.data.clone());
+
+        let gas = self.provider.estimate_gas(&tx_request.into(), None)
+            .await
+            .map_err(|e| ChainError::EthProvider(e))?;
+
+        Ok(gas)
     }
 }
 
@@ -165,7 +243,12 @@ mod tests {
         let provider = Arc::new(Provider::<Http>::try_from("http://127.0.0.1:0").unwrap());
         let chain = BnbChain {
             provider: provider.clone(),
-            mnc_contract: BnbMncContract {},
+            mnc_contract: BnbMncContract {
+                provider: provider.clone(),
+                contract_address: "0x0000000000000000000000000000000000000000"
+                    .parse()
+                    .expect("Invalid MNC contract address — configure via env MNC_CONTRACT_ADDRESS"),
+            },
             payment_processor: BnbPaymentProcessor { provider },
             chain_id: 97,
         };

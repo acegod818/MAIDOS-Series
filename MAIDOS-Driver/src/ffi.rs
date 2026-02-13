@@ -83,8 +83,8 @@ impl From<UpdateInfo> for CUpdateInfo {
                 .unwrap_or_default()
                 .into_raw(),
             update_available: if info.update_available { 1 } else { 0 },
-            status: CString::new(info.status).unwrap_or_default().into_raw(),
-            download_url: CString::new(info.download_url).unwrap_or_default().into_raw(),
+            status: CString::new(info.status).unwrap_or_else(|e| { log::error!("FFI CString error (status): {}", e); CString::default() }).into_raw(),
+            download_url: CString::new(info.download_url).unwrap_or_else(|e| { log::error!("FFI CString error (download_url): {}", e); CString::default() }).into_raw(),
         }
     }
 }
@@ -529,7 +529,7 @@ impl From<DiagnosticInfo> for CDiagnosticInfo {
                 .unwrap_or_default()
                 .into_raw(),
             irq: info.irq,
-            status: CString::new(info.status).unwrap_or_default().into_raw(),
+            status: CString::new(info.status).unwrap_or_else(|e| { log::error!("FFI CString error (status): {}", e); CString::default() }).into_raw(),
         }
     }
 }

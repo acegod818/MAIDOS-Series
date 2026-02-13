@@ -1,3 +1,4 @@
+using Forge.Core;
 // MAIDOS-Forge Zig Language Plugin
 
 using System.Text;
@@ -51,14 +52,14 @@ public sealed class ZigPlugin : ILanguagePlugin
         foreach (var f in files)
         {
             var fn = Path.GetFileName(f);
-            var outFile = Path.Combine(outDir, Path.GetFileNameWithoutExtension(f) + ".out");
+            var outFile = Path.Combine(outDir, Path.GetFileNameWithoutExtension(f));
             logs.Add($"[Zig] Processing: {fn}");
             var r = await ProcessRunner.RunAsync("zig", $"build-exe \"{f}\" --output-dir \"{outDir}\"",
                 new ProcessConfig { WorkingDirectory = Path.GetDirectoryName(f) ?? module.ModulePath, Timeout = TimeSpan.FromMinutes(10) }, ct);
             if (!string.IsNullOrEmpty(r.Stdout)) logs.Add(r.Stdout);
             if (!string.IsNullOrEmpty(r.Stderr)) logs.Add(r.Stderr);
             if (!r.IsSuccess) { sw.Stop(); return CompileResult.Failure($"Failed: {fn}: {r.Stderr}", logs, sw.Elapsed); }
-            artifacts.Add(outFile);
+            if (File.Exists(outFile)) artifacts.Add(outFile);
         }
 
         if (artifacts.Count == 0) artifacts.AddRange(Directory.GetFiles(outDir));
@@ -67,15 +68,15 @@ public sealed class ZigPlugin : ILanguagePlugin
             : CompileResult.Failure("No artifacts", logs, sw.Elapsed);
     }
 
-    public Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
-        => Task.FromResult<InterfaceDescription?>(new InterfaceDescription
+    public async Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
+        => new InterfaceDescription
         {
             Version = "1.0",
             Module = new InterfaceModule { Name = Path.GetFileNameWithoutExtension(artifactPath), Version = "1.0.0" },
             Language = new InterfaceLanguage { Name = "zig", Abi = "native" },
-            Exports = Array.Empty<ExportedFunction>()
+            Exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "zig", ct)).ToArray()
         });
 
     public GlueCodeResult GenerateGlue(InterfaceDescription src, string target)
-        => GlueCodeResult.Failure($"Zig glue generation not supported for {target}");
+        => NativeSymbolExtractor.GenerateCHeader(src, target);
 }

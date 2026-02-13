@@ -1,9 +1,9 @@
 /**
- * Code-QC v3.2 Rules Module
+ * Code-QC v3.5 Rules Module
  * 
- * B = 工作紀律 (49 rules: 8公理+18紅線+14禁止+9標記)
+ * B = 工作紀律 (59 rules: 8公理+28紅線+14禁止+9標記)
  * C = 驗收標準 (~75 rules: 三軸+4門禁+DoD8)
- * D = B + C (~124 rules)
+ * D = B + C (~134 rules)
  */
 
 // B - 工作紀律

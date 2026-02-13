@@ -191,9 +191,3 @@ pub fn is_admin() -> bool {
 
     is_elevated
 }
-
-/// 初始化系統信息模組
-pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    log::info!("Windows 系統信息模組初始化完成");
-    Ok(())
-}

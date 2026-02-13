@@ -256,8 +256,23 @@ pub fn scan_all_devices() -> Result<Vec<DeviceInfo>, Box<dyn std::error::Error>>
 }
 
 /// 初始化硬體偵測模組
+///
+/// 驗證 SetupDI API 可用性 — 這是 scan_all_devices() 的前提條件。
+/// 如果 API 不可用（例如非 Windows 平台），在這裡就會失敗，
+/// 而不是等到掃描時才發現。
 pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    info!("硬體偵測模組初始化完成 (SetupDI backend)");
+    // 嘗試呼叫 SetupDiGetClassDevsW 驗證 API 可用
+    let dev_info = unsafe {
+        SetupDiGetClassDevsW(
+            None,
+            None,
+            None,
+            DIGCF_ALLCLASSES | DIGCF_PRESENT,
+        )?
+    };
+    // 立即釋放 — 這只是驗證 API 可用
+    unsafe { SetupDiDestroyDeviceInfoList(dev_info)?; }
+    info!("硬體偵測模組初始化完成 (SetupDI API verified)");
     Ok(())
 }
 

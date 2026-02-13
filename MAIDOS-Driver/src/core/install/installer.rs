@@ -129,8 +129,7 @@ impl DriverInstaller {
 
         let start_time = std::time::Instant::now();
 
-        // 在實際實現中，這裡會執行真正的驅動卸載過程
-        // 可能包括：
+                // 可能包括：
         // 1. 停止相關服務或進程
         // 2. 刪除驅動文件
         // 3. 取消註冊驅動
@@ -179,8 +178,7 @@ impl DriverInstaller {
     pub fn restart_system() -> Result<(), Box<dyn std::error::Error>> {
         log::info!("正在重啟系統以完成驅動安裝");
 
-        // 在實際實現中，這裡會執行系統重啟
-        // 在 Windows 上可以使用 `shutdown /r /t 0` 命令
+                // 在 Windows 上可以使用 `shutdown /r /t 0` 命令
 
         #[cfg(windows)]
         {
@@ -237,10 +235,4 @@ fn create_restore_point(description: &str) {
             crate::core::audit::audit_failure("RESTORE_POINT", "SYSTEM", &e.to_string());
         }
     }
-}
-
-/// Initialize installer module.
-pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    log::info!("Installer module initialized");
-    Ok(())
 }

@@ -195,9 +195,3 @@ impl ServiceController {
         Ok(())
     }
 }
-
-/// 初始化服務控制器模組
-pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    log::info!("Windows 服務控制器模組初始化完成");
-    Ok(())
-}

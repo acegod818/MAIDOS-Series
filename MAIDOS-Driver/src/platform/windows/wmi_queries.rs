@@ -256,13 +256,6 @@ unsafe fn wmi_query_inner(wql: &str) -> Result<Vec<WmiResult>, String> {
 fn variant_to_string(v: &VARIANT) -> String {
     format!("{}", v)
 }
-
-/// Initialize WMI module.
-pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    log::info!("WMI query module initialized");
-    Ok(())
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

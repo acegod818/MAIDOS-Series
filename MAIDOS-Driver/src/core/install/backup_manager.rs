@@ -134,14 +134,52 @@ impl BackupManager {
                     .ok_or("無效的備份目錄名")?
                     .to_string();
 
-                // 在實際實現中，這裡會從備份元數據文件中讀取備份信息
-                // 目前使用簡化的實現
-                let backup_info = BackupInfo {
-                    backup_id: backup_id.clone(),
-                    timestamp: Utc::now().to_rfc3339(),
-                    device_id: "unknown".to_string(),
-                    backup_path: path.to_string_lossy().to_string(),
-                    file_list: vec![],
+                // Read backup metadata from the metadata.json file in the backup directory
+                let meta_path = path.join("metadata.json");
+                let backup_info = if meta_path.exists() {
+                    let meta_content = fs::read_to_string(&meta_path)?;
+                    let meta: serde_json::Value = serde_json::from_str(&meta_content)
+                        .map_err(|e| { log::warn!("Corrupt backup metadata: {}", e); e })?;
+                    
+                    let file_list: Vec<String> = meta.get("files")
+                        .and_then(|f| f.as_array())
+                        .map(|arr| arr.iter().filter_map(|v| v.as_str().map(String::from)).collect())
+                        .unwrap_or_else(|| { log::warn!("Backup metadata missing files list"); Vec::new() });
+                    
+                    BackupInfo {
+                        backup_id: backup_id.clone(),
+                        timestamp: meta.get("timestamp")
+                            .and_then(|t| t.as_str())
+                            .unwrap_or("unknown")
+                            .to_string(),
+                        device_id: meta.get("device_id")
+                            .and_then(|d| d.as_str())
+                            .unwrap_or("unknown")
+                            .to_string(),
+                        backup_path: path.to_string_lossy().to_string(),
+                        file_list,
+                    }
+                } else {
+                    // Legacy backup without metadata: scan directory for files
+                    let file_list: Vec<String> = fs::read_dir(&path)?
+                        .filter_map(|e| e.ok())
+                        .filter(|e| e.path().is_file())
+                        .map(|e| e.file_name().to_string_lossy().to_string())
+                        .collect();
+                    
+                    BackupInfo {
+                        backup_id: backup_id.clone(),
+                        timestamp: fs::metadata(&path)?
+                            .modified()
+                            .map(|t| chrono::DateTime::<Utc>::from(t).to_rfc3339())
+                            .unwrap_or_else(|_| "unknown".to_string()),
+                        device_id: path.file_name()
+                            .and_then(|n| n.to_str())
+                            .unwrap_or("unknown")
+                            .to_string(),
+                        backup_path: path.to_string_lossy().to_string(),
+                        file_list,
+                    }
                 };
 
                 backups.push(backup_info);
@@ -200,10 +238,4 @@ impl BackupManager {
         log::info!("備份清單匯出完成: {}", export_path);
         Ok(())
     }
-}
-
-/// 初始化備份管理器模組
-pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    log::info!("備份管理器模組初始化完成");
-    Ok(())
 }

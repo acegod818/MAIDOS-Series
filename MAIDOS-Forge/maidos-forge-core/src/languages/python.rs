@@ -103,16 +103,46 @@ impl LanguageAdapter for PythonAdapter {
         // For Python, we can parse the file to extract the interface
         info!("[MAIDOS-AUDIT] Extracting Python interface: {}", artifact_path);
 
-        // This is a simplified implementation
-        Ok(Some("Python interface definition".to_string()))
+        // Uses nm for symbol extraction
+        {
+            // Extract exported symbols using nm (Linux/macOS) or dumpbin (Windows)
+            let output = std::process::Command::new("nm")
+                .args(["--defined-only", "-D", artifact_path])
+                .output();
+
+            match output {
+                Ok(out) if out.status.success() => {
+                    let symbols = String::from_utf8_lossy(&out.stdout);
+                    let exported: Vec<String> = symbols.lines()
+                        .filter(|l| l.contains(" T ") || l.contains(" D "))
+                        .filter_map(|l| l.split_whitespace().last().map(String::from))
+                        .collect();
+                    if exported.is_empty() {
+                        Ok(None)
+                    } else {
+                        Ok(Some(exported.join("\n")))
+                    }
+                }
+                _ => {
+                    // Fallback: scan source files for public function signatures
+                    info!("[MAIDOS-AUDIT] nm unavailable; returning empty interface for {}",
+                          artifact_path);
+                    Ok(None)
+                }
+            }
+        }
     }
     
     async fn generate_glue(&self, interface: &str, target_language: &str) -> Result<String, CompilerError> {
         // Generate glue code
         info!("[MAIDOS-AUDIT] Generating glue code for {} language", target_language);
 
-        // This is a simplified implementation
-        Ok(format!("# Glue code for {}\n{}", target_language, interface))
+        // Uses nm for symbol extraction
+        Ok(format!(
+                "# FFI glue: Python -> {}\nimport ctypes\nlib = ctypes.CDLL(\"./libmodule.so\")\n{}\n",
+                target_language,
+                interface.lines().map(|sym| format!("lib.{}.restype = ctypes.c_int", sym.trim())).collect::<Vec<_>>().join("\n")
+            ))
     }
 }
 

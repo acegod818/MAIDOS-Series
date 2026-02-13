@@ -201,6 +201,7 @@ public sealed class PluginManager : IDisposable
     /// </impl>
     public async Task<PluginInitResult> InitializeAsync(bool loadBuiltins = true, CancellationToken ct = default)
     {
+        ct.ThrowIfCancellationRequested();
         ForgeDirectories.EnsureDirectories();
 
         var results = new List<(string Name, bool Success, string Message)>();
@@ -212,8 +213,8 @@ public sealed class PluginManager : IDisposable
             results.AddRange(builtinResults);
         }
 
-        // 2. 掃描外部插件
-        _discovery.ScanPluginDirectory();
+        // 2. 掃描外部插件 (disk I/O → offload to thread pool)
+        await Task.Run(() => _discovery.ScanPluginDirectory(), ct);
 
         // 3. 載入外部插件
         foreach (var metadata in _discovery.DiscoveredPlugins)
@@ -644,8 +645,9 @@ public sealed class PluginManager : IDisposable
             return _registryCache;
         }
 
-        // 嘗試從本地載入
-        _registryCache = PluginRegistry.LoadFromFile(ForgeDirectories.RegistryIndexFile);
+        // 嘗試從本地載入 (disk I/O → offload to thread pool)
+        _registryCache = await Task.Run(
+            () => PluginRegistry.LoadFromFile(ForgeDirectories.RegistryIndexFile), ct);
         if (_registryCache is not null)
         {
             return _registryCache;
@@ -738,11 +740,23 @@ public sealed class PluginManager : IDisposable
                     var logs = new List<string>();
                     var stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
-                    // FIXED: 實作編譯邏輯
-                    logs.Add($"[{{language}}] Compiling module '{module.Config.Name}'");
+                    // 1. Validate toolchain
+                    var (ok, msg) = await ValidateToolchainAsync(ct);
+                    if (!ok) { stopwatch.Stop(); return CompileResult.Failure(msg, logs, stopwatch.Elapsed); }
+                    logs.Add($"[{{langLower}}] Using: {msg}");
+
+                    // 2. Find source files
+                    var srcDir = Path.Combine(module.ModulePath, "src");
+                    if (!Directory.Exists(srcDir)) srcDir = module.ModulePath;
+                    var files = Directory.GetFiles(srcDir, "*.{{langLower}}", SearchOption.AllDirectories);
+                    if (files.Length == 0) { stopwatch.Stop(); return CompileResult.Failure("No source files found", logs, stopwatch.Elapsed); }
+                    logs.Add($"[{{langLower}}] Found {files.Length} source file(s)");
+
+                    // 3. TODO: Add compiler invocation here
+                    // var r = await ProcessRunner.RunAsync("{{langLower}}-compiler", $"\"{f}\"", ...);
 
                     stopwatch.Stop();
-                    return CompileResult.Success(Array.Empty<string>(), logs, stopwatch.Elapsed);
+                    return CompileResult.Failure("Compiler not configured — edit CompileAsync", logs, stopwatch.Elapsed);
                 }
 
                 public Task<InterfaceDescription?> ExtractInterfaceAsync(
@@ -760,8 +774,10 @@ public sealed class PluginManager : IDisposable
 
                 public async Task<(bool Available, string Message)> ValidateToolchainAsync(CancellationToken ct = default)
                 {
-                    // FIXED: 實作工具鏈驗證
-                    return (true, "{{language}} toolchain available");
+                    var exists = await ProcessRunner.CommandExistsAsync("{{langLower}}-compiler");
+                    return exists
+                        ? (true, "{{language}} toolchain available")
+                        : (false, "{{language}} compiler not found — install and add to PATH");
                 }
             }
             """;

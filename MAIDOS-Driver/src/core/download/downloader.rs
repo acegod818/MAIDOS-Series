@@ -80,7 +80,7 @@ pub fn download_driver(
     }
 
     let stdout = String::from_utf8_lossy(&output.stdout);
-    let file_size: u64 = stdout.trim().parse().unwrap_or(0);
+    let file_size: u64 = stdout.trim().parse().map_err(|e| format!("Failed to parse file size: {}", e))?;
 
     if file_size == 0 {
         return Err("Downloaded file is empty".into());
@@ -122,7 +122,7 @@ fn download_fallback(
     }
 
     let stdout = String::from_utf8_lossy(&output.stdout);
-    let file_size: u64 = stdout.trim().parse().unwrap_or(0);
+    let file_size: u64 = stdout.trim().parse().map_err(|e| format!("Failed to parse file size: {}", e))?;
 
     Ok(DownloadResult {
         file_path: save_path.to_string(),

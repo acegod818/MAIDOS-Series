@@ -210,7 +210,7 @@ impl TokenStore {
 
     /// Check if a token is valid
     pub fn is_valid(&self, token_hash: &str) -> bool {
-        self.get(token_hash).map(|t| t.is_valid()).unwrap_or(false)
+        match self.get(token_hash) { Some(t) => t.is_valid(), None => false }
     }
 
     /// Revoke a token

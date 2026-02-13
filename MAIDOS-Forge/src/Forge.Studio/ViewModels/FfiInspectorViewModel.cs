@@ -40,7 +40,7 @@ public partial class FfiInspectorViewModel : ViewModelBase
         InitializeModules();
         InitializeTargetLanguages();
         
-        // Load demo interfaces
+        // Initial sample data for UI preview (real analysis via Analyze button)
         LoadDemoInterfaces();
     }
 
@@ -166,10 +166,42 @@ public partial class FfiInspectorViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void Analyze()
+    private async void Analyze()
     {
-        // In real implementation, this would parse source files
-        LoadDemoInterfaces();
+        if (string.IsNullOrEmpty(SourcePath))
+        {
+            GeneratedCode = "// Error: No source path specified";
+            return;
+        }
+
+        try
+        {
+            // Use NativeSymbolExtractor for real source/binary analysis
+            var exports = await Forge.Core.NativeSymbolExtractor.ExtractFromSourceAsync(
+                SourcePath, SelectedLanguage ?? "c");
+            
+            if (exports.Count == 0)
+            {
+                exports = await Forge.Core.NativeSymbolExtractor.ExtractFromBinaryAsync(
+                    SourcePath, SelectedLanguage ?? "c");
+            }
+
+            Interfaces.Clear();
+            foreach (var fn in exports)
+            {
+                Interfaces.Add(new InterfaceItem
+                {
+                    Name = fn.Name,
+                    ReturnType = fn.ReturnType,
+                    Parameters = fn.Parameters?.Select(p => $"{p.Type} {p.Name}").ToList()
+                        ?? new List<string>()
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            GeneratedCode = $"// Analysis failed: {ex.Message}";
+        }
     }
 
     private void GenerateBindingCode()

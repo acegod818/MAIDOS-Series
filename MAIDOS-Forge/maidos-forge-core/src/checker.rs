@@ -196,17 +196,66 @@ impl RustChecker {
         }
     }
 
-    /// Extract variable name
+    /// Extract variable name from a declaration node
     fn extract_variable_name(&self, node: &SyntaxNode) -> String {
-        // Simplified implementation; actual logic would be more complex
+        // Parse variable name from common declaration patterns:
+        // let x = ..., var x = ..., const x = ..., int x = ...
+        let text = node.text.trim();
+        for prefix in &["let ", "var ", "const ", "mut "] {
+            if let Some(rest) = text.strip_prefix(prefix) {
+                if let Some(name) = rest.split(|c: char| !c.is_alphanumeric() && c != '_').next() {
+                    if !name.is_empty() { return name.to_string(); }
+                }
+            }
+        }
+        // Fallback: for typed declarations like "int x" or "String name"
+        let tokens: Vec<&str> = text.split_whitespace().collect();
+        if tokens.len() >= 2 {
+            let candidate = tokens[1].trim_end_matches(|c: char| !c.is_alphanumeric() && c != '_');
+            if !candidate.is_empty() { return candidate.to_string(); }
+        }
         node.text.clone()
     }
 
-    /// Check if a variable is used
+    /// Check if a variable is used (beyond its declaration)
     fn is_variable_used(&self, var_name: &str, node: &SyntaxNode) -> bool {
-        // Simplified implementation; actual logic would be more complex
-        node.text.contains(var_name) && !node.text.starts_with("let ")
+        // Search child nodes for usage; skip the declaration itself
+        fn search_children(name: &str, node: &SyntaxNode, skip_decl: bool) -> bool {
+            for child in &node.children {
+                let text = child.text.trim();
+                // Skip the declaration line
+                if skip_decl && (text.starts_with("let ") || text.starts_with("var ") ||
+                    text.starts_with("const ")) && text.contains(name) {
+                    continue;
+                }
+                // Check for word-boundary usage (avoid matching substrings)
+                if contains_identifier(text, name) {
+                    return true;
+                }
+                if search_children(name, child, false) {
+                    return true;
+                }
+            }
+            false
+        }
+        search_children(var_name, node, true)
     }
+}
+
+/// Check if text contains an identifier as a whole word (not substring)
+fn contains_identifier(text: &str, ident: &str) -> bool {
+    let mut start = 0;
+    while let Some(pos) = text[start..].find(ident) {
+        let abs_pos = start + pos;
+        let before_ok = abs_pos == 0 || !text.as_bytes()[abs_pos - 1].is_ascii_alphanumeric()
+            && text.as_bytes()[abs_pos - 1] != b'_';
+        let after_pos = abs_pos + ident.len();
+        let after_ok = after_pos >= text.len() || !text.as_bytes()[after_pos].is_ascii_alphanumeric()
+            && text.as_bytes()[after_pos] != b'_';
+        if before_ok && after_ok { return true; }
+        start = abs_pos + 1;
+    }
+    false
 }
 
 /// C language checker implementation

@@ -222,10 +222,7 @@ impl LanguagePlugin for GenericLanguagePlugin {
     }
 
     fn extensions(&self) -> &[&str] {
-        // We need to return a static lifetime reference here.
-        // For simplicity, we temporarily return an empty array.
-        // In the actual implementation, this should be obtained from the definition.
-        &[]
+        &self.cached_extensions
     }
 
     async fn compile(

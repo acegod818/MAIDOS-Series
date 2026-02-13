@@ -170,9 +170,10 @@ impl CohereProvider {
     }
 
     /// Check if a request contains vision content (Cohere doesn't support it)
-    pub fn has_vision_content(_req: &CompletionRequest) -> bool {
-        // Cohere doesn't support vision, always return false for detection
-        false
+    pub fn has_vision_content(req: &CompletionRequest) -> bool {
+        req.messages.iter().any(|msg| {
+            msg.content.iter().any(|c| matches!(c, crate::message::Content::Image { .. }))
+        })
     }
 }
 

@@ -1,3 +1,4 @@
+using Forge.Core;
 // MAIDOS-Forge Agda Language Plugin
 // Code-QC v2.2B Compliant | M11 Specialist Plugin - Verification Languages
 
@@ -54,7 +55,7 @@ public sealed class AgdaPlugin : ILanguagePlugin
         {
             var fn = Path.GetFileName(f);
             var bn = Path.GetFileNameWithoutExtension(f);
-            var outFile = Path.Combine(outDir, bn + ".out");
+            var outFile = Path.Combine(outDir, bn + ".agdai");
             logs.Add($"[Agda] Processing: {fn}");
 
             var r = await ProcessRunner.RunAsync("agda", $"\"{f}\"",
@@ -72,15 +73,15 @@ public sealed class AgdaPlugin : ILanguagePlugin
             : CompileResult.Failure("No artifacts", logs, sw.Elapsed);
     }
 
-    public Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
-        => Task.FromResult<InterfaceDescription?>(new InterfaceDescription
+    public async Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
+        => new InterfaceDescription
         {
             Version = "1.0",
             Module = new InterfaceModule { Name = Path.GetFileNameWithoutExtension(artifactPath), Version = "1.0.0" },
             Language = new InterfaceLanguage { Name = "agda", Abi = "native" },
-            Exports = Array.Empty<ExportedFunction>()
+            Exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "agda", ct)).ToArray()
         });
 
     public GlueCodeResult GenerateGlue(InterfaceDescription src, string target)
-        => GlueCodeResult.Failure($"Agda glue generation not supported for {target}");
+        => NativeSymbolExtractor.GenerateCHeader(src, target);
 }

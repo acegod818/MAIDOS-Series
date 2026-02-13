@@ -42,7 +42,7 @@ impl LocalLlm {
     }
 
     /// Process LLM request
-    pub async fn complete(&self, request: &LlmRequest) -> Result<LlmResponse> {
+    pub fn complete(&self, request: &LlmRequest) -> Result<LlmResponse> {
         // Build prompt
         let prompt = request.messages.iter()
             .map(|m| m.content.as_str())

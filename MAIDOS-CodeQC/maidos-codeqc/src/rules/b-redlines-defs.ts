@@ -1,6 +1,6 @@
 /**
- * Code-QC v3.3 - B 工作紀律
- * §2 十八紅線 (R01-R18)
+ * Code-QC v3.5 - B 工作紀律
+ * §2 二十八紅線 (R01-R28)
  */
 
 import type { Rule, RedlineId } from '../types.js';
@@ -31,6 +31,18 @@ export const REDLINES: Redline[] = [
   { id: 'R16', category: 'redline', name: '空方法', nameEn: 'Empty Method', description: '方法簽名正確但方法體空或僅return默認值', severity: 'error', action: '🔴 砍掉重寫', autoDetectable: true, detectMethod: 'regex', implemented: true },
   { id: 'R17', category: 'redline', name: '詐欺物件', nameEn: 'Fraud Object', description: '物件結構正確但數據硬編碼/不來自真實數據源', severity: 'error', action: '🔴 砍掉重寫', autoDetectable: true, detectMethod: 'regex', implemented: true },
   { id: 'R18', category: 'redline', name: '繞道實作', nameEn: 'Bypass Implementation', description: '跳過應使用的API/DB/Config用假資料替代', severity: 'error', action: '🔴 砍掉重寫', autoDetectable: true, detectMethod: 'regex', implemented: true },
+  // === v3.4 新增: 審計補漏六規則 (R19-R24) ===
+  { id: 'R19', category: 'redline', name: '固定字串回傳', nameEn: 'Hardcoded String Return', description: '函數回傳寫死字串/固定值而非真實計算結果', severity: 'error', action: '🔴 接入真實數據源', autoDetectable: true, detectMethod: 'regex', implemented: true },
+  { id: 'R20', category: 'redline', name: '模板複製灌水', nameEn: 'Template Copy-Paste', description: '大量檔案結構相同僅改名字，功能全空', severity: 'error', action: '🔴 實作或移除', autoDetectable: true, detectMethod: 'regex+heuristic', implemented: true },
+  { id: 'R21', category: 'redline', name: '假認證', nameEn: 'Fake Auth', description: '收了憑證參數但未用於簽名/驗證，或壓 unused warning', severity: 'error', action: '🔴 實作真實認證', autoDetectable: true, detectMethod: 'regex', implemented: true },
+  { id: 'R22', category: 'redline', name: '資料量不足', nameEn: 'Insufficient Data', description: '字典/對照表/配置數據量遠低於實用門檻', severity: 'error', action: '🔴 補齊數據', autoDetectable: true, detectMethod: 'heuristic', implemented: true },
+  { id: 'R23', category: 'redline', name: '永遠失敗', nameEn: 'Always-Fail Path', description: '函數永遠回 Err/Failure/false，等於功能不存在', severity: 'error', action: '🔴 實作或標記 unsupported', autoDetectable: true, detectMethod: 'regex', implemented: true },
+  { id: 'R24', category: 'redline', name: '自白註解', nameEn: 'Self-Confessing Comment', description: '註解承認是假實作（In a real implementation/simplified/for now）', severity: 'error', action: '🔴 實作真實邏輯', autoDetectable: true, detectMethod: 'regex', implemented: true },
+  // === v3.5 新增: 深掃補漏四規則 (R25-R28) ===
+  { id: 'R25', category: 'redline', name: '日誌灌水', nameEn: 'Log Stuffing', description: '函數體只有 log 語句 + trivial return，無實際業務邏輯', severity: 'error', action: '🔴 實作真實邏輯', autoDetectable: true, detectMethod: 'regex+heuristic', implemented: true },
+  { id: 'R26', category: 'redline', name: '幽靈異步', nameEn: 'Phantom Async', description: 'async fn 內部沒有任何 .await 調用，假裝是異步操作', severity: 'error', action: '🔴 加入真實 .await 或移除 async', autoDetectable: true, detectMethod: 'regex', implemented: true },
+  { id: 'R27', category: 'redline', name: '錯誤洗白', nameEn: 'Error Laundering', description: '在安全相關操作中用 unwrap_or_default() 靜默吞掉錯誤', severity: 'error', action: '🔴 用 ? 傳播錯誤或明確處理', autoDetectable: true, detectMethod: 'regex+context', implemented: true },
+  { id: 'R28', category: 'redline', name: '複製軍團', nameEn: 'Clone Army', description: '跨檔案完全相同的函數體，結構膨脹灌水', severity: 'error', action: '🔴 抽取共用函數', autoDetectable: true, detectMethod: 'heuristic', implemented: true },
 ];
 
 export function getRedline(id: RedlineId): Redline | undefined {

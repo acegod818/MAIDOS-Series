@@ -159,8 +159,38 @@ public sealed class GoPlugin : ILanguagePlugin
     {
         var exports = new List<ExportedFunction>();
 
-        // FIXED: Implement Go-specific interface extraction
-        // For now, return basic interface with file name
+        // Use 'go tool nm' to extract exported symbols from Go binary
+        var nmResult = await ProcessRunner.RunAsync(
+            "go", $"tool nm \"{artifactPath}\"",
+            new ProcessConfig { Timeout = TimeSpan.FromSeconds(30) }, ct);
+
+        if (nmResult.IsSuccess && !string.IsNullOrEmpty(nmResult.Stdout))
+        {
+            foreach (var line in nmResult.Stdout.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+            {
+                var parts = line.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length < 3) continue;
+
+                var symbolType = parts[1];
+                var symbolName = parts[2];
+
+                // T = text (code) symbol, exported
+                if (symbolType != "T") continue;
+
+                // Skip Go runtime internals
+                if (symbolName.StartsWith("runtime.") || symbolName.StartsWith("type.") ||
+                    symbolName.StartsWith("go.") || symbolName.StartsWith("internal/"))
+                    continue;
+
+                exports.Add(new ExportedFunction
+                {
+                    Name = symbolName,
+                    ReturnType = "unknown",
+                    Parameters = Array.Empty<FunctionParameter>()
+                });
+            }
+        }
+
         return new InterfaceDescription
         {
             Version = "1.0",

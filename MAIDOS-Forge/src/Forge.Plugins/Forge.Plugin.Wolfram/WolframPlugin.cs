@@ -1,3 +1,4 @@
+using Forge.Core;
 // MAIDOS-Forge Wolfram Language Plugin
 // Code-QC v2.2B Compliant
 // M10 Extension Plugin - Scientific Languages
@@ -103,8 +104,7 @@ public sealed class WolframPlugin : ILanguagePlugin
             if (!File.Exists(artifactPath))
                 return null;
 
-            // 在實際實現中，我們需要解析 Wolfram 源碼中的函數定義
-            // 這裏返回一個簡化的接口描述
+                        // 這裏返回一個簡化的接口描述
             
             return new InterfaceDescription
             {
@@ -120,7 +120,7 @@ public sealed class WolframPlugin : ILanguagePlugin
                     Abi = "native",
                     Mode = "interpreted"
                 },
-                Exports = Array.Empty<ExportedFunction>(), // 實際實現中需要解析源碼
+                Exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "wolfram", ct)).ToArray(),
                 Imports = Array.Empty<ImportedFunction>()
             };
         }

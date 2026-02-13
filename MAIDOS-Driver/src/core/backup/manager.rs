@@ -99,7 +99,10 @@ pub fn backup_drivers(backup_path: &str) -> Result<Vec<BackupEntry>, Box<dyn std
                 .and_then(|s| s.to_str())
                 .unwrap_or("unknown")
                 .to_string();
-            let size = entry.metadata().map(|m| m.len()).unwrap_or(0);
+            let size = entry.metadata().map(|m| m.len()).unwrap_or_else(|e| {
+                log::warn!("Failed to read file metadata: {}", e);
+                0
+            });
             entries.push(BackupEntry {
                 id: name,
                 timestamp: timestamp.clone(),
@@ -115,10 +118,4 @@ pub fn backup_drivers(backup_path: &str) -> Result<Vec<BackupEntry>, Box<dyn std
         &format!("{} drivers exported to {}", entries.len(), backup_path),
     );
     Ok(entries)
-}
-
-/// Initialize backup module.
-pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    log::info!("Backup module initialized");
-    Ok(())
 }

@@ -5,8 +5,3 @@
 
 pub mod driver_recommender;
 pub mod hardware_identifier;
-
-pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    log::info!("AI module initialized");
-    Ok(())
-}

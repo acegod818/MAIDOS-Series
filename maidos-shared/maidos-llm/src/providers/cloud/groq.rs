@@ -203,7 +203,28 @@ impl LlmProvider for GroqProvider {
     }
 
     async fn complete_stream(&self, _request: CompletionRequest) -> Result<CompletionStream> {
-        Err(LlmError::Provider("Streaming not yet implemented for Groq".to_string()))
+        {
+        // Use SSE (Server-Sent Events) streaming — same protocol as OpenAI-compatible APIs
+        let url = format!("{}/chat/completions", self.base_url);
+        let mut request_body = self.build_request_body(&_request)?;
+        request_body["stream"] = serde_json::json!(true);
+
+        let response = self.client
+            .post(&url)
+            .headers(self.build_headers()?)
+            .json(&request_body)
+            .send()
+            .await
+            .map_err(|e| LlmError::Network(e.to_string()))?;
+
+        if !response.status().is_success() {
+            let status = response.status();
+            let body = response.text().await.unwrap_or_default();
+            return Err(LlmError::Provider(format!("Groq streaming error {}: {}", status, body)));
+        }
+
+        Ok(CompletionStream::from_sse_response(response))
+    }
     }
 
     async fn list_models(&self) -> Result<Vec<ModelInfo>> {

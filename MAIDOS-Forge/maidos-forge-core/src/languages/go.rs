@@ -130,11 +130,17 @@ impl LanguageAdapter for GoAdapter {
     }
     
     async fn generate_glue(&self, interface: &str, target_language: &str) -> Result<String, CompilerError> {
-        // 生成膠水代碼
-        info!("[MAIDOS-AUDIT] 生成{}語言的膠水代碼", target_language);
-        
-        // 這是一個簡化的實現
-        Ok(format!("// {}語言的膠水代碼\n{}", target_language, interface))
+        info!("Generating Go FFI glue for {}", target_language);
+
+        // Generate cgo-style header for C-compatible symbols
+        Ok(format!(
+            "/* FFI glue: Go -> {} */\npackage main\n\n// #cgo LDFLAGS: -L. -lmodule\n{}\nimport \"C\"\n",
+            target_language,
+            interface.lines()
+                .map(|sym| format!("// extern int {}();", sym.trim()))
+                .collect::<Vec<_>>()
+                .join("\n")
+        ))
     }
 }
 

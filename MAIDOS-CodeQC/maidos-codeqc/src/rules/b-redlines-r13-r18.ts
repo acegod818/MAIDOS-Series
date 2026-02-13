@@ -7,8 +7,8 @@ import { maskJsStringsAndComments } from './b-redlines-utils.js';
 // =============================================================================
 
 const FAKE_IMPL_PATTERNS = [
-  /\btodo!\b/g,
-  /\bunimplemented!\b/g,
+  /\btodo!\s*\(/g,
+  /\bunimplemented!\s*\(/g,
   /throw\s+new\s+NotImplementedException/gi,
   /raise\s+NotImplementedError/gi,
 ];

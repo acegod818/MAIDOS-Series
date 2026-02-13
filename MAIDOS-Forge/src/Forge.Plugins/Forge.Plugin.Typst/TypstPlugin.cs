@@ -1,3 +1,4 @@
+using Forge.Core;
 // MAIDOS-Forge Typst Language Plugin
 // Code-QC v2.2B Compliant | M11 Specialist Plugin - Document Languages
 
@@ -54,7 +55,6 @@ public sealed class TypstPlugin : ILanguagePlugin
         {
             var fn = Path.GetFileName(f);
             var bn = Path.GetFileNameWithoutExtension(f);
-            var outFile = Path.Combine(outDir, bn + ".out");
             logs.Add($"[Typst] Processing: {fn}");
 
             var pdfOut = Path.Combine(outDir, bn + ".pdf");
@@ -73,15 +73,15 @@ public sealed class TypstPlugin : ILanguagePlugin
             : CompileResult.Failure("No artifacts", logs, sw.Elapsed);
     }
 
-    public Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
-        => Task.FromResult<InterfaceDescription?>(new InterfaceDescription
+    public async Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
+        => new InterfaceDescription
         {
             Version = "1.0",
             Module = new InterfaceModule { Name = Path.GetFileNameWithoutExtension(artifactPath), Version = "1.0.0" },
             Language = new InterfaceLanguage { Name = "typst", Abi = "native" },
-            Exports = Array.Empty<ExportedFunction>()
+            Exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "typst", ct)).ToArray()
         });
 
     public GlueCodeResult GenerateGlue(InterfaceDescription src, string target)
-        => GlueCodeResult.Failure($"Typst glue generation not supported for {target}");
+        => NativeSymbolExtractor.GenerateCHeader(src, target);
 }

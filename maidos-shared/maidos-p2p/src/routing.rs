@@ -99,11 +99,20 @@ impl RoutingBehaviour {
     }
     
     /// Get a record from the DHT
-    pub async fn get_record(&mut self, key: Vec<u8>) -> Result<Vec<u8>> {
-        let query_id = self.kademlia.get_record(RecordKey::new(&key));
-        // In a real implementation, we would wait for the query result
-        // For now, we'll just return an empty vector
-        Ok(vec![])
+    pub fn get_record(&mut self, key: Vec<u8>) -> Result<Vec<u8>> {
+        let record_key = RecordKey::new(&key);
+
+        // Check local store first
+        if let Some(record) = self.kademlia.store_mut().get(&record_key) {
+            return Ok(record.value.clone());
+        }
+
+        // Issue a DHT query; the caller should drive the Swarm event loop
+        // until a KademliaEvent::OutboundQueryProgressed with GetRecordOk is received.
+        let _query_id = self.kademlia.get_record(record_key);
+
+        // Return not-found so the caller knows to poll the swarm for the async result
+        Err(P2pError::Routing("Record not in local store; DHT query issued — poll swarm events for result".to_string()))
     }
     
     /// Get peer information
@@ -120,7 +129,7 @@ impl RoutingBehaviour {
         Some(PeerInfo {
             id: *peer_id,
             addresses,
-            protocols: vec![], // In a real implementation, we'd collect actual protocols
+            protocols: self.swarm.connected_peers().map(|p| p.to_string()).collect(),
             last_seen: std::time::SystemTime::now(),
         })
     }

@@ -193,7 +193,7 @@ pub unsafe extern "C" fn maidos_auth_capability_from_name(name: *const c_char) -
         Err(_) => return 0,
     };
 
-    Capability::from_name(name_str).map(|c| c as u32).unwrap_or(0)
+    Capability::from_name(name_str).map(|c| c as u32).unwrap_or_else(|| { log::warn!("Unknown capability name: {}", name_str); 0 })
 }
 
 /// Free a string returned by maidos_auth functions

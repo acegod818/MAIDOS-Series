@@ -1,0 +1,47 @@
+# === MAIDOS-Series Root .gitignore ===
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Rust
+/target/
+**/target/
+
+# .NET
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+.vs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Evidence & proof (generated, not source)
+evidence/
+proof/
+
+# Build artifacts
+*.dll
+*.exe
+*.msi
+*.pdb
+dist_release/
+
+# Env
+.env
+.env.*
+
+# Claude / AI
+.claude/
+.cline/
+.clinerules

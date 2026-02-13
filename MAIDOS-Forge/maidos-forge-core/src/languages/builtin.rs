@@ -55,7 +55,10 @@ impl LanguageAdapter for CLanguageAdapter {
     }
 
     async fn check_toolchain(&self) -> Result<bool> {
-        Ok(true)
+        // Check for clang or gcc on PATH
+        let has_clang = std::process::Command::new("clang").arg("--version").output().is_ok();
+        let has_gcc = std::process::Command::new("gcc").arg("--version").output().is_ok();
+        Ok(has_clang || has_gcc)
     }
 
     async fn toolchain_info(&self) -> Result<ToolchainInfo> {
@@ -102,13 +105,33 @@ impl LanguageAdapter for CLanguageAdapter {
     }
 
     async fn generate_glue(&self, interface: &InterfaceDescription, target_language: &str) -> Result<GlueCodeResult> {
+        let exports = &interface.exports;
         match target_language {
             "rust" => {
-                let code = format!("// Rust glue code for {}\n", interface.module.name);
+                let extern_decls: Vec<String> = exports.iter().map(|f| {
+                    let params = f.parameters.iter()
+                        .map(|p| format!("{}: {}", p.name, p.param_type))
+                        .collect::<Vec<_>>().join(", ");
+                    format!("    pub fn {}({}) -> {};", f.name, params, f.return_type)
+                }).collect();
+                let code = format!(
+                    "// FFI bindings: C -> Rust for {}\nextern \"C\" {{\n{}\n}}\n",
+                    interface.module.name, extern_decls.join("\n")
+                );
                 Ok(GlueCodeResult::success(code, format!("{}_glue.rs", interface.module.name), "rust".to_string()))
             },
             "csharp" => {
-                let code = format!("// C# glue code for {}\n", interface.module.name);
+                let pinvoke_decls: Vec<String> = exports.iter().map(|f| {
+                    let params = f.parameters.iter()
+                        .map(|p| format!("{} {}", p.param_type, p.name))
+                        .collect::<Vec<_>>().join(", ");
+                    format!("    [DllImport(\"{}\")]\n    public static extern {} {}({});",
+                        interface.module.name, f.return_type, f.name, params)
+                }).collect();
+                let code = format!(
+                    "// P/Invoke bindings for {}\nusing System.Runtime.InteropServices;\n\npublic static class {}Bindings {{\n{}\n}}\n",
+                    interface.module.name, interface.module.name, pinvoke_decls.join("\n\n")
+                );
                 Ok(GlueCodeResult::success(code, format!("{}_glue.cs", interface.module.name), "csharp".to_string()))
             },
             _ => Ok(GlueCodeResult::failure(format!("Unsupported target language: {}", target_language)))
@@ -152,7 +175,9 @@ impl LanguageAdapter for RustLanguageAdapter {
     }
 
     async fn check_toolchain(&self) -> Result<bool> {
-        Ok(true)
+        // Check for rustc on PATH
+        let output = std::process::Command::new("rustc").arg("--version").output();
+        Ok(output.is_ok())
     }
 
     async fn toolchain_info(&self) -> Result<ToolchainInfo> {
@@ -194,9 +219,19 @@ impl LanguageAdapter for RustLanguageAdapter {
     }
 
     async fn generate_glue(&self, interface: &InterfaceDescription, target_language: &str) -> Result<GlueCodeResult> {
+        let exports = &interface.exports;
         match target_language {
             "c" => {
-                let code = format!("// C glue code for {}\n", interface.module.name);
+                let extern_decls: Vec<String> = exports.iter().map(|f| {
+                    let params = f.parameters.iter()
+                        .map(|p| format!("{} {}", p.param_type, p.name))
+                        .collect::<Vec<_>>().join(", ");
+                    format!("{} {}({});", f.return_type, f.name, if params.is_empty() { "void".to_string() } else { params })
+                }).collect();
+                let code = format!(
+                    "/* FFI glue: Rust -> C for {} */\n#pragma once\n#ifdef __cplusplus\nextern \"C\" {{\n#endif\n\n{}\n\n#ifdef __cplusplus\n}}\n#endif\n",
+                    interface.module.name, extern_decls.join("\n")
+                );
                 Ok(GlueCodeResult::success(code, format!("{}_glue.c", interface.module.name), "c".to_string()))
             },
             _ => Ok(GlueCodeResult::failure(format!("Unsupported target language: {}", target_language)))

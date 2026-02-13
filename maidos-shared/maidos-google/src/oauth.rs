@@ -141,7 +141,11 @@ impl GoogleService for OAuth2Client {
     }
     
     async fn refresh_auth(&mut self) -> Result<()> {
-        // OAuth2 client doesn't need to refresh itself
+        // OAuth2Client is the root auth provider — it refreshes others, not itself.
+        // Validate that the client credentials are still configured.
+        if self.client_id.is_empty() || self.client_secret.is_empty() {
+            return Err(GoogleError::Auth("OAuth2 client credentials not configured".to_string()));
+        }
         Ok(())
     }
 }

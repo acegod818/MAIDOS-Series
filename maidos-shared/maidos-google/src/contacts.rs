@@ -10,6 +10,8 @@ pub struct Contacts {
     client: Client,
     auth: Auth,
     base_url: String,
+    /// OAuth2 client for token refresh (optional)
+    oauth_client: Option<crate::OAuth2Client>,
 }
 
 /// Contact information
@@ -319,7 +321,26 @@ impl GoogleService for Contacts {
     }
     
     async fn refresh_auth(&mut self) -> Result<()> {
-        // In a real implementation, this would refresh the auth token if needed
+        // Check if token is still valid
+        if let Some(expires_at) = self.auth.expires_at {
+            if std::time::SystemTime::now() < expires_at {
+                return Ok(()); // Token still valid
+            }
+        }
+
+        // Attempt refresh via OAuth2Client + refresh_token
+        let oauth = self.oauth_client.as_ref()
+            .ok_or_else(|| GoogleError::Auth("No OAuth2Client configured for token refresh".to_string()))?;
+        let refresh_token = self.auth.refresh_token.as_ref()
+            .ok_or_else(|| GoogleError::Auth("No refresh_token available".to_string()))?;
+
+        let token_response = oauth.refresh_token(refresh_token).await?;
+        self.auth.access_token = token_response.access_token;
+        if let Some(expires_in) = token_response.expires_in {
+            self.auth.expires_at = Some(
+                std::time::SystemTime::now() + std::time::Duration::from_secs(expires_in as u64)
+            );
+        }
         Ok(())
     }
 }

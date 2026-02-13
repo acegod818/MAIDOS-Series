@@ -372,10 +372,27 @@ pub unsafe extern "C" fn ime_pinyin_lookup(
 // =====================================================================
 
 /// Initialize IME Core
+///
+/// Verifies that the core input scheme subsystem is functional by
+/// creating the default Bopomofo scheme and running a smoke test.
+/// Returns 0 on success, -1 on failure (check ime_last_error for details).
 #[no_mangle]
 pub extern "C" fn ime_init() -> i32 {
-    // No special initialization needed currently; interface reserved for future extension
-    0
+    // Smoke-test: create the default scheme and verify it can process input
+    let scheme = SchemeFactory::create_scheme_simple(&SchemeType::Bopomofo);
+    match scheme.process_input("ㄅ") {
+        Ok(candidates) => {
+            if candidates.is_empty() {
+                set_last_error("IME init warning: bopomofo scheme returned no candidates for test input".to_string());
+                // Non-fatal: the scheme works but the table might be minimal
+            }
+            0
+        }
+        Err(e) => {
+            set_last_error(format!("IME init failed: SchemeFactory smoke test error: {}", e));
+            -1
+        }
+    }
 }
 
 // =====================================================================

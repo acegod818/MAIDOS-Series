@@ -62,9 +62,3 @@ pub fn restore_drivers(backup_path: &str) -> Result<(), Box<dyn std::error::Erro
         Ok(())
     }
 }
-
-/// 初始化還原模組
-pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    log::info!("還原模組初始化完成");
-    Ok(())
-}

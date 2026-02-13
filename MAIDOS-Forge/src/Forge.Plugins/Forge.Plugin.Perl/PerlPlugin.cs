@@ -1,3 +1,4 @@
+using Forge.Core;
 // MAIDOS-Forge Perl Language Plugin
 
 using System.Text;
@@ -35,12 +36,14 @@ public sealed class PerlPlugin : ILanguagePlugin
     {
         var logs = new List<string>();
         var sw = System.Diagnostics.Stopwatch.StartNew();
+
         var (ok, msg) = await ValidateToolchainAsync(ct);
         if (!ok) { sw.Stop(); return CompileResult.Failure(msg, logs, sw.Elapsed); }
         logs.Add($"[Perl] Using: {msg}");
 
         var srcDir = Path.Combine(module.ModulePath, "src");
         if (!Directory.Exists(srcDir)) srcDir = module.ModulePath;
+
         var files = SourceExtensions.SelectMany(e => Directory.GetFiles(srcDir, $"*{e}", SearchOption.AllDirectories)).ToArray();
         if (files.Length == 0) { sw.Stop(); return CompileResult.Failure("No source files found", logs, sw.Elapsed); }
 
@@ -51,31 +54,34 @@ public sealed class PerlPlugin : ILanguagePlugin
         foreach (var f in files)
         {
             var fn = Path.GetFileName(f);
-            var outFile = Path.Combine(outDir, Path.GetFileNameWithoutExtension(f) + ".out");
-            logs.Add($"[Perl] Processing: {fn}");
+            logs.Add($"[Perl] Syntax check: {fn}");
+
             var r = await ProcessRunner.RunAsync("perl", $"-c \"{f}\"",
-                new ProcessConfig { WorkingDirectory = Path.GetDirectoryName(f) ?? module.ModulePath, Timeout = TimeSpan.FromMinutes(10) }, ct);
+                new ProcessConfig { WorkingDirectory = Path.GetDirectoryName(f) ?? module.ModulePath, Timeout = TimeSpan.FromMinutes(2) }, ct);
             if (!string.IsNullOrEmpty(r.Stdout)) logs.Add(r.Stdout);
             if (!string.IsNullOrEmpty(r.Stderr)) logs.Add(r.Stderr);
-            if (!r.IsSuccess) { sw.Stop(); return CompileResult.Failure($"Failed: {fn}: {r.Stderr}", logs, sw.Elapsed); }
-            artifacts.Add(outFile);
+            if (!r.IsSuccess) { sw.Stop(); return CompileResult.Failure($"Syntax error: {fn}: {r.Stderr}", logs, sw.Elapsed); }
+
+            // Copy validated source as deliverable
+            var dest = Path.Combine(outDir, fn);
+            File.Copy(f, dest, overwrite: true);
+            artifacts.Add(dest);
         }
 
-        if (artifacts.Count == 0) artifacts.AddRange(Directory.GetFiles(outDir));
         sw.Stop();
         return artifacts.Count > 0 ? CompileResult.Success(artifacts.ToArray(), logs, sw.Elapsed)
             : CompileResult.Failure("No artifacts", logs, sw.Elapsed);
     }
 
-    public Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
-        => Task.FromResult<InterfaceDescription?>(new InterfaceDescription
+    public async Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
+        => new InterfaceDescription
         {
             Version = "1.0",
             Module = new InterfaceModule { Name = Path.GetFileNameWithoutExtension(artifactPath), Version = "1.0.0" },
             Language = new InterfaceLanguage { Name = "perl", Abi = "native" },
-            Exports = Array.Empty<ExportedFunction>()
+            Exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "perl", ct)).ToArray()
         });
 
     public GlueCodeResult GenerateGlue(InterfaceDescription src, string target)
-        => GlueCodeResult.Failure($"Perl glue generation not supported for {target}");
+        => NativeSymbolExtractor.GenerateCHeader(src, target);
 }

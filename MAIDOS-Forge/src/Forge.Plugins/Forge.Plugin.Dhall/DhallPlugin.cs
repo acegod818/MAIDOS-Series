@@ -1,3 +1,4 @@
+using Forge.Core;
 // MAIDOS-Forge Dhall Language Plugin
 // Code-QC v2.2B Compliant | M11 Specialist Plugin - Config Languages
 
@@ -53,34 +54,34 @@ public sealed class DhallPlugin : ILanguagePlugin
         foreach (var f in files)
         {
             var fn = Path.GetFileName(f);
-            var bn = Path.GetFileNameWithoutExtension(f);
-            var outFile = Path.Combine(outDir, bn + ".out");
-            logs.Add($"[Dhall] Processing: {fn}");
+            logs.Add($"[Dhall] Validating: {fn}");
 
-            var jsonOut = Path.Combine(outDir, bn + ".json");
-            var r = await ProcessRunner.RunAsync("dhall", $"\"{f}\"",
-                new ProcessConfig { WorkingDirectory = module.ModulePath, Timeout = TimeSpan.FromMinutes(2) }, ct);
-            if (!string.IsNullOrEmpty(r.Stdout)) { File.WriteAllText(jsonOut, r.Stdout); artifacts.Add(jsonOut); logs.Add(r.Stdout); }
+            var r = await ProcessRunner.RunAsync("dhall", $"text --file \"{f}\"",
+                new ProcessConfig { WorkingDirectory = Path.GetDirectoryName(f) ?? module.ModulePath, Timeout = TimeSpan.FromMinutes(10) }, ct);
+            if (!string.IsNullOrEmpty(r.Stdout)) logs.Add(r.Stdout);
             if (!string.IsNullOrEmpty(r.Stderr)) logs.Add(r.Stderr);
-        }
+            if (!r.IsSuccess) { sw.Stop(); return CompileResult.Failure($"Failed: {fn}: {r.Stderr}", logs, sw.Elapsed); }
 
-        if (artifacts.Count == 0)
-            artifacts.AddRange(Directory.GetFiles(outDir).Where(x => !x.EndsWith(".tmp")));
+            // Interpreted language: copy validated source as deliverable
+            var dest = Path.Combine(outDir, fn);
+            File.Copy(f, dest, overwrite: true);
+            artifacts.Add(dest);
+        }
 
         sw.Stop();
         return artifacts.Count > 0 ? CompileResult.Success(artifacts.ToArray(), logs, sw.Elapsed)
             : CompileResult.Failure("No artifacts", logs, sw.Elapsed);
     }
 
-    public Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
-        => Task.FromResult<InterfaceDescription?>(new InterfaceDescription
+    public async Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
+        => new InterfaceDescription
         {
             Version = "1.0",
             Module = new InterfaceModule { Name = Path.GetFileNameWithoutExtension(artifactPath), Version = "1.0.0" },
             Language = new InterfaceLanguage { Name = "dhall", Abi = "native" },
-            Exports = Array.Empty<ExportedFunction>()
+            Exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "dhall", ct)).ToArray()
         });
 
     public GlueCodeResult GenerateGlue(InterfaceDescription src, string target)
-        => GlueCodeResult.Failure($"Dhall glue generation not supported for {target}");
+        => NativeSymbolExtractor.GenerateCHeader(src, target);
 }

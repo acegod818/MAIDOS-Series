@@ -44,9 +44,3 @@ pub struct UnknownDevice {
     pub vendor: String,
     pub status: String,
 }
-
-/// 初始化未知設備識別模組
-pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    log::info!("未知設備識別模組初始化完成");
-    Ok(())
-}

@@ -1,3 +1,4 @@
+using Forge.Core;
 // MAIDOS-Forge C# Language Plugin
 // UEP v1.7C Compliant - Zero Technical Debt
 // Standalone Plugin Module
@@ -301,7 +302,7 @@ public sealed class CSharpLanguagePlugin : ILanguagePlugin
                 Abi = "clr",
                 Mode = "clr"
             },
-            Exports = Array.Empty<ExportedFunction>()
+            Exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "csharp", ct)).ToArray()
         });
     }
 

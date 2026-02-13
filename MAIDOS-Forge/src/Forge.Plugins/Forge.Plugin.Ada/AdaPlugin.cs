@@ -1,3 +1,4 @@
+using Forge.Core;
 // MAIDOS-Forge Ada Language Plugin
 // Code-QC v2.2B Compliant | Tier C Plugin
 
@@ -54,15 +55,15 @@ public sealed class AdaPlugin : ILanguagePlugin
         {
             var fn = Path.GetFileName(f);
             var bn = Path.GetFileNameWithoutExtension(f);
-            var outFile = Path.Combine(outDir, bn + ".out");
+            var outFile = Path.Combine(outDir, bn);
             logs.Add($"[Ada] Processing: {fn}");
 
-            var r = await ProcessRunner.RunAsync("gnatmake", $"\"{f}\"",
+            var r = await ProcessRunner.RunAsync("gnatmake", $"-o \"{outDir}/{bn}\" \"{f}\"",
                 new ProcessConfig { WorkingDirectory = Path.GetDirectoryName(f) ?? module.ModulePath, Timeout = TimeSpan.FromMinutes(10) }, ct);
             if (!string.IsNullOrEmpty(r.Stdout)) logs.Add(r.Stdout);
             if (!string.IsNullOrEmpty(r.Stderr)) logs.Add(r.Stderr);
             if (!r.IsSuccess) { sw.Stop(); return CompileResult.Failure($"Failed: {fn}: {r.Stderr}", logs, sw.Elapsed); }
-            artifacts.Add(outFile);
+            if (File.Exists(outFile)) artifacts.Add(outFile);
         }
 
         if (artifacts.Count == 0)
@@ -73,15 +74,15 @@ public sealed class AdaPlugin : ILanguagePlugin
             : CompileResult.Failure("No artifacts", logs, sw.Elapsed);
     }
 
-    public Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
-        => Task.FromResult<InterfaceDescription?>(new InterfaceDescription
+    public async Task<InterfaceDescription?> ExtractInterfaceAsync(string artifactPath, CancellationToken ct = default)
+        => new InterfaceDescription
         {
             Version = "1.0",
             Module = new InterfaceModule { Name = Path.GetFileNameWithoutExtension(artifactPath), Version = "1.0.0" },
             Language = new InterfaceLanguage { Name = "ada", Abi = "native" },
-            Exports = Array.Empty<ExportedFunction>()
+            Exports = (await NativeSymbolExtractor.ExtractFromBinaryAsync(artifactPath, "ada", ct)).ToArray()
         });
 
     public GlueCodeResult GenerateGlue(InterfaceDescription src, string target)
-        => GlueCodeResult.Failure($"Ada glue generation not supported for {target}");
+        => NativeSymbolExtractor.GenerateCHeader(src, target);
 }

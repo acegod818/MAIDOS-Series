@@ -422,9 +422,3 @@ impl RegistryManager {
         Ok(subkeys)
     }
 }
-
-/// 初始化註冊表管理器模組
-pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    log::info!("Windows 註冊表管理器模組初始化完成");
-    Ok(())
-}

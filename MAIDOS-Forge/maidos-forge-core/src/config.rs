@@ -160,20 +160,21 @@ impl ForgeConfig {
     
     /// Load configuration from file
     pub fn load_from_file(path: &str) -> Result<Self, Box<dyn std::error::Error>> {
-        // [MAIDOS-AUDIT] Load configuration file
-        tracing::info!("[MAIDOS-AUDIT] Loading configuration file from {}", path);
+        tracing::info!("Loading configuration file from {}", path);
 
-        // This should implement the logic to load configuration from file
-        // For simplicity, we return the default configuration
-        Ok(Self::default())
+        let content = std::fs::read_to_string(path)
+            .map_err(|e| format!("Failed to read config file '{}': {}", path, e))?;
+        let config: Self = toml::from_str(&content)
+            .or_else(|_| serde_json::from_str(&content))
+            .map_err(|e| format!("Failed to parse config file '{}': {}", path, e))?;
+        Ok(config)
     }
     
     /// Save configuration to file
     pub fn save_to_file(&self, path: &str) -> Result<(), Box<dyn std::error::Error>> {
-        // [MAIDOS-AUDIT] Save configuration file
-        tracing::info!("[MAIDOS-AUDIT] Saving configuration to {}", path);
-
-        // This should implement the logic to save configuration to file
+        let json = serde_json::to_string_pretty(self)?;
+        std::fs::write(path, json.as_bytes())?;
+        tracing::info!("[MAIDOS-AUDIT] Saved configuration to {} ({} bytes)", path, json.len());
         Ok(())
     }
 }

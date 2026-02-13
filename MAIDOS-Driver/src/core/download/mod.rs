@@ -4,8 +4,3 @@
 //! (Background Intelligent Transfer Service) with integrity checks.
 
 pub mod downloader;
-
-pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    log::info!("Download module initialized");
-    Ok(())
-}

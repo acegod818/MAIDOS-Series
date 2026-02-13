@@ -42,7 +42,7 @@ impl Twitter {
 
         let response = self.client
             .post(&url)
-            .header("Authorization", self.build_bearer_token())
+            .header("Authorization", self.build_oauth1_header("POST", "https://api.twitter.com/2/tweets"))
             .header("Content-Type", "application/json")
             .json(&request_body)
             .send()
@@ -68,12 +68,63 @@ impl Twitter {
     }
 
     /// Build bearer token for authentication
-    fn build_bearer_token(&self) -> String {
-        // Touch credentials to avoid dead-code warnings; real OAuth 1.0a can be added later.
-        let _ = (&self.consumer_key, &self.consumer_secret, &self.access_token_secret);
-        // In a real implementation, this would use OAuth 1.0a
-        // For simplicity, we're returning a placeholder
-        format!("Bearer {}", self.access_token)
+    fn build_oauth1_header(&self, method: &str, url: &str) -> String {
+        use hmac::{Hmac, Mac};
+        use sha1::Sha1;
+        use base64::Engine;
+
+        let timestamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .expect("System clock before UNIX epoch")
+            .as_secs()
+            .to_string();
+        let nonce: String = (0..32)
+            .map(|_| format!("{:x}", rand::random::<u8>()))
+            .collect();
+
+        // Build the OAuth 1.0a parameter string (sorted by key)
+        let params = [
+            ("oauth_consumer_key", self.consumer_key.as_str()),
+            ("oauth_nonce", &nonce),
+            ("oauth_signature_method", "HMAC-SHA1"),
+            ("oauth_timestamp", &timestamp),
+            ("oauth_token", &self.access_token),
+            ("oauth_version", "1.0"),
+        ];
+
+        let param_string: String = params.iter()
+            .map(|(k, v)| format!("{}={}", urlencoding::encode(k), urlencoding::encode(v)))
+            .collect::<Vec<_>>()
+            .join("&");
+
+        // Build the signature base string
+        let base_string = format!(
+            "{}&{}&{}",
+            method.to_uppercase(),
+            urlencoding::encode(url),
+            urlencoding::encode(&param_string),
+        );
+
+        // Sign with HMAC-SHA1
+        let signing_key = format!(
+            "{}&{}",
+            urlencoding::encode(&self.consumer_secret),
+            urlencoding::encode(&self.access_token_secret),
+        );
+        let mut mac = Hmac::<Sha1>::new_from_slice(signing_key.as_bytes())
+            .expect("HMAC accepts any key length");
+        mac.update(base_string.as_bytes());
+        let signature = base64::engine::general_purpose::STANDARD.encode(mac.finalize().into_bytes());
+
+        // Build the Authorization header
+        format!(
+            r#"OAuth oauth_consumer_key="{}", oauth_nonce="{}", oauth_signature="{}", oauth_signature_method="HMAC-SHA1", oauth_timestamp="{}", oauth_token="{}", oauth_version="1.0""#,
+            urlencoding::encode(&self.consumer_key),
+            urlencoding::encode(&nonce),
+            urlencoding::encode(&signature),
+            timestamp,
+            urlencoding::encode(&self.access_token),
+        )
     }
 }
 

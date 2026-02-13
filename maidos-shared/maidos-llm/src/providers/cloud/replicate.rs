@@ -97,8 +97,14 @@ impl ReplicateProvider {
     }
 
     /// Check if a model supports function calling (most don't on Replicate)
-    pub fn model_supports_tools(_model: &str) -> bool {
-        false
+    pub fn model_supports_tools(model: &str) -> bool {
+        // Models known to support tool/function calling
+        let tool_capable = [
+            "meta/llama-3", "meta/llama-3.1", "meta/llama-3.2",
+            "mistralai/mistral", "mistralai/mixtral",
+        ];
+        let model_lower = model.to_lowercase();
+        tool_capable.iter().any(|prefix| model_lower.contains(prefix))
     }
 
     fn build_prediction_input(&self, req: &CompletionRequest) -> serde_json::Value {

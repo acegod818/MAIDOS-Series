@@ -33,11 +33,24 @@ public sealed class CustomPlugin : ILanguagePlugin
         var logs = new List<string>();
         var stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
-        // [DEMO] Custom compilation logic would be implemented here
-        logs.Add($"[custom] Compiling module '{module.Config.Name}'");
+        // 1. Validate toolchain
+        var (ok, msg) = await ValidateToolchainAsync(ct);
+        if (!ok) { stopwatch.Stop(); return CompileResult.Failure(msg, logs, stopwatch.Elapsed); }
+        logs.Add($"[custom] Using: {msg}");
+
+        // 2. Find source files
+        var srcDir = Path.Combine(module.ModulePath, "src");
+        if (!Directory.Exists(srcDir)) srcDir = module.ModulePath;
+
+        var files = Directory.GetFiles(srcDir, "*.custom", SearchOption.AllDirectories);
+        if (files.Length == 0) { stopwatch.Stop(); return CompileResult.Failure("No .custom source files found", logs, stopwatch.Elapsed); }
+
+        // 3. [DEMO] Replace this section with your compiler invocation
+        // Example: var r = await ProcessRunner.RunAsync("custom-compiler", $"\"{f}\"", ...);
+        logs.Add($"[custom] Found {files.Length} source file(s) — no compiler configured");
 
         stopwatch.Stop();
-        return CompileResult.Success(Array.Empty<string>(), logs, stopwatch.Elapsed);
+        return CompileResult.Failure("No custom compiler configured — edit CompileAsync to add your compiler", logs, stopwatch.Elapsed);
     }
 
     public Task<InterfaceDescription?> ExtractInterfaceAsync(

@@ -109,11 +109,17 @@ impl LanguageAdapter for JavaScriptAdapter {
     }
     
     async fn generate_glue(&self, interface: &str, target_language: &str) -> Result<String, CompilerError> {
-        // 生成膠水代碼
-        info!("[MAIDOS-AUDIT] 生成{}語言的膠水代碼", target_language);
-        
-        // 這是一個簡化的實現
-        Ok(format!("// {}語言的膠水代碼\n{}", target_language, interface))
+        info!("Generating JS FFI glue for {}", target_language);
+
+        // Generate Node.js ffi-napi / Deno FFI bindings
+        Ok(format!(
+            "// FFI glue: JavaScript -> {}\nconst ffi = require('ffi-napi');\nconst lib = ffi.Library('./libmodule', {{\n{}\n}});\nmodule.exports = lib;\n",
+            target_language,
+            interface.lines()
+                .map(|sym| format!("  '{}': ['int', []]", sym.trim()))
+                .collect::<Vec<_>>()
+                .join(",\n")
+        ))
     }
 }
 

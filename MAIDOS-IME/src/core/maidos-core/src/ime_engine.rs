@@ -85,7 +85,7 @@ impl ImeEngine {
     }
 
     /// Process input
-    pub async fn process_input(&self, input: &str, _context: &str) -> Result<String> {
+    pub fn process_input(&self, input: &str, _context: &str) -> Result<String> {
         // Based on configured input scheme, use SchemeFactory to get the corresponding Scheme and process input
         let scheme_name = &self.config.ime.default_scheme;
         let scheme_type = match scheme_name.as_str() {
@@ -126,7 +126,7 @@ impl ImeEngine {
     }
 
     /// Get cross-input candidates (supports combinations of different input schemes and charsets)
-    pub async fn get_cross_candidates(&self, input: &str, scheme: &str, charset: &Charset) -> Result<Vec<char>> {
+    pub fn get_cross_candidates(&self, input: &str, scheme: &str, charset: &Charset) -> Result<Vec<char>> {
         // Get candidates based on input scheme
         let scheme_type = match scheme {
             "bopomofo" => crate::schemes::SchemeType::Bopomofo,
