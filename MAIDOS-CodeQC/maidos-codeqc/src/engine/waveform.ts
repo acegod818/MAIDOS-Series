@@ -1,5 +1,5 @@
 /**
- * CodeQC v3.3 Engine — Waveform (三通道示波器)
+ * CodeQC v3.5 Engine — Waveform (三通道示波器)
  * 
  * CH1 (Y軸) 功能波形: 規格映射+測試+覆蓋+補完
  * CH2 (X軸) 品質波形: 編譯+Lint+紅線+安全

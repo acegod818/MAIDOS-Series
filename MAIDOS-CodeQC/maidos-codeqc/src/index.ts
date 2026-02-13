@@ -1,8 +1,8 @@
 /**
  * MAIDOS CodeQC
- * Code Quality Control implementing Code-QC v3.3 — 軟體工程硬體化
- * 
- * v3.3 升級: 五段硬體化架構 + LV1-LV9防偽 + E/F產品等級
+ * Code Quality Control implementing Code-QC v3.5 — 軟體工程硬體化
+ *
+ * v3.5 升級: 28紅線(R25-R28深掃) + 閾值對齊 + 五段硬體化架構 + LV1-LV9防偽 + E/F產品等級
  * v3.2 基礎: 反詐欺紅線(R16-R18) + 三軸證明(Z軸) + IAV + BLDS + DoD 8點
  * 
  * @packageDocumentation
@@ -52,7 +52,7 @@ export {
   BLDS_GATE_MINIMUM,
   DOD_DEFINITIONS,
   CODEQC_VERSION,
-  // v3.3 Hardwarization (軟體工程硬體化)
+  // v3.5Hardwarization (軟體工程硬體化)
   HARDWARIZATION_PILLARS,
   CIRCUIT_WORLDVIEW,
   GATE_CIRCUIT_LABELS,
@@ -122,10 +122,10 @@ export {
 } from './reporter/index.js';
 
 // Version
-export const VERSION = '0.3.3';
+export const VERSION = '0.3.5';
 
 // =============================================================================
-// v3.3 Engine (單品 + SaaS 共用核心引擎)
+// v3.5Engine (單品 + SaaS 共用核心引擎)
 // =============================================================================
 
 export {
@@ -152,7 +152,7 @@ export type {
   ProtectionReport,
 } from './engine/index.js';
 
-// v3.3 Types
+// v3.5Types
 export type {
   GateV33Id,
   GateV33Result,

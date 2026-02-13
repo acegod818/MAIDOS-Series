@@ -1,8 +1,8 @@
-# MAIDOS CodeQC — 路線圖 v2.3
+# MAIDOS CodeQC — 路線圖 v3.5
 
 > **版本**: v2.3 (Session 5 最終驗證)
 > **日期**: 2026-02-02
-> **引擎**: Code-QC v3.3 (軟體工程硬體化)
+> **引擎**: Code-QC v3.5 (軟體工程硬體化)
 > **形態**: 單品 (wocao 武器配件) + SaaS (對外營業)
 
 ---
@@ -11,7 +11,7 @@
 
 ```
 ┌─────────────────────────────┐
-│    CodeQC Engine Core v3.3  │ ← 共用引擎
+│    CodeQC Engine Core v3.5  │ ← 共用引擎
 │  Pipeline + Gates + LV1-9   │
 │  Waveform + DoD + ProofPack │
 └──────────┬──────────┬───────┘
@@ -45,7 +45,7 @@ Dashboard UI:   6 Tab 全功能 (API 連通驗證)  ✅
 | 模組 | 路徑 | 行數 | 狀態 |
 |:-----|:-----|:----:|:----:|
 | 類型+常量 | src/types.ts | 670 | ✅ |
-| 紅線規則 | src/rules/b-redlines.ts | 639 | ✅ 15/18 |
+| 紅線規則 | src/rules/b-redlines*.ts | ~1200 | ✅ 25/28 |
 | 禁止規則 | src/rules/b-prohibitions.ts | 394 | ✅ 10/14 |
 | 公理定義 | src/rules/b-axioms.ts | 148 | ✅ |
 | 舊版門禁 | src/rules/c-gates.ts | 283 | ⚠️ 保留相容 |
@@ -101,9 +101,9 @@ Auto-detect from package.json:
 
 | 類別 | 實作/總數 | 覆蓋率 | 缺口 |
 |:-----|:--------:|:------:|:-----|
-| 紅線 R01-R18 | 15/18 | 83% | R04/R06/R11 需 LLM/CI/Git |
+| 紅線 R01-R28 | 25/28 | 89% | R04/R06/R11 需 LLM/CI/Git |
 | 禁止 P01-P14 | 10/14 | 71% | P01/P02/P08/P11 需 LLM |
-| **合計** | **25/32** | **78%** | |
+| **合計** | **35/42** | **83%** | |
 
 ---
 
@@ -150,7 +150,7 @@ GET  /api/v1/version       → 版本資訊
 功能                          狀態     單品CLI  SaaS API  Dashboard
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 CLI scan (v3.2)               ✅驗證   ✅       ✅        ✅
-CLI pipeline (v3.3 十步)      ✅驗證   ✅       ✅        ✅
+CLI pipeline (v3.5 十步)      ✅驗證   ✅       ✅        ✅
 CLI serve (SaaS API)          ✅驗證   —        ✅        —
 十步走線引擎                   ✅       ✅       ✅        ✅ Tab
 外部結果注入 (auto-detect)    ✅驗證   ✅       —         —
@@ -204,7 +204,7 @@ src/                          行數
 │   ├── c-gates.ts            283   v2.4 舊版門禁
 │   └── index.ts               82
 │
-├── engine/                         v3.3 硬體化引擎
+├── engine/                         v3.5 硬體化引擎
 │   ├── pipeline.ts           543   十步走線+外部注入
 │   ├── gates-v33.ts          167   G1-G4 AND Gate
 │   ├── evidence.ts           252   Proof Pack + DoD
@@ -228,4 +228,4 @@ tests/                        ~1,500  167/167 pass
 
 ---
 
-*Code-QC v3.3 · MAIDOS · 全驗證通過 · 2026-02-02*
+*Code-QC v3.5 · MAIDOS · 全驗證通過 · 2026-02-02*

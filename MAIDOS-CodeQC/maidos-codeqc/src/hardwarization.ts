@@ -1,5 +1,5 @@
 /**
- * Code-QC v3.3 — Hardwarization constants (ABCD worldview)
+ * Code-QC v3.5 — Hardwarization constants (ABCD worldview)
  *
  * Keep this file <500 lines (self-proof gate).
  */
@@ -15,10 +15,10 @@ export const HARDWARIZATION_PILLARS = {
 
 /** ABCD 文件體系 — 電路觀映射 */
 export const CIRCUIT_WORLDVIEW = {
-  A: { name: '規格標準', nameEn: 'Schematic', circuit: '電路圖', question: '電路圖有沒有畫好？', doc: 'CodeQC_v3.3_A.md', pillar: 'PINOUT' },
-  B: { name: '工作紀律', nameEn: 'Protection Circuit', circuit: '保護電路', question: '保護電路有沒有裝？', doc: 'CodeQC_v3.3_B.md', pillar: 'PROTECTION' },
-  C: { name: '證明標準', nameEn: 'Power-On Waveform', circuit: '上電波形', question: '上電波形有沒有出？', doc: 'CodeQC_v3.3_C.md', pillar: 'INSTRUMENT+LOGIC_GATE' },
-  D: { name: '測試台', nameEn: 'Test Bench', circuit: '上電測試台', question: '測試台能不能重跑？', doc: 'CodeQC_v3.3_D.md', pillar: 'WIRING+ALL' },
+  A: { name: '規格標準', nameEn: 'Schematic', circuit: '電路圖', question: '電路圖有沒有畫好？', doc: 'CodeQC_v3.5_A.md', pillar: 'PINOUT' },
+  B: { name: '工作紀律', nameEn: 'Protection Circuit', circuit: '保護電路', question: '保護電路有沒有裝？', doc: 'CodeQC_v3.5_B.md', pillar: 'PROTECTION' },
+  C: { name: '證明標準', nameEn: 'Power-On Waveform', circuit: '上電波形', question: '上電波形有沒有出？', doc: 'CodeQC_v3.5_C.md', pillar: 'INSTRUMENT+LOGIC_GATE' },
+  D: { name: '測試台', nameEn: 'Test Bench', circuit: '上電測試台', question: '測試台能不能重跑？', doc: 'CodeQC_v3.5_D.md', pillar: 'WIRING+ALL' },
 } as const;
 
 /** 門禁電路標註 — AND Gate 邏輯 */
@@ -52,7 +52,7 @@ export const FAULT_MODES = {
 
 /** 電路速查卡（嵌入 LLM system prompt 用） */
 export const CIRCUIT_QUICK_CARD = [
-  'Code-QC v3.3 · 軟體工程硬體化',
+  'Code-QC v3.5 · 軟體工程硬體化',
   '❶腳位化: SPEC+type定義+信號流 (沒腳位=短路)',
   '❷走線化: Pipeline固定不可跳步 (不通=斷路)',
   '❸閘門化: G1-G4 AND全HIGH才開 (一LOW=斷電)',
@@ -61,7 +61,7 @@ export const CIRCUIT_QUICK_CARD = [
   '五段全過=MISSION COMPLETE | 任一熔斷=REJECTED',
 ].join('\n') as string;
 
-/** 防偽等級 LV1-LV9 (v3.3 新增) */
+/** 防偽等級 LV1-LV9 (v3.5) */
 export const PROTECTION_LEVELS = {
   LV1: { name: '保險絲保護', nameEn: 'Redline Fuse', scope: 'All projects', tier: 'basic' as const },
   LV2: { name: '穩壓器限制', nameEn: 'Prohibition Regulator', scope: 'All projects', tier: 'basic' as const },
@@ -74,13 +74,13 @@ export const PROTECTION_LEVELS = {
   LV9: { name: '形式化證明', nameEn: 'Formal Verification', scope: 'Military/Aerospace', tier: 'formal' as const },
 } as const;
 
-/** 產品等級 (v3.3 新增) */
+/** 產品等級 (v3.5) */
 export const PRODUCT_GRADES = {
   E: { name: '商用級', nameEn: 'Commercial Grade', protection: 'LV1-5', gates: 'G1-G4', description: '一般商用產品' },
   F: { name: '深科技級', nameEn: 'Deep-Tech Grade', protection: 'LV1-9', gates: 'G1-G4+Formal', description: '金融/醫療/軍規/航太' },
 } as const;
 
-/** 保護元件完整對照 (v3.3 統一) */
+/** 保護元件完整對照 (v3.5) */
 export const PROTECTION_COMPONENTS = {
   FUSE:       { name: '保險絲', nameEn: 'Fuse', behavior: '過流即斷', maps: 'Redlines R01-R18', tier: 'LV1' },
   REGULATOR:  { name: '穩壓器', nameEn: 'Regulator', behavior: '限制範圍', maps: 'Prohibitions P01-P14', tier: 'LV2' },
@@ -92,7 +92,7 @@ export const PROTECTION_COMPONENTS = {
 /** 硬體化速查卡（完整版，嵌入 LLM system prompt） */
 export const HARDWARE_QUICK_CARD = `
 ╔════════════════════════════════════════════════════════════╗
-║         Code-QC v3.3  軟體工程硬體化  速查卡               ║
+║         Code-QC v3.5  軟體工程硬體化  速查卡               ║
 ║         你是施工隊，不是寫手。接電路，出波形。              ║
 ╠════════════════════════════════════════════════════════════╣
 ║  ❶ 腳位化 (A): 接口定義+類型簽名+錯誤腳位+狀態機         ║

@@ -181,22 +181,22 @@ describe('禁止 Checker 行為驗證', () => {
   });
   
   describe('P05 超長函數', () => {
-    it('檢測超過 50 行函數', () => {
-      const code = 'function test() {\n' + Array(55).fill('  x++;').join('\n') + '\n}';
+    it('檢測超過 100 行函數', () => {
+      const code = 'function test() {\n' + Array(105).fill('  x++;').join('\n') + '\n}';
       const v = checkProhibitions(code, 'test.ts');
       expect(v.some(x => x.ruleId === 'P05')).toBe(true);
     });
-    
-    it('不報告 50 行以內', () => {
-      const code = 'function test() {\n' + Array(45).fill('  x++;').join('\n') + '\n}';
+
+    it('不報告 100 行以內', () => {
+      const code = 'function test() {\n' + Array(95).fill('  x++;').join('\n') + '\n}';
       const v = checkProhibitions(code, 'test.ts');
       expect(v.some(x => x.ruleId === 'P05')).toBe(false);
     });
   });
   
   describe('P06 深層嵌套', () => {
-    it('檢測超過 3 層嵌套', () => {
-      const v = checkProhibitions('if(a){if(b){if(c){if(d){}}}}', 'test.ts');
+    it('檢測超過 5 層嵌套', () => {
+      const v = checkProhibitions('if(a){if(b){if(c){if(d){if(e){if(f){}}}}}}', 'test.ts');
       expect(v.some(x => x.ruleId === 'P06')).toBe(true);
     });
   });
@@ -231,13 +231,13 @@ describe('禁止 Checker 行為驗證', () => {
   });
   
   describe('P10 過長參數', () => {
-    it('檢測超過 5 個參數', () => {
+    it('檢測超過 6 個參數', () => {
       const v = checkProhibitions('function test(a, b, c, d, e, f, g) {}', 'test.ts');
       expect(v.some(x => x.ruleId === 'P10')).toBe(true);
     });
-    
-    it('不報告 5 個以內', () => {
-      const v = checkProhibitions('function test(a, b, c, d, e) {}', 'test.ts');
+
+    it('不報告 6 個以內', () => {
+      const v = checkProhibitions('function test(a, b, c, d, e, f) {}', 'test.ts');
       expect(v.some(x => x.ruleId === 'P10')).toBe(false);
     });
   });
@@ -251,14 +251,14 @@ describe('禁止 Checker 行為驗證', () => {
   });
   
   describe('P13 TODO 堆積', () => {
-    it('檢測超過 10 個 TODO', () => {
-      const code = Array(15).fill('// TODO: fix this').join('\n');
+    it('檢測超過 5 個 TODO', () => {
+      const code = Array(7).fill('// TODO: fix this').join('\n');
       const v = checkProhibitions(code, 'test.ts');
       expect(v.some(x => x.ruleId === 'P13')).toBe(true);
     });
-    
-    it('不報告 10 個以內', () => {
-      const code = Array(8).fill('// TODO: fix').join('\n');
+
+    it('不報告 5 個以內', () => {
+      const code = Array(4).fill('// TODO: fix').join('\n');
       const v = checkProhibitions(code, 'test.ts');
       expect(v.some(x => x.ruleId === 'P13')).toBe(false);
     });

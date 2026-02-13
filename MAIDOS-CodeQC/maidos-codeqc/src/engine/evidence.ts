@@ -1,5 +1,5 @@
 /**
- * Code-QC v3.3 — Evidence 收集器 + DoD 8點判定器 (❹量測化)
+ * Code-QC v3.5 — Evidence 收集器 + DoD 8點判定器 (❹量測化)
  * 
  * 對照 C.md §7 + D.md §7
  * 
@@ -49,7 +49,7 @@ export function collectEvidence(
   input: {
     evidenceDir: string;
     files: Array<{ path: string; content: string }>;
-    // Optional v3.3 extras injected by CLI (see PipelineInput)
+    // Optional v3.5 extras injected by CLI (see PipelineInput)
     externalResults?: {
       build?: { exitCode: number; log: string };
       lint?: { exitCode: number; log: string };
@@ -156,7 +156,7 @@ export function collectEvidence(
     path: `${dir}/impl.log`,
     exists: true,
     lineCount: 0,
-    // Treat "no MISSING" as "impl complete" at v3.3 baseline.
+    // Treat "no MISSING" as "impl complete" at v3.5 baseline.
     zeroViolations: steps[8]?.passed ?? false,
     summary: steps[8]?.passed ? '補完證明: 規格函數均已落地' : '補完證明: 仍有缺口 (見 mapping.log)',
   };
@@ -307,7 +307,7 @@ export function judgeDod(evidence: EvidenceCollection): DoDStatus {
 export function generateProofPackManifest(evidence: EvidenceCollection): string {
   const lines: string[] = [];
 
-  lines.push('# Proof Pack — Code-QC v3.3');
+  lines.push('# Proof Pack — Code-QC v3.5');
   lines.push(`# Generated: ${new Date().toISOString()}`);
   lines.push(`# Directory: ${evidence.dir}`);
   lines.push('');

@@ -6,22 +6,22 @@ import { describe, it, expect } from 'vitest';
 import { checkProhibitions } from '../../src/rules/b-prohibitions.js';
 
 describe('P05: 超長函數', () => {
-  it('should detect function over 50 lines', () => {
-    const lines = Array(60).fill('  console.log("line");').join('\n');
+  it('should detect function over 100 lines', () => {
+    const lines = Array(105).fill('  console.log("line");').join('\n');
     const code = `function longFunction() {\n${lines}\n}`;
     const violations = checkProhibitions(code, 'test.ts');
     expect(violations.some(v => v.ruleId === 'P05')).toBe(true);
   });
 
-  it('should allow function under 50 lines', () => {
-    const lines = Array(30).fill('  console.log("line");').join('\n');
+  it('should allow function under 100 lines', () => {
+    const lines = Array(90).fill('  console.log("line");').join('\n');
     const code = `function shortFunction() {\n${lines}\n}`;
     const violations = checkProhibitions(code, 'test.ts');
     expect(violations.filter(v => v.ruleId === 'P05')).toHaveLength(0);
   });
 
   it('should detect long async function', () => {
-    const lines = Array(60).fill('  await doSomething();').join('\n');
+    const lines = Array(105).fill('  await doSomething();').join('\n');
     const code = `async function longAsync() {\n${lines}\n}`;
     const violations = checkProhibitions(code, 'test.ts');
     expect(violations.some(v => v.ruleId === 'P05')).toBe(true);
@@ -29,14 +29,18 @@ describe('P05: 超長函數', () => {
 });
 
 describe('P06: 深層嵌套', () => {
-  it('should detect nesting over 3 levels', () => {
+  it('should detect nesting over 5 levels', () => {
     const code = `
 function test() {
   if (a) {
     if (b) {
       if (c) {
         if (d) {
-          console.log("deep");
+          if (e) {
+            if (f) {
+              console.log("deep");
+            }
+          }
         }
       }
     }
@@ -46,12 +50,16 @@ function test() {
     expect(violations.some(v => v.ruleId === 'P06')).toBe(true);
   });
 
-  it('should allow nesting at 3 levels', () => {
+  it('should allow nesting at 5 levels', () => {
     const code = `
 function test() {
   if (a) {
     if (b) {
-      console.log("ok");
+      if (c) {
+        if (d) {
+          console.log("ok");
+        }
+      }
     }
   }
 }`;
@@ -93,14 +101,14 @@ describe('P09: 無意義命名', () => {
 });
 
 describe('P10: 過長參數', () => {
-  it('should detect function with more than 5 parameters', () => {
-    const code = `function test(a, b, c, d, e, f) {}`;
+  it('should detect function with more than 6 parameters', () => {
+    const code = `function test(a, b, c, d, e, f, g) {}`;
     const violations = checkProhibitions(code, 'test.ts');
     expect(violations.some(v => v.ruleId === 'P10')).toBe(true);
   });
 
-  it('should allow function with 5 parameters', () => {
-    const code = `function test(a, b, c, d, e) {}`;
+  it('should allow function with 6 parameters', () => {
+    const code = `function test(a, b, c, d, e, f) {}`;
     const violations = checkProhibitions(code, 'test.ts');
     expect(violations.filter(v => v.ruleId === 'P10')).toHaveLength(0);
   });
@@ -113,14 +121,14 @@ describe('P10: 過長參數', () => {
 });
 
 describe('P13: TODO 堆積', () => {
-  it('should detect more than 10 TODOs', () => {
-    const todos = Array(12).fill('// TODO: fix this').join('\n');
+  it('should detect more than 5 TODOs', () => {
+    const todos = Array(7).fill('// TODO: fix this').join('\n');
     const violations = checkProhibitions(todos, 'test.ts');
     expect(violations.some(v => v.ruleId === 'P13')).toBe(true);
   });
 
-  it('should allow 10 or fewer TODOs', () => {
-    const todos = Array(8).fill('// TODO: fix this').join('\n');
+  it('should allow 5 or fewer TODOs', () => {
+    const todos = Array(4).fill('// TODO: fix this').join('\n');
     const violations = checkProhibitions(todos, 'test.ts');
     expect(violations.filter(v => v.ruleId === 'P13')).toHaveLength(0);
   });

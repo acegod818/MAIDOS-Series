@@ -14,7 +14,6 @@
 
 import type { RuleChecker, Violation } from '../types.js';
 import { getRedline } from './b-redlines-defs.js';
-import { maskJsStringsAndComments } from './b-redlines-utils.js';
 
 // =============================================================================
 // R19: 固定字串回傳
@@ -110,13 +109,6 @@ export const R20_CHECKER: RuleChecker = {
 //       收了 4 個 OAuth 參數只用 1 個
 // =============================================================================
 
-const FAKE_AUTH_PATTERNS = [
-  // Rust: let _ = (&self.xxx_key, ...) — 用 let _ 壓掉憑證未使用的 warning
-  /let\s+_\s*=\s*\(&?self\.\w*(?:key|secret|token|password|credential|cert)\w*/gi,
-  // 任何語言: 收了 secret/key 參數但函數體沒有 hmac/sign/hash/encrypt/verify
-  // (此 pattern 標記可疑，需人工確認)
-  /(?:consumer_secret|client_secret|api_secret|private_key)\s*[,)]/g,
-];
 
 export const R21_CHECKER: RuleChecker = {
   rule: getRedline('R21')!,

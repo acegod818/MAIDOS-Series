@@ -1,10 +1,10 @@
 /**
- * Code-QC v3.3 — Pipeline 引擎 (❷走線化)
+ * Code-QC v3.5 — Pipeline 引擎 (❷走線化)
  * 
  * 十步走線：build → lint → test → proof → gate → ship
  * 走線固定不可跳步，斷一條即熔斷。
  * 
- * 對照 D.md §8 Pipeline v3.3
+ * 對照 D.md §8 Pipeline v3.5
  */
 
 import type {
@@ -123,7 +123,7 @@ function step01_fuseCheck(input: PipelineInput): PipelineStepResult {
     // 排除測試 fixtures、web-ui demo 代碼
     if (isTestPath(f.path)) continue;
     if (/web-ui[/\\]/i.test(f.path)) continue;
-    // v3.3 Step1: 只針對 R13-R18 (假實現/靜默失敗/TODO/反詐欺) 做保險絲快篩
+    // v3.5 Step1: 只針對 R13-R18 (假實現/靜默失敗/TODO/反詐欺) 做保險絲快篩
     const subset = checkRedlines(f.content, f.path).filter(v => (
       v.ruleId === 'R13' || v.ruleId === 'R14' || v.ruleId === 'R15' ||
       v.ruleId === 'R16' || v.ruleId === 'R17' || v.ruleId === 'R18'
@@ -482,7 +482,7 @@ const STEP_RUNNERS: StepRunner[] = [
 // =============================================================================
 
 /**
- * 執行 v3.3 十步走線 Pipeline
+ * 執行 v3.5 十步走線 Pipeline
  * 
  * 走線規則:
  * - 順序執行，不可跳步
@@ -522,7 +522,7 @@ export function runPipeline(input: PipelineInput): PipelineResult {
   // This is a minimal LV5 implementation: hash the proof inputs deterministically.
   const ext = input.externalResults;
   const hashPayload = JSON.stringify({
-    version: '3.3',
+    version: '3.5',
     timestamp,
     targetPath: input.targetPath,
     grade: input.grade,
@@ -593,7 +593,7 @@ export function runPipeline(input: PipelineInput): PipelineResult {
   const waveform = buildWaveformReport(yChannel, xChannel, zChannel);
 
   return {
-    version: '3.3',
+    version: '3.5',
     timestamp,
     targetPath: input.targetPath,
     productGrade: input.grade,
@@ -619,7 +619,7 @@ export function formatPipelineReport(result: PipelineResult): string {
 
   lines.push('');
   lines.push('╔══════════════════════════════════════════════════════════╗');
-  lines.push('║  Code-QC v3.3 品質檢測台 (Test Bench)                   ║');
+  lines.push('║  Code-QC v3.5 品質檢測台 (Test Bench)                   ║');
   lines.push('║  程式品質，用硬體標準來驗。                              ║');
   lines.push('╚══════════════════════════════════════════════════════════╝');
   lines.push('');

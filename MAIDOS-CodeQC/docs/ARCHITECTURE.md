@@ -3,7 +3,7 @@
 | Field     | Value                  |
 |-----------|------------------------|
 | Product   | MAIDOS-CodeQC          |
-| Version   | v3.0                   |
+| Version   | v3.5                   |
 | Type      | Architecture Overview  |
 
 ## High-Level Architecture

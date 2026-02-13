@@ -545,7 +545,7 @@ function filterByCategory(result: ReturnType<typeof analyze>, categories: Set<An
 // =============================================================================
 
 async function main() {
-  // v3.3 子命令路由: pipeline / serve / scan (預設)
+  // v3.5 子命令路由: pipeline / serve / scan (預設)
   const rawArgs = process.argv.slice(2);
   const subcommand = rawArgs[0]?.toLowerCase();
 

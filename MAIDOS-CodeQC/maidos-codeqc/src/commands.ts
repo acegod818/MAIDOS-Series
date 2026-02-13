@@ -1,5 +1,5 @@
 /**
- * MAIDOS CodeQC v3.3 — CLI Commands
+ * MAIDOS CodeQC v3.5 — CLI Commands
  *
  * Pipeline + Serve 子命令實作
  * 從 cli.ts 拆出，避免單檔超長
@@ -257,7 +257,7 @@ Options:
 type FileEntry = { path: string; content: string };
 type LoadFilesFn = (target: string) => FileEntry[];
 
-/** `maidos-codeqc pipeline` — Run full v3.3 pipeline */
+/** `maidos-codeqc pipeline` — Run full v3.5 pipeline */
 export async function pipelineCommand(args: string[], loadFiles: LoadFilesFn) {
   const { runPipeline, formatPipelineReport } = await import('./engine/pipeline.js');
   const { generateProofPackManifest, collectEvidence } = await import('./engine/evidence.js');
@@ -267,7 +267,7 @@ export async function pipelineCommand(args: string[], loadFiles: LoadFilesFn) {
 
   if (args.includes('-h') || args.includes('--help')) {
     console.log(`
-MAIDOS CodeQC pipeline (v3.3)
+MAIDOS CodeQC pipeline (v3.5)
 
 Usage:
   maidos-codeqc pipeline [target] [options]
@@ -323,7 +323,7 @@ Examples:
   }
 
   const absTarget = resolve(target);
-  console.log(`\n🔧 CodeQC v3.3 Pipeline — Grade ${grade}`);
+  console.log(`\n🔧 CodeQC v3.5 Pipeline — Grade ${grade}`);
   console.log(`   Target: ${absTarget}\n`);
 
   // ── Auto-detect scripts from package.json ──
@@ -507,7 +507,7 @@ Examples:
 
   // Minimal PROOF-REPORT.md (waveform snapshot)
   const proofReportLines: string[] = [];
-  proofReportLines.push('# Proof Report v3.3');
+  proofReportLines.push('# Proof Report v3.5');
   proofReportLines.push(`- Target: ${absTarget}`);
   proofReportLines.push(`- Timestamp: ${pipelineResult.timestamp}`);
   proofReportLines.push(`- Verdict: ${pipelineResult.passed ? 'MISSION COMPLETE ✅' : 'REJECTED ❌'}`);

@@ -1,6 +1,6 @@
 # MAIDOS CodeQC
 
-> Code Quality Control implementing Code-QC v2.6 standards
+> Code Quality Control implementing Code-QC v3.5 standards
 
 [![npm version](https://badge.fury.io/js/@maidos%2Fcodeqc.svg)](https://badge.fury.io/js/@maidos%2Fcodeqc)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -8,7 +8,7 @@
 ## Features
 
 - 🔍 **Static Analysis** - AST-based code analysis using Tree-sitter
-- 📏 **Code-QC v2.6 Rules** - Complete implementation of B (工作紀律) + C (驗收標準)
+- 📏 **Code-QC v3.5 Rules** - Complete implementation of B (工作紀律) + C (驗收標準)
 - 🌐 **Multi-Language** - TypeScript, JavaScript, Python, Rust, Go (Phase 0)
 - 📊 **Reports** - Console, JSON, HTML output formats
 - 🚀 **CI/CD Ready** - GitHub Actions & GitLab CI integration

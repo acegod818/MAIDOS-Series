@@ -1,5 +1,5 @@
 /**
- * CodeQC v3.3 — SaaS API Server
+ * CodeQC v3.5 — SaaS API Server
  * 
  * REST API for CodeQC-as-a-Service
  * 
@@ -138,7 +138,7 @@ function handleHealth(_req: IncomingMessage, res: ServerResponse) {
 }
 
 function handleVersion(_req: IncomingMessage, res: ServerResponse) {
-  json(res, 200, { ok: true, version: VERSION, codeqc: CODEQC_VERSION, engine: 'v3.3' });
+  json(res, 200, { ok: true, version: VERSION, codeqc: CODEQC_VERSION, engine: 'v3.5' });
 }
 
 function getDashboardPath(): string {
@@ -203,7 +203,7 @@ async function router(req: IncomingMessage, res: ServerResponse, config: ServerC
     if (method === 'GET' && url === '/') return json(res, 200, {
       name: 'MAIDOS CodeQC API',
       version: VERSION,
-      engine: 'Code-QC v3.3',
+      engine: 'Code-QC v3.5',
       endpoints: [
         'POST /api/v1/scan',
         'POST /api/v1/pipeline',
@@ -233,7 +233,7 @@ export function startServer(config: Partial<ServerConfig> = {}): Promise<void> {
     server.listen(cfg.port, cfg.host, () => {
       console.log(`\n🔧 MAIDOS CodeQC API v${VERSION} (Code-QC v${CODEQC_VERSION})`);
       console.log(`   Server: http://${cfg.host}:${cfg.port}`);
-      console.log(`   Engine: v3.3 軟體工程硬體化`);
+      console.log(`   Engine: v3.5 軟體工程硬體化`);
       console.log(`   Auth:   ${cfg.apiKey ? 'enabled' : 'disabled'}`);
       console.log(`\n   POST /api/v1/scan      — 快速掃描`);
       console.log(`   POST /api/v1/pipeline  — 十步走線`);

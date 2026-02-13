@@ -1,7 +1,7 @@
 {
   "name": "@maidos/codeqc",
-  "version": "0.3.3",
-  "description": "Code Quality Control tool implementing Code-QC v3.3 — 軟體工程硬體化 (Hardware-ification of Software Engineering)",
+  "version": "0.3.5",
+  "description": "Code Quality Control tool implementing Code-QC v3.5 — 軟體工程硬體化 (Hardware-ification of Software Engineering)",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

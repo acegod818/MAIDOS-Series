@@ -1,5 +1,5 @@
 /**
- * Code-QC v2.4 - B 工作紀律
+ * Code-QC v3.5 - B 工作紀律
  * §3 十四禁止 (P01-P14)
  * 
  * 實作狀態：
@@ -24,7 +24,7 @@
 import type { Rule, ProhibitionId, Violation, RuleChecker } from '../types.js';
 
 // =============================================================================
-// Thresholds (Code-QC v2.4 規範)
+// Thresholds (Code-QC v3.5 規範)
 // =============================================================================
 
 export const THRESHOLDS = {
@@ -35,17 +35,17 @@ export const THRESHOLDS = {
   /** P04: 魔法數字報告上限 */
   MAGIC_NUMBER_MAX_REPORT: 10,
   /** P05: 函數最大行數 */
-  FUNCTION_MAX_LINES: 50,
+  FUNCTION_MAX_LINES: 100,
   /** P06: 嵌套最大層數 */
-  NESTING_MAX_DEPTH: 3,
+  NESTING_MAX_DEPTH: 5,
   /** P09: 無意義命名報告上限 */
   MEANINGLESS_NAME_MAX_REPORT: 10,
   /** P10: 參數最大數量 */
-  PARAM_MAX_COUNT: 5,
+  PARAM_MAX_COUNT: 6,
   /** P12: 註釋代碼行數閾值 */
   COMMENTED_CODE_THRESHOLD: 10,
   /** P13: TODO 最大數量 */
-  TODO_MAX_COUNT: 10,
+  TODO_MAX_COUNT: 5,
   /** P14: 生產依賴最大數量 */
   DEPS_MAX_COUNT: 50,
   /** P14: 開發依賴最大數量 */

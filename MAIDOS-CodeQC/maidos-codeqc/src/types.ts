@@ -1,8 +1,8 @@
 /**
  * MAIDOS CodeQC - Core Types
- * Implements Code-QC v3.3 specification — 軟體工程硬體化
+ * Implements Code-QC v3.5 specification — 軟體工程硬體化
  * 
- * v3.3 升級:
+ * v3.5 升級:
  * - 五段硬體化架構: 腳位化/走線化/閘門化/量測化/過載保護
  * - LV1-LV9 九級防偽等級
  * - E/F 產品等級 (商用/深科技)
@@ -49,13 +49,13 @@ export type RedlineId = 'R01' | 'R02' | 'R03' | 'R04' | 'R05' | 'R06' | 'R07' | 
 export type ProhibitionId = 'P01' | 'P02' | 'P03' | 'P04' | 'P05' | 'P06' | 'P07' | 'P08' | 'P09' | 'P10' | 'P11' | 'P12' | 'P13' | 'P14';
 export type GateId = 'Gate-In' | 'Gate-Mid' | 'Gate-Out' | 'Gate-Accept';
 
-/** v3.3 四門禁 ID (硬體化) */
+/** v3.5 四門禁 ID (硬體化) */
 export type GateV33Id = 'G1' | 'G2' | 'G3' | 'G4';
 
-/** v3.3 Pipeline 步驟 ID */
+/** v3.5 Pipeline 步驟 ID */
 export type PipelineStepId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
-/** v3.3 Pipeline 步驟結果 */
+/** v3.5 Pipeline 步驟結果 */
 export interface PipelineStepResult {
   step: PipelineStepId;
   name: string;
@@ -76,9 +76,9 @@ export interface PipelineStepResult {
   stats?: Record<string, number>;
 }
 
-/** v3.3 Pipeline 結果 */
+/** v3.5 Pipeline 結果 */
 export interface PipelineResult {
-  version: '3.3';
+  version: '3.5';
   timestamp: string;
   targetPath: string;
   productGrade: 'E' | 'F';
@@ -98,7 +98,7 @@ export interface PipelineResult {
   evidenceDir: string;
 }
 
-/** v3.3 門禁結果 */
+/** v3.5 門禁結果 */
 export interface GateV33Result {
   G1: { passed: boolean; tool: string; details: string };
   G2: { passed: boolean; tool: string; details: string };
@@ -134,7 +134,7 @@ export interface Rule {
   /** 閾值（如適用） */
   threshold?: number | string;
   /** 檢測方法 */
-  detectMethod?: 'regex' | 'ast' | 'heuristic' | 'llm' | 'manual' | 'integration';
+  detectMethod?: 'regex' | 'ast' | 'heuristic' | 'llm' | 'manual' | 'integration' | 'regex+heuristic' | 'regex+context';
 }
 
 // =============================================================================
@@ -364,8 +364,8 @@ export interface LanguageConfig {
 /** 檢查等級 */
 export type CheckLevel = 'B' | 'C' | 'D';
 
-/** v3.3 版本標識 — 軟體工程硬體化 */
-export const CODEQC_VERSION = '3.3';
+/** v3.5 版本標識 — 軟體工程硬體化 */
+export const CODEQC_VERSION = '3.5';
 
 /** CodeQC 配置 */
 export interface CodeQCConfig {

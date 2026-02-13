@@ -3,7 +3,7 @@
 | Field         | Value                                              |
 |---------------|----------------------------------------------------|
 | Product       | MAIDOS-CodeQC                                      |
-| Version       | v3.0                                               |
+| Version       | v3.5                                               |
 | Type          | TypeScript / Node.js CLI + Web UI                  |
 | Description   | Code quality assurance pipeline tool for MAIDOS products |
 | Entry Points  | `codeqc.cmd` (Windows), `codeqc.sh` (Unix)        |

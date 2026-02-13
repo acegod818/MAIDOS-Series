@@ -1,6 +1,6 @@
-# SPEC — MAIDOS CodeQC (Code-QC v3.3)
+# SPEC — MAIDOS CodeQC (Code-QC v3.5)
 
-> This file is the G2 continuity source of truth for the v3.3 pipeline.
+> This file is the G2 continuity source of truth for the v3.5 pipeline.
 > All items MUST be checked (SPEC 100%) to pass Gate G2.
 
 ## Library API
@@ -15,9 +15,9 @@
 - [x] Support console/json/html reporters → `htmlReporter`
 - [x] Support config file (JSON/YAML) + CLI overrides → `loadCliConfig`
 
-## v3.3 Test Bench (pipeline)
+## v3.5 Test Bench (pipeline)
 
-- [x] Pipeline command runs the v3.3 10-step wiring flow → `pipelineCommand`
+- [x] Pipeline command runs the v3.5 10-step wiring flow → `pipelineCommand`
 - [x] Pipeline produces evidence logs for scan/fraud/redline/sync/mapping → `runPipeline`
 - [x] Pipeline validates Z-axis proof inputs (IAV/BLDS/datasource) → `parseIavLog`
 - [x] Pipeline emits DoD verdict + Proof Pack manifest/report → `generateProofPackManifest`
@@ -25,5 +25,5 @@
 
 ## Server
 
-- [x] Serve command starts v3.3 API server (dashboard backend) → `serveCommand`
+- [x] Serve command starts v3.5 API server (dashboard backend) → `serveCommand`
 

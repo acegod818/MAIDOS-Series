@@ -1,5 +1,5 @@
 /**
- * Code-QC v3.3 Engine Module
+ * Code-QC v3.5 Engine Module
  * 
  * 五段硬體化引擎:
  * ❶ 腳位化 → types.ts (SPEC/接口定義)
@@ -13,7 +13,7 @@
 export { runPipeline, formatPipelineReport } from './pipeline.js';
 export type { PipelineInput } from './pipeline.js';
 
-// Gates v3.3
+// Gates v3.5
 export { runGatesV33 } from './gates-v33.js';
 export type { GateV33Input } from './gates-v33.js';
 

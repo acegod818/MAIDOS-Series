@@ -1,5 +1,5 @@
 /**
- * Code-QC v3.3 — G1-G4 硬體化門禁 (❸閘門化)
+ * Code-QC v3.5 — G1-G4 硬體化門禁 (❸閘門化)
  * 
  * 四門禁 = AND Gate 邏輯，一 LOW 即斷電
  * G1 萬用表 → 腳位接觸
@@ -126,7 +126,7 @@ function runG4(input: GateV33Input, g1: GateV33Result['G1'], g2: GateV33Result['
   const buildPass = allSteps[2]?.passed ?? false;
   const testPass = allSteps[4]?.passed ?? false;
 
-  // v3.3: G4 = G1 AND G2 AND G3 AND (build+test) AND (delivery evidence)
+  // v3.5: G4 = G1 AND G2 AND G3 AND (build+test) AND (delivery evidence)
   const passed = g1.passed && g2.passed && g3.passed && buildPass && testPass && step10Result.passed;
 
   const failReasons: string[] = [];
@@ -151,7 +151,7 @@ function runG4(input: GateV33Input, g1: GateV33Result['G1'], g2: GateV33Result['
 // =============================================================================
 
 /**
- * 執行 v3.3 四門禁 (AND Gate 串聯)
+ * 執行 v3.5 四門禁 (AND Gate 串聯)
  * G1 → G2 → G3 → G4，全 HIGH 才 PASS
  */
 export function runGatesV33(input: GateV33Input): GateV33Result {

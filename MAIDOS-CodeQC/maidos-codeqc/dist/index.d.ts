@@ -1,5 +1,5 @@
 /**
- * CodeQC v3.3 Engine — Waveform (三通道示波器)
+ * CodeQC v3.5 Engine — Waveform (三通道示波器)
  *
  * CH1 (Y軸) 功能波形: 規格映射+測試+覆蓋+補完
  * CH2 (X軸) 品質波形: 編譯+Lint+紅線+安全
@@ -39,7 +39,7 @@ interface WaveformReport {
 type SupportedLanguage = 'typescript' | 'javascript' | 'python' | 'rust' | 'go' | 'java' | 'kotlin' | 'scala' | 'groovy' | 'clojure' | 'csharp' | 'fsharp' | 'vbnet' | 'swift' | 'objc' | 'dart' | 'c' | 'cpp' | 'zig' | 'nim' | 'php' | 'ruby' | 'shell' | 'powershell' | 'perl' | 'lua' | 'sql' | 'r' | 'julia' | 'yaml' | 'json' | 'toml' | 'xml' | 'elixir' | 'haskell' | 'ocaml' | 'erlang' | 'cobol' | 'abap' | 'plsql' | 'fortran' | 'vba' | 'rpg';
 
 /**
- * Code-QC Z-axis (v3.2/v3.3): Authenticity Protocol Helpers
+ * Code-QC Z-axis (v3.2/v3.5): Authenticity Protocol Helpers
  *
  * Keep this file <500 lines (self-proof gate).
  */
@@ -73,11 +73,11 @@ interface IAVRecord {
 type BLDSLevel = 0 | 1 | 2 | 3 | 4 | 5;
 /** BLDS 等級名稱 */
 declare const BLDS_LEVELS: Record<BLDSLevel, string>;
-/** BLDS 最低門禁要求 (v3.3 baseline) */
+/** BLDS 最低門禁要求 (v3.5 baseline) */
 declare const BLDS_GATE_MINIMUM: BLDSLevel;
 
 /**
- * Code-QC v3.3 — DoD (Definition of Done) definitions
+ * Code-QC v3.5 — DoD (Definition of Done) definitions
  *
  * Keep this file <500 lines (self-proof gate).
  */
@@ -101,11 +101,11 @@ interface DoDStatus {
     /** 是否全部通過 */
     missionComplete: boolean;
 }
-/** DoD 8 點定義 (v3.3) */
+/** DoD 8 點定義 (v3.5) */
 declare const DOD_DEFINITIONS: Omit<DoDItem, 'passed' | 'evidencePath'>[];
 
 /**
- * Code-QC v3.3 — Hardwarization constants (ABCD worldview)
+ * Code-QC v3.5 — Hardwarization constants (ABCD worldview)
  *
  * Keep this file <500 lines (self-proof gate).
  */
@@ -159,7 +159,7 @@ declare const CIRCUIT_WORLDVIEW: {
         readonly nameEn: "Schematic";
         readonly circuit: "電路圖";
         readonly question: "電路圖有沒有畫好？";
-        readonly doc: "CodeQC_v3.3_A.md";
+        readonly doc: "CodeQC_v3.5_A.md";
         readonly pillar: "PINOUT";
     };
     readonly B: {
@@ -167,7 +167,7 @@ declare const CIRCUIT_WORLDVIEW: {
         readonly nameEn: "Protection Circuit";
         readonly circuit: "保護電路";
         readonly question: "保護電路有沒有裝？";
-        readonly doc: "CodeQC_v3.3_B.md";
+        readonly doc: "CodeQC_v3.5_B.md";
         readonly pillar: "PROTECTION";
     };
     readonly C: {
@@ -175,7 +175,7 @@ declare const CIRCUIT_WORLDVIEW: {
         readonly nameEn: "Power-On Waveform";
         readonly circuit: "上電波形";
         readonly question: "上電波形有沒有出？";
-        readonly doc: "CodeQC_v3.3_C.md";
+        readonly doc: "CodeQC_v3.5_C.md";
         readonly pillar: "INSTRUMENT+LOGIC_GATE";
     };
     readonly D: {
@@ -183,7 +183,7 @@ declare const CIRCUIT_WORLDVIEW: {
         readonly nameEn: "Test Bench";
         readonly circuit: "上電測試台";
         readonly question: "測試台能不能重跑？";
-        readonly doc: "CodeQC_v3.3_D.md";
+        readonly doc: "CodeQC_v3.5_D.md";
         readonly pillar: "WIRING+ALL";
     };
 };
@@ -296,7 +296,7 @@ declare const FAULT_MODES: {
 };
 /** 電路速查卡（嵌入 LLM system prompt 用） */
 declare const CIRCUIT_QUICK_CARD: string;
-/** 防偽等級 LV1-LV9 (v3.3 新增) */
+/** 防偽等級 LV1-LV9 (v3.5) */
 declare const PROTECTION_LEVELS: {
     readonly LV1: {
         readonly name: "保險絲保護";
@@ -353,7 +353,7 @@ declare const PROTECTION_LEVELS: {
         readonly tier: "formal";
     };
 };
-/** 產品等級 (v3.3 新增) */
+/** 產品等級 (v3.5) */
 declare const PRODUCT_GRADES: {
     readonly E: {
         readonly name: "商用級";
@@ -370,7 +370,7 @@ declare const PRODUCT_GRADES: {
         readonly description: "金融/醫療/軍規/航太";
     };
 };
-/** 保護元件完整對照 (v3.3 統一) */
+/** 保護元件完整對照 (v3.5) */
 declare const PROTECTION_COMPONENTS: {
     readonly FUSE: {
         readonly name: "保險絲";
@@ -409,7 +409,7 @@ declare const PROTECTION_COMPONENTS: {
     };
 };
 /** 硬體化速查卡（完整版，嵌入 LLM system prompt） */
-declare const HARDWARE_QUICK_CARD: "\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551         Code-QC v3.3  \u8EDF\u9AD4\u5DE5\u7A0B\u786C\u9AD4\u5316  \u901F\u67E5\u5361               \u2551\n\u2551         \u4F60\u662F\u65BD\u5DE5\u968A\uFF0C\u4E0D\u662F\u5BEB\u624B\u3002\u63A5\u96FB\u8DEF\uFF0C\u51FA\u6CE2\u5F62\u3002              \u2551\n\u2560\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2563\n\u2551  \u2776 \u8173\u4F4D\u5316 (A): \u63A5\u53E3\u5B9A\u7FA9+\u985E\u578B\u7C3D\u540D+\u932F\u8AA4\u8173\u4F4D+\u72C0\u614B\u6A5F         \u2551\n\u2551  \u2777 \u8D70\u7DDA\u5316 (D): build\u2192lint\u2192test\u2192proof\u2192gate\u2192ship            \u2551\n\u2551  \u2778 \u9598\u9580\u5316 (B): R01-18=0 + P01-14\u5728\u9650 + A1-8\u7121\u9055\u53CD        \u2551\n\u2551  \u2779 \u91CF\u6E2C\u5316 (C): G1\u842C\u7528\u8868+G2\u8702\u9CF4+G3\u6545\u969C\u6CE8\u5165+G4\u793A\u6CE2\u5668       \u2551\n\u2551  \u277A \u904E\u8F09\u4FDD\u8B77: LV1-3\u57FA\u790E + LV4-5\u9632\u507D + LV6-9\u7368\u7ACB\u9A57\u8B49       \u2551\n\u2551  DoD: (1)\u5BE6\u73FE(2)\u88DC\u5B8C(3)\u898F\u683C(4)\u540C\u6B65(5)\u7DE8\u8B6F(6)\u4EA4\u4ED8(7)\u771F\u5BE6(8)\u9632\u8A50 \u2551\n\u2551  \u5168\u904E=MISSION COMPLETE  \u4EFB\u4E00\u4E0D\u904E=REJECTED                  \u2551\n\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D\n";
+declare const HARDWARE_QUICK_CARD: "\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2551         Code-QC v3.5  \u8EDF\u9AD4\u5DE5\u7A0B\u786C\u9AD4\u5316  \u901F\u67E5\u5361               \u2551\n\u2551         \u4F60\u662F\u65BD\u5DE5\u968A\uFF0C\u4E0D\u662F\u5BEB\u624B\u3002\u63A5\u96FB\u8DEF\uFF0C\u51FA\u6CE2\u5F62\u3002              \u2551\n\u2560\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2563\n\u2551  \u2776 \u8173\u4F4D\u5316 (A): \u63A5\u53E3\u5B9A\u7FA9+\u985E\u578B\u7C3D\u540D+\u932F\u8AA4\u8173\u4F4D+\u72C0\u614B\u6A5F         \u2551\n\u2551  \u2777 \u8D70\u7DDA\u5316 (D): build\u2192lint\u2192test\u2192proof\u2192gate\u2192ship            \u2551\n\u2551  \u2778 \u9598\u9580\u5316 (B): R01-18=0 + P01-14\u5728\u9650 + A1-8\u7121\u9055\u53CD        \u2551\n\u2551  \u2779 \u91CF\u6E2C\u5316 (C): G1\u842C\u7528\u8868+G2\u8702\u9CF4+G3\u6545\u969C\u6CE8\u5165+G4\u793A\u6CE2\u5668       \u2551\n\u2551  \u277A \u904E\u8F09\u4FDD\u8B77: LV1-3\u57FA\u790E + LV4-5\u9632\u507D + LV6-9\u7368\u7ACB\u9A57\u8B49       \u2551\n\u2551  DoD: (1)\u5BE6\u73FE(2)\u88DC\u5B8C(3)\u898F\u683C(4)\u540C\u6B65(5)\u7DE8\u8B6F(6)\u4EA4\u4ED8(7)\u771F\u5BE6(8)\u9632\u8A50 \u2551\n\u2551  \u5168\u904E=MISSION COMPLETE  \u4EFB\u4E00\u4E0D\u904E=REJECTED                  \u2551\n\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D\n";
 
 /** 違規嚴重程度 */
 type Severity = 'error' | 'warning' | 'info';
@@ -417,14 +417,14 @@ type Severity = 'error' | 'warning' | 'info';
 type RuleCategory = 'axiom' | 'redline' | 'prohibition' | 'gate';
 /** 規則 ID 類型 */
 type AxiomId = 'A1' | 'A2' | 'A3' | 'A4' | 'A5' | 'A6' | 'A7' | 'A8';
-type RedlineId = 'R01' | 'R02' | 'R03' | 'R04' | 'R05' | 'R06' | 'R07' | 'R08' | 'R09' | 'R10' | 'R11' | 'R12' | 'R13' | 'R14' | 'R15' | 'R16' | 'R17' | 'R18';
+type RedlineId = 'R01' | 'R02' | 'R03' | 'R04' | 'R05' | 'R06' | 'R07' | 'R08' | 'R09' | 'R10' | 'R11' | 'R12' | 'R13' | 'R14' | 'R15' | 'R16' | 'R17' | 'R18' | 'R19' | 'R20' | 'R21' | 'R22' | 'R23' | 'R24' | 'R25' | 'R26' | 'R27' | 'R28';
 type ProhibitionId = 'P01' | 'P02' | 'P03' | 'P04' | 'P05' | 'P06' | 'P07' | 'P08' | 'P09' | 'P10' | 'P11' | 'P12' | 'P13' | 'P14';
 type GateId = 'Gate-In' | 'Gate-Mid' | 'Gate-Out' | 'Gate-Accept';
-/** v3.3 四門禁 ID (硬體化) */
+/** v3.5 四門禁 ID (硬體化) */
 type GateV33Id = 'G1' | 'G2' | 'G3' | 'G4';
-/** v3.3 Pipeline 步驟 ID */
+/** v3.5 Pipeline 步驟 ID */
 type PipelineStepId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-/** v3.3 Pipeline 步驟結果 */
+/** v3.5 Pipeline 步驟結果 */
 interface PipelineStepResult {
     step: PipelineStepId;
     name: string;
@@ -444,9 +444,9 @@ interface PipelineStepResult {
     /** Optional: lightweight counters (e.g. { missing: 3, violations: 12 }). */
     stats?: Record<string, number>;
 }
-/** v3.3 Pipeline 結果 */
+/** v3.5 Pipeline 結果 */
 interface PipelineResult {
-    version: '3.3';
+    version: '3.5';
     timestamp: string;
     targetPath: string;
     productGrade: 'E' | 'F';
@@ -465,7 +465,7 @@ interface PipelineResult {
     duration: number;
     evidenceDir: string;
 }
-/** v3.3 門禁結果 */
+/** v3.5 門禁結果 */
 interface GateV33Result {
     G1: {
         passed: boolean;
@@ -511,7 +511,7 @@ interface Rule {
     /** 閾值（如適用） */
     threshold?: number | string;
     /** 檢測方法 */
-    detectMethod?: 'regex' | 'ast' | 'heuristic' | 'llm' | 'manual' | 'integration';
+    detectMethod?: 'regex' | 'ast' | 'heuristic' | 'llm' | 'manual' | 'integration' | 'regex+heuristic' | 'regex+context';
 }
 /** 違規記錄 */
 interface Violation {
@@ -701,8 +701,8 @@ interface LanguageConfig {
 }
 /** 檢查等級 */
 type CheckLevel = 'B' | 'C' | 'D';
-/** v3.3 版本標識 — 軟體工程硬體化 */
-declare const CODEQC_VERSION = "3.3";
+/** v3.5 版本標識 — 軟體工程硬體化 */
+declare const CODEQC_VERSION = "3.5";
 /** CodeQC 配置 */
 interface CodeQCConfig {
     /** 檢查等級 */
@@ -816,7 +816,7 @@ declare function extractHandoverTags(source: string): {
 }[];
 
 /**
- * Code-QC v2.4 - B 工作紀律
+ * Code-QC v3.5 - B 工作紀律
  * §3 十四禁止 (P01-P14)
  *
  * 實作狀態：
@@ -850,8 +850,8 @@ declare const PROHIBITION_CHECKERS: RuleChecker[];
 declare function checkProhibitions(source: string, file: string): Violation[];
 
 /**
- * Code-QC v3.3 - B 工作紀律
- * §2 十八紅線 (R01-R18)
+ * Code-QC v3.5 - B 工作紀律
+ * §2 二十八紅線 (R01-R28)
  */
 
 interface Redline extends Rule {
@@ -891,7 +891,7 @@ declare function getAxiom(id: AxiomId): Axiom | undefined;
 declare function formatAxiomsPrompt(): string;
 
 declare const REDLINE_CHECKERS: RuleChecker[];
-/** 反詐欺專用檢查器 (R16+R17+R18) */
+/** 反詐欺專用檢查器 (R16-R28) — v3.5 完整版 */
 declare const ANTI_FRAUD_CHECKERS: RuleChecker[];
 /** 執行反詐欺掃描 — 生成 fraud.log 的資料 */
 declare function checkAntifraud(source: string, file: string): Violation[];
@@ -957,12 +957,12 @@ declare const reporters: Record<string, Reporter>;
 declare function getReporter(name: string): Reporter;
 
 /**
- * Code-QC v3.3 — Pipeline 引擎 (❷走線化)
+ * Code-QC v3.5 — Pipeline 引擎 (❷走線化)
  *
  * 十步走線：build → lint → test → proof → gate → ship
  * 走線固定不可跳步，斷一條即熔斷。
  *
- * 對照 D.md §8 Pipeline v3.3
+ * 對照 D.md §8 Pipeline v3.5
  */
 
 interface PipelineInput {
@@ -1057,7 +1057,7 @@ interface PipelineInput {
     };
 }
 /**
- * 執行 v3.3 十步走線 Pipeline
+ * 執行 v3.5 十步走線 Pipeline
  *
  * 走線規則:
  * - 順序執行，不可跳步
@@ -1073,7 +1073,7 @@ declare function runPipeline(input: PipelineInput): PipelineResult;
 declare function formatPipelineReport(result: PipelineResult): string;
 
 /**
- * Code-QC v3.3 — G1-G4 硬體化門禁 (❸閘門化)
+ * Code-QC v3.5 — G1-G4 硬體化門禁 (❸閘門化)
  *
  * 四門禁 = AND Gate 邏輯，一 LOW 即斷電
  * G1 萬用表 → 腳位接觸
@@ -1100,13 +1100,13 @@ interface GateV33Input {
     }>;
 }
 /**
- * 執行 v3.3 四門禁 (AND Gate 串聯)
+ * 執行 v3.5 四門禁 (AND Gate 串聯)
  * G1 → G2 → G3 → G4，全 HIGH 才 PASS
  */
 declare function runGatesV33(input: GateV33Input): GateV33Result;
 
 /**
- * Code-QC v3.3 — Evidence 收集器 + DoD 8點判定器 (❹量測化)
+ * Code-QC v3.5 — Evidence 收集器 + DoD 8點判定器 (❹量測化)
  *
  * 對照 C.md §7 + D.md §7
  *
@@ -1218,7 +1218,7 @@ declare function judgeDod(evidence: EvidenceCollection): DoDStatus;
 declare function generateProofPackManifest(evidence: EvidenceCollection): string;
 
 /**
- * Code-QC v3.3 — LV1-LV9 防偽引擎 (❺過載保護)
+ * Code-QC v3.5 — LV1-LV9 防偽引擎 (❺過載保護)
  *
  * 對照 D.md §9 + B.md §5
  *
@@ -1263,14 +1263,14 @@ declare function resolveProtectionLevel(grade: 'E' | 'F', steps: PipelineStepRes
 
 /**
  * MAIDOS CodeQC
- * Code Quality Control implementing Code-QC v3.3 — 軟體工程硬體化
+ * Code Quality Control implementing Code-QC v3.5 — 軟體工程硬體化
  *
- * v3.3 升級: 五段硬體化架構 + LV1-LV9防偽 + E/F產品等級
+ * v3.5 升級: 28紅線(R25-R28深掃) + 閾值對齊 + 五段硬體化架構 + LV1-LV9防偽 + E/F產品等級
  * v3.2 基礎: 反詐欺紅線(R16-R18) + 三軸證明(Z軸) + IAV + BLDS + DoD 8點
  *
  * @packageDocumentation
  */
 
-declare const VERSION = "0.3.3";
+declare const VERSION = "0.3.5";
 
 export { ANTI_FRAUD_CHECKERS, AXIOMS, AXIOMS_BY_PRIORITY, type AnalysisResult, type AnalyzeOptions, type AuthenticityScore, type AxiomId, type BLDSLevel, BLDS_GATE_MINIMUM, BLDS_LEVELS, CIRCUIT_QUICK_CARD, CIRCUIT_WORLDVIEW, CODEQC_VERSION, type CheckLevel, type CodeQCConfig, type ComplianceScore, DEFAULT_CONFIG, DOD_DEFINITIONS, type DoDItem, type DoDStatus, type DualAxisScore, type EvidenceCollection, type EvidenceLog, FAULT_MODES, type FileAnalysisResult, GATES, GATE_CIRCUIT_LABELS, type GateCheckItem, type GateId, type GateResult, type GateStatus, type GateV33Id, type GateV33Input, type GateV33Result, HANDOVER_TAGS, HANDOVER_TEMPLATE, HARDWARE_QUICK_CARD, HARDWARIZATION_PILLARS, type IAVAnswer, type IAVRecord, IAV_DISQUALIFIERS, type LanguageConfig, type LanguageSupport, type OutcomeScore, PRODUCT_GRADES, PROHIBITIONS, PROHIBITION_CHECKERS, PROTECTION_COMPONENTS, PROTECTION_LAYERS, PROTECTION_LEVELS, type PipelineInput, type PipelineResult, type PipelineStepId, type PipelineStepResult, type Plugin, type ProhibitionId, type ProtectionCheckResult, type ProtectionReport, REDLINES, REDLINE_CHECKERS, type RedlineId, type Reporter, type Rule, type RuleCategory, type RuleChecker, type RuleId, type Severity, type SupportedLanguage, type TriAxisScore, VERSION, type Violation, analyze, analyzeFile, calculateComplianceScore, calculateDualAxisScore, calculateOutcomeScore, checkAntifraud, checkFraud, checkProhibitions, checkProtection, checkRedlines, checkRules, collectEvidence, consoleReporter, createGateStatus, detectLanguage, evaluateGate, extractHandoverTags, formatAxiomsPrompt, formatPipelineReport, generateAllGatesChecklist, generateGateChecklist, generateProofPackManifest, getAxiom, getProhibition, getRedline, getReporter, htmlReporter, isSupported, jsonReporter, judgeDod, quickCheck, reporters, resolveProtectionLevel, runGatesV33, runPipeline };

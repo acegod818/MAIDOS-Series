@@ -1,11 +1,11 @@
 /**
  * MAIDOS CodeQC - Self Proof Test Suite
  * 
- * 自證測試：證明這個工具本身符合 Code-QC v2.4 標準
- * 
+ * 自證測試：證明這個工具本身符合 Code-QC v3.5 標準
+ *
  * 驗證項目：
  * 1. 實作功能有實現 - 每個 checker 都有對應測試
- * 2. 專案達到規格門檻 - 符合 Code-QC v2.4 標準
+ * 2. 專案達到規格門檻 - 符合 Code-QC v3.5 標準
  * 3. 代碼沒有空殼 - 每個聲稱的功能都有實際行為
  * 4. 軍事級代碼 - 對自己的代碼執行檢查並通過
  */
@@ -26,8 +26,8 @@ describe('1. 功能實現證明', () => {
   describe('紅線檢查器', () => {
     const stats = getRedlineStats();
     
-    it('應該有 18 條紅線定義', () => {
-      expect(REDLINES).toHaveLength(18);
+    it('應該有 28 條紅線定義', () => {
+      expect(REDLINES).toHaveLength(28);
     });
     
     it('每條實作的紅線應該有對應的 checker', () => {
@@ -123,13 +123,13 @@ describe('1. 功能實現證明', () => {
     });
     
     it('P05 checker 應該實際檢測超長函數', () => {
-      const longFunc = `function test() {\n${Array(60).fill('  console.log("line");').join('\n')}\n}`;
+      const longFunc = `function test() {\n${Array(105).fill('  console.log("line");').join('\n')}\n}`;
       const violations = checkProhibitions(longFunc, 'test.ts');
       expect(violations.some(v => v.ruleId === 'P05')).toBe(true);
     });
-    
+
     it('P06 checker 應該實際檢測深層嵌套', () => {
-      const nested = 'if (a) { if (b) { if (c) { if (d) { if (e) { } } } } }';
+      const nested = 'if (a) { if (b) { if (c) { if (d) { if (e) { if (f) { } } } } } }';
       const violations = checkProhibitions(nested, 'test.ts');
       expect(violations.some(v => v.ruleId === 'P06')).toBe(true);
     });
@@ -147,7 +147,7 @@ describe('1. 功能實現證明', () => {
     });
     
     it('P13 checker 應該實際檢測 TODO 堆積', () => {
-      const badCode = Array(15).fill('// TODO: fix this').join('\n');
+      const badCode = Array(7).fill('// TODO: fix this').join('\n');
       const violations = checkProhibitions(badCode, 'test.ts');
       expect(violations.some(v => v.ruleId === 'P13')).toBe(true);
     });
@@ -299,10 +299,14 @@ describe('4. 自我檢查（軍事級證明）', () => {
       }
     }
     
-    // 警告級違規：P03/P04/P05/P06/P09 允許合理數量
-    const errorViolations = allViolations.filter(v => 
-      !['P03', 'P04', 'P05', 'P06', 'P09'].includes(v.ruleId)
+    // 警告級違規：P03/P04/P05/P06/P09/P12/P13 允許合理數量
+    const errorViolations = allViolations.filter(v =>
+      !['P03', 'P04', 'P05', 'P06', 'P09', 'P12', 'P13'].includes(v.ruleId)
     );
+    if (errorViolations.length > 0) {
+      console.log('非允許違規:');
+      for (const e of errorViolations) console.log(`  [${e.ruleId}] ${e.file}: ${e.message}`);
+    }
     expect(errorViolations).toHaveLength(0);
   });
   

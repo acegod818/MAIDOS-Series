@@ -1,5 +1,5 @@
 /**
- * Code-QC v3.3 — DoD (Definition of Done) definitions
+ * Code-QC v3.5 — DoD (Definition of Done) definitions
  *
  * Keep this file <500 lines (self-proof gate).
  */
@@ -26,7 +26,7 @@ export interface DoDStatus {
   missionComplete: boolean;
 }
 
-/** DoD 8 點定義 (v3.3) */
+/** DoD 8 點定義 (v3.5) */
 export const DOD_DEFINITIONS: Omit<DoDItem, 'passed' | 'evidencePath'>[] = [
   { id: 1, name: '實現證明', verification: 'redline.log = 0 (無斷路/短路)' },
   { id: 2, name: '補完證明', verification: 'impl.log + mapping.log (走線連通)' },

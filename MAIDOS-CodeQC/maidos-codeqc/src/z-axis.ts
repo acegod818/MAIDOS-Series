@@ -1,11 +1,11 @@
 /**
- * Code-QC Z-axis (v3.2/v3.3): Authenticity Protocol Helpers
+ * Code-QC Z-axis (v3.2/v3.5): Authenticity Protocol Helpers
  *
  * Keep this file <500 lines (self-proof gate).
  */
 
 // =============================================================================
-// IAV: Implementation Authenticity Verification (v3.2/v3.3)
+// IAV: Implementation Authenticity Verification (v3.2/v3.5)
 // =============================================================================
 
 /** IAV 五問回答 */
@@ -44,7 +44,7 @@ export interface IAVRecord {
 }
 
 // =============================================================================
-// BLDS: Business Logic Depth Score (v3.2/v3.3)
+// BLDS: Business Logic Depth Score (v3.2/v3.5)
 // =============================================================================
 
 /** BLDS 等級 */
@@ -60,6 +60,6 @@ export const BLDS_LEVELS: Record<BLDSLevel, string> = {
   5: '武器級 — 優秀+可測+可重播+審計日誌',
 };
 
-/** BLDS 最低門禁要求 (v3.3 baseline) */
+/** BLDS 最低門禁要求 (v3.5 baseline) */
 export const BLDS_GATE_MINIMUM: BLDSLevel = 3;
 

@@ -1,14 +1,14 @@
 /**
- * Code-QC v3.3 — Pipeline engine coverage tests
+ * Code-QC v3.5 — Pipeline engine coverage tests
  *
- * Goal: exercise the v3.3 ten-step pipeline (pass + key fail branches),
+ * Goal: exercise the v3.5 ten-step pipeline (pass + key fail branches),
  * so coverage reflects real execution paths (not just rule matchers).
  */
 
 import { describe, it, expect } from 'vitest';
 import { runPipeline } from '../../src/engine/pipeline.js';
 
-describe('engine/pipeline v3.3', () => {
+describe('engine/pipeline v3.5', () => {
   it('passes when all required evidence is provided', () => {
     const files = [
       {

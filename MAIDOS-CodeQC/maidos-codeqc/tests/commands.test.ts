@@ -1,5 +1,5 @@
 /**
- * CodeQC v3.3 — CLI command helpers coverage tests
+ * CodeQC v3.5 — CLI command helpers coverage tests
  *
  * These tests focus on:
  * - parsers (test/coverage/audit/Proof Pack)
@@ -138,7 +138,7 @@ describe('pipelineCommand', () => {
     const proofPath = join(dir, 'evidence', 'PROOF-REPORT.md');
     expect(existsSync(proofPath)).toBe(true);
     const proof = readFileSync(proofPath, 'utf-8');
-    expect(proof).toContain('# Proof Report v3.3');
+    expect(proof).toContain('# Proof Report v3.5');
     expect(proof).toContain('MISSION COMPLETE');
 
     // Spot-check that internal evidence logs were emitted.

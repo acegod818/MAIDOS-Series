@@ -177,7 +177,7 @@ var init_types = __esm({
     init_z_axis();
     init_dod();
     init_hardwarization();
-    CODEQC_VERSION = "3.3";
+    CODEQC_VERSION = "3.5";
     ({
       level: "D",
       include: SUPPORTED_EXTENSIONS.map((ext) => `**/*${ext}`),
@@ -338,7 +338,19 @@ var init_b_redlines_defs = __esm({
       { id: "R15", category: "redline", name: "TODO\u6B98\u7559", nameEn: "TODO Residue", description: "todo!/unimplemented!/TODO \u9032\u5165\u63D0\u4EA4", severity: "error", action: "\u{1F534} \u7ACB\u5373\u6E05\u9664", autoDetectable: true, detectMethod: "regex", implemented: true },
       { id: "R16", category: "redline", name: "\u7A7A\u65B9\u6CD5", nameEn: "Empty Method", description: "\u65B9\u6CD5\u7C3D\u540D\u6B63\u78BA\u4F46\u65B9\u6CD5\u9AD4\u7A7A\u6216\u50C5return\u9ED8\u8A8D\u503C", severity: "error", action: "\u{1F534} \u780D\u6389\u91CD\u5BEB", autoDetectable: true, detectMethod: "regex", implemented: true },
       { id: "R17", category: "redline", name: "\u8A50\u6B3A\u7269\u4EF6", nameEn: "Fraud Object", description: "\u7269\u4EF6\u7D50\u69CB\u6B63\u78BA\u4F46\u6578\u64DA\u786C\u7DE8\u78BC/\u4E0D\u4F86\u81EA\u771F\u5BE6\u6578\u64DA\u6E90", severity: "error", action: "\u{1F534} \u780D\u6389\u91CD\u5BEB", autoDetectable: true, detectMethod: "regex", implemented: true },
-      { id: "R18", category: "redline", name: "\u7E5E\u9053\u5BE6\u4F5C", nameEn: "Bypass Implementation", description: "\u8DF3\u904E\u61C9\u4F7F\u7528\u7684API/DB/Config\u7528\u5047\u8CC7\u6599\u66FF\u4EE3", severity: "error", action: "\u{1F534} \u780D\u6389\u91CD\u5BEB", autoDetectable: true, detectMethod: "regex", implemented: true }
+      { id: "R18", category: "redline", name: "\u7E5E\u9053\u5BE6\u4F5C", nameEn: "Bypass Implementation", description: "\u8DF3\u904E\u61C9\u4F7F\u7528\u7684API/DB/Config\u7528\u5047\u8CC7\u6599\u66FF\u4EE3", severity: "error", action: "\u{1F534} \u780D\u6389\u91CD\u5BEB", autoDetectable: true, detectMethod: "regex", implemented: true },
+      // === v3.4 新增: 審計補漏六規則 (R19-R24) ===
+      { id: "R19", category: "redline", name: "\u56FA\u5B9A\u5B57\u4E32\u56DE\u50B3", nameEn: "Hardcoded String Return", description: "\u51FD\u6578\u56DE\u50B3\u5BEB\u6B7B\u5B57\u4E32/\u56FA\u5B9A\u503C\u800C\u975E\u771F\u5BE6\u8A08\u7B97\u7D50\u679C", severity: "error", action: "\u{1F534} \u63A5\u5165\u771F\u5BE6\u6578\u64DA\u6E90", autoDetectable: true, detectMethod: "regex", implemented: true },
+      { id: "R20", category: "redline", name: "\u6A21\u677F\u8907\u88FD\u704C\u6C34", nameEn: "Template Copy-Paste", description: "\u5927\u91CF\u6A94\u6848\u7D50\u69CB\u76F8\u540C\u50C5\u6539\u540D\u5B57\uFF0C\u529F\u80FD\u5168\u7A7A", severity: "error", action: "\u{1F534} \u5BE6\u4F5C\u6216\u79FB\u9664", autoDetectable: true, detectMethod: "regex+heuristic", implemented: true },
+      { id: "R21", category: "redline", name: "\u5047\u8A8D\u8B49", nameEn: "Fake Auth", description: "\u6536\u4E86\u6191\u8B49\u53C3\u6578\u4F46\u672A\u7528\u65BC\u7C3D\u540D/\u9A57\u8B49\uFF0C\u6216\u58D3 unused warning", severity: "error", action: "\u{1F534} \u5BE6\u4F5C\u771F\u5BE6\u8A8D\u8B49", autoDetectable: true, detectMethod: "regex", implemented: true },
+      { id: "R22", category: "redline", name: "\u8CC7\u6599\u91CF\u4E0D\u8DB3", nameEn: "Insufficient Data", description: "\u5B57\u5178/\u5C0D\u7167\u8868/\u914D\u7F6E\u6578\u64DA\u91CF\u9060\u4F4E\u65BC\u5BE6\u7528\u9580\u6ABB", severity: "error", action: "\u{1F534} \u88DC\u9F4A\u6578\u64DA", autoDetectable: true, detectMethod: "heuristic", implemented: true },
+      { id: "R23", category: "redline", name: "\u6C38\u9060\u5931\u6557", nameEn: "Always-Fail Path", description: "\u51FD\u6578\u6C38\u9060\u56DE Err/Failure/false\uFF0C\u7B49\u65BC\u529F\u80FD\u4E0D\u5B58\u5728", severity: "error", action: "\u{1F534} \u5BE6\u4F5C\u6216\u6A19\u8A18 unsupported", autoDetectable: true, detectMethod: "regex", implemented: true },
+      { id: "R24", category: "redline", name: "\u81EA\u767D\u8A3B\u89E3", nameEn: "Self-Confessing Comment", description: "\u8A3B\u89E3\u627F\u8A8D\u662F\u5047\u5BE6\u4F5C\uFF08In a real implementation/simplified/for now\uFF09", severity: "error", action: "\u{1F534} \u5BE6\u4F5C\u771F\u5BE6\u908F\u8F2F", autoDetectable: true, detectMethod: "regex", implemented: true },
+      // === v3.5 新增: 深掃補漏四規則 (R25-R28) ===
+      { id: "R25", category: "redline", name: "\u65E5\u8A8C\u704C\u6C34", nameEn: "Log Stuffing", description: "\u51FD\u6578\u9AD4\u53EA\u6709 log \u8A9E\u53E5 + trivial return\uFF0C\u7121\u5BE6\u969B\u696D\u52D9\u908F\u8F2F", severity: "error", action: "\u{1F534} \u5BE6\u4F5C\u771F\u5BE6\u908F\u8F2F", autoDetectable: true, detectMethod: "regex+heuristic", implemented: true },
+      { id: "R26", category: "redline", name: "\u5E7D\u9748\u7570\u6B65", nameEn: "Phantom Async", description: "async fn \u5167\u90E8\u6C92\u6709\u4EFB\u4F55 .await \u8ABF\u7528\uFF0C\u5047\u88DD\u662F\u7570\u6B65\u64CD\u4F5C", severity: "error", action: "\u{1F534} \u52A0\u5165\u771F\u5BE6 .await \u6216\u79FB\u9664 async", autoDetectable: true, detectMethod: "regex", implemented: true },
+      { id: "R27", category: "redline", name: "\u932F\u8AA4\u6D17\u767D", nameEn: "Error Laundering", description: "\u5728\u5B89\u5168\u76F8\u95DC\u64CD\u4F5C\u4E2D\u7528 unwrap_or_default() \u975C\u9ED8\u541E\u6389\u932F\u8AA4", severity: "error", action: "\u{1F534} \u7528 ? \u50B3\u64AD\u932F\u8AA4\u6216\u660E\u78BA\u8655\u7406", autoDetectable: true, detectMethod: "regex+context", implemented: true },
+      { id: "R28", category: "redline", name: "\u8907\u88FD\u8ECD\u5718", nameEn: "Clone Army", description: "\u8DE8\u6A94\u6848\u5B8C\u5168\u76F8\u540C\u7684\u51FD\u6578\u9AD4\uFF0C\u7D50\u69CB\u81A8\u8139\u704C\u6C34", severity: "error", action: "\u{1F534} \u62BD\u53D6\u5171\u7528\u51FD\u6578", autoDetectable: true, detectMethod: "heuristic", implemented: true }
     ];
   }
 });
@@ -885,8 +897,8 @@ var init_b_redlines_r13_r18 = __esm({
     init_b_redlines_defs();
     init_b_redlines_utils();
     FAKE_IMPL_PATTERNS = [
-      /\btodo!\b/g,
-      /\bunimplemented!\b/g,
+      /\btodo!\s*\(/g,
+      /\bunimplemented!\s*\(/g,
       /throw\s+new\s+NotImplementedException/gi,
       /raise\s+NotImplementedError/gi
     ];
@@ -1062,6 +1074,447 @@ var init_b_redlines_r13_r18 = __esm({
   }
 });
 
+// src/rules/b-redlines-r19-r24.ts
+var HARDCODED_RETURN_PATTERNS, R19_CHECKER, TEMPLATE_MARKER_PATTERNS, R20_CHECKER, R21_CHECKER, R22_CHECKER, ALWAYS_FAIL_PATTERNS, R23_CHECKER, SELF_CONFESSING_PATTERNS, R24_CHECKER;
+var init_b_redlines_r19_r24 = __esm({
+  "src/rules/b-redlines-r19-r24.ts"() {
+    init_b_redlines_defs();
+    HARDCODED_RETURN_PATTERNS = [
+      // Rust: Ok(Some("固定字串")) — 函數聲稱回傳解析結果但回寫死字串
+      /Ok\(\s*Some\(\s*"[^"]{3,60}"\.to_string\(\)\s*\)\s*\)/g,
+      // Rust: Ok(format!("// comment")) — 生成的"代碼"只是註解
+      /Ok\(\s*format!\(\s*"\/\/[^"]*"/g,
+      // C#: return "固定字串" 在非 ToString/Name/Version 方法中
+      /return\s+"[A-Z][a-z]+\s+(?:interface|definition|implementation|result|output|response)\s*(?:for)?\s*[^"]*"/gi,
+      // 任何語言: hardcoded confidence/score 值 (直接賦值)
+      /(?:confidence|score|probability|accuracy)\s*[:=]\s*0\.\d{1,2}f?\b/gi,
+      // 任何語言: hardcoded magic float 在 return/Math 中 (0.75f, 0.85f, 0.90f, 0.95f)
+      /(?:return|Math\.Min|Math\.Max|math\.min)\s*\(\s*0\.(?:7[05]|8[05]|9[05])f?\b/gi,
+      // hardcoded gas limit (21000 是 ETH transfer 的，但用在所有 tx 就是假的)
+      /gas(?:_limit|Limit)\s*[:=]\s*(?:U256::from\()?21000/g
+    ];
+    R19_CHECKER = {
+      rule: getRedline("R19"),
+      checkSource(source, file) {
+        const violations = [];
+        if (/(?:test|spec|mock|fixture|__test__)/i.test(file)) return violations;
+        const lines = source.split("\n");
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          if (/^\s*(?:\/\/|#|\/\*|\*|--|;)/.test(line)) continue;
+          for (const pattern of HARDCODED_RETURN_PATTERNS) {
+            pattern.lastIndex = 0;
+            const match = pattern.exec(line);
+            if (match) {
+              violations.push({
+                ruleId: "R19",
+                ruleName: "\u56FA\u5B9A\u5B57\u4E32\u56DE\u50B3",
+                severity: "error",
+                file,
+                line: i + 1,
+                column: match.index + 1,
+                message: `\u56FA\u5B9A\u5B57\u4E32\u56DE\u50B3 (R19): \u56DE\u50B3\u503C\u53EF\u80FD\u662F\u5BEB\u6B7B\u7684 \u2014 ${match[0].substring(0, 50)}`,
+                snippet: line.trim(),
+                suggestion: "\u78BA\u8A8D\u56DE\u50B3\u503C\u4F86\u81EA\u771F\u5BE6\u8A08\u7B97/\u89E3\u6790/API\u547C\u53EB\uFF0C\u4E0D\u662F hardcoded"
+              });
+              break;
+            }
+          }
+        }
+        return violations;
+      }
+    };
+    TEMPLATE_MARKER_PATTERNS = [
+      // C#: SupportsInterfaceExtraction = false + SupportsGlueGeneration = false 同時出現
+      /Supports(?:Interface|Glue|Export)(?:Extraction|Generation|Analysis)\s*=\s*false/gi,
+      // 任何語言: 函數名有意義但 body 只有一行 return Array.Empty / vec![] / []
+      /(?:Extract|Analyze|Parse|Generate|Process)\w+\s*(?:Async)?\s*\([^)]*\)[^{]*\{\s*(?:return\s+)?(?:Array\.Empty|vec!\[\]|\[\]|new\s+\w+\[0\]|Enumerable\.Empty)/g
+    ];
+    R20_CHECKER = {
+      rule: getRedline("R20"),
+      checkSource(source, file) {
+        const violations = [];
+        if (/(?:test|spec|mock|fixture)/i.test(file)) return violations;
+        for (const pattern of TEMPLATE_MARKER_PATTERNS) {
+          pattern.lastIndex = 0;
+          let match;
+          while ((match = pattern.exec(source)) !== null) {
+            const before = source.substring(0, match.index);
+            const lineNum = (before.match(/\n/g) || []).length + 1;
+            violations.push({
+              ruleId: "R20",
+              ruleName: "\u6A21\u677F\u8907\u88FD\u704C\u6C34",
+              severity: "error",
+              file,
+              line: lineNum,
+              column: 1,
+              message: `\u6A21\u677F\u8907\u88FD\u704C\u6C34 (R20): \u529F\u80FD\u5BA3\u544A\u5B58\u5728\u4F46\u6838\u5FC3\u8FD4\u56DE\u7A7A \u2014 ${match[0].substring(0, 50)}`,
+              snippet: match[0].substring(0, 80),
+              suggestion: "\u5BE6\u4F5C\u771F\u5BE6\u908F\u8F2F\u6216\u5C07 SupportsX \u6539\u70BA false \u4E26\u79FB\u9664\u7A7A\u6BBC\u65B9\u6CD5"
+            });
+          }
+        }
+        return violations;
+      }
+    };
+    R21_CHECKER = {
+      rule: getRedline("R21"),
+      checkSource(source, file) {
+        const violations = [];
+        if (/(?:test|spec|mock|fixture)/i.test(file)) return violations;
+        const lines = source.split("\n");
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const letUnderscoreMatch = /let\s+_\s*=\s*\(?&?self\.\w*(?:key|secret|token|password|credential|cert)\w*/i.exec(line);
+          if (letUnderscoreMatch) {
+            violations.push({
+              ruleId: "R21",
+              ruleName: "\u5047\u8A8D\u8B49",
+              severity: "error",
+              file,
+              line: i + 1,
+              column: letUnderscoreMatch.index + 1,
+              message: `\u5047\u8A8D\u8B49 (R21): \u7528 let _ \u58D3\u6389\u6191\u8B49\u672A\u4F7F\u7528\u8B66\u544A \u2014 ${letUnderscoreMatch[0].substring(0, 50)}`,
+              snippet: line.trim(),
+              suggestion: "\u6191\u8B49\u53C3\u6578\u5FC5\u9808\u7528\u65BC\u771F\u5BE6\u7C3D\u540D/\u52A0\u5BC6/\u9A57\u8B49\uFF0C\u4E0D\u80FD let _ \u4E1F\u68C4"
+            });
+          }
+        }
+        return violations;
+      }
+    };
+    R22_CHECKER = {
+      rule: getRedline("R22"),
+      checkSource(source, file) {
+        const violations = [];
+        if (/(?:test|spec|mock|fixture)/i.test(file)) return violations;
+        if (/(?:table|dict|mapping|vocab|lexicon).*\.json$/i.test(file)) {
+          const charEntries = (source.match(/"char"/g) || []).length;
+          if (charEntries > 0 && charEntries < 500) {
+            violations.push({
+              ruleId: "R22",
+              ruleName: "\u8CC7\u6599\u91CF\u4E0D\u8DB3",
+              severity: "error",
+              file,
+              line: 1,
+              column: 1,
+              message: `\u8CC7\u6599\u91CF\u4E0D\u8DB3 (R22): \u5B57\u5178\u50C5 ${charEntries} \u689D\u76EE\uFF0C\u5BE6\u7528\u9580\u6ABB\u81F3\u5C11 500+`,
+              snippet: `${charEntries} entries in ${file.split("/").pop()}`,
+              suggestion: "\u64F4\u5145\u5B57\u5178\u5230\u5BE6\u7528\u898F\u6A21\uFF0C\u53C3\u8003 Unihan/CC-CEDICT \u7B49\u958B\u6E90\u6578\u64DA"
+            });
+          }
+        }
+        if (/\.tsv$/i.test(file)) {
+          const lines = source.split("\n").filter((l) => l.trim() && !l.startsWith("#"));
+          let emptyFields = 0;
+          for (const line of lines) {
+            const fields = line.split("	");
+            emptyFields += fields.filter((f) => f.trim() === "").length;
+          }
+          if (emptyFields > 5) {
+            violations.push({
+              ruleId: "R22",
+              ruleName: "\u8CC7\u6599\u91CF\u4E0D\u8DB3",
+              severity: "error",
+              file,
+              line: 1,
+              column: 1,
+              message: `\u8CC7\u6599\u91CF\u4E0D\u8DB3 (R22): TSV \u6709 ${emptyFields} \u500B\u7A7A\u6B04\u4F4D`,
+              snippet: `${emptyFields} empty fields in ${file.split("/").pop()}`,
+              suggestion: "\u586B\u5165\u771F\u5BE6\u6578\u64DA\u6216\u6A19\u8A18 VERIFY_ON_DOWNLOAD"
+            });
+          }
+        }
+        return violations;
+      }
+    };
+    ALWAYS_FAIL_PATTERNS = [
+      // Rust: 函數只有一行 Err(...)
+      /fn\s+\w+\s*(?:<[^>]*>)?\s*\([^)]*\)\s*(?:->.*?)?\{\s*Err\(/g,
+      // C#: 方法只回 .Failure(
+      /\w+\s*\([^)]*\)\s*(?:=>|{)\s*(?:return\s+)?\w+\.Failure\(/g,
+      // 任何語言: supports_X / has_X / can_X 永遠回 false
+      /(?:pub\s+)?fn\s+(?:supports?|has|can|is)_\w+\s*\([^)]*\)\s*(?:->.*?)?\{\s*false\s*\}/g,
+      // C# 版: SupportsX => false (property)
+      /Supports\w+\s*(?:=>|{\s*get\s*{\s*return)\s*false/g
+    ];
+    R23_CHECKER = {
+      rule: getRedline("R23"),
+      checkSource(source, file) {
+        const violations = [];
+        if (/(?:test|spec|mock|fixture)/i.test(file)) return violations;
+        const normalized = source.replace(/\r\n/g, "\n");
+        for (const pattern of ALWAYS_FAIL_PATTERNS) {
+          pattern.lastIndex = 0;
+          let match;
+          while ((match = pattern.exec(normalized)) !== null) {
+            const before = normalized.substring(0, match.index);
+            const lineNum = (before.match(/\n/g) || []).length + 1;
+            violations.push({
+              ruleId: "R23",
+              ruleName: "\u6C38\u9060\u5931\u6557",
+              severity: "error",
+              file,
+              line: lineNum,
+              column: 1,
+              message: `\u6C38\u9060\u5931\u6557 (R23): \u51FD\u6578\u6C38\u9060\u56DE\u5931\u6557/false \u2014 ${match[0].substring(0, 50)}`,
+              snippet: match[0].substring(0, 80),
+              suggestion: '\u5BE6\u4F5C\u771F\u5BE6\u908F\u8F2F\u6216\u660E\u78BA\u6A19\u8A18\u70BA #[cfg(not(feature = "X"))]'
+            });
+          }
+        }
+        return violations;
+      }
+    };
+    SELF_CONFESSING_PATTERNS = [
+      // English
+      /\/\/\s*(?:In a real|In production|In the actual|In actual)/gi,
+      /\/\/\s*(?:This is a |This is the |This should be a )?simplified\s+implementation/gi,
+      /\/\/\s*For (?:now|simplicity|the time being),?\s*(?:we |just |simply )?(?:return|use|log)/gi,
+      /\/\/\s*(?:Should|Would|Could) (?:call|use|fetch|load|query|connect to|integrate with)/gi,
+      /\/\/\s*(?:Placeholder|Stub|Dummy|Hardcoded|Bypassed|Shortcut|Stubbed)/gi,
+      // Chinese
+      /\/\/\s*(?:在實際|在真實|實際實現|實際實作|簡化實現|簡化的實現|目前使用簡化)/g,
+      /\/\/\s*(?:應該(?:從|調用|使用|連接|呼叫))/g,
+      // Rust doc comments
+      /\/\/\/?\s*(?:In a real|simplified|placeholder|stub|dummy)/gi,
+      // Python/Ruby
+      /#\s*(?:In a real|simplified|placeholder|stub|dummy|for now|HARDCODED)/gi
+    ];
+    R24_CHECKER = {
+      rule: getRedline("R24"),
+      checkSource(source, file) {
+        const violations = [];
+        if (/(?:test|spec|mock|fixture)/i.test(file)) return violations;
+        const lines = source.split("\n");
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          for (const pattern of SELF_CONFESSING_PATTERNS) {
+            pattern.lastIndex = 0;
+            const match = pattern.exec(line);
+            if (match) {
+              violations.push({
+                ruleId: "R24",
+                ruleName: "\u81EA\u767D\u8A3B\u89E3",
+                severity: "error",
+                file,
+                line: i + 1,
+                column: match.index + 1,
+                message: `\u81EA\u767D\u8A3B\u89E3 (R24): \u4EE3\u78BC\u81EA\u5DF1\u627F\u8A8D\u662F\u5047\u5BE6\u4F5C \u2014 ${match[0].substring(0, 50)}`,
+                snippet: line.trim(),
+                suggestion: '\u79FB\u9664\u81EA\u767D\u8A3B\u89E3\u4E26\u5BE6\u4F5C\u771F\u5BE6\u908F\u8F2F\uFF0C\u6216\u660E\u78BA\u6A19\u8A18 #[cfg(feature = "mock")]'
+              });
+              break;
+            }
+          }
+        }
+        return violations;
+      }
+    };
+  }
+});
+
+// src/rules/b-redlines-r25-r28.ts
+var TRIVIAL_RETURNS_RS, LOG_LINE_RS, LOG_LINE_CS, LOG_LINE_CPP, LOG_ONLY_WHITELIST, R25_CHECKER, R26_CHECKER, HIGH_RISK_CONTEXTS, ERROR_LAUNDER_PATTERNS, R27_CHECKER, CLONE_ARMY_PATTERNS, R28_CHECKER;
+var init_b_redlines_r25_r28 = __esm({
+  "src/rules/b-redlines-r25-r28.ts"() {
+    init_b_redlines_defs();
+    TRIVIAL_RETURNS_RS = /* @__PURE__ */ new Set([
+      "Ok(())",
+      "Ok(true)",
+      "Ok(false)",
+      "Ok(None)",
+      "Ok(vec![])",
+      "Ok(String::new())",
+      "Ok(Default::default())",
+      "Ok(HashMap::new())",
+      "Ok(Vec::new())",
+      "Ok(BTreeMap::new())",
+      "Ok(HashSet::new())",
+      "true",
+      "false",
+      "None",
+      "()",
+      "Default::default()",
+      "String::new()",
+      "Vec::new()",
+      "HashMap::new()",
+      "0",
+      "0.0",
+      '""'
+    ]);
+    LOG_LINE_RS = /^\s*(?:log|tracing|println|eprintln|debug|info|warn|error|trace)(?:::)?\w*!?\s*\(/;
+    LOG_LINE_CS = /^\s*(?:Console\.Write|Debug\.Log|Logger\.\w+|_?logger\.\w+|Log\.\w+)\s*\(/;
+    LOG_LINE_CPP = /^\s*(?:std::cout|std::cerr|printf|fprintf|spdlog|LOG_|SPDLOG_)\s*[(<]/;
+    LOG_ONLY_WHITELIST = /* @__PURE__ */ new Set(["drop", "fmt", "display", "debug", "new", "default"]);
+    R25_CHECKER = {
+      rule: getRedline("R25"),
+      checkSource(source, file) {
+        const violations = [];
+        if (/(?:test|spec|mock|fixture|__test__)/i.test(file)) return violations;
+        const ext = file.split(".").pop()?.toLowerCase() || "";
+        const logPattern = ext === "cs" ? LOG_LINE_CS : ext === "cpp" || ext === "h" ? LOG_LINE_CPP : LOG_LINE_RS;
+        const fnPattern = ext === "rs" ? /(?:pub\s+)?(?:async\s+)?fn\s+(\w+)\s*\([^)]*\)[^{]*\{/g : ext === "cs" ? /(?:public|internal|private|protected)\s+(?:static\s+)?(?:async\s+)?[\w<>\[\]]+\s+(\w+)\s*\([^)]*\)\s*\{/g : /(?:void|bool|int|string|auto)\s+(\w+)\s*\([^)]*\)\s*\{/g;
+        let match;
+        while ((match = fnPattern.exec(source)) !== null) {
+          const fnName = match[1];
+          if (LOG_ONLY_WHITELIST.has(fnName.toLowerCase())) continue;
+          const bodyStart = match.index + match[0].length;
+          let depth = 1;
+          let pos = bodyStart;
+          while (pos < source.length && depth > 0) {
+            if (source[pos] === "{") depth++;
+            else if (source[pos] === "}") depth--;
+            pos++;
+          }
+          if (depth !== 0) continue;
+          const body = source.substring(bodyStart, pos - 1);
+          if (body.length > 500) continue;
+          const lines = body.split("\n").map((l) => l.trim()).filter((l) => l && !l.startsWith("//") && !l.startsWith("/*") && !l.startsWith("*"));
+          if (lines.length === 0) continue;
+          const afterLog = lines.filter((l) => !logPattern.test(l));
+          const meaningful = afterLog.filter((l) => {
+            const trimmed = l.replace(/;$/, "").trim();
+            return !TRIVIAL_RETURNS_RS.has(trimmed) && trimmed !== "";
+          });
+          if (meaningful.length === 0 && lines.length >= 1) {
+            const lineNum = (source.substring(0, match.index).match(/\n/g) || []).length + 1;
+            violations.push({
+              ruleId: "R25",
+              ruleName: "\u65E5\u8A8C\u704C\u6C34",
+              severity: "error",
+              file,
+              line: lineNum,
+              column: 1,
+              message: `\u65E5\u8A8C\u704C\u6C34 (R25): fn ${fnName}() \u53EA\u6709 ${lines.length} \u884C log + trivial return\uFF0C\u7121\u5BE6\u969B\u696D\u52D9\u908F\u8F2F`,
+              snippet: `fn ${fnName}() { ${lines[0]?.substring(0, 40) ?? ""}... }`,
+              suggestion: "\u51FD\u6578\u9AD4\u5FC5\u9808\u5305\u542B\u771F\u5BE6\u696D\u52D9\u908F\u8F2F\uFF08I/O\u3001\u8A08\u7B97\u3001\u72C0\u614B\u8B8A\u66F4\uFF09\uFF0C\u4E0D\u80FD\u53EA\u6709\u65E5\u8A8C"
+            });
+          }
+        }
+        return violations;
+      }
+    };
+    R26_CHECKER = {
+      rule: getRedline("R26"),
+      checkSource(source, file) {
+        const violations = [];
+        if (/(?:test|spec|mock|fixture)/i.test(file)) return violations;
+        const ext = file.split(".").pop()?.toLowerCase() || "";
+        if (ext !== "rs" && ext !== "cs") return violations;
+        const asyncFnPattern = ext === "rs" ? /pub\s+async\s+fn\s+(\w+)\s*\([^)]*\)[^{]*\{/g : /(?:public|internal)\s+(?:static\s+)?async\s+[\w<>\[\]]+\s+(\w+)\s*\([^)]*\)\s*\{/g;
+        let match;
+        while ((match = asyncFnPattern.exec(source)) !== null) {
+          const fnName = match[1];
+          const bodyStart = match.index + match[0].length;
+          let depth = 1;
+          let pos = bodyStart;
+          while (pos < source.length && depth > 0) {
+            if (source[pos] === "{") depth++;
+            else if (source[pos] === "}") depth--;
+            pos++;
+          }
+          if (depth !== 0) continue;
+          const body = source.substring(bodyStart, pos - 1);
+          if (body.length > 2e3) continue;
+          const hasAwait = ext === "rs" ? /\.await\b/.test(body) : /\bawait\b/.test(body);
+          if (!hasAwait) {
+            const lineNum = (source.substring(0, match.index).match(/\n/g) || []).length + 1;
+            violations.push({
+              ruleId: "R26",
+              ruleName: "\u5E7D\u9748\u7570\u6B65",
+              severity: "error",
+              file,
+              line: lineNum,
+              column: 1,
+              message: `\u5E7D\u9748\u7570\u6B65 (R26): async fn ${fnName}() \u5167\u90E8\u6C92\u6709\u4EFB\u4F55 .await \u8ABF\u7528`,
+              snippet: `async fn ${fnName}() { ... no .await ... }`,
+              suggestion: "async \u51FD\u6578\u5FC5\u9808\u6709 .await \u8ABF\u7528\uFF08\u7DB2\u8DEF/\u6A94\u6848/channel\uFF09\uFF0C\u5426\u5247\u79FB\u9664 async"
+            });
+          }
+        }
+        return violations;
+      }
+    };
+    HIGH_RISK_CONTEXTS = /(?:verify|auth|sign|encrypt|decrypt|download|install|delete|backup|restore|payment|transfer|checksum|hash|validate|wallet|key|secret|credential|private|password|token_refresh|certificate)/i;
+    ERROR_LAUNDER_PATTERNS = [
+      /\.unwrap_or_default\(\)/g,
+      /\.unwrap_or\(\s*(?:vec!\[\]|String::new\(\)|Vec::new\(\)|HashMap::new\(\)|false|0|"")\s*\)/g
+    ];
+    R27_CHECKER = {
+      rule: getRedline("R27"),
+      checkSource(source, file) {
+        const violations = [];
+        if (/(?:test|spec|mock|fixture)/i.test(file)) return violations;
+        const ext = file.split(".").pop()?.toLowerCase() || "";
+        if (ext !== "rs") return violations;
+        const lines = source.split("\n");
+        let currentFn = "";
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const fnMatch = /(?:pub\s+)?(?:async\s+)?fn\s+(\w+)/.exec(line);
+          if (fnMatch) currentFn = fnMatch[1];
+          if (!HIGH_RISK_CONTEXTS.test(currentFn) && !HIGH_RISK_CONTEXTS.test(line)) continue;
+          for (const pattern of ERROR_LAUNDER_PATTERNS) {
+            pattern.lastIndex = 0;
+            const match = pattern.exec(line);
+            if (match) {
+              violations.push({
+                ruleId: "R27",
+                ruleName: "\u932F\u8AA4\u6D17\u767D",
+                severity: "error",
+                file,
+                line: i + 1,
+                column: match.index + 1,
+                message: `\u932F\u8AA4\u6D17\u767D (R27): ${match[0]} \u5728\u5B89\u5168\u76F8\u95DC\u51FD\u6578 ${currentFn}() \u4E2D\u975C\u9ED8\u541E\u6389\u932F\u8AA4`,
+                snippet: line.trim().substring(0, 80),
+                suggestion: "\u5B89\u5168\u76F8\u95DC\u64CD\u4F5C\u5FC5\u9808\u7528 ? \u50B3\u64AD\u932F\u8AA4\u6216\u660E\u78BA\u8655\u7406\u5931\u6557\uFF0C\u4E0D\u80FD unwrap_or_default"
+              });
+              break;
+            }
+          }
+        }
+        return violations;
+      }
+    };
+    CLONE_ARMY_PATTERNS = [
+      // Test server in production code
+      /TcpListener::bind\(\s*"127\.0\.0\.1:0"\s*\)/g,
+      // Hardcoded test responses in production
+      /spawn_http_server\s*\(\s*"(?:200 OK|404|500)/g,
+      // Copy-paste HTTP client boilerplate with hardcoded content-type
+      /\.header\(\s*"Content-Type"\s*,\s*"application\/json"\s*\)[\s\S]{0,100}\.header\(\s*"Authorization"/g
+    ];
+    R28_CHECKER = {
+      rule: getRedline("R28"),
+      checkSource(source, file) {
+        const violations = [];
+        if (/(?:test|spec|mock|fixture)/i.test(file)) return violations;
+        for (const pattern of CLONE_ARMY_PATTERNS) {
+          pattern.lastIndex = 0;
+          let match;
+          while ((match = pattern.exec(source)) !== null) {
+            const before = source.substring(0, match.index);
+            const lineNum = (before.match(/\n/g) || []).length + 1;
+            violations.push({
+              ruleId: "R28",
+              ruleName: "\u8907\u88FD\u8ECD\u5718",
+              severity: "error",
+              file,
+              line: lineNum,
+              column: 1,
+              message: `\u8907\u88FD\u8ECD\u5718 (R28): \u975E\u6E2C\u8A66\u4EE3\u78BC\u4E2D\u51FA\u73FE\u6E2C\u8A66/\u6A23\u677F\u4EE3\u78BC \u2014 ${match[0].substring(0, 50)}`,
+              snippet: match[0].substring(0, 80),
+              suggestion: "\u62BD\u53D6\u70BA\u5171\u7528 util \u51FD\u6578\uFF0C\u5404\u6A21\u7D44\u8ABF\u7528\u5171\u7528\u4EE3\u78BC\u800C\u975E\u8907\u88FD"
+            });
+          }
+        }
+        return violations;
+      }
+    };
+  }
+});
+
 // src/rules/b-redlines.ts
 function checkAntifraud(source, file) {
   const ext = file.split(".").pop()?.toLowerCase() || "";
@@ -1089,6 +1542,8 @@ var init_b_redlines = __esm({
     init_b_redlines_r01_r05();
     init_b_redlines_r07_r12();
     init_b_redlines_r13_r18();
+    init_b_redlines_r19_r24();
+    init_b_redlines_r25_r28();
     REDLINE_CHECKERS = [
       R01_CHECKER,
       R02_CHECKER,
@@ -1104,12 +1559,32 @@ var init_b_redlines = __esm({
       R15_CHECKER,
       R16_CHECKER,
       R17_CHECKER,
-      R18_CHECKER
+      R18_CHECKER,
+      R19_CHECKER,
+      R20_CHECKER,
+      R21_CHECKER,
+      R22_CHECKER,
+      R23_CHECKER,
+      R24_CHECKER,
+      R25_CHECKER,
+      R26_CHECKER,
+      R27_CHECKER,
+      R28_CHECKER
     ];
     ANTI_FRAUD_CHECKERS = [
       R16_CHECKER,
       R17_CHECKER,
-      R18_CHECKER
+      R18_CHECKER,
+      R19_CHECKER,
+      R20_CHECKER,
+      R21_CHECKER,
+      R22_CHECKER,
+      R23_CHECKER,
+      R24_CHECKER,
+      R25_CHECKER,
+      R26_CHECKER,
+      R27_CHECKER,
+      R28_CHECKER
     ];
   }
 });
@@ -1132,17 +1607,17 @@ var init_b_prohibitions = __esm({
       /** P04: 魔法數字報告上限 */
       MAGIC_NUMBER_MAX_REPORT: 10,
       /** P05: 函數最大行數 */
-      FUNCTION_MAX_LINES: 50,
+      FUNCTION_MAX_LINES: 100,
       /** P06: 嵌套最大層數 */
-      NESTING_MAX_DEPTH: 3,
+      NESTING_MAX_DEPTH: 5,
       /** P09: 無意義命名報告上限 */
       MEANINGLESS_NAME_MAX_REPORT: 10,
       /** P10: 參數最大數量 */
-      PARAM_MAX_COUNT: 5,
+      PARAM_MAX_COUNT: 6,
       /** P12: 註釋代碼行數閾值 */
       COMMENTED_CODE_THRESHOLD: 10,
       /** P13: TODO 最大數量 */
-      TODO_MAX_COUNT: 10,
+      TODO_MAX_COUNT: 5,
       /** P14: 生產依賴最大數量 */
       DEPS_MAX_COUNT: 50,
       /** P14: 開發依賴最大數量 */
@@ -2663,7 +3138,7 @@ function collectEvidence(steps, gates, input) {
     path: `${dir}/impl.log`,
     exists: true,
     lineCount: 0,
-    // Treat "no MISSING" as "impl complete" at v3.3 baseline.
+    // Treat "no MISSING" as "impl complete" at v3.5 baseline.
     zeroViolations: steps[8]?.passed ?? false,
     summary: steps[8]?.passed ? "\u88DC\u5B8C\u8B49\u660E: \u898F\u683C\u51FD\u6578\u5747\u5DF2\u843D\u5730" : "\u88DC\u5B8C\u8B49\u660E: \u4ECD\u6709\u7F3A\u53E3 (\u898B mapping.log)"
   };
@@ -2766,7 +3241,7 @@ function judgeDod(evidence) {
 }
 function generateProofPackManifest(evidence) {
   const lines = [];
-  lines.push("# Proof Pack \u2014 Code-QC v3.3");
+  lines.push("# Proof Pack \u2014 Code-QC v3.5");
   lines.push(`# Generated: ${(/* @__PURE__ */ new Date()).toISOString()}`);
   lines.push(`# Directory: ${evidence.dir}`);
   lines.push("");
@@ -3331,7 +3806,7 @@ function runPipeline(input) {
   const dod = judgeDod(evidence);
   const ext = input.externalResults;
   const hashPayload = JSON.stringify({
-    version: "3.3",
+    version: "3.5",
     timestamp,
     targetPath: input.targetPath,
     grade: input.grade,
@@ -3396,7 +3871,7 @@ function runPipeline(input) {
   });
   const waveform = buildWaveformReport(yChannel, xChannel, zChannel);
   return {
-    version: "3.3",
+    version: "3.5",
     timestamp,
     targetPath: input.targetPath,
     productGrade: input.grade,
@@ -3417,7 +3892,7 @@ function formatPipelineReport(result) {
   const lines = [];
   lines.push("");
   lines.push("\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
-  lines.push("\u2551  Code-QC v3.3 \u54C1\u8CEA\u6AA2\u6E2C\u53F0 (Test Bench)                   \u2551");
+  lines.push("\u2551  Code-QC v3.5 \u54C1\u8CEA\u6AA2\u6E2C\u53F0 (Test Bench)                   \u2551");
   lines.push("\u2551  \u7A0B\u5F0F\u54C1\u8CEA\uFF0C\u7528\u786C\u9AD4\u6A19\u6E96\u4F86\u9A57\u3002                              \u2551");
   lines.push("\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
   lines.push("");
@@ -3527,7 +4002,7 @@ var init_src = __esm({
     init_analyzer();
     init_reporter();
     init_engine();
-    VERSION = "0.3.3";
+    VERSION = "0.3.5";
   }
 });
 
@@ -3608,7 +4083,7 @@ function handleHealth(_req, res) {
   json(res, 200, { ok: true, status: "healthy", uptime: process.uptime() });
 }
 function handleVersion(_req, res) {
-  json(res, 200, { ok: true, version: VERSION, codeqc: CODEQC_VERSION, engine: "v3.3" });
+  json(res, 200, { ok: true, version: VERSION, codeqc: CODEQC_VERSION, engine: "v3.5" });
 }
 function getDashboardPath() {
   const argv1 = process.argv[1] || "";
@@ -3652,7 +4127,7 @@ async function router(req, res, config) {
     if (method === "GET" && url === "/") return json(res, 200, {
       name: "MAIDOS CodeQC API",
       version: VERSION,
-      engine: "Code-QC v3.3",
+      engine: "Code-QC v3.5",
       endpoints: [
         "POST /api/v1/scan",
         "POST /api/v1/pipeline",
@@ -3676,7 +4151,7 @@ function startServer(config = {}) {
       console.log(`
 \u{1F527} MAIDOS CodeQC API v${VERSION} (Code-QC v${CODEQC_VERSION})`);
       console.log(`   Server: http://${cfg.host}:${cfg.port}`);
-      console.log(`   Engine: v3.3 \u8EDF\u9AD4\u5DE5\u7A0B\u786C\u9AD4\u5316`);
+      console.log(`   Engine: v3.5 \u8EDF\u9AD4\u5DE5\u7A0B\u786C\u9AD4\u5316`);
       console.log(`   Auth:   ${cfg.apiKey ? "enabled" : "disabled"}`);
       console.log(`
    POST /api/v1/scan      \u2014 \u5FEB\u901F\u6383\u63CF`);
@@ -3914,7 +4389,7 @@ async function pipelineCommand(args, loadFiles2) {
   const { resolve: resolve3 } = await import('path');
   if (args.includes("-h") || args.includes("--help")) {
     console.log(`
-MAIDOS CodeQC pipeline (v3.3)
+MAIDOS CodeQC pipeline (v3.5)
 
 Usage:
   maidos-codeqc pipeline [target] [options]
@@ -3978,7 +4453,7 @@ Examples:
   }
   const absTarget = resolve3(target);
   console.log(`
-\u{1F527} CodeQC v3.3 Pipeline \u2014 Grade ${grade}`);
+\u{1F527} CodeQC v3.5 Pipeline \u2014 Grade ${grade}`);
   console.log(`   Target: ${absTarget}
 `);
   if (autoDetect) {
@@ -4142,7 +4617,7 @@ ${pipelineResult.gates.G4.details}
   console.log(`  \u{1F4C4} Proof Pack: ${reportPath}
 `);
   const proofReportLines = [];
-  proofReportLines.push("# Proof Report v3.3");
+  proofReportLines.push("# Proof Report v3.5");
   proofReportLines.push(`- Target: ${absTarget}`);
   proofReportLines.push(`- Timestamp: ${pipelineResult.timestamp}`);
   proofReportLines.push(`- Verdict: ${pipelineResult.passed ? "MISSION COMPLETE \u2705" : "REJECTED \u274C"}`);

@@ -1,6 +1,6 @@
 # MAIDOS CodeQC
 
-> Code Quality Control tool implementing Code-QC v3.3 standards
+> Code Quality Control tool implementing Code-QC v3.5 standards
 
 ## Quick Start
 

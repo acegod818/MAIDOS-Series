@@ -13,7 +13,7 @@ Phase 0 目標：建立核心規則引擎 + 5 種標配語言支援
 
 | 項目 | 目標 |
 |:-----|:-----|
-| 規則引擎 | Code-QC v2.6 B+C 全量（~90 條） |
+| 規則引擎 | Code-QC v3.5 B+C 全量（50 條） |
 | 語言支援 | TypeScript, JavaScript, Python, Rust, Go |
 | CLI | `npx maidos-codeqc` |
 | CI/CD | GitHub Actions, GitLab CI |
@@ -96,15 +96,15 @@ Phase 0 目標：建立核心規則引擎 + 5 種標配語言支援
 | P02 過早優化 | LLM 輔助 | - |
 | P03 複製粘貼 | 重複檢測 | DRY |
 | P04 魔法數字 | AST | 0 |
-| P05 超長函數 | AST（行數） | ≤50 |
-| P06 深層嵌套 | AST（層數） | ≤3 |
+| P05 超長函數 | AST（行數） | ≤100 |
+| P06 深層嵌套 | AST（層數） | ≤5 |
 | P07 全局狀態 | AST | - |
 | P08 緊耦合 | 依賴分析 | - |
 | P09 無意義命名 | Regex + AST | 0 |
-| P10 過長參數 | AST（參數數） | ≤5 |
+| P10 過長參數 | AST（參數數） | ≤6 |
 | P11 混合抽象 | LLM 輔助 | - |
 | P12 註釋代碼 | Regex | 刪除 |
-| P13 TODO 堆積 | Regex | ≤10 |
+| P13 TODO 堆積 | Regex | ≤5 |
 | P14 依賴膨脹 | 依賴分析 | - |
 
 ---

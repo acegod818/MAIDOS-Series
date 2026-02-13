@@ -1,5 +1,5 @@
 /**
- * CodeQC v3.3 — server smoke tests
+ * CodeQC v3.5 — server smoke tests
  *
  * Covers the USB/SaaS-style API server behaviour:
  * - start/stop (important for vitest stability)
@@ -34,7 +34,7 @@ describe('server/app', () => {
       const verJson = await ver.json();
       expect(verJson.ok).toBe(true);
       expect(typeof verJson.version).toBe('string');
-      expect(verJson.engine).toBe('v3.3');
+      expect(verJson.engine).toBe('v3.5');
 
       const rules = await fetch(`${base}/api/v1/rules`);
       expect(rules.status).toBe(200);
