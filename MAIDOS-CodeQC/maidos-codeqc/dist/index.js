@@ -353,14 +353,14 @@ var REDLINES = [
   { id: "R01", category: "redline", name: "\u786C\u7DE8\u78BC\u6191\u8B49", nameEn: "Hardcoded Credentials", description: "\u4EE3\u78BC\u4E2D\u786C\u7DE8\u78BC\u5BC6\u78BC\u3001\u5BC6\u9470\u3001Token", severity: "error", action: "\u{1F534} \u7ACB\u5373\u522A\u9664\uFF0C\u8F2A\u63DB", autoDetectable: true, detectMethod: "regex", implemented: true },
   { id: "R02", category: "redline", name: "\u8DF3\u904E\u5B89\u5168\u6AA2\u67E5", nameEn: "Bypass Security", description: "\u7E5E\u904E\u8A8D\u8B49\u3001\u6388\u6B0A\u3001\u8F38\u5165\u9A57\u8B49", severity: "error", action: "\u{1F534} \u56DE\u6EFE\uFF0C\u5BE9\u67E5", autoDetectable: true, detectMethod: "regex", implemented: true },
   { id: "R03", category: "redline", name: "\u522A\u9664\u5BE9\u8A08\u65E5\u8A8C", nameEn: "Delete Audit Logs", description: "\u522A\u9664\u6216\u7BE1\u6539\u5BE9\u8A08\u8A18\u9304", severity: "error", action: "\u{1F534} \u7ACB\u5373\u6062\u5FA9", autoDetectable: true, detectMethod: "regex", implemented: true },
-  { id: "R04", category: "redline", name: "\u672A\u6388\u6B0A\u6578\u64DA\u8A2A\u554F", nameEn: "Unauthorized Data Access", description: "\u8A2A\u554F\u8D85\u51FA\u6B0A\u9650\u7684\u6578\u64DA", severity: "error", action: "\u{1F534} \u64A4\u92B7\uFF0C\u5BE9\u67E5", autoDetectable: false, detectMethod: "llm", implemented: false, requiresIntegration: "LLM \u8A9E\u7FA9\u5206\u6790" },
+  { id: "R04", category: "redline", name: "\u672A\u6388\u6B0A\u6578\u64DA\u8A2A\u554F", nameEn: "Unauthorized Data Access", description: "\u8A2A\u554F\u8D85\u51FA\u6B0A\u9650\u7684\u6578\u64DA", severity: "error", action: "\u{1F534} \u64A4\u92B7\uFF0C\u5BE9\u67E5", autoDetectable: true, detectMethod: "regex+heuristic", implemented: true },
   { id: "R05", category: "redline", name: "\u5FFD\u7565\u932F\u8AA4\u8655\u7406", nameEn: "Ignore Error Handling", description: "\u7A7A catch\u3001\u541E\u7570\u5E38", severity: "error", action: "\u{1F534} \u7ACB\u5373\u4FEE\u5FA9", autoDetectable: true, detectMethod: "regex", implemented: true },
-  { id: "R06", category: "redline", name: "\u76F4\u63A5\u64CD\u4F5C\u751F\u7522", nameEn: "Direct Production Access", description: "\u672A\u7D93\u5BE9\u6279\u4FEE\u6539\u751F\u7522\u74B0\u5883", severity: "error", action: "\u{1F534} \u56DE\u6EFE", autoDetectable: false, detectMethod: "integration", implemented: false, requiresIntegration: "CI/CD \u7CFB\u7D71" },
+  { id: "R06", category: "redline", name: "\u76F4\u63A5\u64CD\u4F5C\u751F\u7522", nameEn: "Direct Production Access", description: "\u672A\u7D93\u5BE9\u6279\u4FEE\u6539\u751F\u7522\u74B0\u5883", severity: "error", action: "\u{1F534} \u56DE\u6EFE", autoDetectable: true, detectMethod: "regex+heuristic", implemented: true },
   { id: "R07", category: "redline", name: "\u95DC\u9589\u5B89\u5168\u529F\u80FD", nameEn: "Disable Security", description: "\u95DC\u9589\u9632\u706B\u7246\u3001TLS\u3001\u52A0\u5BC6", severity: "error", action: "\u{1F534} \u7ACB\u5373\u6062\u5FA9", autoDetectable: true, detectMethod: "regex", implemented: true },
   { id: "R08", category: "redline", name: "\u4F7F\u7528\u5DF2\u77E5\u6F0F\u6D1E", nameEn: "Known Vulnerabilities", description: "\u4F7F\u7528\u6709\u6F0F\u6D1E\u7684\u4F9D\u8CF4\u7248\u672C", severity: "error", action: "\u{1F534} \u7ACB\u5373\u5347\u7D1A", autoDetectable: true, detectMethod: "regex", implemented: true },
   { id: "R09", category: "redline", name: "\u7121\u9650\u5236\u8CC7\u6E90", nameEn: "Unlimited Resources", description: "\u7121\u9650\u5236 API \u8ABF\u7528\u3001\u67E5\u8A62\u3001\u5FAA\u74B0", severity: "error", action: "\u{1F534} \u6DFB\u52A0\u9650\u5236", autoDetectable: true, detectMethod: "regex", implemented: true },
   { id: "R10", category: "redline", name: "\u660E\u6587\u50B3\u8F38\u654F\u611F", nameEn: "Plaintext Sensitive Data", description: "\u660E\u6587\u50B3\u8F38\u5BC6\u78BC\u3001PII\u3001\u8CA1\u52D9", severity: "error", action: "\u{1F534} \u52A0\u5BC6\u50B3\u8F38", autoDetectable: true, detectMethod: "regex", implemented: true },
-  { id: "R11", category: "redline", name: "\u8DF3\u904E\u4EE3\u78BC\u5BE9\u67E5", nameEn: "Skip Code Review", description: "\u672A\u5BE9\u67E5\u4EE3\u78BC\u9032\u5165\u4E3B\u5206\u652F", severity: "error", action: "\u{1F534} \u56DE\u6EFE\uFF0C\u88DC\u5BE9\u67E5", autoDetectable: false, detectMethod: "integration", implemented: false, requiresIntegration: "Git/VCS \u7CFB\u7D71" },
+  { id: "R11", category: "redline", name: "\u8DF3\u904E\u4EE3\u78BC\u5BE9\u67E5", nameEn: "Skip Code Review", description: "\u672A\u5BE9\u67E5\u4EE3\u78BC\u9032\u5165\u4E3B\u5206\u652F", severity: "error", action: "\u{1F534} \u56DE\u6EFE\uFF0C\u88DC\u5BE9\u67E5", autoDetectable: true, detectMethod: "regex+heuristic", implemented: true },
   { id: "R12", category: "redline", name: "\u507D\u9020\u6E2C\u8A66\u7D50\u679C", nameEn: "Fake Test Results", description: "\u507D\u9020\u3001\u8DF3\u904E\u3001\u786C\u7DE8\u78BC\u6E2C\u8A66", severity: "error", action: "\u{1F534} \u91CD\u65B0\u6E2C\u8A66", autoDetectable: true, detectMethod: "regex", implemented: true },
   { id: "R13", category: "redline", name: "\u5047\u5BE6\u73FE", nameEn: "Fake Implementation", description: "return true/null/\u7A7A\u7269\u4EF6\u7121\u5BE6\u969B\u908F\u8F2F", severity: "error", action: "\u{1F534} \u7ACB\u5373\u91CD\u5BEB", autoDetectable: true, detectMethod: "regex", implemented: true },
   { id: "R14", category: "redline", name: "\u975C\u9ED8\u5931\u6557", nameEn: "Silent Failure", description: "catch \u4E0D log \u4E5F\u4E0D re-throw", severity: "error", action: "\u{1F534} \u7ACB\u5373\u4FEE\u5FA9", autoDetectable: true, detectMethod: "regex", implemented: true },
@@ -729,6 +729,45 @@ var R03_CHECKER = {
     return violations;
   }
 };
+var UNAUTHORIZED_ACCESS_PATTERNS = [
+  // SQL 直接查敏感表
+  /SELECT\s+.*\bFROM\s+.*\b(?:passwords?|credentials?|credit_cards?|ssn|salary|secrets?|tokens?|private_keys?)\b/gi,
+  // 直接讀取敏感系統檔
+  /['"`](?:\/etc\/(?:passwd|shadow|sudoers)|~?\/?\.ssh\/|\.env\b)/gi,
+  // 環境變量整體 dump（不是讀單一 key，而是遍歷全部）
+  /Object\.keys\s*\(\s*process\.env\s*\)/gi,
+  /os\.environ\.(?:copy|items|keys)\s*\(\)/gi,
+  /System\.getenv\s*\(\s*\)/gi,
+  // Java 無參版 = dump all
+  /std::env::vars\s*\(\)/g,
+  // Rust dump all env
+  // 權限提升
+  /\bsetuid\s*\(/gi,
+  /chmod\s+(?:777|a\+rwx|u\+s)\b/gi,
+  /\brunas\s+\/user:\s*(?:admin|root|system)\b/gi
+];
+var R04_CHECKER = {
+  rule: getRedline("R04"),
+  checkSource(source, file) {
+    const violations = [];
+    if (/(?:test|spec|mock|fixture|__test__)/i.test(file)) return violations;
+    const lines = source.split("\n");
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (/^\s*(?:\/\/|#|\/\*|\*|--|;)/.test(line)) continue;
+      if (/^\s*\/.*\/[gimsuy]*\s*,?\s*$/.test(line)) continue;
+      for (const pattern of UNAUTHORIZED_ACCESS_PATTERNS) {
+        pattern.lastIndex = 0;
+        const match = pattern.exec(line);
+        if (match) {
+          violations.push({ ruleId: "R04", ruleName: "\u672A\u6388\u6B0A\u6578\u64DA\u8A2A\u554F", severity: "error", file, line: i + 1, column: match.index + 1, message: `\u672A\u6388\u6B0A\u6578\u64DA\u8A2A\u554F (R04): ${match[0].substring(0, 40)}`, snippet: line.trim(), suggestion: "\u4F7F\u7528\u6B0A\u9650\u63A7\u5236 API\uFF0C\u4E0D\u76F4\u63A5\u8A2A\u554F\u654F\u611F\u8CC7\u6E90" });
+          break;
+        }
+      }
+    }
+    return violations;
+  }
+};
 var EMPTY_CATCH_PATTERNS = {
   typescript: [/catch\s*\([^)]*\)\s*\{\s*\}/g, /\.catch\s*\(\s*\(\s*\w*\s*\)\s*=>\s*\{\s*\}\s*\)/g],
   javascript: [/catch\s*\([^)]*\)\s*\{\s*\}/g, /\.catch\s*\(\s*\(\s*\)\s*=>\s*\{\s*\}\s*\)/g],
@@ -760,6 +799,43 @@ var R05_CHECKER = {
 };
 
 // src/rules/b-redlines-r07-r12.ts
+var DIRECT_PROD_PATTERNS = [
+  // Production DB 連線字串
+  /['"`](?:mysql|postgres|mongodb(?:\+srv)?|redis):\/\/[^'"`]*(?:prod|production)[^'"`]*['"`]/gi,
+  // prod RDS/database host
+  /['"`][^'"`]*\.(?:prod|production)\..*\.(?:rds|database|cluster)\.[^'"`]*['"`]/gi,
+  // 危險 DDL (非 migration/seed/schema 檔)
+  /\b(?:DROP\s+TABLE|TRUNCATE\s+TABLE)\b/gi,
+  // kubectl 直接操作 prod
+  /kubectl\s+(?:delete|exec|scale|rollout|apply).*(?:prod|production)/gi,
+  // SSH/SCP 到 prod
+  /\b(?:ssh|scp)\s+.*(?:prod|production)/gi
+];
+var PROD_FILE_WHITELIST = /(?:migration|migrate|seed|schema|fixture|test|spec|mock)/i;
+var R06_CHECKER = {
+  rule: getRedline("R06"),
+  checkSource(source, file) {
+    const violations = [];
+    if (/(?:test|spec|mock|fixture|__test__)/i.test(file)) return violations;
+    const isDDLWhitelisted = PROD_FILE_WHITELIST.test(file);
+    const lines = source.split("\n");
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (/^\s*(?:\/\/|#|\/\*|\*|--|;)/.test(line)) continue;
+      if (/^\s*\/.*\/[gimsuy]*\s*,?\s*$/.test(line)) continue;
+      for (const pattern of DIRECT_PROD_PATTERNS) {
+        pattern.lastIndex = 0;
+        const match = pattern.exec(line);
+        if (match) {
+          if (isDDLWhitelisted && /DROP\s+TABLE|TRUNCATE/i.test(match[0])) continue;
+          violations.push({ ruleId: "R06", ruleName: "\u76F4\u63A5\u64CD\u4F5C\u751F\u7522", severity: "error", file, line: i + 1, column: match.index + 1, message: `\u76F4\u63A5\u64CD\u4F5C\u751F\u7522 (R06): ${match[0].substring(0, 40)}`, snippet: line.trim(), suggestion: "\u4F7F\u7528 CI/CD pipeline \u90E8\u7F72\uFF0C\u7981\u6B62\u76F4\u63A5\u64CD\u4F5C\u751F\u7522\u74B0\u5883" });
+          break;
+        }
+      }
+    }
+    return violations;
+  }
+};
 var SECURITY_DISABLE_PATTERNS = [
   /(?:verify|ssl|tls)[_-]?(?:ssl|verify|cert)\s*[=:]\s*(?:false|False|FALSE|0)/gi,
   /NODE_TLS_REJECT_UNAUTHORIZED\s*=\s*['"]?0/gi,
@@ -868,6 +944,42 @@ var R10_CHECKER = {
         const match = pattern.exec(line);
         if (match) {
           violations.push({ ruleId: "R10", ruleName: "\u660E\u6587\u50B3\u8F38\u654F\u611F", severity: "error", file, line: i + 1, column: match.index + 1, message: "\u660E\u6587\u50B3\u8F38", snippet: line.trim(), suggestion: "\u4F7F\u7528 HTTPS/TLS" });
+          break;
+        }
+      }
+    }
+    return violations;
+  }
+};
+var SKIP_REVIEW_PATTERNS = [
+  // Force push
+  /git\s+push\s+.*(?:--force\b|-f\b)/gi,
+  // 直接 push 到 main/master
+  /git\s+push\s+(?:origin|upstream)\s+(?:main|master)\b/gi,
+  // 跳過 CI
+  /\[skip\s+ci\]|\[ci\s+skip\]/gi,
+  // 跳過 git hooks
+  /--no-verify\b/gi,
+  /HUSKY\s*=\s*0/gi,
+  // 繞過 review 配置
+  /bypass[_-]?(?:review|approval|check)/gi,
+  /required[_-]?reviews?\s*[:=]\s*0/gi
+];
+var R11_CHECKER = {
+  rule: getRedline("R11"),
+  checkSource(source, file) {
+    const violations = [];
+    if (/(?:test|spec|mock|fixture|__test__)/i.test(file)) return violations;
+    const lines = source.split("\n");
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (/^\s*(?:\/\/|#|\/\*|\*|--|;)/.test(line)) continue;
+      if (/^\s*\/.*\/[gimsuy]*\s*,?\s*$/.test(line)) continue;
+      for (const pattern of SKIP_REVIEW_PATTERNS) {
+        pattern.lastIndex = 0;
+        const match = pattern.exec(line);
+        if (match) {
+          violations.push({ ruleId: "R11", ruleName: "\u8DF3\u904E\u4EE3\u78BC\u5BE9\u67E5", severity: "error", file, line: i + 1, column: match.index + 1, message: `\u8DF3\u904E\u4EE3\u78BC\u5BE9\u67E5 (R11): ${match[0].substring(0, 40)}`, snippet: line.trim(), suggestion: "\u9075\u5FAA code review \u6D41\u7A0B\uFF0C\u4E0D\u7E5E\u904E\u5BE9\u67E5\u6A5F\u5236" });
           break;
         }
       }
@@ -1515,11 +1627,14 @@ var REDLINE_CHECKERS = [
   R01_CHECKER,
   R02_CHECKER,
   R03_CHECKER,
+  R04_CHECKER,
   R05_CHECKER,
+  R06_CHECKER,
   R07_CHECKER,
   R08_CHECKER,
   R09_CHECKER,
   R10_CHECKER,
+  R11_CHECKER,
   R12_CHECKER,
   R13_CHECKER,
   R14_CHECKER,
@@ -1598,17 +1713,17 @@ var THRESHOLDS = {
   DEV_DEPS_MAX_COUNT: 80
 };
 var PROHIBITIONS = [
-  { id: "P01", category: "prohibition", name: "\u904E\u5EA6\u5DE5\u7A0B", nameEn: "Over-Engineering", description: "\u70BA\u4E0D\u5B58\u5728\u7684\u9700\u6C42\u505A\u8A2D\u8A08", severity: "warning", action: "\u7C21\u5316", autoDetectable: false, detectMethod: "llm", implemented: false, requiresIntegration: "LLM \u8A9E\u7FA9\u5206\u6790" },
-  { id: "P02", category: "prohibition", name: "\u904E\u65E9\u512A\u5316", nameEn: "Premature Optimization", description: "\u5728\u8B49\u660E\u9700\u8981\u524D\u512A\u5316", severity: "warning", action: "\u79FB\u9664", autoDetectable: false, detectMethod: "llm", implemented: false, requiresIntegration: "LLM \u8A9E\u7FA9\u5206\u6790" },
+  { id: "P01", category: "prohibition", name: "\u904E\u5EA6\u5DE5\u7A0B", nameEn: "Over-Engineering", description: "\u70BA\u4E0D\u5B58\u5728\u7684\u9700\u6C42\u505A\u8A2D\u8A08", severity: "warning", action: "\u7C21\u5316", autoDetectable: true, detectMethod: "regex+heuristic", implemented: true },
+  { id: "P02", category: "prohibition", name: "\u904E\u65E9\u512A\u5316", nameEn: "Premature Optimization", description: "\u5728\u8B49\u660E\u9700\u8981\u524D\u512A\u5316", severity: "warning", action: "\u79FB\u9664", autoDetectable: true, detectMethod: "regex+heuristic", implemented: true },
   { id: "P03", category: "prohibition", name: "\u8907\u88FD\u7C98\u8CBC", nameEn: "Copy-Paste", description: "\u5927\u91CF\u91CD\u8907\u4EE3\u78BC", severity: "warning", action: "DRY \u91CD\u69CB", autoDetectable: true, detectMethod: "heuristic", implemented: true },
   { id: "P04", category: "prohibition", name: "\u9B54\u6CD5\u6578\u5B57", nameEn: "Magic Numbers", description: "\u786C\u7DE8\u78BC\u6578\u503C\u7121\u8AAA\u660E", severity: "warning", action: "\u63D0\u53D6\u5E38\u91CF", autoDetectable: true, detectMethod: "regex", implemented: true },
   { id: "P05", category: "prohibition", name: "\u8D85\u9577\u51FD\u6578", nameEn: "Long Function", description: "\u51FD\u6578\u884C\u6578\u904E\u591A", severity: "warning", action: "\u62C6\u5206", autoDetectable: true, detectMethod: "ast", implemented: true, threshold: THRESHOLDS.FUNCTION_MAX_LINES },
   { id: "P06", category: "prohibition", name: "\u6DF1\u5C64\u5D4C\u5957", nameEn: "Deep Nesting", description: "\u5D4C\u5957\u5C64\u6578\u904E\u6DF1", severity: "warning", action: "\u63D0\u53D6/\u65E9\u8FD4\u56DE", autoDetectable: true, detectMethod: "ast", implemented: true, threshold: THRESHOLDS.NESTING_MAX_DEPTH },
   { id: "P07", category: "prohibition", name: "\u5168\u5C40\u72C0\u614B", nameEn: "Global State", description: "\u904E\u5EA6\u4F7F\u7528\u5168\u5C40\u8B8A\u91CF", severity: "warning", action: "\u5C01\u88DD", autoDetectable: true, detectMethod: "regex", implemented: true },
-  { id: "P08", category: "prohibition", name: "\u7DCA\u8026\u5408", nameEn: "Tight Coupling", description: "\u6A21\u7D44\u9593\u76F4\u63A5\u4F9D\u8CF4", severity: "warning", action: "\u4F9D\u8CF4\u6CE8\u5165", autoDetectable: false, detectMethod: "llm", implemented: false, requiresIntegration: "LLM \u8A9E\u7FA9\u5206\u6790" },
+  { id: "P08", category: "prohibition", name: "\u7DCA\u8026\u5408", nameEn: "Tight Coupling", description: "\u6A21\u7D44\u9593\u76F4\u63A5\u4F9D\u8CF4", severity: "warning", action: "\u4F9D\u8CF4\u6CE8\u5165", autoDetectable: true, detectMethod: "regex+heuristic", implemented: true },
   { id: "P09", category: "prohibition", name: "\u7121\u610F\u7FA9\u547D\u540D", nameEn: "Meaningless Names", description: "temp, data, info \u7B49", severity: "warning", action: "\u91CD\u547D\u540D", autoDetectable: true, detectMethod: "regex", implemented: true },
   { id: "P10", category: "prohibition", name: "\u904E\u9577\u53C3\u6578", nameEn: "Long Parameter List", description: "\u51FD\u6578\u53C3\u6578\u904E\u591A", severity: "warning", action: "\u63D0\u53D6\u7269\u4EF6", autoDetectable: true, detectMethod: "regex", implemented: true, threshold: THRESHOLDS.PARAM_MAX_COUNT },
-  { id: "P11", category: "prohibition", name: "\u6DF7\u5408\u62BD\u8C61", nameEn: "Mixed Abstraction", description: "\u9AD8\u4F4E\u5C64\u908F\u8F2F\u6DF7\u96DC", severity: "warning", action: "\u5206\u5C64", autoDetectable: false, detectMethod: "llm", implemented: false, requiresIntegration: "LLM \u8A9E\u7FA9\u5206\u6790" },
+  { id: "P11", category: "prohibition", name: "\u6DF7\u5408\u62BD\u8C61", nameEn: "Mixed Abstraction", description: "\u9AD8\u4F4E\u5C64\u908F\u8F2F\u6DF7\u96DC", severity: "warning", action: "\u5206\u5C64", autoDetectable: true, detectMethod: "regex+heuristic", implemented: true },
   { id: "P12", category: "prohibition", name: "\u8A3B\u91CB\u4EE3\u78BC", nameEn: "Commented Code", description: "\u5927\u91CF\u88AB\u8A3B\u91CB\u7684\u4EE3\u78BC", severity: "info", action: "\u522A\u9664", autoDetectable: true, detectMethod: "regex", implemented: true },
   { id: "P13", category: "prohibition", name: "TODO \u5806\u7A4D", nameEn: "TODO Accumulation", description: "\u672A\u8655\u7406\u7684 TODO", severity: "info", action: "\u8655\u7406\u6216\u79FB\u9664", autoDetectable: true, detectMethod: "regex", implemented: true, threshold: THRESHOLDS.TODO_MAX_COUNT },
   { id: "P14", category: "prohibition", name: "\u4F9D\u8CF4\u81A8\u8139", nameEn: "Dependency Bloat", description: "\u4E0D\u5FC5\u8981\u7684\u4F9D\u8CF4", severity: "info", action: "\u79FB\u9664", autoDetectable: true, detectMethod: "heuristic", implemented: true }
@@ -1829,14 +1944,140 @@ var P14_CHECKER = {
     return violations;
   }
 };
+var P01_CHECKER = {
+  rule: getProhibition("P01"),
+  checkSource(source, file) {
+    if (/(?:test|spec)\.[^/]+$/i.test(file)) return [];
+    const violations = [];
+    const abstractCount = (source.match(/\b(?:abstract\s+class|interface)\s+Abstract\w+/gi) || []).length;
+    if (abstractCount >= 3) {
+      violations.push({ ruleId: "P01", ruleName: "\u904E\u5EA6\u5DE5\u7A0B", severity: "warning", file, line: 1, column: 1, message: `\u904E\u5EA6\u5DE5\u7A0B: \u540C\u6A94 ${abstractCount} \u500B Abstract \u5B9A\u7FA9`, suggestion: "\u7C21\u5316\u62BD\u8C61\u5C64\uFF0C\u512A\u5148\u7D44\u5408\u800C\u975E\u7E7C\u627F" });
+    }
+    const patternClassCount = (source.match(/\bclass\s+\w*(?:Factory|Builder|Strategy|Visitor|Observer|Mediator|Decorator|Proxy|Adapter|Bridge|Flyweight)\b/gi) || []).length;
+    if (patternClassCount >= 3) {
+      violations.push({ ruleId: "P01", ruleName: "\u904E\u5EA6\u5DE5\u7A0B", severity: "warning", file, line: 1, column: 1, message: `\u904E\u5EA6\u5DE5\u7A0B: \u540C\u6A94 ${patternClassCount} \u500B\u8A2D\u8A08\u6A21\u5F0F\u985E`, suggestion: "\u53EA\u5728\u78BA\u5BE6\u9700\u8981\u6642\u4F7F\u7528\u8A2D\u8A08\u6A21\u5F0F" });
+    }
+    const genericNestCount = (source.match(/<[^>]*<[^>]*<[^>]*>/g) || []).length;
+    if (genericNestCount >= 3) {
+      violations.push({ ruleId: "P01", ruleName: "\u904E\u5EA6\u5DE5\u7A0B", severity: "warning", file, line: 1, column: 1, message: `\u904E\u5EA6\u5DE5\u7A0B: ${genericNestCount} \u8655 \u22653 \u5C64\u6CDB\u578B\u5D4C\u5957`, suggestion: "\u7528\u985E\u578B\u5225\u540D\u7C21\u5316\u6CDB\u578B" });
+    }
+    return violations;
+  }
+};
+var PREMATURE_OPT_PATTERNS = [
+  // 位運算代替基本算數
+  /\b\w+\s*(?:<<|>>)\s*1\b/g,
+  /\b\w+\s*&\s*1\b/g
+];
+var CUSTOM_DS_PATTERN = /\bclass\s+(?:LinkedList|BTree|BPlusTree|HashMap|HashSet|RedBlackTree|SkipList|Trie|AVLTree)\b/gi;
+var MEMORY_POOL_PATTERN = /\bclass\s+(?:ObjectPool|MemoryPool|BufferPool|ThreadPool|ConnectionPool)\b/gi;
+var INLINE_ASM_PATTERN = /\b(?:__asm__|asm\s*\(|__attribute__\s*\(\s*\(\s*always_inline|#\[inline\(always\)\])/g;
+var P02_CHECKER = {
+  rule: getProhibition("P02"),
+  checkSource(source, file) {
+    if (/(?:test|spec)\.[^/]+$/i.test(file)) return [];
+    const violations = [];
+    const lines = source.split("\n");
+    let bitOpCount = 0;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (/^\s*(?:\/\/|#|\/\*|\*)/.test(line)) continue;
+      for (const pattern of PREMATURE_OPT_PATTERNS) {
+        pattern.lastIndex = 0;
+        if (pattern.test(line)) bitOpCount++;
+      }
+    }
+    if (bitOpCount >= 3) {
+      violations.push({ ruleId: "P02", ruleName: "\u904E\u65E9\u512A\u5316", severity: "warning", file, line: 1, column: 1, message: `\u904E\u65E9\u512A\u5316: ${bitOpCount} \u8655\u4F4D\u904B\u7B97\u4EE3\u66FF\u57FA\u672C\u7B97\u6578`, suggestion: "\u4F7F\u7528 *2 /2 %2 \u7B49\u53EF\u8B80\u5BEB\u6CD5\uFF0C\u9664\u975E\u6709\u6548\u80FD\u9A57\u8B49" });
+    }
+    CUSTOM_DS_PATTERN.lastIndex = 0;
+    const dsMatch = CUSTOM_DS_PATTERN.exec(source);
+    if (dsMatch) {
+      const before = source.substring(0, dsMatch.index);
+      const lineNum = (before.match(/\n/g) || []).length + 1;
+      violations.push({ ruleId: "P02", ruleName: "\u904E\u65E9\u512A\u5316", severity: "warning", file, line: lineNum, column: 1, message: `\u904E\u65E9\u512A\u5316: \u624B\u5BEB\u8CC7\u6599\u7D50\u69CB ${dsMatch[0].substring(0, 30)}`, suggestion: "\u4F7F\u7528\u6A19\u6E96\u5EAB\uFF0C\u9664\u975E\u6709\u57FA\u6E96\u6E2C\u8A66\u8B49\u660E\u9700\u8981" });
+    }
+    MEMORY_POOL_PATTERN.lastIndex = 0;
+    const poolMatch = MEMORY_POOL_PATTERN.exec(source);
+    if (poolMatch) {
+      const before = source.substring(0, poolMatch.index);
+      const lineNum = (before.match(/\n/g) || []).length + 1;
+      violations.push({ ruleId: "P02", ruleName: "\u904E\u65E9\u512A\u5316", severity: "warning", file, line: lineNum, column: 1, message: `\u904E\u65E9\u512A\u5316: \u624B\u5BEB\u8A18\u61B6\u9AD4\u6C60 ${poolMatch[0].substring(0, 30)}`, suggestion: "\u4F7F\u7528\u6210\u719F\u7684 pool \u5EAB\uFF0C\u9664\u975E\u6709\u57FA\u6E96\u6E2C\u8A66" });
+    }
+    INLINE_ASM_PATTERN.lastIndex = 0;
+    const asmMatch = INLINE_ASM_PATTERN.exec(source);
+    if (asmMatch) {
+      const before = source.substring(0, asmMatch.index);
+      const lineNum = (before.match(/\n/g) || []).length + 1;
+      violations.push({ ruleId: "P02", ruleName: "\u904E\u65E9\u512A\u5316", severity: "warning", file, line: lineNum, column: 1, message: `\u904E\u65E9\u512A\u5316: \u5167\u806F\u5F59\u7DE8/\u5F37\u5236\u5167\u806F ${asmMatch[0].substring(0, 30)}`, suggestion: "\u907F\u514D\u904E\u65E9\u512A\u5316\uFF0C\u5148\u91CF\u6E2C\u518D\u6C7A\u5B9A" });
+    }
+    return violations;
+  }
+};
+var P08_CHECKER = {
+  rule: getProhibition("P08"),
+  checkSource(source, file) {
+    if (/(?:test|spec)\.[^/]+$/i.test(file)) return [];
+    const violations = [];
+    const lines = source.split("\n");
+    const importLines = lines.filter((l) => /^\s*(?:import\s|const\s+\w+\s*=\s*require\s*\()/.test(l));
+    if (importLines.length > 15) {
+      violations.push({ ruleId: "P08", ruleName: "\u7DCA\u8026\u5408", severity: "warning", file, line: 1, column: 1, message: `\u7DCA\u8026\u5408: ${importLines.length} \u500B import/require (>15)`, suggestion: "\u62C6\u5206\u6A21\u7D44\uFF0C\u6E1B\u5C11\u4F9D\u8CF4" });
+    }
+    const deepImportPattern = /(?:from|require\s*\()\s*['"](?:\.\.\/){3,}/g;
+    let deepCount = 0;
+    for (const line of lines) {
+      deepImportPattern.lastIndex = 0;
+      if (deepImportPattern.test(line)) deepCount++;
+    }
+    if (deepCount >= 2) {
+      violations.push({ ruleId: "P08", ruleName: "\u7DCA\u8026\u5408", severity: "warning", file, line: 1, column: 1, message: `\u7DCA\u8026\u5408: ${deepCount} \u8655 \u22653 \u5C64\u76F8\u5C0D\u8DEF\u5F91 import`, suggestion: "\u4F7F\u7528\u8DEF\u5F91\u5225\u540D\u6216\u8ABF\u6574\u6A21\u7D44\u7D50\u69CB" });
+    }
+    const newServicePattern = /new\s+\w+(?:Service|Repository|Controller|Manager|Handler|Provider|Gateway)\b/gi;
+    const newServiceCount = (source.match(newServicePattern) || []).length;
+    if (newServiceCount >= 5) {
+      violations.push({ ruleId: "P08", ruleName: "\u7DCA\u8026\u5408", severity: "warning", file, line: 1, column: 1, message: `\u7DCA\u8026\u5408: ${newServiceCount} \u8655\u76F4\u63A5 new Service/Repository`, suggestion: "\u4F7F\u7528\u4F9D\u8CF4\u6CE8\u5165(DI)\u800C\u975E\u76F4\u63A5 new" });
+    }
+    return violations;
+  }
+};
+var SQL_PATTERN = /\b(?:SELECT\s+\S|INSERT\s+INTO\b|UPDATE\s+\w+\s+SET\b|DELETE\s+FROM\b)/i;
+var UI_PATTERN = /(?:document\.\w|innerHTML|querySelector|getElementById|React\.\w|\.render\s*\(|createElement\b)/i;
+var HTTP_CLIENT_PATTERN = /\b(?:fetch\s*\(|axios\.|http\.(?:get|post|put|delete)|HttpClient|XMLHttpRequest|reqwest::)/i;
+var LOW_LEVEL_IO_PATTERN = /\b(?:fs\.(?:read|write|open|close)|File\.(?:open|read|write)|fopen\s*\(|fread\s*\(|std::fs::)/i;
+var P11_CHECKER = {
+  rule: getProhibition("P11"),
+  checkSource(source, file) {
+    if (/(?:test|spec)\.[^/]+$/i.test(file)) return [];
+    const violations = [];
+    const hasSQL = SQL_PATTERN.test(source);
+    const hasUI = UI_PATTERN.test(source);
+    const hasHTTP = HTTP_CLIENT_PATTERN.test(source);
+    const hasLowIO = LOW_LEVEL_IO_PATTERN.test(source);
+    if (hasSQL && hasUI) {
+      violations.push({ ruleId: "P11", ruleName: "\u6DF7\u5408\u62BD\u8C61", severity: "warning", file, line: 1, column: 1, message: "\u6DF7\u5408\u62BD\u8C61: SQL \u8207 UI \u64CD\u4F5C\u5728\u540C\u4E00\u6A94\u6848", suggestion: "\u5206\u96E2\u6578\u64DA\u5B58\u53D6\u5C64\u8207\u8868\u73FE\u5C64" });
+    }
+    if (hasHTTP && hasLowIO) {
+      violations.push({ ruleId: "P11", ruleName: "\u6DF7\u5408\u62BD\u8C61", severity: "warning", file, line: 1, column: 1, message: "\u6DF7\u5408\u62BD\u8C61: HTTP \u8ACB\u6C42\u8207\u4F4E\u5C64 IO \u5728\u540C\u4E00\u6A94\u6848", suggestion: "\u5206\u96E2\u7DB2\u8DEF\u5C64\u8207\u6A94\u6848 IO \u5C64" });
+    }
+    if (hasSQL && hasHTTP) {
+      violations.push({ ruleId: "P11", ruleName: "\u6DF7\u5408\u62BD\u8C61", severity: "warning", file, line: 1, column: 1, message: "\u6DF7\u5408\u62BD\u8C61: SQL \u8207 HTTP \u8ACB\u6C42\u5728\u540C\u4E00\u6A94\u6848", suggestion: "\u5206\u96E2\u6578\u64DA\u5B58\u53D6\u5C64\u8207\u5916\u90E8 API \u5C64" });
+    }
+    return violations;
+  }
+};
 var PROHIBITION_CHECKERS = [
+  P01_CHECKER,
+  P02_CHECKER,
   P03_CHECKER,
   P04_CHECKER,
   P05_CHECKER,
   P06_CHECKER,
   P07_CHECKER,
+  P08_CHECKER,
   P09_CHECKER,
   P10_CHECKER,
+  P11_CHECKER,
   P12_CHECKER,
   P13_CHECKER,
   P14_CHECKER

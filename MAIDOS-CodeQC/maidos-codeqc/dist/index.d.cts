@@ -820,22 +820,22 @@ declare function extractHandoverTags(source: string): {
  * §3 十四禁止 (P01-P14)
  *
  * 實作狀態：
- * ⚠️ P01 過度工程 (需 LLM)
- * ⚠️ P02 過早優化 (需 LLM)
+ * ✅ P01 過度工程 (regex+heuristic)
+ * ✅ P02 過早優化 (regex+heuristic)
  * ✅ P03 複製粘貼 (基礎檢測)
  * ✅ P04 魔法數字 (regex)
  * ✅ P05 超長函數 (AST)
  * ✅ P06 深層嵌套 (AST)
  * ✅ P07 全局狀態 (regex)
- * ⚠️ P08 緊耦合 (需 LLM)
+ * ✅ P08 緊耦合 (regex+heuristic)
  * ✅ P09 無意義命名 (regex)
  * ✅ P10 過長參數 (regex)
- * ⚠️ P11 混合抽象 (需 LLM)
+ * ✅ P11 混合抽象 (regex+heuristic)
  * ✅ P12 註釋代碼 (regex)
  * ✅ P13 TODO 堆積 (regex)
  * ✅ P14 依賴膨脹 (基礎檢測)
  *
- * 總計：10/14 已實作
+ * 總計：14/14 已實作
  */
 
 interface Prohibition extends Rule {

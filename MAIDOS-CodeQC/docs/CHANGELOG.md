@@ -9,8 +9,12 @@
 ## v3.5 (2026-02-13)
 
 ### Added
+- R04 (未授權數據訪問), R06 (直接操作生產), R11 (跳過代碼審查) — regex+heuristic
+- P01 (過度工程), P02 (過早優化), P08 (緊耦合), P11 (混合抽象) — regex+heuristic
+- **All 42/42 rules now implemented (100% coverage)**
 - R19-R28 redline checkers (audit + deep defense layers)
 - R19-R28 dedicated unit tests (25+ test cases)
+- R04/R06/R11 + P01/P02/P08/P11 dedicated unit tests
 - Hardwarization engine: 5-pillar architecture + LV1-LV9 protection levels
 - Product grades E (Commercial) / F (Deep-Tech)
 - Pipeline 10-step wiring flow with waveform oscilloscope

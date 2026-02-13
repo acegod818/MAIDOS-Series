@@ -120,6 +120,51 @@ export const R03_CHECKER: RuleChecker = {
 };
 
 // =============================================================================
+// R04: 未授權數據訪問
+// 手法: 直接 SQL 查敏感表、讀取敏感檔案、dump 全部環境變量、權限提升
+// =============================================================================
+
+const UNAUTHORIZED_ACCESS_PATTERNS = [
+  // SQL 直接查敏感表
+  /SELECT\s+.*\bFROM\s+.*\b(?:passwords?|credentials?|credit_cards?|ssn|salary|secrets?|tokens?|private_keys?)\b/gi,
+  // 直接讀取敏感系統檔
+  /['"`](?:\/etc\/(?:passwd|shadow|sudoers)|~?\/?\.ssh\/|\.env\b)/gi,
+  // 環境變量整體 dump（不是讀單一 key，而是遍歷全部）
+  /Object\.keys\s*\(\s*process\.env\s*\)/gi,
+  /os\.environ\.(?:copy|items|keys)\s*\(\)/gi,
+  /System\.getenv\s*\(\s*\)/gi,  // Java 無參版 = dump all
+  /std::env::vars\s*\(\)/g,      // Rust dump all env
+  // 權限提升
+  /\bsetuid\s*\(/gi,
+  /chmod\s+(?:777|a\+rwx|u\+s)\b/gi,
+  /\brunas\s+\/user:\s*(?:admin|root|system)\b/gi,
+];
+
+export const R04_CHECKER: RuleChecker = {
+  rule: getRedline('R04')!,
+  checkSource(source: string, file: string): Violation[] {
+    const violations: Violation[] = [];
+    if (/(?:test|spec|mock|fixture|__test__)/i.test(file)) return violations;
+    const lines = source.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i]!;
+      if (/^\s*(?:\/\/|#|\/\*|\*|--|;)/.test(line)) continue;
+      // Skip regex pattern definitions (avoid self-false-positives)
+      if (/^\s*\/.*\/[gimsuy]*\s*,?\s*$/.test(line)) continue;
+      for (const pattern of UNAUTHORIZED_ACCESS_PATTERNS) {
+        pattern.lastIndex = 0;
+        const match = pattern.exec(line);
+        if (match) {
+          violations.push({ ruleId: 'R04', ruleName: '未授權數據訪問', severity: 'error', file, line: i + 1, column: match.index + 1, message: `未授權數據訪問 (R04): ${match[0].substring(0, 40)}`, snippet: line.trim(), suggestion: '使用權限控制 API，不直接訪問敏感資源' });
+          break;
+        }
+      }
+    }
+    return violations;
+  },
+};
+
+// =============================================================================
 // R05: 忽略錯誤處理
 // =============================================================================
 

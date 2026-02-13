@@ -3,22 +3,22 @@
  * §3 十四禁止 (P01-P14)
  * 
  * 實作狀態：
- * ⚠️ P01 過度工程 (需 LLM)
- * ⚠️ P02 過早優化 (需 LLM)
+ * ✅ P01 過度工程 (regex+heuristic)
+ * ✅ P02 過早優化 (regex+heuristic)
  * ✅ P03 複製粘貼 (基礎檢測)
  * ✅ P04 魔法數字 (regex)
  * ✅ P05 超長函數 (AST)
  * ✅ P06 深層嵌套 (AST)
  * ✅ P07 全局狀態 (regex)
- * ⚠️ P08 緊耦合 (需 LLM)
+ * ✅ P08 緊耦合 (regex+heuristic)
  * ✅ P09 無意義命名 (regex)
  * ✅ P10 過長參數 (regex)
- * ⚠️ P11 混合抽象 (需 LLM)
+ * ✅ P11 混合抽象 (regex+heuristic)
  * ✅ P12 註釋代碼 (regex)
  * ✅ P13 TODO 堆積 (regex)
  * ✅ P14 依賴膨脹 (基礎檢測)
- * 
- * 總計：10/14 已實作
+ *
+ * 總計：14/14 已實作
  */
 
 import type { Rule, ProhibitionId, Violation, RuleChecker } from '../types.js';
@@ -64,17 +64,17 @@ export interface Prohibition extends Rule {
 }
 
 export const PROHIBITIONS: Prohibition[] = [
-  { id: 'P01', category: 'prohibition', name: '過度工程', nameEn: 'Over-Engineering', description: '為不存在的需求做設計', severity: 'warning', action: '簡化', autoDetectable: false, detectMethod: 'llm', implemented: false, requiresIntegration: 'LLM 語義分析' },
-  { id: 'P02', category: 'prohibition', name: '過早優化', nameEn: 'Premature Optimization', description: '在證明需要前優化', severity: 'warning', action: '移除', autoDetectable: false, detectMethod: 'llm', implemented: false, requiresIntegration: 'LLM 語義分析' },
+  { id: 'P01', category: 'prohibition', name: '過度工程', nameEn: 'Over-Engineering', description: '為不存在的需求做設計', severity: 'warning', action: '簡化', autoDetectable: true, detectMethod: 'regex+heuristic', implemented: true },
+  { id: 'P02', category: 'prohibition', name: '過早優化', nameEn: 'Premature Optimization', description: '在證明需要前優化', severity: 'warning', action: '移除', autoDetectable: true, detectMethod: 'regex+heuristic', implemented: true },
   { id: 'P03', category: 'prohibition', name: '複製粘貼', nameEn: 'Copy-Paste', description: '大量重複代碼', severity: 'warning', action: 'DRY 重構', autoDetectable: true, detectMethod: 'heuristic', implemented: true },
   { id: 'P04', category: 'prohibition', name: '魔法數字', nameEn: 'Magic Numbers', description: '硬編碼數值無說明', severity: 'warning', action: '提取常量', autoDetectable: true, detectMethod: 'regex', implemented: true },
   { id: 'P05', category: 'prohibition', name: '超長函數', nameEn: 'Long Function', description: '函數行數過多', severity: 'warning', action: '拆分', autoDetectable: true, detectMethod: 'ast', implemented: true, threshold: THRESHOLDS.FUNCTION_MAX_LINES },
   { id: 'P06', category: 'prohibition', name: '深層嵌套', nameEn: 'Deep Nesting', description: '嵌套層數過深', severity: 'warning', action: '提取/早返回', autoDetectable: true, detectMethod: 'ast', implemented: true, threshold: THRESHOLDS.NESTING_MAX_DEPTH },
   { id: 'P07', category: 'prohibition', name: '全局狀態', nameEn: 'Global State', description: '過度使用全局變量', severity: 'warning', action: '封裝', autoDetectable: true, detectMethod: 'regex', implemented: true },
-  { id: 'P08', category: 'prohibition', name: '緊耦合', nameEn: 'Tight Coupling', description: '模組間直接依賴', severity: 'warning', action: '依賴注入', autoDetectable: false, detectMethod: 'llm', implemented: false, requiresIntegration: 'LLM 語義分析' },
+  { id: 'P08', category: 'prohibition', name: '緊耦合', nameEn: 'Tight Coupling', description: '模組間直接依賴', severity: 'warning', action: '依賴注入', autoDetectable: true, detectMethod: 'regex+heuristic', implemented: true },
   { id: 'P09', category: 'prohibition', name: '無意義命名', nameEn: 'Meaningless Names', description: 'temp, data, info 等', severity: 'warning', action: '重命名', autoDetectable: true, detectMethod: 'regex', implemented: true },
   { id: 'P10', category: 'prohibition', name: '過長參數', nameEn: 'Long Parameter List', description: '函數參數過多', severity: 'warning', action: '提取物件', autoDetectable: true, detectMethod: 'regex', implemented: true, threshold: THRESHOLDS.PARAM_MAX_COUNT },
-  { id: 'P11', category: 'prohibition', name: '混合抽象', nameEn: 'Mixed Abstraction', description: '高低層邏輯混雜', severity: 'warning', action: '分層', autoDetectable: false, detectMethod: 'llm', implemented: false, requiresIntegration: 'LLM 語義分析' },
+  { id: 'P11', category: 'prohibition', name: '混合抽象', nameEn: 'Mixed Abstraction', description: '高低層邏輯混雜', severity: 'warning', action: '分層', autoDetectable: true, detectMethod: 'regex+heuristic', implemented: true },
   { id: 'P12', category: 'prohibition', name: '註釋代碼', nameEn: 'Commented Code', description: '大量被註釋的代碼', severity: 'info', action: '刪除', autoDetectable: true, detectMethod: 'regex', implemented: true },
   { id: 'P13', category: 'prohibition', name: 'TODO 堆積', nameEn: 'TODO Accumulation', description: '未處理的 TODO', severity: 'info', action: '處理或移除', autoDetectable: true, detectMethod: 'regex', implemented: true, threshold: THRESHOLDS.TODO_MAX_COUNT },
   { id: 'P14', category: 'prohibition', name: '依賴膨脹', nameEn: 'Dependency Bloat', description: '不必要的依賴', severity: 'info', action: '移除', autoDetectable: true, detectMethod: 'heuristic', implemented: true },
@@ -371,12 +371,190 @@ export const P14_CHECKER: RuleChecker = {
 };
 
 // =============================================================================
+// P01: 過度工程（regex+heuristic）
+// =============================================================================
+
+export const P01_CHECKER: RuleChecker = {
+  rule: getProhibition('P01')!,
+  checkSource(source: string, file: string): Violation[] {
+    if (/(?:test|spec)\.[^/]+$/i.test(file)) return [];
+    const violations: Violation[] = [];
+
+    // 計算 Abstract 堆疊數量
+    const abstractCount = (source.match(/\b(?:abstract\s+class|interface)\s+Abstract\w+/gi) || []).length;
+    if (abstractCount >= 3) {
+      violations.push({ ruleId: 'P01', ruleName: '過度工程', severity: 'warning', file, line: 1, column: 1, message: `過度工程: 同檔 ${abstractCount} 個 Abstract 定義`, suggestion: '簡化抽象層，優先組合而非繼承' });
+    }
+
+    // 計算設計模式類名數量
+    const patternClassCount = (source.match(/\bclass\s+\w*(?:Factory|Builder|Strategy|Visitor|Observer|Mediator|Decorator|Proxy|Adapter|Bridge|Flyweight)\b/gi) || []).length;
+    if (patternClassCount >= 3) {
+      violations.push({ ruleId: 'P01', ruleName: '過度工程', severity: 'warning', file, line: 1, column: 1, message: `過度工程: 同檔 ${patternClassCount} 個設計模式類`, suggestion: '只在確實需要時使用設計模式' });
+    }
+
+    // 泛型地獄
+    const genericNestCount = (source.match(/<[^>]*<[^>]*<[^>]*>/g) || []).length;
+    if (genericNestCount >= 3) {
+      violations.push({ ruleId: 'P01', ruleName: '過度工程', severity: 'warning', file, line: 1, column: 1, message: `過度工程: ${genericNestCount} 處 ≥3 層泛型嵌套`, suggestion: '用類型別名簡化泛型' });
+    }
+
+    return violations;
+  },
+};
+
+// =============================================================================
+// P02: 過早優化（regex+heuristic）
+// =============================================================================
+
+const PREMATURE_OPT_PATTERNS = [
+  // 位運算代替基本算數
+  /\b\w+\s*(?:<<|>>)\s*1\b/g,
+  /\b\w+\s*&\s*1\b/g,
+];
+
+const CUSTOM_DS_PATTERN = /\bclass\s+(?:LinkedList|BTree|BPlusTree|HashMap|HashSet|RedBlackTree|SkipList|Trie|AVLTree)\b/gi;
+const MEMORY_POOL_PATTERN = /\bclass\s+(?:ObjectPool|MemoryPool|BufferPool|ThreadPool|ConnectionPool)\b/gi;
+const INLINE_ASM_PATTERN = /\b(?:__asm__|asm\s*\(|__attribute__\s*\(\s*\(\s*always_inline|#\[inline\(always\)\])/g;
+
+export const P02_CHECKER: RuleChecker = {
+  rule: getProhibition('P02')!,
+  checkSource(source: string, file: string): Violation[] {
+    if (/(?:test|spec)\.[^/]+$/i.test(file)) return [];
+    const violations: Violation[] = [];
+    const lines = source.split('\n');
+
+    // 位運算代替算數
+    let bitOpCount = 0;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i]!;
+      if (/^\s*(?:\/\/|#|\/\*|\*)/.test(line)) continue;
+      for (const pattern of PREMATURE_OPT_PATTERNS) {
+        pattern.lastIndex = 0;
+        if (pattern.test(line)) bitOpCount++;
+      }
+    }
+    if (bitOpCount >= 3) {
+      violations.push({ ruleId: 'P02', ruleName: '過早優化', severity: 'warning', file, line: 1, column: 1, message: `過早優化: ${bitOpCount} 處位運算代替基本算數`, suggestion: '使用 *2 /2 %2 等可讀寫法，除非有效能驗證' });
+    }
+
+    // 手寫資料結構
+    CUSTOM_DS_PATTERN.lastIndex = 0;
+    const dsMatch = CUSTOM_DS_PATTERN.exec(source);
+    if (dsMatch) {
+      const before = source.substring(0, dsMatch.index);
+      const lineNum = (before.match(/\n/g) || []).length + 1;
+      violations.push({ ruleId: 'P02', ruleName: '過早優化', severity: 'warning', file, line: lineNum, column: 1, message: `過早優化: 手寫資料結構 ${dsMatch[0].substring(0, 30)}`, suggestion: '使用標準庫，除非有基準測試證明需要' });
+    }
+
+    // 手動內存池
+    MEMORY_POOL_PATTERN.lastIndex = 0;
+    const poolMatch = MEMORY_POOL_PATTERN.exec(source);
+    if (poolMatch) {
+      const before = source.substring(0, poolMatch.index);
+      const lineNum = (before.match(/\n/g) || []).length + 1;
+      violations.push({ ruleId: 'P02', ruleName: '過早優化', severity: 'warning', file, line: lineNum, column: 1, message: `過早優化: 手寫記憶體池 ${poolMatch[0].substring(0, 30)}`, suggestion: '使用成熟的 pool 庫，除非有基準測試' });
+    }
+
+    // 內聯 ASM
+    INLINE_ASM_PATTERN.lastIndex = 0;
+    const asmMatch = INLINE_ASM_PATTERN.exec(source);
+    if (asmMatch) {
+      const before = source.substring(0, asmMatch.index);
+      const lineNum = (before.match(/\n/g) || []).length + 1;
+      violations.push({ ruleId: 'P02', ruleName: '過早優化', severity: 'warning', file, line: lineNum, column: 1, message: `過早優化: 內聯彙編/強制內聯 ${asmMatch[0].substring(0, 30)}`, suggestion: '避免過早優化，先量測再決定' });
+    }
+
+    return violations;
+  },
+};
+
+// =============================================================================
+// P08: 緊耦合（regex+heuristic）
+// =============================================================================
+
+export const P08_CHECKER: RuleChecker = {
+  rule: getProhibition('P08')!,
+  checkSource(source: string, file: string): Violation[] {
+    if (/(?:test|spec)\.[^/]+$/i.test(file)) return [];
+    const violations: Violation[] = [];
+    const lines = source.split('\n');
+
+    // 過多 import (>15 行)
+    const importLines = lines.filter(l => /^\s*(?:import\s|const\s+\w+\s*=\s*require\s*\()/.test(l));
+    if (importLines.length > 15) {
+      violations.push({ ruleId: 'P08', ruleName: '緊耦合', severity: 'warning', file, line: 1, column: 1, message: `緊耦合: ${importLines.length} 個 import/require (>15)`, suggestion: '拆分模組，減少依賴' });
+    }
+
+    // 深層相對路徑 (≥3 層 ../)
+    const deepImportPattern = /(?:from|require\s*\()\s*['"](?:\.\.\/){3,}/g;
+    let deepCount = 0;
+    for (const line of lines) {
+      deepImportPattern.lastIndex = 0;
+      if (deepImportPattern.test(line)) deepCount++;
+    }
+    if (deepCount >= 2) {
+      violations.push({ ruleId: 'P08', ruleName: '緊耦合', severity: 'warning', file, line: 1, column: 1, message: `緊耦合: ${deepCount} 處 ≥3 層相對路徑 import`, suggestion: '使用路徑別名或調整模組結構' });
+    }
+
+    // 直接 new 多服務 (≥5)
+    const newServicePattern = /new\s+\w+(?:Service|Repository|Controller|Manager|Handler|Provider|Gateway)\b/gi;
+    const newServiceCount = (source.match(newServicePattern) || []).length;
+    if (newServiceCount >= 5) {
+      violations.push({ ruleId: 'P08', ruleName: '緊耦合', severity: 'warning', file, line: 1, column: 1, message: `緊耦合: ${newServiceCount} 處直接 new Service/Repository`, suggestion: '使用依賴注入(DI)而非直接 new' });
+    }
+
+    return violations;
+  },
+};
+
+// =============================================================================
+// P11: 混合抽象（regex+heuristic）
+// =============================================================================
+
+const SQL_PATTERN = /\b(?:SELECT\s+\S|INSERT\s+INTO\b|UPDATE\s+\w+\s+SET\b|DELETE\s+FROM\b)/i;
+const UI_PATTERN = /(?:document\.\w|innerHTML|querySelector|getElementById|React\.\w|\.render\s*\(|createElement\b)/i;
+const HTTP_CLIENT_PATTERN = /\b(?:fetch\s*\(|axios\.|http\.(?:get|post|put|delete)|HttpClient|XMLHttpRequest|reqwest::)/i;
+const LOW_LEVEL_IO_PATTERN = /\b(?:fs\.(?:read|write|open|close)|File\.(?:open|read|write)|fopen\s*\(|fread\s*\(|std::fs::)/i;
+
+export const P11_CHECKER: RuleChecker = {
+  rule: getProhibition('P11')!,
+  checkSource(source: string, file: string): Violation[] {
+    if (/(?:test|spec)\.[^/]+$/i.test(file)) return [];
+    const violations: Violation[] = [];
+
+    const hasSQL = SQL_PATTERN.test(source);
+    const hasUI = UI_PATTERN.test(source);
+    const hasHTTP = HTTP_CLIENT_PATTERN.test(source);
+    const hasLowIO = LOW_LEVEL_IO_PATTERN.test(source);
+
+    // SQL + UI 混合
+    if (hasSQL && hasUI) {
+      violations.push({ ruleId: 'P11', ruleName: '混合抽象', severity: 'warning', file, line: 1, column: 1, message: '混合抽象: SQL 與 UI 操作在同一檔案', suggestion: '分離數據存取層與表現層' });
+    }
+
+    // HTTP Client + 低層 IO 混合
+    if (hasHTTP && hasLowIO) {
+      violations.push({ ruleId: 'P11', ruleName: '混合抽象', severity: 'warning', file, line: 1, column: 1, message: '混合抽象: HTTP 請求與低層 IO 在同一檔案', suggestion: '分離網路層與檔案 IO 層' });
+    }
+
+    // SQL + HTTP 混合 (data access + external API)
+    if (hasSQL && hasHTTP) {
+      violations.push({ ruleId: 'P11', ruleName: '混合抽象', severity: 'warning', file, line: 1, column: 1, message: '混合抽象: SQL 與 HTTP 請求在同一檔案', suggestion: '分離數據存取層與外部 API 層' });
+    }
+
+    return violations;
+  },
+};
+
+// =============================================================================
 // 匯出
 // =============================================================================
 
 export const PROHIBITION_CHECKERS: RuleChecker[] = [
+  P01_CHECKER, P02_CHECKER,
   P03_CHECKER, P04_CHECKER, P05_CHECKER, P06_CHECKER, P07_CHECKER,
-  P09_CHECKER, P10_CHECKER, P12_CHECKER, P13_CHECKER, P14_CHECKER,
+  P08_CHECKER, P09_CHECKER, P10_CHECKER, P11_CHECKER,
+  P12_CHECKER, P13_CHECKER, P14_CHECKER,
 ];
 
 export function checkProhibitions(source: string, file: string): Violation[] {
