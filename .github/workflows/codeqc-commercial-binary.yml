@@ -81,10 +81,14 @@ jobs:
 
           New-Item -ItemType Directory -Force -Path $package, $sample, $reports | Out-Null
           Expand-Archive -LiteralPath $zip -DestinationPath $package
-          $exe = Join-Path $package "codeqc-runner.exe"
-          if (-not (Test-Path -LiteralPath $exe)) {
-            throw "Missing executable after extraction: $exe"
+          Get-ChildItem -LiteralPath $package -Recurse -File | ForEach-Object {
+            Write-Host "Extracted: $($_.FullName)"
           }
+          $exeItem = Get-ChildItem -LiteralPath $package -Recurse -File -Filter "codeqc-runner.exe" | Select-Object -First 1
+          if (-not $exeItem) {
+            throw "Missing executable after extraction under: $package"
+          }
+          $exe = $exeItem.FullName
 
           @(
             "def suspicious_value():",
