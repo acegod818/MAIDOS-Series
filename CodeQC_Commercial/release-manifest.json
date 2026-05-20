@@ -2,17 +2,26 @@
   "product": "CodeQC Commercial Runner",
   "release_id": "gate2-beta-baseline",
   "release_date": "2026-05-18",
-  "packaged_at": "2026-05-21T00:18:00+08:00",
+  "packaged_at": "2026-05-21T01:38:00+08:00",
   "platform": "windows-x64",
   "source_policy": "binary-only; commercial source code is not included in this repository",
   "versions": {
     "codeqc-core": "0.4.0",
     "codeqc-runner": "0.1.0"
   },
+  "fixes": [
+    "utf8-console-output",
+    "portable-fingerprints",
+    "portable-baseline-paths"
+  ],
+  "validation": [
+    "defect-axis-r19-detection",
+    "function-axis-a-engine-e-engine-wwp-report-baseline"
+  ],
   "artifacts": [
     {
       "file": "releases/CodeQC_Commercial_Windows_x64_0.4.0.zip",
-      "sha256": "EE7BB0732E8FFA0EF69A5C2F213F77C98C60AA9DCBF95DF9296EFFFC7D67A284",
+      "sha256": "67174BCBC4602540BAB3EA1CF7087803840734818B92DD3D38915AFFEFCC17F1",
       "contents": [
         "codeqc-runner.exe",
         "README.html",
@@ -30,7 +39,19 @@
       "smoke_tests": [
         "codeqc-runner.exe version",
         "codeqc-runner.exe health",
-        "codeqc-runner.exe report smoke-sample --profile advisory --format html --format json --format sarif"
+        "codeqc-runner.exe categories",
+        "codeqc-runner.exe route SPA",
+        "codeqc-runner.exe list frontend",
+        "codeqc-runner.exe find React",
+        "codeqc-runner.exe matrix",
+        "codeqc-runner.exe classify L1 M1 O3 C3 P1 T0",
+        "codeqc-runner.exe seeds --summary",
+        "codeqc-runner.exe similar L2 M4 O1 C3 P1 T0",
+        "codeqc-runner.exe scanners",
+        "codeqc-runner.exe patterns",
+        "codeqc-runner.exe scan sample-project",
+        "codeqc-runner.exe baseline sample-project --profile advisory",
+        "codeqc-runner.exe report sample-project --profile advisory --format html --format json --format sarif"
       ]
     }
   ]
