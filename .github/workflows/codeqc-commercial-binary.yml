@@ -79,11 +79,9 @@ jobs:
           $zip = "CodeQC_Commercial/releases/CodeQC_Commercial_Windows_x64_0.4.0.zip"
           $work = Join-Path $env:RUNNER_TEMP "codeqc-commercial-smoke"
           $package = Join-Path $work "package"
-          $sample = Join-Path $work "sample-project"
-          $reports = Join-Path $work "reports"
-          $baseline = Join-Path $work "baseline.json"
+          $selftest = Join-Path $work "selftest.json"
 
-          New-Item -ItemType Directory -Force -Path $package, $sample, $reports | Out-Null
+          New-Item -ItemType Directory -Force -Path $package | Out-Null
           Expand-Archive -LiteralPath $zip -DestinationPath $package
           Get-ChildItem -LiteralPath $package -Recurse -File | ForEach-Object {
             Write-Host "Extracted: $($_.FullName)"
@@ -94,64 +92,26 @@ jobs:
           }
           $exe = $exeItem.FullName
 
-          @(
-            "def suspicious_value():",
-            "    return `"hardcoded`""
-          ) | Set-Content -LiteralPath (Join-Path $sample "sample.py") -Encoding UTF8
-
-          function Invoke-CodeQCSmoke([string]$Name, [string[]]$StepArgs) {
-            Write-Host "Running $Name..."
-            try {
-              $output = & $exe @StepArgs 2>&1
-              $code = $LASTEXITCODE
-            } catch {
-              Write-Host "::error title=CodeQC $Name exception::$($_.Exception.Message)"
-              throw
-            }
-            $output | ForEach-Object { Write-Host $_ }
-            if ($code -ne 0) {
-              $tail = (($output | Select-Object -Last 20) -join "`n").Replace("`r", "").Replace("`n", "%0A")
-              Write-Host "::error title=CodeQC $Name failed::$Name failed with exit code $code%0A$tail"
-              exit $code
-            }
+          & $exe selftest --work-dir $work --output $selftest --keep-work-dir
+          if ($LASTEXITCODE -ne 0) {
+            throw "CodeQC product-owned selftest failed with exit code $LASTEXITCODE"
           }
-
-          Invoke-CodeQCSmoke "version" @("version")
-          Invoke-CodeQCSmoke "health" @("health")
-          Invoke-CodeQCSmoke "categories" @("categories")
-          Invoke-CodeQCSmoke "route-spa" @("route", "SPA")
-          Invoke-CodeQCSmoke "list-frontend" @("list", "frontend")
-          Invoke-CodeQCSmoke "find-react" @("find", "React")
-          Invoke-CodeQCSmoke "matrix" @("matrix")
-          Invoke-CodeQCSmoke "classify" @("classify", "L1", "M1", "O3", "C3", "P1", "T0")
-          Invoke-CodeQCSmoke "seeds-summary" @("seeds", "--summary")
-          Invoke-CodeQCSmoke "similar" @("similar", "L2", "M4", "O1", "C3", "P1", "T0")
-          Invoke-CodeQCSmoke "scanners" @("scanners")
-          Invoke-CodeQCSmoke "patterns" @("patterns")
-          Invoke-CodeQCSmoke "scan-sample" @("scan", $sample)
-          Invoke-CodeQCSmoke "baseline-sample" @("baseline", $sample, "--project-name", "DualAxisSample", "--profile", "advisory", "--output", $baseline)
-          Invoke-CodeQCSmoke "report-sample" @("report", $sample, "--project-name", "DualAxisSample", "--profile", "advisory", "--baseline-file", $baseline, "--report-dir", $reports, "--format", "html", "--format", "json", "--format", "sarif")
-
-          if (-not (Test-Path -LiteralPath $baseline)) {
-            throw "Baseline command did not produce $baseline"
+          $payload = Get-Content -LiteralPath $selftest -Raw | ConvertFrom-Json
+          if ($payload.status -ne "PASS") {
+            throw "CodeQC selftest status was $($payload.status)"
           }
-          $reportFiles = @(Get-ChildItem -LiteralPath $reports -File)
-          if ($reportFiles.Count -lt 3) {
-            throw "Expected HTML/JSON/SARIF report outputs, found $($reportFiles.Count)."
+          if ([int]$payload.assertions.function_commands_checked -lt 15) {
+            throw "CodeQC selftest did not cover the expected function axis."
           }
-          $session = Get-ChildItem -LiteralPath $reports -Filter "*session.json" | Select-Object -First 1
-          if (-not $session) {
-            throw "Missing session JSON report."
-          }
-          $payload = Get-Content -LiteralPath $session.FullName -Raw | ConvertFrom-Json
-          if ([int]$payload.filtered_file_count -lt 1) {
-            throw "Report did not scan the sample project."
-          }
-          if ([int]$payload.raw_findings_total -lt 1) {
-            throw "Defect axis did not detect the known R19 sample finding."
-          }
-          if ([int]$payload.baseline.suppressed -lt 1) {
-            throw "Baseline/report flow did not suppress the known sample finding."
+          if ([int]$payload.assertions.raw_findings_total -lt 1) {
+            throw "CodeQC selftest did not validate the defect axis."
           }
 
           Write-Host "CodeQC Commercial binary functionality gate passed."
+
+      - name: Upload selftest record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: codeqc-commercial-selftest
+          path: ${{ runner.temp }}/codeqc-commercial-smoke
