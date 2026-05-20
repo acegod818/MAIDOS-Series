@@ -1,0 +1,37 @@
+{
+  "product": "CodeQC Commercial Runner",
+  "release_id": "gate2-beta-baseline",
+  "release_date": "2026-05-18",
+  "packaged_at": "2026-05-21T00:18:00+08:00",
+  "platform": "windows-x64",
+  "source_policy": "binary-only; commercial source code is not included in this repository",
+  "versions": {
+    "codeqc-core": "0.4.0",
+    "codeqc-runner": "0.1.0"
+  },
+  "artifacts": [
+    {
+      "file": "releases/CodeQC_Commercial_Windows_x64_0.4.0.zip",
+      "sha256": "EE7BB0732E8FFA0EF69A5C2F213F77C98C60AA9DCBF95DF9296EFFFC7D67A284",
+      "contents": [
+        "codeqc-runner.exe",
+        "README.html",
+        "QUICKSTART.html",
+        "OPERATIONS-CHEATSHEET.html",
+        "RELEASE-STATUS.html",
+        "RELEASE-METADATA.json",
+        "LICENSE",
+        "TERMS.html",
+        "PRIVACY.html",
+        "SECURITY.html",
+        "CHANGELOG.html",
+        "MANIFEST.json"
+      ],
+      "smoke_tests": [
+        "codeqc-runner.exe version",
+        "codeqc-runner.exe health",
+        "codeqc-runner.exe report smoke-sample --profile advisory --format html --format json --format sarif"
+      ]
+    }
+  ]
+}

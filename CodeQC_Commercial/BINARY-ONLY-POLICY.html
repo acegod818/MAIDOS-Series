@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodeQC Commercial Binary-Only Policy</title>
+</head>
+<body>
+  <h1>CodeQC Commercial Binary-Only Policy</h1>
+  <p>CodeQC Commercial is distributed through compiled release artifacts in this repository. Commercial source code must remain outside the public repository.</p>
+
+  <h2>Allowed</h2>
+  <ul>
+    <li>Compiled executable packages.</li>
+    <li>Release manifests and checksums.</li>
+    <li>HTML usage guides, license notices, privacy, security, and terms documents.</li>
+    <li>Smoke-test evidence that does not expose commercial source code.</li>
+  </ul>
+
+  <h2>Forbidden</h2>
+  <ul>
+    <li>Commercial <code>.py</code>, <code>.ts</code>, <code>.rs</code>, <code>.cs</code>, or equivalent source files.</li>
+    <li>Python wheels, source distributions, or package archives that contain source code.</li>
+    <li>Build specifications, virtual environments, caches, temporary reports with local source paths, and runtime databases.</li>
+    <li>Any file that reveals proprietary implementation details rather than product operation.</li>
+  </ul>
+
+  <h2>Release Gate</h2>
+  <p>Before pushing, scan the repository tree and the binary package contents. The release passes only when the committed CodeQC Commercial directory contains no commercial source code.</p>
+</body>
+</html>

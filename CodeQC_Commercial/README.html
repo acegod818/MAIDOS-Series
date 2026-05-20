@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodeQC Commercial Binary Release</title>
+</head>
+<body>
+  <h1>CodeQC Commercial Binary Release</h1>
+  <p>This directory is intentionally binary-only.</p>
+  <p>The commercial CodeQC source code is not committed to this repository. The release artifact is a compiled Windows x64 package:</p>
+  <pre><code>releases/CodeQC_Commercial_Windows_x64_0.4.0.zip</code></pre>
+
+  <h2>Package</h2>
+  <ul>
+    <li>Product: CodeQC Commercial Runner</li>
+    <li>Release ID: gate2-beta-baseline</li>
+    <li>Core version: codeqc-core 0.4.0</li>
+    <li>Runner version: codeqc-runner 0.1.0</li>
+    <li>Platform: Windows x64</li>
+    <li>ZIP SHA256: EE7BB0732E8FFA0EF69A5C2F213F77C98C60AA9DCBF95DF9296EFFFC7D67A284</li>
+  </ul>
+
+  <h2>Quick Use</h2>
+  <pre><code>Expand-Archive .\releases\CodeQC_Commercial_Windows_x64_0.4.0.zip -DestinationPath .\local-codeqc-commercial
+.\local-codeqc-commercial\codeqc-runner.exe version
+.\local-codeqc-commercial\codeqc-runner.exe health
+.\local-codeqc-commercial\codeqc-runner.exe report C:\path\to\project --profile advisory --report-dir reports --format html</code></pre>
+
+  <h2>Repository Boundary</h2>
+  <p>Allowed here: compiled binary package, checksum, manifest, and usage or policy documents.</p>
+  <p>Forbidden here: commercial source trees, Python source packages, wheels, sdists, build specs, virtual environments, caches, and runtime databases.</p>
+</body>
+</html>
