@@ -97,9 +97,15 @@ jobs:
 
           function Invoke-CodeQCSmoke([string]$Name, [string[]]$StepArgs) {
             Write-Host "Running $Name..."
-            & $exe @StepArgs
+            try {
+              & $exe @StepArgs
+            } catch {
+              Write-Host "::error title=CodeQC $Name exception::$($_.Exception.Message)"
+              throw
+            }
             if ($LASTEXITCODE -ne 0) {
-              throw "$Name failed with exit code $LASTEXITCODE"
+              Write-Host "::error title=CodeQC $Name failed::$Name failed with exit code $LASTEXITCODE"
+              exit $LASTEXITCODE
             }
           }
 
