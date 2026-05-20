@@ -1,0 +1,68 @@
+name: CodeQC Commercial Binary Gate
+
+on:
+  push:
+    branches:
+      - codex/add-codeqc-commercial
+    paths:
+      - "CodeQC_Commercial/**"
+      - ".github/workflows/codeqc-commercial-binary.yml"
+  pull_request:
+    paths:
+      - "CodeQC_Commercial/**"
+      - ".github/workflows/codeqc-commercial-binary.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  binary-only:
+    name: Enforce binary-only commercial release
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify commercial package boundary
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $commercial = "CodeQC_Commercial"
+          $zip = Join-Path $commercial "releases/CodeQC_Commercial_Windows_x64_0.4.0.zip"
+          $sums = Join-Path $commercial "SHA256SUMS.txt"
+          $forbiddenPattern = "\.(py|pyw|pyi|ts|tsx|rs|cs|java|go|cpp|c|h|hpp|toml|whl|gz|spec)$|pyproject|package\.json|package-lock|setup\."
+
+          if (-not (Test-Path -LiteralPath $commercial)) {
+            throw "Missing CodeQC_Commercial directory."
+          }
+          if (-not (Test-Path -LiteralPath $zip)) {
+            throw "Missing commercial binary package: $zip"
+          }
+          if (-not (Test-Path -LiteralPath $sums)) {
+            throw "Missing checksum file: $sums"
+          }
+
+          $badRepoFiles = @(
+            Get-ChildItem -LiteralPath $commercial -Recurse -File -Force |
+              Where-Object {
+                $_.FullName -notlike "*.zip" -and $_.Name -match $forbiddenPattern
+              }
+          )
+          if ($badRepoFiles.Count -gt 0) {
+            $badRepoFiles | ForEach-Object { Write-Host $_.FullName }
+            throw "Commercial source-like files are not allowed in CodeQC_Commercial."
+          }
+
+          $expectedHash = ((Get-Content -LiteralPath $sums -Raw).Trim() -split "\s+")[0].ToUpperInvariant()
+          $actualHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $zip).Hash.ToUpperInvariant()
+          if ($expectedHash -ne $actualHash) {
+            throw "ZIP SHA256 mismatch. Expected $expectedHash, got $actualHash."
+          }
+
+          $zipBadEntries = @(tar -tf $zip | Where-Object { $_ -match $forbiddenPattern })
+          if ($zipBadEntries.Count -gt 0) {
+            $zipBadEntries | ForEach-Object { Write-Host $_ }
+            throw "Commercial package contains source-like files."
+          }
+
+          Write-Host "CodeQC Commercial binary-only gate passed."
