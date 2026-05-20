@@ -25,6 +25,8 @@
   "acceptance": {
     "public_matrix": "ACCEPTANCE-MATRIX.html",
     "machine_readable": "release-acceptance.json",
+    "release_evidence": "RELEASE-EVIDENCE.html",
+    "operator_checklist": "OPERATOR-CHECKLIST.html",
     "covered_by_ci": [
       "CQC-COM-001",
       "CQC-COM-002"

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodeQC Commercial Release Evidence</title>
+</head>
+<body>
+  <h1>CodeQC Commercial Release Evidence</h1>
+  <p>This page explains how to verify that the repository contains a binary-only commercial release and that the release has passed spec-mapped acceptance.</p>
+
+  <h2>Evidence Chain</h2>
+  <ol>
+    <li><strong>Binary boundary:</strong> <code>BINARY-ONLY-POLICY.html</code> defines what may and may not be committed.</li>
+    <li><strong>Checksum:</strong> <code>SHA256SUMS.txt</code> pins the release ZIP hash.</li>
+    <li><strong>Manifest:</strong> <code>release-manifest.json</code> records package metadata, fixes, and validation scope.</li>
+    <li><strong>Acceptance contract:</strong> <code>ACCEPTANCE-MATRIX.html</code> and <code>release-acceptance.json</code> define <code>CQC-COM-001</code> through <code>CQC-COM-019</code>.</li>
+    <li><strong>Product-owned test:</strong> <code>codeqc-runner.exe selftest</code> emits a JSON acceptance record with spec coverage.</li>
+    <li><strong>CI proof:</strong> GitHub Actions uploads <code>codeqc-commercial-selftest</code> for every commercial release gate run.</li>
+  </ol>
+
+  <h2>Acceptance Split</h2>
+  <ul>
+    <li><code>CQC-COM-001</code> and <code>CQC-COM-002</code> are verified by the CI boundary gate.</li>
+    <li><code>CQC-COM-003</code> through <code>CQC-COM-019</code> are verified by the commercial binary's selftest.</li>
+    <li>The CI gate fails if any acceptance ID in <code>release-acceptance.json</code> is missing from the combined evidence.</li>
+  </ul>
+
+  <h2>Manual Verification</h2>
+  <pre><code>Get-FileHash -Algorithm SHA256 .\releases\CodeQC_Commercial_Windows_x64_0.4.0.zip
+Expand-Archive .\releases\CodeQC_Commercial_Windows_x64_0.4.0.zip -DestinationPath .\verify-codeqc
+.\verify-codeqc\codeqc-runner.exe selftest --output .\selftest.json --keep-work-dir
+Get-Content .\selftest.json</code></pre>
+
+  <h2>Non-Claims</h2>
+  <p>This evidence does not claim code signing, installer readiness, license-server enforcement, long-duration load testing, or multi-OS release coverage.</p>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodeQC Commercial Operator Checklist</title>
+</head>
+<body>
+  <h1>CodeQC Commercial Operator Checklist</h1>
+  <p>Use this checklist before handing the commercial ZIP to a customer, evaluator, or internal stakeholder.</p>
+
+  <h2>Required Checks</h2>
+  <ol>
+    <li>Confirm <code>CodeQC_Commercial/releases/CodeQC_Commercial_Windows_x64_0.4.0.zip</code> exists.</li>
+    <li>Confirm the ZIP SHA256 matches <code>SHA256SUMS.txt</code>.</li>
+    <li>Open the latest GitHub Actions run for <code>CodeQC Commercial Binary Gate</code>.</li>
+    <li>Confirm the job conclusion is <code>success</code>.</li>
+    <li>Download or inspect the <code>codeqc-commercial-selftest</code> artifact.</li>
+    <li>Confirm <code>selftest.json</code> reports <code>status: PASS</code>.</li>
+    <li>Confirm <code>acceptance_matrix.covered_ids</code> contains the selftest-owned acceptance IDs.</li>
+    <li>Confirm the workflow did not report missing acceptance IDs.</li>
+  </ol>
+
+  <h2>Release Boundary</h2>
+  <p>Do not add commercial source code, wheels, sdists, build specs, virtual environments, caches, or runtime databases to this repository.</p>
+</body>
+</html>

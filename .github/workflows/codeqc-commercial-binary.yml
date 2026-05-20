@@ -119,6 +119,19 @@ jobs:
             throw "CodeQC acceptance matrix missing coverage: $($missing -join ', ')"
           }
 
+          @(
+            "## CodeQC Commercial Acceptance",
+            "",
+            "- Selftest status: $($payload.status)",
+            "- Function commands checked: $($payload.assertions.function_commands_checked)",
+            "- Known defect findings detected: $($payload.assertions.raw_findings_total)",
+            "- Baseline suppressions verified: $($payload.assertions.baseline_suppressed)",
+            "- Acceptance IDs required: $($accepted.Count)",
+            "- Acceptance IDs covered: $($covered.Count)",
+            "- Acceptance IDs missing: $($missing.Count)",
+            "- Artifact: ``codeqc-commercial-selftest``"
+          ) | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY
+
           Write-Host "CodeQC Commercial binary functionality gate passed."
 
       - name: Upload selftest record
