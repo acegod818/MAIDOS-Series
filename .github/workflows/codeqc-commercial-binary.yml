@@ -31,6 +31,7 @@ jobs:
           $commercial = "CodeQC_Commercial"
           $zip = Join-Path $commercial "releases/CodeQC_Commercial_Windows_x64_0.4.0.zip"
           $sums = Join-Path $commercial "SHA256SUMS.txt"
+          $acceptance = Join-Path $commercial "release-acceptance.json"
           $forbiddenPattern = "\.(py|pyw|pyi|ts|tsx|rs|cs|java|go|cpp|c|h|hpp|toml|whl|gz|spec)$|pyproject|package\.json|package-lock|setup\."
 
           if (-not (Test-Path -LiteralPath $commercial)) {
@@ -41,6 +42,9 @@ jobs:
           }
           if (-not (Test-Path -LiteralPath $sums)) {
             throw "Missing checksum file: $sums"
+          }
+          if (-not (Test-Path -LiteralPath $acceptance)) {
+            throw "Missing acceptance matrix file: $acceptance"
           }
 
           $badRepoFiles = @(
@@ -66,6 +70,7 @@ jobs:
             throw "Commercial package contains source-like files."
           }
 
+          "CQC-COM-001", "CQC-COM-002" | Set-Content -LiteralPath (Join-Path $env:RUNNER_TEMP "codeqc-boundary-specs.txt") -Encoding UTF8
           Write-Host "CodeQC Commercial binary-only gate passed."
 
       - name: Verify commercial binary functionality
@@ -105,6 +110,13 @@ jobs:
           }
           if ([int]$payload.assertions.raw_findings_total -lt 1) {
             throw "CodeQC selftest did not validate the defect axis."
+          }
+          $accepted = (Get-Content -LiteralPath "CodeQC_Commercial/release-acceptance.json" -Raw | ConvertFrom-Json).acceptance_ids
+          $boundary = Get-Content -LiteralPath (Join-Path $env:RUNNER_TEMP "codeqc-boundary-specs.txt")
+          $covered = @($boundary) + @($payload.acceptance_matrix.covered_ids)
+          $missing = @($accepted | Where-Object { $covered -notcontains $_ })
+          if ($missing.Count -gt 0) {
+            throw "CodeQC acceptance matrix missing coverage: $($missing -join ', ')"
           }
 
           Write-Host "CodeQC Commercial binary functionality gate passed."

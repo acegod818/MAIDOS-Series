@@ -2,7 +2,7 @@
   "product": "CodeQC Commercial Runner",
   "release_id": "gate2-beta-baseline",
   "release_date": "2026-05-18",
-  "packaged_at": "2026-05-21T01:54:00+08:00",
+  "packaged_at": "2026-05-21T02:32:00+08:00",
   "platform": "windows-x64",
   "source_policy": "binary-only; commercial source code is not included in this repository",
   "versions": {
@@ -13,17 +13,46 @@
     "utf8-console-output",
     "portable-fingerprints",
     "portable-baseline-paths",
-    "product-owned-selftest"
+    "product-owned-selftest",
+    "spec-id-acceptance-coverage"
   ],
   "validation": [
     "defect-axis-r19-detection",
     "function-axis-a-engine-e-engine-wwp-report-baseline",
-    "selftest-json-record"
+    "selftest-json-record",
+    "acceptance-matrix-coverage"
   ],
+  "acceptance": {
+    "public_matrix": "ACCEPTANCE-MATRIX.html",
+    "machine_readable": "release-acceptance.json",
+    "covered_by_ci": [
+      "CQC-COM-001",
+      "CQC-COM-002"
+    ],
+    "covered_by_selftest": [
+      "CQC-COM-003",
+      "CQC-COM-004",
+      "CQC-COM-005",
+      "CQC-COM-006",
+      "CQC-COM-007",
+      "CQC-COM-008",
+      "CQC-COM-009",
+      "CQC-COM-010",
+      "CQC-COM-011",
+      "CQC-COM-012",
+      "CQC-COM-013",
+      "CQC-COM-014",
+      "CQC-COM-015",
+      "CQC-COM-016",
+      "CQC-COM-017",
+      "CQC-COM-018",
+      "CQC-COM-019"
+    ]
+  },
   "artifacts": [
     {
       "file": "releases/CodeQC_Commercial_Windows_x64_0.4.0.zip",
-      "sha256": "B5A07CC82C23D831C7064C70C06A351963D72F1C0C2F0713E51021023C2CDC51",
+      "sha256": "2410F1F91F514BAB0F9C7E01A173C9E1D8D1678BAC0FDB0D2F20C3737C05C473",
       "contents": [
         "codeqc-runner.exe",
         "README.html",

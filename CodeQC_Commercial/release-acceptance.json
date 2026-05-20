@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "product": "CodeQC Commercial Runner",
+  "acceptance_ids": [
+    "CQC-COM-001",
+    "CQC-COM-002",
+    "CQC-COM-003",
+    "CQC-COM-004",
+    "CQC-COM-005",
+    "CQC-COM-006",
+    "CQC-COM-007",
+    "CQC-COM-008",
+    "CQC-COM-009",
+    "CQC-COM-010",
+    "CQC-COM-011",
+    "CQC-COM-012",
+    "CQC-COM-013",
+    "CQC-COM-014",
+    "CQC-COM-015",
+    "CQC-COM-016",
+    "CQC-COM-017",
+    "CQC-COM-018",
+    "CQC-COM-019"
+  ]
+}

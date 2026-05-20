@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CodeQC Commercial Acceptance Matrix</title>
+</head>
+<body>
+  <h1>CodeQC Commercial Acceptance Matrix</h1>
+  <p>This matrix is the public acceptance contract for the binary-only CodeQC Commercial release. Commercial source code remains outside this repository.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Spec ID</th>
+        <th>Acceptance Requirement</th>
+        <th>Evidence Source</th>
+        <th>Axis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>CQC-COM-001</td><td>Release package checksum must match the published SHA256.</td><td>CI binary boundary gate</td><td>Defect</td></tr>
+      <tr><td>CQC-COM-002</td><td>Commercial repository package must not contain commercial source-like files.</td><td>CI binary boundary gate</td><td>Defect</td></tr>
+      <tr><td>CQC-COM-003</td><td>Release artifact must expose product version metadata.</td><td>selftest version check</td><td>Function</td></tr>
+      <tr><td>CQC-COM-004</td><td>A-engine health check must execute successfully.</td><td>selftest health check</td><td>Function</td></tr>
+      <tr><td>CQC-COM-005</td><td>A-engine category listing must execute successfully.</td><td>selftest categories check</td><td>Function</td></tr>
+      <tr><td>CQC-COM-006</td><td>A-engine route lookup must execute successfully for SPA.</td><td>selftest route check</td><td>Function</td></tr>
+      <tr><td>CQC-COM-007</td><td>A-engine category detail lookup must execute successfully for frontend.</td><td>selftest list check</td><td>Function</td></tr>
+      <tr><td>CQC-COM-008</td><td>A-engine tool lookup must execute successfully for React.</td><td>selftest find check</td><td>Function</td></tr>
+      <tr><td>CQC-COM-009</td><td>E-engine matrix output must execute successfully.</td><td>selftest matrix check</td><td>Function</td></tr>
+      <tr><td>CQC-COM-010</td><td>E-engine classification must execute successfully for a known coordinate.</td><td>selftest classify check</td><td>Function</td></tr>
+      <tr><td>CQC-COM-011</td><td>E-engine seed summary must execute successfully and use the packaged seed inventory.</td><td>selftest seeds check</td><td>Function</td></tr>
+      <tr><td>CQC-COM-012</td><td>E-engine similar-seed lookup must execute successfully for a known coordinate.</td><td>selftest similar check</td><td>Function</td></tr>
+      <tr><td>CQC-COM-013</td><td>WWP scanner inventory must execute successfully.</td><td>selftest scanners check</td><td>Function</td></tr>
+      <tr><td>CQC-COM-014</td><td>WWP redline pattern inventory must execute successfully.</td><td>selftest patterns check</td><td>Function</td></tr>
+      <tr><td>CQC-COM-015</td><td>WWP scan must detect a known R19 hardcoded-return defect.</td><td>selftest scan assertion</td><td>Defect</td></tr>
+      <tr><td>CQC-COM-016</td><td>Baseline generation must produce a machine-readable baseline file.</td><td>selftest baseline assertion</td><td>Function</td></tr>
+      <tr><td>CQC-COM-017</td><td>Report generation must produce HTML, JSON, and SARIF evidence.</td><td>selftest report assertion</td><td>Function</td></tr>
+      <tr><td>CQC-COM-018</td><td>Baseline suppression must suppress the known R19 sample finding in report flow.</td><td>selftest baseline/report assertion</td><td>Defect</td></tr>
+      <tr><td>CQC-COM-019</td><td>Product-owned selftest must emit a JSON acceptance record.</td><td>selftest output file</td><td>Function</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>
