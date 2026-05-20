@@ -3,6 +3,7 @@ name: CodeQC Commercial Binary Gate
 on:
   push:
     branches:
+      - main
       - codex/add-codeqc-commercial
     paths:
       - "CodeQC_Commercial/**"

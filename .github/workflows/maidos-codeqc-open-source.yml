@@ -3,6 +3,7 @@ name: MAIDOS CodeQC Open Source Gate
 on:
   push:
     branches:
+      - main
       - codex/add-codeqc-commercial
     paths:
       - "MAIDOS-CodeQC/**"
