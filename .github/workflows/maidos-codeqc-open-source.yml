@@ -1,0 +1,43 @@
+name: MAIDOS CodeQC Open Source Gate
+
+on:
+  push:
+    branches:
+      - codex/add-codeqc-commercial
+    paths:
+      - "MAIDOS-CodeQC/**"
+      - ".github/workflows/maidos-codeqc-open-source.yml"
+  pull_request:
+    paths:
+      - "MAIDOS-CodeQC/**"
+      - ".github/workflows/maidos-codeqc-open-source.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  npm-build-test:
+    name: Build and test open-source CodeQC
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: MAIDOS-CodeQC/maidos-codeqc
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: MAIDOS-CodeQC/maidos-codeqc/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
+        run: npm test -- --run
