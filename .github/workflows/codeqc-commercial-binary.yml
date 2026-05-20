@@ -75,6 +75,7 @@ jobs:
           $env:PYTHONIOENCODING = "utf-8"
           $env:PYTHONUTF8 = "1"
           [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
+          chcp.com 65001
           $zip = "CodeQC_Commercial/releases/CodeQC_Commercial_Windows_x64_0.4.0.zip"
           $work = Join-Path $env:RUNNER_TEMP "codeqc-commercial-smoke"
           $package = Join-Path $work "package"
@@ -101,14 +102,17 @@ jobs:
           function Invoke-CodeQCSmoke([string]$Name, [string[]]$StepArgs) {
             Write-Host "Running $Name..."
             try {
-              & $exe @StepArgs
+              $output = & $exe @StepArgs 2>&1
+              $code = $LASTEXITCODE
             } catch {
               Write-Host "::error title=CodeQC $Name exception::$($_.Exception.Message)"
               throw
             }
-            if ($LASTEXITCODE -ne 0) {
-              Write-Host "::error title=CodeQC $Name failed::$Name failed with exit code $LASTEXITCODE"
-              exit $LASTEXITCODE
+            $output | ForEach-Object { Write-Host $_ }
+            if ($code -ne 0) {
+              $tail = (($output | Select-Object -Last 20) -join "`n").Replace("`r", "").Replace("`n", "%0A")
+              Write-Host "::error title=CodeQC $Name failed::$Name failed with exit code $code%0A$tail"
+              exit $code
             }
           }
 
