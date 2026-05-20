@@ -72,6 +72,9 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = "Stop"
+          $env:PYTHONIOENCODING = "utf-8"
+          $env:PYTHONUTF8 = "1"
+          [Console]::OutputEncoding = [System.Text.UTF8Encoding]::new()
           $zip = "CodeQC_Commercial/releases/CodeQC_Commercial_Windows_x64_0.4.0.zip"
           $work = Join-Path $env:RUNNER_TEMP "codeqc-commercial-smoke"
           $package = Join-Path $work "package"
