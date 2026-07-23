@@ -7,7 +7,7 @@ MAIDOS 全家桶 — 開源軟體工程工具集（**PUBLIC / MIT**，C# / Rust 
 ## 動手前必守的硬約束（完整版見 AGENTS.md）
 
 1. **品質 > 速度；效率 = 砍浪費**：絕不為快跳驗證／作假／抄捷徑；效率是砍 busywork，不是把該做的事做爛。
-2. **Code 紅線（CodeQC）**：禁空殼實作／裸 except 吞異常／assert True 假測試／sleep 假裝／硬編碼繞過／裸 TODO-TBD／fallback placeholder／幻覺 API-import。本 repo `MAIDOS-CodeQC` ＝ 此規範的 **canonical 工具**（`@maidos/codeqc` v0.3.5，Code-QC v3.5）；交付前用它掃描歸零。
+2. **Code 紅線（CodeQC）**：禁空殼實作／裸 except 吞異常／assert True 假測試／sleep 假裝／硬編碼繞過／裸 TODO-TBD／fallback placeholder／幻覺 API-import。本 repo `MAIDOS-CodeQC` ＝ CodeQC v4.0 整合框架規則層（Code-QC 規範 v3.5）的 **canonical 工具實作**（`@maidos/codeqc` v0.3.5）；交付前用它掃描歸零。
 3. **測試鑑別力**：關鍵測試要能 sentinel 注入翻紅，否則不構成回歸防線，誠實標明。
 4. **接線五問**（測試綠 ≠ 交付完成）：誰建立／誰驅動／上游真來／下游真消費／整合測試證明。禁孤兒模組。
 5. **收官 = 雙軸 100%**：功能完整軸＋驗證通過軸都 100% 才能稱完成；測試數 ≠ 系統完成。

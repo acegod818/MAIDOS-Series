@@ -7,7 +7,7 @@ MAIDOS 全家桶 — 開源軟體工程工具集（Driver / IME / Forge / CodeQC
 ## 快速索引（完整規則見 AGENTS.md）
 
 - **§A 品質總則**：品質>速度・效率=砍浪費／收官=雙軸100%／拍板前先盤舊文件
-- **§B Code 紅線（CodeQC）**：空殼／裸except／假測試／sleep／硬編碼繞過／裸TODO-TBD／幻覺import ＋ sentinel 鑑別力。canonical 工具＝本 repo `MAIDOS-CodeQC`（`@maidos/codeqc` **v0.3.5**，Code-QC 規範 **v3.5**）
+- **§B Code 紅線（CodeQC）**：空殼／裸except／假測試／sleep／硬編碼繞過／裸TODO-TBD／幻覺import ＋ sentinel 鑑別力。canonical 工具＝本 repo `MAIDOS-CodeQC`（`@maidos/codeqc` **v0.3.5** ＝ CodeQC v4.0 整合框架規則層 Code-QC 規範 **v3.5** 的可執行實作）
 - **§C 接線五問**：測試綠 ≠ 交付完成；禁孤兒模組
 - **§D 反作假**：不信自評、獨立全新 process 重驗、推理優先禁腳本代理
 - **§E 系統思考/同步**：跨模組、版本/規格值全樹一次改齊、治理更新全樹重對齊、搜尋帶 root path、失敗3次升級
